@@ -1,0 +1,552 @@
+.wrapper {
+  background: var(--off-white);
+  min-height: 100vh;
+}
+
+/* ── Hero ──────────────────────────────────────────────── */
+.hero {
+  background: var(--ink);
+  color: var(--off-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.ornament {
+  position: absolute;
+  right: -30px;
+  bottom: -80px;
+  font-family: var(--font-devan);
+  font-size: clamp(280px, 28vw, 420px);
+  line-height: 1;
+  color: var(--charcoal);
+  letter-spacing: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heroInner {
+  padding-top: 56px;
+  padding-bottom: 72px;
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+.breadcrumbLink {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+.breadcrumbLink:hover {
+  opacity: 0.7;
+}
+.breadcrumbCurrent {
+  color: var(--off-white);
+}
+
+.heroTitleGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 60px;
+  align-items: flex-end;
+}
+
+.eyebrow {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 22px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(56px, 9vw, 152px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  margin: 0;
+  color: var(--off-white);
+  max-width: 14ch;
+}
+
+.heroMeta {
+  margin-top: 72px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line-dark);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 60px;
+}
+
+.summary {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: clamp(20px, 1.8vw, 30px);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--off-white);
+  margin: 0;
+  max-width: 700px;
+}
+
+.metaList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-self: flex-end;
+}
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line-dark);
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.metaLabel {
+  color: var(--smoke);
+}
+.metaValue {
+  color: var(--off-white);
+}
+
+/* ── Promises ──────────────────────────────────────────── */
+.promises {
+  background: var(--bone);
+  padding: 72px 0;
+}
+
+.promisesHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.promisesLine {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  transform: translateY(-4px);
+}
+
+.promisesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.promiseCard {
+  padding: 32px 32px 32px 40px;
+  border-left: 1px solid var(--line);
+}
+.promiseCardFirst {
+  padding-left: 0;
+  border-left: none;
+}
+
+.promiseKicker {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(56px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.promiseLabel {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin-bottom: 10px;
+}
+.promiseBody {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--smoke);
+  margin: 0;
+  max-width: 280px;
+}
+
+/* ── Body ──────────────────────────────────────────────── */
+.body {
+  background: var(--off-white);
+  padding: 120px 0;
+}
+
+.bodyGrid {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 200px;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+/* Left rail */
+.leftRail {
+  position: sticky;
+  top: 40px;
+}
+
+.tocLabel {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 22px;
+}
+
+.tocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tocLink {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  padding: 14px 0;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+.tocLinkFirst {
+  border-top: 1px solid var(--ink);
+}
+.tocLinkRest {
+  border-top: 1px solid var(--line);
+}
+
+.tocNum {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--smoke);
+  font-feature-settings: 'tnum' 1;
+  transition: color var(--dur-fast) var(--ease);
+}
+.tocNumActive {
+  color: var(--ink);
+}
+
+.tocTitle {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  color: var(--smoke);
+  transition: color var(--dur-fast) var(--ease);
+  position: relative;
+}
+.tocTitleActive {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tocDot {
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.contactCard {
+  margin-top: 40px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--off-white);
+}
+.contactCardLabel {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 12px;
+}
+.contactCardTitle {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+.contactLink:hover {
+  opacity: 0.65;
+}
+
+/* Main article */
+.mainCol {
+  max-width: 660px;
+}
+
+.signature {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--ink);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: flex-end;
+}
+.sigWordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.sigMeta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--smoke);
+  line-height: 1.7;
+  text-align: right;
+}
+
+/* ── Section blocks ────────────────────────────────────── */
+.sectionBlock {
+  padding-bottom: 16px;
+  scroll-margin-top: 24px;
+}
+.sectionBlockIndented {
+  padding-top: 88px;
+}
+
+.sectionHeader {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: baseline;
+  margin-bottom: 32px;
+}
+.sectionNum {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+.sectionTitle {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(28px, 2.6vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--ink);
+  align-self: flex-end;
+}
+
+.para {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink);
+  max-width: 600px;
+}
+.paraFirst {
+  margin: 0 0 16px;
+}
+.paraRest {
+  margin: 16px 0 0;
+}
+
+.list {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.listItem {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.listItemBordered {
+  border-bottom: 1px solid var(--line);
+}
+.listDash {
+  flex-shrink: 0;
+  margin-top: 10px;
+  width: 6px;
+  height: 1px;
+  background: var(--ink);
+  display: block;
+}
+
+.steps {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 8px 0;
+  background: var(--bone);
+}
+.stepItem {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 16px;
+  padding: 20px 24px;
+  align-items: baseline;
+}
+.stepItemBordered {
+  border-bottom: 1px solid var(--line);
+}
+.stepNum {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--smoke);
+  font-feature-settings: 'tnum' 1;
+}
+.stepText {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.callout {
+  margin-top: 32px;
+  padding: 24px;
+  border-left: 2px solid var(--ink);
+  background: var(--off-white);
+}
+.calloutLabel {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 8px;
+}
+.calloutValue {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+/* ── Cross-link strip ──────────────────────────────────── */
+.crossLinks {
+  background: var(--ink);
+  color: var(--off-white);
+  padding: 96px 0;
+}
+.crossLinksHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.crossLinksLine {
+  flex: 1;
+  height: 1px;
+  background: var(--line-dark);
+  transform: translateY(-4px);
+}
+
+.crossLinksGrid {
+  display: grid;
+  gap: 24px;
+}
+
+.crossLink {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line-dark);
+  text-decoration: none;
+  color: var(--off-white);
+  cursor: pointer;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+.crossLink:hover {
+  opacity: 0.65;
+}
+.crossLinkCurrent {
+  color: var(--smoke);
+  cursor: default;
+  opacity: 0.5;
+  border-top-color: var(--off-white);
+}
+.crossLinkCurrent:hover {
+  opacity: 0.5;
+}
+
+.crossLinkNum {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--smoke);
+  font-feature-settings: 'tnum' 1;
+}
+.crossLinkTitle {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  line-height: 1.15;
+  min-height: 60px;
+}
+.crossLinkCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--smoke);
+}

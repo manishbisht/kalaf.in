@@ -1,0 +1,226 @@
+/* Global resets & utility classes — component-specific styles live in style.module.css */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--off-white);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+* {
+  box-sizing: border-box;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---- Container ---------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--page-pad);
+}
+@media (max-width: 1024px) {
+  .container {
+    padding-inline: var(--page-pad-md);
+  }
+}
+@media (max-width: 640px) {
+  .container {
+    padding-inline: var(--page-pad-sm);
+  }
+}
+
+/* ---- Section padding ---------------------------------------------------- */
+.section {
+  padding: var(--s-24) 0;
+}
+.section-tight {
+  padding: var(--s-20) 0;
+}
+
+/* ---- Section header pattern --------------------------------------------- */
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 40px;
+  gap: 40px;
+}
+.section-head .eyebrow {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 18px;
+}
+.section-head h2 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(36px, 4.4vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 720px;
+}
+.section-head .right {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--fg-muted);
+  max-width: 320px;
+  line-height: 1.6;
+  text-align: right;
+}
+.section-head .right a {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--font-head);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--fg);
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--fg);
+  padding-bottom: 2px;
+  transition: opacity var(--dur-fast) var(--ease);
+  cursor: pointer;
+}
+.section-head .right a:hover {
+  opacity: 0.6;
+}
+
+/* ---- Image hover zoom --------------------------------------------------- */
+.img-zoom {
+  overflow: hidden;
+  display: block;
+}
+.img-zoom > * {
+  transition: transform 800ms var(--ease);
+}
+.img-zoom:hover > * {
+  transform: scale(1.04);
+}
+
+/* ---- Tag chip ----------------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  background: var(--off-white);
+  color: var(--ink);
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.chip-dark {
+  background: var(--ink);
+  color: var(--off-white);
+}
+
+/* ---- Buttons ------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 28px;
+  border: 1px solid transparent;
+  border-radius: var(--r-0);
+  font-family: var(--font-head);
+  font-weight: var(--w-med);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    opacity var(--dur-fast) var(--ease);
+  text-decoration: none;
+}
+.btn:active {
+  opacity: 0.7;
+  transition-duration: 120ms;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--off-white);
+}
+.btn-primary:hover {
+  background: var(--charcoal);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--fg);
+}
+.btn-secondary:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg);
+}
+.btn-ghost:hover {
+  opacity: 0.6;
+}
+
+/* ---- Fade-up animation -------------------------------------------------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fadeUp 800ms var(--ease) both;
+}
+.fade-up.d1 {
+  animation-delay: 80ms;
+}
+.fade-up.d2 {
+  animation-delay: 160ms;
+}
+.fade-up.d3 {
+  animation-delay: 240ms;
+}
+.fade-up.d4 {
+  animation-delay: 320ms;
+}
+
+/* ---- Eyebrow type helper ------------------------------------------------ */
+.t-eyebrow {
+  font-family: var(--font-head);
+  font-weight: var(--w-med);
+  font-size: var(--t-eyebrow);
+  line-height: 1;
+  letter-spacing: var(--tr-eyebrow);
+  text-transform: uppercase;
+}

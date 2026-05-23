@@ -1,0 +1,45 @@
+.section {
+  padding: var(--s-24) 0;
+  background: var(--ink);
+  color: var(--off-white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 48px;
+  row-gap: 48px;
+}
+
+.card {
+  border-top: 1px solid var(--line-dark);
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
+
+.num {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--smoke);
+  margin-bottom: 32px;
+  font-feature-settings: 'tnum' 1;
+}
+
+.title {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  margin: 0 0 14px;
+  color: var(--off-white);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--smoke);
+  margin: 0;
+  max-width: 320px;
+}
