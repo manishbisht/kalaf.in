@@ -1,102 +1,102 @@
 .section {
-  padding: var(--s-24) 0;
-  background: var(--ink);
-  color: var(--off-white);
-  position: relative;
-  overflow: hidden;
+    padding: var(--s-24) 0;
+    background: var(--ink);
+    color: var(--off-white);
+    position: relative;
+    overflow: hidden;
 }
 
 .inner {
-  position: relative;
-  z-index: 1;
-  text-align: center;
+    position: relative;
+    z-index: 1;
+    text-align: center;
 }
 
 .eyebrow {
-  font-family: var(--font-head);
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--smoke);
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--smoke);
 }
 
 .headline {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(48px, 7vw, 112px);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  margin: 20px 0 0;
-  color: var(--off-white);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(48px, 7vw, 112px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 20px 0 0;
+    color: var(--off-white);
 }
 
 .sub {
-  font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--smoke);
-  margin: 32px auto 0;
-  max-width: 460px;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--smoke);
+    margin: 32px auto 0;
+    max-width: 460px;
 }
 
 .form {
-  margin: 40px auto 0;
-  max-width: 480px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  border: 1px solid var(--line-dark);
-  border-radius: 999px;
-  padding: 4px;
-  background: rgba(255, 255, 255, 0.03);
+    margin: 40px auto 0;
+    max-width: 480px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border: 1px solid var(--line-dark);
+    border-radius: 999px;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .input {
-  flex: 1;
-  border: 0;
-  background: transparent;
-  padding: 0 24px;
-  height: 52px;
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--off-white);
-  outline: none;
+    flex: 1;
+    border: 0;
+    background: transparent;
+    padding: 0 24px;
+    height: 52px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--off-white);
+    outline: none;
 }
 .input::placeholder {
-  color: var(--smoke);
+    color: var(--smoke);
 }
 
 .submit {
-  height: 52px;
-  padding: 0 24px;
-  background: var(--off-white);
-  color: var(--ink);
-  border: 0;
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: var(--font-head);
-  font-weight: 500;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: background var(--dur-fast) var(--ease);
-  white-space: nowrap;
+    height: 52px;
+    padding: 0 24px;
+    background: var(--off-white);
+    color: var(--ink);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background var(--dur-fast) var(--ease);
+    white-space: nowrap;
 }
 .submit:hover {
-  background: var(--bone);
+    background: var(--bone);
 }
 .submit:active {
-  opacity: 0.7;
+    opacity: 0.7;
 }
 
 .fine {
-  font-family: var(--font-head);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--smoke);
-  margin-top: 22px;
+    font-family: var(--font-head);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin-top: 22px;
 }

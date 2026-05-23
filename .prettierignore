@@ -1,4 +1,5 @@
-dist/
-node_modules/
-public/
-*.lock
+node_modules
+dist
+public
+yarn.lock
+package-lock.json
