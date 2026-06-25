@@ -1,16 +1,8 @@
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants";
+import { MetaRow } from "./MetaRow";
 import type { PolicyData } from "./types";
 import styles from "./style.module.css";
-
-function MetaRow({ label, value }: { label: string; value: string }) {
-    return (
-        <li className={styles.metaRow}>
-            <span className={styles.metaLabel}>{label}</span>
-            <span className={styles.metaValue}>{value}</span>
-        </li>
-    );
-}
 
 export function PolicyHero({ data }: { data: PolicyData }) {
     return (

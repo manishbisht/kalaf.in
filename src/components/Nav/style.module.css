@@ -21,10 +21,20 @@
     max-width: 1600px;
     margin: 0 auto;
 }
+@media (max-width: 640px) {
+    .inner {
+        padding: 16px 20px;
+    }
+}
 
 .links {
     display: flex;
     gap: 32px;
+}
+@media (max-width: 768px) {
+    .links {
+        display: none;
+    }
 }
 
 .link {
@@ -93,6 +103,13 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--smoke);
+}
+@media (max-width: 640px) {
+    .announcement {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        padding: 8px 16px;
+    }
 }
 
 .announcementDark {

@@ -1,6 +1,7 @@
+import { FeatureCard, type Feature } from "./FeatureCard";
 import styles from "./style.module.css";
 
-const FEATURES = [
+const FEATURES: Feature[] = [
     {
         num: "01",
         title: "Premium fabric",
@@ -23,8 +24,8 @@ const FEATURES = [
     },
     {
         num: "05",
-        title: "Limited drops",
-        body: "Six pieces every other Thursday. When they're gone, they're gone. Restocks are rare and announced.",
+        title: "Small batches",
+        body: "We work in small runs from the Jaipur workshop. When a batch sells out on Amazon, Flipkart, or Myntra, we make the next one — never warehouses of unsold stock.",
     },
     {
         num: "06",
@@ -32,18 +33,6 @@ const FEATURES = [
         body: "Workshops within a 200 km radius. No air freight. Offcuts re-spun into the next season's linings.",
     },
 ];
-
-type Feature = { num: string; title: string; body: string };
-
-function FeatureCard({ item }: { item: Feature }) {
-    return (
-        <div className={styles.card}>
-            <div className={styles.num}>{item.num}</div>
-            <h3 className={styles.title}>{item.title}</h3>
-            <p className={styles.body}>{item.body}</p>
-        </div>
-    );
-}
 
 export function WhyKalaf() {
     return (

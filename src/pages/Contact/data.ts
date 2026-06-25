@@ -45,13 +45,13 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Include your order number in any message about an existing order. It speeds up the reply considerably.",
+                    text: "Tell us which marketplace you bought from (Amazon, Flipkart, or Myntra) and paste the order ID — that's the fastest path to a useful reply.",
                 },
                 {
                     kind: "list",
                     items: [
-                        "Order number (starts with KLF-)",
-                        "The email address you placed the order with.",
+                        "The marketplace name (Amazon / Flipkart / Myntra).",
+                        "The marketplace order ID, copied from Your Orders.",
                         "A brief description of what you need.",
                     ],
                 },
@@ -63,7 +63,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "See our Shipping & Returns page for the full process. If you'd like to start a return, reply directly to your order confirmation email — that's the fastest route.",
+                    text: "Returns and exchanges are handled by the marketplace where you bought the piece — start from Your Orders on Amazon, Flipkart, or Myntra. The Shipping & Returns page walks through what each marketplace covers. If you've already tried there and hit a wall, write to us and we'll chase it.",
                 },
             ],
         },

@@ -1,43 +1,55 @@
 import type { PolicyData } from "../../components/PolicyLayout";
-import { BRAND } from "../../constants";
+import { BRAND, MARKETPLACE_ORDERS } from "../../constants";
 
 export const data: PolicyData = {
     eyebrow: "Orders",
     title: "Track order",
     ornament: "पार्सल",
     summary:
-        "Every shipment leaves Jaipur with a live tracking link. Here's how to find it and what each status means.",
+        "Kalaf pieces are sold and shipped by Amazon, Flipkart, and Myntra. Each one handles its own tracking — open the marketplace you bought from.",
     updated: "23 May 2026",
-    readTime: "2 min read",
+    readTime: "1 min read",
     crossLinksHeader: "More guides",
     sections: [
         {
-            id: "find",
-            title: "Finding your link",
+            id: "where",
+            title: "Where you bought it is where you track it",
             body: [
                 {
                     kind: "p",
-                    text: "Your tracking link arrives in a separate 'Your order has shipped' email, usually within 30 minutes of the courier scanning the package.",
+                    text: "Tap the marketplace you ordered from to open its order history. You'll need to be signed in with the account you used to place the order.",
                 },
                 {
-                    kind: "p",
-                    text: "You can also find it by logging into your account and opening the relevant order.",
+                    kind: "links",
+                    items: [
+                        {
+                            label: "Amazon",
+                            href: MARKETPLACE_ORDERS.amazon,
+                            sub: "Your Orders",
+                        },
+                        {
+                            label: "Flipkart",
+                            href: MARKETPLACE_ORDERS.flipkart,
+                            sub: "My Orders",
+                        },
+                        {
+                            label: "Myntra",
+                            href: MARKETPLACE_ORDERS.myntra,
+                            sub: "My Orders",
+                        },
+                    ],
                 },
             ],
-            callout: {
-                label: "Didn't get the email?",
-                value: `Check your spam folder. Still missing — email ${BRAND.email}.`,
-            },
         },
         {
             id: "statuses",
-            title: "Order statuses",
+            title: "What each status means",
             body: [
                 {
                     kind: "list",
                     items: [
-                        "Processing — we've received your order and are preparing it for dispatch.",
-                        "Dispatched — the courier has picked it up and a tracking number is active.",
+                        "Order placed — the marketplace has your order and is sharing it with us for dispatch.",
+                        "Dispatched / Shipped — the courier has picked it up; the tracking number is live in the marketplace app.",
                         "Out for delivery — it's on a vehicle in your area today.",
                         "Delivered — the courier has marked it as delivered at your address.",
                     ],
@@ -50,21 +62,21 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Standard delivery takes 4–6 working days across India. Express is 2–3 working days to most metro pincodes.",
+                    text: "Standard delivery on each marketplace is typically 4–6 working days across India; Prime / Plus accounts often see 2–3 days to metros.",
                 },
                 {
                     kind: "p",
-                    text: "Delays beyond 7 working days are rare. If your tracking hasn't updated in 48 hours, email us with your order number and we'll chase the courier.",
+                    text: "Delays beyond 7 working days are rare. If your tracking hasn't updated in 48 hours, raise it inside the marketplace's order page first — they hold the courier relationship.",
                 },
             ],
         },
         {
-            id: "missing",
-            title: "Can't find your order?",
+            id: "help",
+            title: "Still stuck?",
             body: [
                 {
                     kind: "p",
-                    text: `Email ${BRAND.email} with your order number (starts with KLF-) and the email address you placed the order with. We'll trace it.`,
+                    text: `Write to us at ${BRAND.email} with the marketplace name, the order ID, and a screenshot of the tracking page. We'll chase it with the marketplace on your behalf.`,
                 },
             ],
             callout: { label: "Write to us", value: BRAND.email },

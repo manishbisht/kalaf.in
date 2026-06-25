@@ -5,6 +5,11 @@
     overflow: hidden;
     color: var(--off-white);
 }
+@media (max-width: 640px) {
+    .hero {
+        min-height: calc(100vh - 96px);
+    }
+}
 
 .bg {
     position: absolute;
@@ -29,6 +34,15 @@
     color: var(--off-white);
     line-height: 1.8;
 }
+@media (max-width: 640px) {
+    .metaTopRight {
+        top: 20px;
+        right: 20px;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        line-height: 1.6;
+    }
+}
 .metaSub {
     color: var(--smoke);
 }
@@ -46,6 +60,11 @@
     display: flex;
     align-items: center;
     gap: 12px;
+}
+@media (max-width: 768px) {
+    .scrollCue {
+        display: none;
+    }
 }
 .scrollLine {
     display: block;
@@ -68,6 +87,11 @@
     gap: 14px;
     text-align: right;
 }
+@media (max-width: 768px) {
+    .countdown {
+        display: none;
+    }
+}
 .countdownLabel {
     color: var(--smoke);
     font-family: var(--font-head);
@@ -88,6 +112,18 @@
     bottom: 18%;
     z-index: 2;
 }
+@media (max-width: 1024px) {
+    .content {
+        bottom: 14%;
+    }
+}
+@media (max-width: 640px) {
+    .content {
+        left: 20px;
+        right: 20px;
+        bottom: 64px;
+    }
+}
 
 .eyebrow {
     font-family: var(--font-head);
@@ -101,6 +137,13 @@
     align-items: center;
     gap: 14px;
 }
+@media (max-width: 640px) {
+    .eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        margin-bottom: 18px;
+    }
+}
 .eyebrowLine {
     display: block;
     width: 24px;
@@ -112,7 +155,7 @@
 .headline {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(72px, 13vw, 220px);
+    font-size: clamp(56px, 13vw, 220px);
     line-height: 0.92;
     letter-spacing: -0.045em;
     margin: 0;
@@ -124,6 +167,17 @@
     gap: 14px;
     margin-top: 44px;
     align-items: center;
+}
+@media (max-width: 640px) {
+    .ctas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 28px;
+    }
+    .ctas a {
+        width: 100%;
+    }
 }
 
 /* Hero-specific button overrides */

@@ -6,7 +6,7 @@ export const data: PolicyData = {
     title: "Cookie policy",
     ornament: "नियम",
     summary:
-        "We use a small number of cookies to keep the store working and to understand how people find us.",
+        "kalaf.in is a brand site — no cart, no checkout, no payments here. We use a small number of first-party cookies to understand how people find us.",
     updated: "23 May 2026",
     readTime: "3 min read",
     sections: [
@@ -16,7 +16,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Cookies are small text files saved in your browser when you visit a website. They let a site remember things between pages and sessions — like what's in your cart.",
+                    text: "Cookies are small text files saved in your browser when you visit a website. They let a site remember things between pages and sessions — like which page you came from or whether you've dismissed a banner.",
                 },
                 {
                     kind: "p",
@@ -26,15 +26,18 @@ export const data: PolicyData = {
         },
         {
             id: "use",
-            title: "What we use",
+            title: "What we use on kalaf.in",
             body: [
                 {
                     kind: "list",
                     items: [
-                        "Session cookie — keeps your bag intact while you browse. Expires when you close the browser.",
-                        "Preference cookie — remembers your region and size if you've set them. Lasts 90 days.",
-                        "Analytics cookies — first-party only. We use a privacy-first analytics tool that doesn't fingerprint or sell data.",
+                        "Preference cookie — remembers small UI choices, like whether you've dismissed a banner. Lasts 90 days.",
+                        "Analytics cookies — first-party only, via Microsoft Clarity. We use them to understand how people navigate the site. No fingerprinting, no data sold.",
                     ],
+                },
+                {
+                    kind: "p",
+                    text: "There's no cart, checkout, or payment here, so no session-cart or payment-processor cookies are set on this domain.",
                 },
             ],
         },
@@ -44,7 +47,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "You can block or delete cookies in your browser settings at any time. Blocking session cookies will stop your cart from working correctly.",
+                    text: "You can block or delete cookies in your browser settings at any time. The site will continue to work normally without them.",
                 },
                 {
                     kind: "p",
@@ -54,11 +57,11 @@ export const data: PolicyData = {
         },
         {
             id: "third-party",
-            title: "Third-party cookies",
+            title: "Cookies on the marketplaces",
             body: [
                 {
                     kind: "p",
-                    text: "Our payment processor (Razorpay) may set its own cookies during checkout. See Razorpay's cookie policy for details.",
+                    text: "When you tap a marketplace button here, you leave kalaf.in and land on Amazon, Flipkart, or Myntra. Each of those sites sets its own cookies under its own policy. We have no control over what they store, and we don't receive that data.",
                 },
                 {
                     kind: "p",

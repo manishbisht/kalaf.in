@@ -16,12 +16,19 @@
     right: -30px;
     bottom: -80px;
     font-family: var(--font-devan);
-    font-size: clamp(280px, 28vw, 420px);
+    font-size: clamp(180px, 28vw, 420px);
     line-height: 1;
     color: var(--charcoal);
     letter-spacing: 0;
     pointer-events: none;
     user-select: none;
+}
+@media (max-width: 640px) {
+    .ornament {
+        right: -20px;
+        bottom: -40px;
+        font-size: 200px;
+    }
 }
 
 .heroInner {
@@ -29,6 +36,12 @@
     padding-bottom: 72px;
     position: relative;
     z-index: 1;
+}
+@media (max-width: 640px) {
+    .heroInner {
+        padding-top: 32px;
+        padding-bottom: 48px;
+    }
 }
 
 .breadcrumb {
@@ -41,6 +54,15 @@
     gap: 10px;
     align-items: center;
     margin-bottom: 80px;
+    flex-wrap: wrap;
+}
+@media (max-width: 640px) {
+    .breadcrumb {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        gap: 8px;
+        margin-bottom: 48px;
+    }
 }
 .breadcrumbLink {
     color: inherit;
@@ -90,6 +112,20 @@
     grid-template-columns: 1.4fr 1fr;
     gap: 60px;
 }
+@media (max-width: 1024px) {
+    .heroMeta {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-top: 48px;
+    }
+}
+@media (max-width: 640px) {
+    .heroMeta {
+        margin-top: 32px;
+        padding-top: 24px;
+        gap: 24px;
+    }
+}
 
 .summary {
     font-family: var(--font-head);
@@ -134,6 +170,11 @@
     background: var(--bone);
     padding: 72px 0;
 }
+@media (max-width: 640px) {
+    .promises {
+        padding: 48px 0;
+    }
+}
 
 .promisesHeader {
     display: flex;
@@ -152,6 +193,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
+@media (max-width: 768px) {
+    .promisesGrid {
+        grid-template-columns: 1fr;
+    }
+}
 
 .promiseCard {
     padding: 32px 32px 32px 40px;
@@ -160,6 +206,17 @@
 .promiseCardFirst {
     padding-left: 0;
     border-left: none;
+}
+@media (max-width: 768px) {
+    .promiseCard {
+        padding: 24px 0;
+        border-left: none;
+        border-top: 1px solid var(--line);
+    }
+    .promiseCardFirst {
+        border-top: none;
+        padding-top: 8px;
+    }
 }
 
 .promiseKicker {
@@ -193,6 +250,16 @@
     background: var(--off-white);
     padding: 120px 0;
 }
+@media (max-width: 1024px) {
+    .body {
+        padding: 72px 0;
+    }
+}
+@media (max-width: 640px) {
+    .body {
+        padding: 48px 0;
+    }
+}
 
 .bodyGrid {
     display: grid;
@@ -200,11 +267,31 @@
     gap: 80px;
     align-items: flex-start;
 }
+@media (max-width: 1024px) {
+    .bodyGrid {
+        grid-template-columns: 200px minmax(0, 1fr);
+        gap: 48px;
+    }
+    .bodyGrid > :last-child {
+        display: none;
+    }
+}
+@media (max-width: 768px) {
+    .bodyGrid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
 
 /* Left rail */
 .leftRail {
     position: sticky;
     top: 40px;
+}
+@media (max-width: 768px) {
+    .leftRail {
+        position: static;
+    }
 }
 
 .tocLabel {
@@ -223,6 +310,15 @@
     padding: 0;
     display: flex;
     flex-direction: column;
+}
+@media (max-width: 768px) {
+    .tocLabel,
+    .tocList {
+        display: none;
+    }
+    .contactCard {
+        margin-top: 0;
+    }
 }
 
 .tocLink {
@@ -332,6 +428,13 @@
     gap: 24px;
     align-items: flex-end;
 }
+@media (max-width: 640px) {
+    .signature {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 56px;
+    }
+}
 .sigWordmark {
     font-family: var(--font-display);
     font-weight: 600;
@@ -347,6 +450,11 @@
     line-height: 1.7;
     text-align: right;
 }
+@media (max-width: 640px) {
+    .sigMeta {
+        text-align: left;
+    }
+}
 
 /* ── Section blocks ────────────────────────────────────── */
 .sectionBlock {
@@ -356,6 +464,11 @@
 .sectionBlockIndented {
     padding-top: 88px;
 }
+@media (max-width: 640px) {
+    .sectionBlockIndented {
+        padding-top: 56px;
+    }
+}
 
 .sectionHeader {
     display: grid;
@@ -364,10 +477,16 @@
     align-items: baseline;
     margin-bottom: 32px;
 }
+@media (max-width: 640px) {
+    .sectionHeader {
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+}
 .sectionNum {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 72px;
+    font-size: clamp(44px, 9vw, 72px);
     line-height: 0.9;
     letter-spacing: -0.04em;
     color: var(--ink);
@@ -426,6 +545,57 @@
     display: block;
 }
 
+.linkGrid {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+@media (max-width: 768px) {
+    .linkGrid {
+        grid-template-columns: 1fr;
+    }
+}
+.linkCard {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    background: var(--off-white);
+    text-decoration: none;
+    color: var(--ink);
+    position: relative;
+    transition:
+        background-color var(--dur-fast) var(--ease),
+        border-color var(--dur-fast) var(--ease);
+}
+.linkCard:hover {
+    background: var(--bone);
+    border-color: var(--ink);
+}
+.linkCardLabel {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+}
+.linkCardSub {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--smoke);
+    line-height: 1.5;
+}
+.linkCardArrow {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-family: var(--font-head);
+    font-size: 14px;
+    color: var(--smoke);
+}
+
 .steps {
     list-style: none;
     margin: 32px 0 0;
@@ -438,6 +608,13 @@
     gap: 16px;
     padding: 20px 24px;
     align-items: baseline;
+}
+@media (max-width: 640px) {
+    .stepItem {
+        grid-template-columns: 40px 1fr;
+        gap: 12px;
+        padding: 16px;
+    }
 }
 .stepItemBordered {
     border-bottom: 1px solid var(--line);
@@ -463,6 +640,11 @@
     border-left: 2px solid var(--ink);
     background: var(--off-white);
 }
+@media (max-width: 640px) {
+    .callout {
+        padding: 20px;
+    }
+}
 .calloutLabel {
     font-family: var(--font-head);
     font-weight: 500;
@@ -486,11 +668,26 @@
     color: var(--off-white);
     padding: 96px 0;
 }
+@media (max-width: 1024px) {
+    .crossLinks {
+        padding: 64px 0;
+    }
+}
+@media (max-width: 640px) {
+    .crossLinks {
+        padding: 48px 0;
+    }
+}
 .crossLinksHeader {
     display: flex;
     align-items: baseline;
     gap: 16px;
     margin-bottom: 56px;
+}
+@media (max-width: 640px) {
+    .crossLinksHeader {
+        margin-bottom: 32px;
+    }
 }
 .crossLinksLine {
     flex: 1;
@@ -502,6 +699,11 @@
 .crossLinksGrid {
     display: grid;
     gap: 24px;
+}
+@media (max-width: 640px) {
+    .crossLinksGrid {
+        gap: 12px;
+    }
 }
 
 .crossLink {
@@ -543,6 +745,16 @@
     letter-spacing: -0.005em;
     line-height: 1.15;
     min-height: 60px;
+}
+@media (max-width: 640px) {
+    .crossLinkTitle {
+        font-size: 18px;
+        min-height: 0;
+    }
+    .crossLink {
+        gap: 12px;
+        padding: 18px 0;
+    }
 }
 .crossLinkCta {
     display: inline-flex;

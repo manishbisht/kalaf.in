@@ -6,7 +6,7 @@ export const data: PolicyData = {
     title: "Terms of use",
     ornament: "नियम",
     summary:
-        "Straightforward rules for using the Kalaf website and placing orders. Nothing unusual.",
+        "Straightforward rules for using kalaf.in. Orders themselves are sold and fulfilled by Amazon, Flipkart, and Myntra under their own terms.",
     updated: "23 May 2026",
     readTime: "5 min read",
     sections: [
@@ -25,34 +25,20 @@ export const data: PolicyData = {
             ],
         },
         {
-            id: "account",
-            title: "Your account",
-            body: [
-                {
-                    kind: "p",
-                    text: "You are responsible for maintaining the confidentiality of your account credentials.",
-                },
-                {
-                    kind: "p",
-                    text: "You agree to provide accurate information when creating an account and to update your details when they change.",
-                },
-            ],
-        },
-        {
             id: "orders",
-            title: "Orders & payment",
+            title: "Buying through a marketplace",
             body: [
                 {
                     kind: "p",
-                    text: "An order confirmation does not constitute acceptance. We accept your order when we dispatch your item and send a shipping confirmation.",
+                    text: "Kalaf pieces are listed and sold on Amazon, Flipkart, and Myntra. Each purchase is a contract between you and the marketplace — payment, order acceptance, shipping, and returns are governed by that marketplace's terms.",
                 },
                 {
                     kind: "p",
-                    text: "We accept payments via card (Visa, Mastercard, Rupay), UPI, and select BNPL providers. All transactions are processed in INR.",
+                    text: "We dispatch the pieces from our Jaipur workshop into the marketplace fulfilment chain. Once a piece is in their hands, their courier SLA and inspection rules apply.",
                 },
                 {
                     kind: "p",
-                    text: "We reserve the right to cancel orders we suspect are fraudulent or placed using stolen payment details.",
+                    text: "We accept all payment methods supported by Amazon, Flipkart, and Myntra in India — including card, UPI, wallet, and select BNPL options. All transactions are processed by the marketplace in INR.",
                 },
             ],
         },

@@ -50,6 +50,38 @@ export function SectionBlock({
                             </ul>
                         );
                     }
+                    if (b.kind === "links") {
+                        return (
+                            <div key={i} className={styles.linkGrid}>
+                                {b.items.map((item, j) => (
+                                    <a
+                                        key={j}
+                                        href={item.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.linkCard}
+                                    >
+                                        <span className={styles.linkCardLabel}>
+                                            {item.label}
+                                        </span>
+                                        {item.sub && (
+                                            <span
+                                                className={styles.linkCardSub}
+                                            >
+                                                {item.sub}
+                                            </span>
+                                        )}
+                                        <span
+                                            className={styles.linkCardArrow}
+                                            aria-hidden
+                                        >
+                                            ↗
+                                        </span>
+                                    </a>
+                                ))}
+                            </div>
+                        );
+                    }
                     return null;
                 })}
             </div>

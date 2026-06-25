@@ -39,6 +39,12 @@
     margin: 32px auto 0;
     max-width: 460px;
 }
+@media (max-width: 640px) {
+    .sub {
+        font-size: 15px;
+        margin-top: 22px;
+    }
+}
 
 .form {
     margin: 40px auto 0;
@@ -50,6 +56,17 @@
     border-radius: 999px;
     padding: 4px;
     background: rgba(255, 255, 255, 0.03);
+}
+@media (max-width: 560px) {
+    .form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+    }
 }
 
 .input {
@@ -65,6 +82,14 @@
 }
 .input::placeholder {
     color: var(--smoke);
+}
+@media (max-width: 560px) {
+    .input {
+        border: 1px solid var(--line-dark);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 0 20px;
+    }
 }
 
 .submit {
@@ -84,6 +109,11 @@
     gap: 8px;
     transition: background var(--dur-fast) var(--ease);
     white-space: nowrap;
+}
+@media (max-width: 560px) {
+    .submit {
+        justify-content: center;
+    }
 }
 .submit:hover {
     background: var(--bone);

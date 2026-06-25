@@ -62,9 +62,7 @@ export function TocRail({ sections }: { sections: PolicySection[] }) {
                 <div className={`t-eyebrow ${styles.contactCardLabel}`}>
                     Still wondering?
                 </div>
-                <div className={styles.contactCardTitle}>
-                    Write to a human.
-                </div>
+                <div className={styles.contactCardTitle}>Write to a human.</div>
                 <a
                     href={`mailto:${BRAND.email}`}
                     className={styles.contactLink}

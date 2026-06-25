@@ -42,7 +42,12 @@ type Look = { src: string; label: string };
 function LookFrame({ item }: { item: Look }) {
     return (
         <a className={styles.frame}>
-            <img src={item.src} alt={item.label} />
+            <img
+                src={item.src}
+                alt={item.label}
+                loading="lazy"
+                decoding="async"
+            />
             <div className={styles.frameLabel}>
                 <span>{item.label}</span>
                 <Icon name="arrowUpRight" size={18} />

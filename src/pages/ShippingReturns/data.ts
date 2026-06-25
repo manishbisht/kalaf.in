@@ -1,29 +1,29 @@
 import type { PolicyData } from "../../components/PolicyLayout";
-import { BRAND } from "../../constants";
+import { BRAND, MARKETPLACE_ORDERS } from "../../constants";
 
 export const data: PolicyData = {
     eyebrow: "Policy 02",
     title: "Shipping & returns",
     ornament: "नियम",
     summary:
-        "Two simple rules. We ship within 48 hours from Jaipur. You have 14 days to send it back if it doesn’t feel right.",
+        "Kalaf pieces are sold and fulfilled by Amazon, Flipkart, and Myntra. Each marketplace ships and accepts returns under its own policy — here's how that breaks down.",
     updated: "23 May 2026",
-    readTime: "3 min read",
+    readTime: "2 min read",
     promises: [
         {
-            kicker: "48 h",
-            label: "Time to ship",
-            body: "Orders placed before 4pm IST ship the next working day from Jaipur.",
+            kicker: "3 ways",
+            label: "Three marketplaces",
+            body: "Buy from Amazon, Flipkart, or Myntra — whichever account you already shop with.",
         },
         {
-            kicker: "14 d",
-            label: "Return window",
-            body: "Send it back unworn with the tag intact. We book the courier pickup.",
+            kicker: "Theirs",
+            label: "Their courier, their SLA",
+            body: "Shipping speed, delivery dates, and packaging are set by the marketplace, not by us.",
         },
         {
             kicker: "₹ 0",
-            label: "Pickup cost",
-            body: "We pay for the return courier. You pay nothing to send it back.",
+            label: "Returns are free",
+            body: "All three marketplaces offer free return pickups for fashion. Start it from Your Orders.",
         },
     ],
     sections: [
@@ -33,48 +33,60 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Orders placed before 4pm IST ship the next working day. Orders placed after, ship the day after that.",
+                    text: "Once you place an order on Amazon, Flipkart, or Myntra, that marketplace handles the courier, the tracking, and the delivery promise. We dispatch from Jaipur to their fulfilment partners; from there, their SLA takes over.",
                 },
                 {
-                    kind: "p",
-                    text: "Free standard shipping on orders over ₹ 3,000. Below that, a flat ₹ 99 covers it.",
-                },
-                {
-                    kind: "p",
-                    text: "Express delivery is available at checkout for ₹ 249 (2–3 working days to most metro pincodes). International shipping rolls out later this year.",
-                },
-                {
-                    kind: "p",
-                    text: "You’ll get a tracking link the moment the courier picks it up.",
+                    kind: "list",
+                    items: [
+                        "Standard delivery is typically 4–6 working days across India on all three platforms.",
+                        "Amazon Prime and Flipkart Plus accounts often see 1–3 day delivery to metro pincodes.",
+                        "Live tracking sits inside each marketplace's order page — we don't send a separate email.",
+                    ],
                 },
             ],
             callout: {
-                label: "When you’ll have it",
-                value: "4–6 working days across India.",
+                label: "Track an order",
+                value: "Open Your Orders on the marketplace you bought from.",
             },
         },
         {
             id: "returns",
-            title: "14-day returns",
+            title: "Returns",
             body: [
                 {
                     kind: "p",
-                    text: "14 days from delivery, on any unworn piece with the original tag intact. No restocking fee.",
+                    text: "Each marketplace runs its own return window and inspection process. Start the return from Your Orders on the marketplace where you bought it.",
+                },
+                {
+                    kind: "links",
+                    items: [
+                        {
+                            label: "Amazon",
+                            href: MARKETPLACE_ORDERS.amazon,
+                            sub: "7–30 day window · free pickup",
+                        },
+                        {
+                            label: "Flipkart",
+                            href: MARKETPLACE_ORDERS.flipkart,
+                            sub: "7–10 day window · free pickup",
+                        },
+                        {
+                            label: "Myntra",
+                            href: MARKETPLACE_ORDERS.myntra,
+                            sub: "30 day window · free pickup",
+                        },
+                    ],
                 },
                 {
                     kind: "p",
-                    text: "Start a return from your account page or by replying to your order confirmation email. We’ll book a courier pickup within 48 hours.",
-                },
-                {
-                    kind: "p",
-                    text: "The refund lands in your original payment method within 5–7 working days of us receiving the piece.",
+                    text: "The exact window is shown on the order page itself — check there before sending it back.",
                 },
             ],
             steps: [
-                "Reply to your order confirmation or open the order in your account.",
-                "We confirm and book a courier pickup, usually within 48 hours.",
-                "Pack the piece in its original tag-on state.",
-                "Once we receive it, the refund moves in 5–7 working days.",
+                "Open Your Orders on the marketplace and pick the Kalaf piece.",
+                "Choose 'Return' and select a reason — they'll book a courier pickup.",
+                "Pack the piece unworn, tag intact, in the original delivery bag if you can.",
+                "Refund moves once the marketplace inspects and accepts the return.",
             ],
         },
         {
@@ -83,24 +95,24 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Wrong size? We’ll exchange it one-for-one, free, within the 14-day window.",
+                    text: "Wrong size? Amazon, Flipkart, and Myntra all support free size exchanges directly from the order page — no need to return and reorder.",
                 },
                 {
                     kind: "p",
-                    text: "Wrong colour or different piece entirely? Return for refund and place a fresh order — easier and faster than wiring an exchange.",
+                    text: "For a different colour or piece entirely, return the original for refund and place a fresh order. It's faster than waiting for an exchange to route.",
                 },
             ],
         },
         {
             id: "noreturn",
-            title: "What we can’t take back",
+            title: "What can't be returned",
             body: [
                 {
                     kind: "list",
                     items: [
-                        "Anything visibly worn, washed, or with the tag removed.",
-                        "Pieces marked Final Sale on the product page — usually our last few units in a colourway.",
-                        "Innerwear, when we eventually stock it.",
+                        "Anything visibly worn, washed, or with the marketplace tag removed.",
+                        "Pieces returned after the marketplace's return window has closed.",
+                        "Items marked as final-sale on the product page — usually our last few units.",
                     ],
                 },
             ],
@@ -111,7 +123,11 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: `Email ${BRAND.email} with a photo within 48 hours of delivery and we’ll replace or refund — no return shipment needed on our end.`,
+                    text: "Raise it inside the marketplace first — they own the courier relationship and will replace or refund without a return shipment in most cases.",
+                },
+                {
+                    kind: "p",
+                    text: `If you can't get it sorted there, email ${BRAND.email} with the order ID, marketplace name, and a photo within 48 hours of delivery. We'll chase it on your behalf.`,
                 },
             ],
             callout: { label: "Write to", value: BRAND.email },

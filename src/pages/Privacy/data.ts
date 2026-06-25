@@ -6,7 +6,7 @@ export const data: PolicyData = {
     title: "Privacy policy",
     ornament: "गोपनीय",
     summary:
-        "We collect only what we need to run the store. We don't sell your data, ever.",
+        "Most of your purchase data sits with the marketplace you bought from. We collect very little ourselves, and we don't sell any of it.",
     updated: "23 May 2026",
     readTime: "4 min read",
     sections: [
@@ -16,15 +16,19 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "We collect your name, email address, shipping address, and payment method when you place an order. That's it.",
+                    text: "Kalaf pieces are sold and fulfilled by Amazon, Flipkart, and Myntra. When you buy on a marketplace, your purchase data — name, payment method, account details — sits with that marketplace under its own privacy policy. We never see your payment information.",
                 },
                 {
                     kind: "p",
-                    text: "If you create an account, we store your order history and saved addresses so checkout is faster next time.",
+                    text: "When the marketplace passes us an order to fulfil, we receive the recipient's name and shipping address only — enough to print a dispatch label. That's the entirety of customer data we hold from a sale.",
                 },
                 {
                     kind: "p",
-                    text: "We record basic browsing behaviour — which pages you visit, how long you spend on them — through first-party analytics.",
+                    text: "If you subscribe to our newsletter from this website, we store your email address. If you write to us, we store the message and your reply-to email.",
+                },
+                {
+                    kind: "p",
+                    text: "We record basic browsing behaviour on kalaf.in — which pages you visit, how long you spend on them — through first-party analytics.",
                 },
             ],
         },
@@ -35,10 +39,10 @@ export const data: PolicyData = {
                 {
                     kind: "list",
                     items: [
-                        "To fulfil and ship your order.",
-                        "To send you a tracking link and order updates.",
-                        "To improve the website based on how people actually use it.",
+                        "To dispatch the order to the address the marketplace shared with us.",
+                        "To reply to your email if you've written to us.",
                         "To send the Kalaf newsletter, if you've opted in.",
+                        "To improve the website based on how people actually use it.",
                     ],
                 },
             ],
@@ -53,7 +57,7 @@ export const data: PolicyData = {
                 },
                 {
                     kind: "p",
-                    text: "We share your shipping address with our courier partner (currently Delhivery) to deliver your order. That's the only external sharing.",
+                    text: "We share the shipping address from your marketplace order with our courier partner to deliver the piece. That's the only external sharing.",
                 },
                 {
                     kind: "p",
@@ -67,7 +71,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "See our Cookie Policy for a full breakdown. In short: we use a session cookie to keep your cart intact, and optional analytics cookies to understand traffic.",
+                    text: "See our Cookie Policy for a full breakdown. In short: kalaf.in uses only first-party analytics cookies. There's no on-site cart, checkout, or payment processor here — those run on the marketplace, under the marketplace's cookie policy.",
                 },
             ],
         },

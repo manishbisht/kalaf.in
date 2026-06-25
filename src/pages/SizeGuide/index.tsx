@@ -1,6 +1,4 @@
-import PolicyLayout, {
-    HELP_CROSS_LINKS,
-} from "../../components/PolicyLayout";
+import PolicyLayout, { HELP_CROSS_LINKS } from "../../components/PolicyLayout";
 import { data } from "./data";
 
 export default function SizeGuide() {

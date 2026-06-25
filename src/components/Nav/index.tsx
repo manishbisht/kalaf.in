@@ -30,7 +30,7 @@ export function Nav({ dark = false }: NavProps) {
             <div
                 className={`${styles.announcement} ${dark ? styles.announcementDark : ""}`}
             >
-                Drop 01 — The first capsule · Made in Jaipur · Coming soon
+                Drop 01 — Now on Amazon · Flipkart · Myntra
             </div>
         </header>
     );

@@ -2,7 +2,11 @@
 
 export type PolicyBodyBlock =
     | { kind: "p"; text: string }
-    | { kind: "list"; items: string[] };
+    | { kind: "list"; items: string[] }
+    | {
+          kind: "links";
+          items: { label: string; href: string; sub?: string }[];
+      };
 
 export type PolicySection = {
     id: string;

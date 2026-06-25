@@ -51,6 +51,18 @@ html {
 .section-tight {
     padding: var(--s-20) 0;
 }
+@media (max-width: 1024px) {
+    .section,
+    .section-tight {
+        padding: var(--s-16) 0;
+    }
+}
+@media (max-width: 640px) {
+    .section,
+    .section-tight {
+        padding: var(--s-12) 0;
+    }
+}
 
 /* ---- Section header pattern --------------------------------------------- */
 .section-head {
@@ -72,7 +84,7 @@ html {
 .section-head h2 {
     font-family: var(--font-head);
     font-weight: 700;
-    font-size: clamp(36px, 4.4vw, 64px);
+    font-size: clamp(32px, 4.4vw, 64px);
     line-height: 1.05;
     letter-spacing: -0.015em;
     margin: 0;
@@ -86,6 +98,24 @@ html {
     max-width: 320px;
     line-height: 1.6;
     text-align: right;
+}
+@media (max-width: 1024px) {
+    .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        padding-bottom: 32px;
+    }
+    .section-head .right {
+        text-align: left;
+        max-width: none;
+    }
+}
+@media (max-width: 640px) {
+    .section-head {
+        padding-bottom: 24px;
+        gap: 18px;
+    }
 }
 .section-head .right a {
     display: inline-block;

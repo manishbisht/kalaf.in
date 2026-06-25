@@ -1,29 +1,29 @@
 import type { PolicyData } from "../../components/PolicyLayout";
-import { BRAND } from "../../constants";
+import { BRAND, MARKETPLACE_ORDERS } from "../../constants";
 
 export const data: PolicyData = {
     eyebrow: "Policy 04",
     title: "Refund policy",
     ornament: "वापसी",
     summary:
-        "We process refunds within 5–7 working days of receiving your return. Here's exactly how it works.",
+        "Kalaf pieces are sold through Amazon, Flipkart, and Myntra. Refunds are issued by the marketplace where you bought the piece, against the original payment method.",
     updated: "23 May 2026",
     readTime: "2 min read",
     promises: [
         {
+            kicker: "Theirs",
+            label: "Marketplace processed",
+            body: "The refund is initiated and paid by the marketplace, not by us — that's how marketplace seller-of-record works.",
+        },
+        {
+            kicker: "Same",
+            label: "Original payment method",
+            body: "The amount returns to the card, UPI, or wallet you originally paid with.",
+        },
+        {
             kicker: "5–7 d",
-            label: "Processing time",
-            body: "From the day we receive your return to the day the refund hits your account.",
-        },
-        {
-            kicker: "₹ 0",
-            label: "Return courier",
-            body: "We book and pay for the pickup. You pay nothing to send it back.",
-        },
-        {
-            kicker: "14 d",
-            label: "Return window",
-            body: "Pieces must be back with us within 14 days of your delivery date.",
+            label: "Typical timeline",
+            body: "From the day the marketplace accepts the return to the day the money lands in your account.",
         },
     ],
     sections: [
@@ -33,32 +33,53 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Items must be returned within 14 days of delivery, unworn, with the original tag attached.",
+                    text: "Each marketplace defines what's returnable and the window it accepts returns within. The exact rules sit on each order page — but the standards across all three are consistent:",
                 },
                 {
                     kind: "list",
                     items: [
                         "Unworn and in original condition.",
-                        "Tag still attached — the physical paper tag, not the label sewn into the garment.",
-                        "Purchased at full price. Final Sale items are not eligible.",
+                        "Original packaging and the marketplace tag intact — not the brand label sewn into the garment.",
+                        "Inside the marketplace's return window (typically 7–30 days from delivery).",
+                        "Not marked as final-sale on the product page.",
                     ],
                 },
             ],
         },
         {
             id: "request",
-            title: "How to request",
+            title: "How to request a refund",
             body: [
                 {
                     kind: "p",
-                    text: "Start a return from your account page or by replying directly to your order confirmation email.",
+                    text: "Open Your Orders on the marketplace you bought from and choose 'Return' or 'Refund' on the Kalaf piece. The marketplace handles the rest.",
+                },
+                {
+                    kind: "links",
+                    items: [
+                        {
+                            label: "Amazon",
+                            href: MARKETPLACE_ORDERS.amazon,
+                            sub: "Your Orders",
+                        },
+                        {
+                            label: "Flipkart",
+                            href: MARKETPLACE_ORDERS.flipkart,
+                            sub: "My Orders",
+                        },
+                        {
+                            label: "Myntra",
+                            href: MARKETPLACE_ORDERS.myntra,
+                            sub: "My Orders",
+                        },
+                    ],
                 },
             ],
             steps: [
-                "Reply to your order confirmation or open the order in your account and select 'Return this item'.",
-                "We'll confirm within 24 hours and book a courier pickup at no cost to you.",
-                "Pack the item with the original tag on and hand it to the courier.",
-                "Refund is processed within 5–7 working days of us receiving and inspecting the item.",
+                "Open the order on the marketplace and select Return / Refund.",
+                "Pick a reason and confirm the pickup address.",
+                "Hand the piece (unworn, tag intact) to the courier when they arrive.",
+                "Refund is initiated once the return is inspected and accepted.",
             ],
         },
         {
@@ -67,26 +88,30 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Once we receive your return, we inspect it within 24 hours and initiate the refund. The money moves back to your original payment method — card, UPI, or BNPL.",
+                    text: "Standard refund processing is 5–7 working days from the day the marketplace accepts the return. Bank settlement adds another 1–3 days depending on the payment method.",
+                },
+                {
+                    kind: "p",
+                    text: "The refund always goes back to the original payment method — you can't redirect it to a different card or wallet.",
                 },
             ],
-            callout: { label: "Refund arrives in", value: "5–7 working days." },
+            callout: { label: "Refund arrives in", value: "5–10 days total." },
         },
         {
             id: "exceptions",
-            title: "What we can't refund",
+            title: "What can't be refunded",
             body: [
                 {
                     kind: "list",
                     items: [
                         "Items marked Final Sale on the product page.",
-                        "Anything visibly worn, washed, or with the tag removed.",
-                        "Items returned after the 14-day window.",
+                        "Anything visibly worn, washed, or with the marketplace tag removed.",
+                        "Returns submitted after the marketplace's return window has closed.",
                     ],
                 },
                 {
                     kind: "p",
-                    text: "If an item arrives damaged, email us with a photo within 48 hours of delivery. We'll replace or refund without requiring a return shipment.",
+                    text: `If a piece arrives damaged, raise it inside the marketplace within 48 hours. If you can't get it sorted there, write to ${BRAND.email} with the order ID and a photo and we'll chase it for you.`,
                 },
             ],
             callout: {

@@ -1,6 +1,7 @@
+import { ProcessStep, type ProcessItem } from "./ProcessStep";
 import styles from "./style.module.css";
 
-const PROCESS = [
+const PROCESS: ProcessItem[] = [
     {
         img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1000&q=80",
         step: "01",
@@ -26,23 +27,6 @@ const PROCESS = [
         body: "Single garment-wash, line-dry, hand-press. Then a six-point review before it leaves the workshop.",
     },
 ];
-
-type ProcessItem = { img: string; step: string; label: string; body: string };
-
-function ProcessStep({ item }: { item: ProcessItem }) {
-    return (
-        <div className={styles.step}>
-            <div className={styles.imageWrap}>
-                <img src={item.img} alt={item.label} />
-                <div className={styles.stepNum}>{item.step}</div>
-            </div>
-            <div>
-                <div className={styles.label}>{item.label}</div>
-                <p className={styles.body}>{item.body}</p>
-            </div>
-        </div>
-    );
-}
 
 export function Process() {
     return (

@@ -1,4 +1,5 @@
 import { Icon } from "../Icons";
+import { MARKETPLACES } from "../../constants";
 import styles from "./style.module.css";
 
 export function Hero() {
@@ -8,6 +9,8 @@ export function Hero() {
                 src="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=2000&q=85"
                 alt=""
                 className={styles.bg}
+                decoding="async"
+                fetchPriority="high"
             />
 
             <div className={styles.metaTopRight}>
@@ -24,7 +27,7 @@ export function Hero() {
 
             <div className={styles.countdown}>
                 <span className={styles.countdownLabel}>
-                    Drop 01 — Coming soon
+                    Now on Amazon · Flipkart · Myntra
                 </span>
             </div>
 
@@ -41,11 +44,16 @@ export function Hero() {
                 </h1>
 
                 <div className={styles.ctas}>
-                    <a href="#drop" className={styles.btnPrimary}>
-                        See the pant <Icon name="arrowRight" size={16} />
+                    <a
+                        href={MARKETPLACES.amazon}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.btnPrimary}
+                    >
+                        Shop on Amazon <Icon name="arrowUpRight" size={16} />
                     </a>
-                    <a href="#waitlist" className={styles.btnSecondary}>
-                        Join the waitlist
+                    <a href="#drop" className={styles.btnSecondary}>
+                        See the pant <Icon name="arrowRight" size={16} />
                     </a>
                 </div>
             </div>

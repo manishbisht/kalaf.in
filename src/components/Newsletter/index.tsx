@@ -7,21 +7,21 @@ export function Newsletter() {
     const [done, setDone] = useState(false);
 
     return (
-        <section className={styles.section} id="waitlist">
+        <section className={styles.section} id="updates">
             <div className={`container ${styles.inner}`}>
                 <div className={styles.eyebrow}>
-                    The Circle · Drop 01 waitlist
+                    The Circle · Notes from the workshop
                 </div>
 
                 <h2 className={styles.headline}>
-                    First in line
+                    First to know
                     <br />
-                    for the first drop.
+                    when the next drop lands.
                 </h2>
 
                 <p className={styles.sub}>
-                    Reserve your size 48 hours before the public drop. One email
-                    when the drop opens — never more than that.
+                    One email when a new piece goes live on Amazon, Flipkart, or
+                    Myntra — with the direct link. Nothing else.
                 </p>
 
                 <form
@@ -39,7 +39,7 @@ export function Newsletter() {
                         className={styles.input}
                     />
                     <button type="submit" className={styles.submit}>
-                        {done ? "You're on the list" : "Join the waitlist"}
+                        {done ? "You're on the list" : "Stay in the loop"}
                         {!done && <Icon name="arrowRight" size={16} />}
                     </button>
                 </form>
