@@ -1,7 +1,7 @@
 // The pant as it is listed on the marketplaces. Source of truth is the
 // products.kalaf.in sheet (Pants tab) — keep prices and links in sync with it.
 
-export type Marketplace = "amazon" | "flipkart" | "meesho";
+import type { MarketplaceLinks } from "../BuyButtons";
 
 export type Colourway = {
     id: string;
@@ -10,7 +10,7 @@ export type Colourway = {
     sku: string;
     image: string;
     // Per-colour listing links. A missing link means "not live yet".
-    links: Partial<Record<Marketplace, string>>;
+    links: MarketplaceLinks;
 };
 
 export const PANT = {

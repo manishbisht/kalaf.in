@@ -158,22 +158,6 @@
     margin-bottom: 12px;
 }
 
-.ctaRow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-@media (max-width: 640px) {
-    .ctaRow {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-    .ctaRow .btn,
-    .ctaRow a {
-        width: 100%;
-    }
-}
 
 .sizingLink {
     display: inline-block;
@@ -249,8 +233,3 @@
     color: var(--olive);
 }
 
-.ctaSoon {
-    opacity: 0.45;
-    cursor: default;
-    pointer-events: none;
-}

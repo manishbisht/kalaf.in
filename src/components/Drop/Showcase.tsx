@@ -1,20 +1,9 @@
 import { Link } from "react-router-dom";
-import { Icon } from "../Icons";
+import { BuyButtons } from "../BuyButtons";
 import { Swatches } from "./Swatches";
-import {
-    PANT,
-    formatRupees,
-    type Colourway,
-    type Marketplace,
-} from "./product";
+import { PANT, formatRupees, type Colourway } from "./product";
 import { ROUTES } from "../../constants";
 import styles from "./style.module.css";
-
-const STORES: { id: Marketplace; label: string; primary?: boolean }[] = [
-    { id: "flipkart", label: "Buy on Flipkart", primary: true },
-    { id: "meesho", label: "Buy on Meesho" },
-    { id: "amazon", label: "Buy on Amazon" },
-];
 
 export function Showcase({
     active,
@@ -71,35 +60,7 @@ export function Showcase({
                     <div className={styles.shopOnLabel}>
                         Buy the {active.name.toLowerCase()} pant on
                     </div>
-                    <div className={styles.ctaRow}>
-                        {STORES.map((s) => {
-                            const href = active.links[s.id];
-                            if (!href) {
-                                return (
-                                    <span
-                                        key={s.id}
-                                        className={`btn btn-secondary ${styles.ctaSoon}`}
-                                        aria-disabled="true"
-                                    >
-                                        {s.label.replace("Buy on ", "")} —
-                                        coming soon
-                                    </span>
-                                );
-                            }
-                            return (
-                                <a
-                                    key={s.id}
-                                    href={href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`btn ${s.primary ? "btn-primary" : "btn-secondary"}`}
-                                >
-                                    {s.label}{" "}
-                                    <Icon name="arrowUpRight" size={16} />
-                                </a>
-                            );
-                        })}
-                    </div>
+                    <BuyButtons links={active.links} />
 
                     <Link to={ROUTES.sizeGuide} className={styles.sizingLink}>
                         Need a size? Open the size guide →

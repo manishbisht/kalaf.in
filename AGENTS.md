@@ -52,7 +52,9 @@ src/
   components/
     Nav/        index.tsx + style.module.css
     Hero/       …
-    Drop/       …
+    Drop/       …  (pant — product.ts holds the live listing)
+    Dupattas/   …  (products.ts holds the live listings)
+    BuyButtons/ …  (shared Flipkart / Meesho / Amazon buttons)
     Process/    …
     WhyKalaf/   …
     Lookbook/   …
@@ -185,6 +187,10 @@ Use these via `var(--token)` rather than hardcoding hex/px values.
 ## Product (home page `Drop` section)
 
 `src/components/Drop/product.ts` holds the live pant listing: name, price/MRP, sizes, and per-colour (White / Beige / Black) Flipkart + Meesho links. The source of truth is the **products.kalaf.in** Google Sheet (Pants tab) — update this file when the sheet changes. A colour with no `links.amazon` shows a disabled "Amazon — coming soon" button; add the URL once the Amazon listing is live (and set `MARKETPLACES.amazon` in `constants.ts`). Marketplaces sitewide are Amazon, Flipkart and Meesho (not Myntra). `pant-white.png` / `pant-black.png` are recolours of the stock beige photo — swap in real photos when available.
+
+## Dupattas (home page `Dupattas` section)
+
+`src/components/Dupattas/products.ts` holds the three dupatta styles (bandhani with gota, plain bandhani, chiffon leheriya with gota) and every colour's marketplace links, from the sheet's Dupattas tab. Flipkart "In QC" and Amazon "On hold" are left out, so they render as "coming soon" — add the URL when a listing goes live. There are no dupatta photos yet: `PatternTile` draws an SVG stand-in (colour + dots/waves + gota band). Both product sections use the shared `components/BuyButtons`.
 
 ## Footer, Nav, Cart
 
