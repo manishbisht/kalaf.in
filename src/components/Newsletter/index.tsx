@@ -21,7 +21,7 @@ export function Newsletter() {
 
                 <p className={styles.sub}>
                     One email when a new piece goes live on Amazon, Flipkart, or
-                    Myntra — with the direct link. Nothing else.
+                    Meesho — with the direct link. Nothing else.
                 </p>
 
                 <form

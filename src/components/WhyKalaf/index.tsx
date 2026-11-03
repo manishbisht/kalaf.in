@@ -25,7 +25,7 @@ const FEATURES: Feature[] = [
     {
         num: "05",
         title: "Small batches",
-        body: "We work in small runs from the Jaipur workshop. When a batch sells out on Amazon, Flipkart, or Myntra, we make the next one — never warehouses of unsold stock.",
+        body: "We work in small runs from the Jaipur workshop. When a batch sells out on Amazon, Flipkart, or Meesho, we make the next one — never warehouses of unsold stock.",
     },
     {
         num: "06",

@@ -45,12 +45,12 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Tell us which marketplace you bought from (Amazon, Flipkart, or Myntra) and paste the order ID — that's the fastest path to a useful reply.",
+                    text: "Tell us which marketplace you bought from (Amazon, Flipkart, or Meesho) and paste the order ID — that's the fastest path to a useful reply.",
                 },
                 {
                     kind: "list",
                     items: [
-                        "The marketplace name (Amazon / Flipkart / Myntra).",
+                        "The marketplace name (Amazon / Flipkart / Meesho).",
                         "The marketplace order ID, copied from Your Orders.",
                         "A brief description of what you need.",
                     ],
@@ -63,7 +63,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Returns and exchanges are handled by the marketplace where you bought the piece — start from Your Orders on Amazon, Flipkart, or Myntra. The Shipping & Returns page walks through what each marketplace covers. If you've already tried there and hit a wall, write to us and we'll chase it.",
+                    text: "Returns and exchanges are handled by the marketplace where you bought the piece — start from Your Orders on Amazon, Flipkart, or Meesho. The Shipping & Returns page walks through what each marketplace covers. If you've already tried there and hit a wall, write to us and we'll chase it.",
                 },
             ],
         },

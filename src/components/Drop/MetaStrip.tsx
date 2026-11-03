@@ -1,11 +1,12 @@
 import { MetaCell } from "./MetaCell";
+import { PANT, formatRupees } from "./product";
 import styles from "./style.module.css";
 
 const META = [
-    { label: "The piece", value: "The Everyday Pant" },
-    { label: "Fabric", value: "60% cotton, 40% linen" },
-    { label: "Made in", value: "Jaipur" },
-    { label: "Available on", value: "Amazon · Flipkart · Myntra" },
+    { label: "Fabric", value: PANT.fabric },
+    { label: "Sizes", value: `Waist ${PANT.sizes.join(" · ")}` },
+    { label: "Price", value: `${formatRupees(PANT.price)} · Made in Jaipur` },
+    { label: "Available on", value: "Flipkart · Meesho · Amazon soon" },
 ];
 
 export function MetaStrip() {

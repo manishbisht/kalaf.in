@@ -50,6 +50,15 @@
     text-decoration: none;
     overflow: hidden;
 }
+/* On desktop the photo matches the right column's height instead of forcing
+   a 3:4 box, which would widen it past its grid track. */
+@media (min-width: 769px) {
+    .heroImage {
+        aspect-ratio: auto;
+        width: 100%;
+        min-height: 640px;
+    }
+}
 .heroImage img {
     width: 100%;
     height: 100%;
@@ -217,4 +226,31 @@
     font-size: 16px;
     color: var(--ink);
     letter-spacing: -0.005em;
+}
+
+.price {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+.mrp {
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--smoke);
+}
+.off {
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--olive);
+}
+
+.ctaSoon {
+    opacity: 0.45;
+    cursor: default;
+    pointer-events: none;
 }

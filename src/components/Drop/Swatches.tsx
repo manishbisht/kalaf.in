@@ -1,4 +1,4 @@
-import { COLOURWAYS, type Colourway } from "./colourways";
+import { COLOURWAYS, type Colourway } from "./product";
 import styles from "./style.module.css";
 
 export function Swatches({
@@ -35,7 +35,7 @@ export function Swatches({
                     }}
                 />
             ))}
-            <span className={styles.swatchCode}>{active.code}</span>
+            <span className={styles.swatchCode}>{active.name}</span>
         </div>
     );
 }

@@ -61,7 +61,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "When you tap a marketplace button here, you leave kalaf.in and land on Amazon, Flipkart, or Myntra. Each of those sites sets its own cookies under its own policy. We have no control over what they store, and we don't receive that data.",
+                    text: "When you tap a marketplace button here, you leave kalaf.in and land on Amazon, Flipkart, or Meesho. Each of those sites sets its own cookies under its own policy. We have no control over what they store, and we don't receive that data.",
                 },
                 {
                     kind: "p",

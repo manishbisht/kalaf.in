@@ -6,7 +6,7 @@ export const data: PolicyData = {
     title: "Refund policy",
     ornament: "वापसी",
     summary:
-        "Kalaf pieces are sold through Amazon, Flipkart, and Myntra. Refunds are issued by the marketplace where you bought the piece, against the original payment method.",
+        "Kalaf pieces are sold through Amazon, Flipkart, and Meesho. Refunds are issued by the marketplace where you bought the piece, against the original payment method.",
     updated: "23 May 2026",
     readTime: "2 min read",
     promises: [
@@ -68,8 +68,8 @@ export const data: PolicyData = {
                             sub: "My Orders",
                         },
                         {
-                            label: "Myntra",
-                            href: MARKETPLACE_ORDERS.myntra,
+                            label: "Meesho",
+                            href: MARKETPLACE_ORDERS.meesho,
                             sub: "My Orders",
                         },
                     ],

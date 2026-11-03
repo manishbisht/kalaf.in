@@ -182,6 +182,10 @@ A grep for hardcoded `hello@kalaf.in`, `Kalaf Atelier`, route literals etc. shou
 
 Use these via `var(--token)` rather than hardcoding hex/px values.
 
+## Product (home page `Drop` section)
+
+`src/components/Drop/product.ts` holds the live pant listing: name, price/MRP, sizes, and per-colour (White / Beige / Black) Flipkart + Meesho links. The source of truth is the **products.kalaf.in** Google Sheet (Pants tab) — update this file when the sheet changes. A colour with no `links.amazon` shows a disabled "Amazon — coming soon" button; add the URL once the Amazon listing is live (and set `MARKETPLACES.amazon` in `constants.ts`). Marketplaces sitewide are Amazon, Flipkart and Meesho (not Myntra). `pant-white.png` / `pant-black.png` are recolours of the stock beige photo — swap in real photos when available.
+
 ## Footer, Nav, Cart
 
 - **Footer**: rendered identically on every page. Help and Policies columns route via `<Link to={ROUTES.…}>`; Shop and Brand columns are static placeholders. Social row: Instagram → Facebook → LinkedIn → X, all with `href` from `SOCIAL`, `target="_blank"`, `rel="noopener noreferrer"`.

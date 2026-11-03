@@ -16,7 +16,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Kalaf pieces are sold and fulfilled by Amazon, Flipkart, and Myntra. When you buy on a marketplace, your purchase data — name, payment method, account details — sits with that marketplace under its own privacy policy. We never see your payment information.",
+                    text: "Kalaf pieces are sold and fulfilled by Amazon, Flipkart, and Meesho. When you buy on a marketplace, your purchase data — name, payment method, account details — sits with that marketplace under its own privacy policy. We never see your payment information.",
                 },
                 {
                     kind: "p",

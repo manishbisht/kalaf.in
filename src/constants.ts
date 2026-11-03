@@ -20,20 +20,20 @@ export const SOCIAL = {
     x: "https://x.com/kalafindia",
 } as const;
 
-// Marketplace storefront URLs. Update each to the brand's seller-page URL
-// once the listings are live; the search-results URLs below are a usable
-// placeholder until then.
-export const MARKETPLACES = {
-    amazon: "https://www.amazon.in/s?k=kalaf",
-    flipkart: "https://www.flipkart.com/search?q=kalaf",
-    myntra: "https://www.myntra.com/kalaf",
-} as const;
+// Where the "Shop" buttons outside the product card send people. Per-colour
+// product links live in components/Drop/product.ts. Amazon is not live yet —
+// leave it blank until the listing is up.
+export const MARKETPLACES: Record<"amazon" | "flipkart" | "meesho", string> = {
+    amazon: "",
+    flipkart: "https://www.flipkart.com/product/p/itme?pid=TROHSRF2WR8FANUF",
+    meesho: "https://www.meesho.com/s/p/j0jjab",
+};
 
 // Where to send people who bought on a marketplace and want to track an order.
 export const MARKETPLACE_ORDERS = {
     amazon: "https://www.amazon.in/your-orders/orders",
     flipkart: "https://www.flipkart.com/account/orders",
-    myntra: "https://www.myntra.com/my/orders",
+    meesho: "https://www.meesho.com/",
 } as const;
 
 export const ROUTES = {

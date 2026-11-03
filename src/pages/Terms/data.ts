@@ -6,7 +6,7 @@ export const data: PolicyData = {
     title: "Terms of use",
     ornament: "नियम",
     summary:
-        "Straightforward rules for using kalaf.in. Orders themselves are sold and fulfilled by Amazon, Flipkart, and Myntra under their own terms.",
+        "Straightforward rules for using kalaf.in. Orders themselves are sold and fulfilled by Amazon, Flipkart, and Meesho under their own terms.",
     updated: "23 May 2026",
     readTime: "5 min read",
     sections: [
@@ -30,7 +30,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Kalaf pieces are listed and sold on Amazon, Flipkart, and Myntra. Each purchase is a contract between you and the marketplace — payment, order acceptance, shipping, and returns are governed by that marketplace's terms.",
+                    text: "Kalaf pieces are listed and sold on Amazon, Flipkart, and Meesho. Each purchase is a contract between you and the marketplace — payment, order acceptance, shipping, and returns are governed by that marketplace's terms.",
                 },
                 {
                     kind: "p",
@@ -38,7 +38,7 @@ export const data: PolicyData = {
                 },
                 {
                     kind: "p",
-                    text: "We accept all payment methods supported by Amazon, Flipkart, and Myntra in India — including card, UPI, wallet, and select BNPL options. All transactions are processed by the marketplace in INR.",
+                    text: "We accept all payment methods supported by Amazon, Flipkart, and Meesho in India — including card, UPI, wallet, and select BNPL options. All transactions are processed by the marketplace in INR.",
                 },
             ],
         },

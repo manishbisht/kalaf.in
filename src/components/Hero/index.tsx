@@ -14,9 +14,9 @@ export function Hero() {
             />
 
             <div className={styles.metaTopRight}>
-                <div>Drop 01 — The Everyday Pant</div>
+                <div>Drop 01 — Cotton Linen Trousers</div>
                 <div className={styles.metaSub}>
-                    One pant. Five colours. Jaipur.
+                    One pant. Three colours. Jaipur.
                 </div>
             </div>
 
@@ -27,30 +27,30 @@ export function Hero() {
 
             <div className={styles.countdown}>
                 <span className={styles.countdownLabel}>
-                    Now on Amazon · Flipkart · Myntra
+                    Now on Flipkart · Meesho · Amazon soon
                 </span>
             </div>
 
             <div className={styles.content}>
                 <div className={styles.eyebrow}>
                     <span className={styles.eyebrowLine} />
-                    One pant. Five colours. Cut once, in Jaipur.
+                    One pant. Three colours. Cut once, in Jaipur.
                 </div>
 
                 <h1 className={styles.headline}>
-                    The Everyday
+                    The Cotton
                     <br />
-                    Pant.
+                    Linen Pant.
                 </h1>
 
                 <div className={styles.ctas}>
                     <a
-                        href={MARKETPLACES.amazon}
+                        href={MARKETPLACES.flipkart}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.btnPrimary}
                     >
-                        Shop on Amazon <Icon name="arrowUpRight" size={16} />
+                        Buy on Flipkart <Icon name="arrowUpRight" size={16} />
                     </a>
                     <a href="#drop" className={styles.btnSecondary}>
                         See the pant <Icon name="arrowRight" size={16} />

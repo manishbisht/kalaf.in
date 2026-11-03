@@ -1,9 +1,20 @@
 import { Link } from "react-router-dom";
 import { Icon } from "../Icons";
 import { Swatches } from "./Swatches";
-import { imageFilter, type Colourway } from "./colourways";
-import { MARKETPLACES, ROUTES } from "../../constants";
+import {
+    PANT,
+    formatRupees,
+    type Colourway,
+    type Marketplace,
+} from "./product";
+import { ROUTES } from "../../constants";
 import styles from "./style.module.css";
+
+const STORES: { id: Marketplace; label: string; primary?: boolean }[] = [
+    { id: "flipkart", label: "Buy on Flipkart", primary: true },
+    { id: "meesho", label: "Buy on Meesho" },
+    { id: "amazon", label: "Buy on Amazon" },
+];
 
 export function Showcase({
     active,
@@ -12,76 +23,82 @@ export function Showcase({
     active: Colourway;
     onPick: (id: string) => void;
 }) {
+    const off = Math.round((1 - PANT.price / PANT.mrp) * 100);
+
     return (
         <div className={styles.showcase}>
             <div className={styles.heroImage}>
                 <img
                     src="/pant-colourways.png"
-                    alt="Five colourways"
+                    alt="Kalaf cotton linen trousers on the rail"
                     loading="lazy"
                     decoding="async"
                 />
                 <div className={styles.chipWrap}>
-                    <span className="chip">DROP 01 — 01 OF 01</span>
+                    <span className="chip">DROP 01 — THE PANT</span>
                 </div>
             </div>
 
             <div className={styles.rightCol}>
                 <div className={styles.variantImage}>
                     <img
-                        src={
-                            active.id === "sand"
-                                ? "/pant-front.png"
-                                : "/pant-front-2.png"
-                        }
-                        alt={`The Everyday Pant — ${active.name}`}
+                        src={active.image}
+                        alt={`Kalaf ${PANT.name} — ${active.name}`}
                         loading="lazy"
                         decoding="async"
-                        style={{
-                            filter: imageFilter(active.id),
-                            mixBlendMode: "multiply",
-                        }}
                     />
                 </div>
 
                 <div className={styles.info}>
                     <div className={styles.titleRow}>
-                        <h3 className={styles.productTitle}>
-                            The Everyday Pant
-                        </h3>
+                        <h3 className={styles.productTitle}>{PANT.name}</h3>
+                        <div className={styles.price}>
+                            {formatRupees(PANT.price)}
+                            <s className={styles.mrp}>
+                                {formatRupees(PANT.mrp)}
+                            </s>
+                            <span className={styles.off}>{off}% off</span>
+                        </div>
                     </div>
                     <div className={styles.variant}>
-                        Cotton-linen · Relaxed easy fit · {active.name}
+                        Cotton-linen · Relaxed straight leg · {active.name} ·
+                        Waist {PANT.sizes[0]}–
+                        {PANT.sizes[PANT.sizes.length - 1]}
                     </div>
 
                     <Swatches active={active} onPick={onPick} />
 
-                    <div className={styles.shopOnLabel}>Shop the pant on</div>
+                    <div className={styles.shopOnLabel}>
+                        Buy the {active.name.toLowerCase()} pant on
+                    </div>
                     <div className={styles.ctaRow}>
-                        <a
-                            href={MARKETPLACES.amazon}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-primary"
-                        >
-                            Amazon <Icon name="arrowUpRight" size={16} />
-                        </a>
-                        <a
-                            href={MARKETPLACES.flipkart}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-secondary"
-                        >
-                            Flipkart <Icon name="arrowUpRight" size={16} />
-                        </a>
-                        <a
-                            href={MARKETPLACES.myntra}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-secondary"
-                        >
-                            Myntra <Icon name="arrowUpRight" size={16} />
-                        </a>
+                        {STORES.map((s) => {
+                            const href = active.links[s.id];
+                            if (!href) {
+                                return (
+                                    <span
+                                        key={s.id}
+                                        className={`btn btn-secondary ${styles.ctaSoon}`}
+                                        aria-disabled="true"
+                                    >
+                                        {s.label.replace("Buy on ", "")} —
+                                        coming soon
+                                    </span>
+                                );
+                            }
+                            return (
+                                <a
+                                    key={s.id}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`btn ${s.primary ? "btn-primary" : "btn-secondary"}`}
+                                >
+                                    {s.label}{" "}
+                                    <Icon name="arrowUpRight" size={16} />
+                                </a>
+                            );
+                        })}
                     </div>
 
                     <Link to={ROUTES.sizeGuide} className={styles.sizingLink}>

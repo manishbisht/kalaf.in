@@ -6,14 +6,14 @@ export const data: PolicyData = {
     title: "Shipping & returns",
     ornament: "नियम",
     summary:
-        "Kalaf pieces are sold and fulfilled by Amazon, Flipkart, and Myntra. Each marketplace ships and accepts returns under its own policy — here's how that breaks down.",
+        "Kalaf pieces are sold and fulfilled by Amazon, Flipkart, and Meesho. Each marketplace ships and accepts returns under its own policy — here's how that breaks down.",
     updated: "23 May 2026",
     readTime: "2 min read",
     promises: [
         {
             kicker: "3 ways",
             label: "Three marketplaces",
-            body: "Buy from Amazon, Flipkart, or Myntra — whichever account you already shop with.",
+            body: "Buy from Amazon, Flipkart, or Meesho — whichever account you already shop with.",
         },
         {
             kicker: "Theirs",
@@ -33,7 +33,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Once you place an order on Amazon, Flipkart, or Myntra, that marketplace handles the courier, the tracking, and the delivery promise. We dispatch from Jaipur to their fulfilment partners; from there, their SLA takes over.",
+                    text: "Once you place an order on Amazon, Flipkart, or Meesho, that marketplace handles the courier, the tracking, and the delivery promise. We dispatch from Jaipur to their fulfilment partners; from there, their SLA takes over.",
                 },
                 {
                     kind: "list",
@@ -71,8 +71,8 @@ export const data: PolicyData = {
                             sub: "7–10 day window · free pickup",
                         },
                         {
-                            label: "Myntra",
-                            href: MARKETPLACE_ORDERS.myntra,
+                            label: "Meesho",
+                            href: MARKETPLACE_ORDERS.meesho,
                             sub: "30 day window · free pickup",
                         },
                     ],
@@ -95,7 +95,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Wrong size? Amazon, Flipkart, and Myntra all support free size exchanges directly from the order page — no need to return and reorder.",
+                    text: "Wrong size? Amazon, Flipkart, and Meesho all support free size exchanges directly from the order page — no need to return and reorder.",
                 },
                 {
                     kind: "p",

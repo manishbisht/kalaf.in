@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { COLOURWAYS } from "./colourways";
+import { COLOURWAYS, DEFAULT_COLOURWAY } from "./product";
 import { Showcase } from "./Showcase";
 import { MetaStrip } from "./MetaStrip";
 import styles from "./style.module.css";
 
 export function Drop() {
-    const [activeId, setActiveId] = useState("sand");
-    const active = COLOURWAYS.find((c) => c.id === activeId)!;
+    const [activeId, setActiveId] = useState(DEFAULT_COLOURWAY.id);
+    const active =
+        COLOURWAYS.find((c) => c.id === activeId) ?? DEFAULT_COLOURWAY;
 
     return (
         <section className={styles.section} id="drop">
@@ -22,14 +23,15 @@ export function Drop() {
                         <h2>
                             One pant.
                             <br />
-                            Five colours.
+                            Three colours.
                         </h2>
                     </div>
                     <div className="right">
-                        We started with the pant we&apos;d want to wear every
-                        day. Cotton-linen, relaxed easy fit,
-                        elastic-and-drawcord waist. Cut and finished in Jaipur —
-                        five honest colours, nothing else.
+                        Breathable cotton-linen that stays cool in the heat.
+                        Elastic waistband all the way round, with a front button
+                        and zip fly for a clean, tailored look. A relaxed wide
+                        straight leg for work, travel and weekends. Made in
+                        Jaipur — white, beige and black.
                     </div>
                 </div>
 

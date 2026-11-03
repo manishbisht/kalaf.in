@@ -30,7 +30,7 @@ export function Nav({ dark = false }: NavProps) {
             <div
                 className={`${styles.announcement} ${dark ? styles.announcementDark : ""}`}
             >
-                Drop 01 — Now on Amazon · Flipkart · Myntra
+                Drop 01 — Now on Flipkart · Meesho · Amazon soon
             </div>
         </header>
     );

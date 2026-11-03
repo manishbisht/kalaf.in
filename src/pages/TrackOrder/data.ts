@@ -6,7 +6,7 @@ export const data: PolicyData = {
     title: "Track order",
     ornament: "पार्सल",
     summary:
-        "Kalaf pieces are sold and shipped by Amazon, Flipkart, and Myntra. Each one handles its own tracking — open the marketplace you bought from.",
+        "Kalaf pieces are sold and shipped by Amazon, Flipkart, and Meesho. Each one handles its own tracking — open the marketplace you bought from.",
     updated: "23 May 2026",
     readTime: "1 min read",
     crossLinksHeader: "More guides",
@@ -33,8 +33,8 @@ export const data: PolicyData = {
                             sub: "My Orders",
                         },
                         {
-                            label: "Myntra",
-                            href: MARKETPLACE_ORDERS.myntra,
+                            label: "Meesho",
+                            href: MARKETPLACE_ORDERS.meesho,
                             sub: "My Orders",
                         },
                     ],
