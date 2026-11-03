@@ -31,8 +31,10 @@
     display: flex;
     gap: 32px;
 }
+/* Hide the links on mobile but keep the (empty) column so the wordmark
+   stays centred. */
 @media (max-width: 768px) {
-    .links {
+    .links > * {
         display: none;
     }
 }
@@ -49,6 +51,19 @@
 }
 .link:hover {
     opacity: 0.6;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+}
+.mobileShop {
+    display: none;
+}
+@media (max-width: 768px) {
+    .mobileShop {
+        display: inline;
+    }
 }
 
 .linkMuted {

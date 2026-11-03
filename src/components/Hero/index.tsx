@@ -1,5 +1,6 @@
 import { Icon } from "../Icons";
-import { MARKETPLACES } from "../../constants";
+import { Link } from "react-router-dom";
+import { MARKETPLACES, ROUTES } from "../../constants";
 import styles from "./style.module.css";
 
 export function Hero() {
@@ -52,9 +53,9 @@ export function Hero() {
                     >
                         Buy on Flipkart <Icon name="arrowUpRight" size={16} />
                     </a>
-                    <a href="#drop" className={styles.btnSecondary}>
-                        See the pant <Icon name="arrowRight" size={16} />
-                    </a>
+                    <Link to={ROUTES.products} className={styles.btnSecondary}>
+                        Shop all <Icon name="arrowRight" size={16} />
+                    </Link>
                 </div>
             </div>
         </section>

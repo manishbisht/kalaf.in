@@ -1,70 +1,110 @@
 import { Link } from "react-router-dom";
 import { BuyButtons } from "../BuyButtons";
 import { Swatches } from "./Swatches";
-import { PANT, formatRupees, type Colourway } from "./product";
-import { ROUTES } from "../../constants";
+import { PANT } from "./pant";
+import { formatRupees, percentOff, type Variant } from "../../data/catalog";
+import { ROUTES, productPath } from "../../constants";
 import styles from "./style.module.css";
 
 export function Showcase({
     active,
     onPick,
 }: {
-    active: Colourway;
-    onPick: (id: string) => void;
+    active: Variant;
+    onPick: (sku: string) => void;
 }) {
-    const off = Math.round((1 - PANT.price / PANT.mrp) * 100);
+    // Video shows the pant worn, so the side image is the flat lay (photo 2),
+    // with the back view (photo 3) on hover.
+    const [model, flat, back] = active.images;
+    const side = flat ?? model;
+    const sizes = PANT.sizes;
 
     return (
         <div className={styles.showcase}>
             <div className={styles.heroImage}>
-                <img
-                    src="/pant-colourways.png"
-                    alt="Kalaf cotton linen trousers on the rail"
-                    loading="lazy"
-                    decoding="async"
-                />
+                {active.video ? (
+                    <video
+                        key={active.video.src}
+                        src={active.video.src}
+                        poster={active.video.poster}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        aria-label={`${PANT.title} in ${active.colour}, worn`}
+                    />
+                ) : (
+                    <img src={model.srcLarge} alt="" decoding="async" />
+                )}
                 <div className={styles.chipWrap}>
                     <span className="chip">DROP 01 — THE PANT</span>
                 </div>
             </div>
 
             <div className={styles.rightCol}>
-                <div className={styles.variantImage}>
+                <Link
+                    to={productPath(PANT.handle, active.colourCode)}
+                    className={styles.variantImage}
+                >
                     <img
-                        src={active.image}
-                        alt={`Kalaf ${PANT.name} — ${active.name}`}
+                        key={side.src}
+                        src={side.srcLarge}
+                        srcSet={`${side.src} 600w, ${side.srcLarge} 1200w`}
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                        alt={`${PANT.title} — ${active.colour}`}
                         loading="lazy"
                         decoding="async"
                     />
-                </div>
+                    {back && (
+                        <img
+                            src={back.src}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            className={styles.variantAlt}
+                        />
+                    )}
+                </Link>
 
                 <div className={styles.info}>
                     <div className={styles.titleRow}>
-                        <h3 className={styles.productTitle}>{PANT.name}</h3>
+                        <h3 className={styles.productTitle}>{PANT.title}</h3>
                         <div className={styles.price}>
-                            {formatRupees(PANT.price)}
+                            {formatRupees(active.price)}
                             <s className={styles.mrp}>
-                                {formatRupees(PANT.mrp)}
+                                {formatRupees(active.mrp)}
                             </s>
-                            <span className={styles.off}>{off}% off</span>
+                            <span className={styles.off}>
+                                {percentOff(active.price, active.mrp)}% off
+                            </span>
                         </div>
                     </div>
                     <div className={styles.variant}>
-                        Cotton-linen · Relaxed straight leg · {active.name} ·
-                        Waist {PANT.sizes[0]}–
-                        {PANT.sizes[PANT.sizes.length - 1]}
+                        Cotton-linen · Relaxed straight leg · {active.colour} ·
+                        Waist {sizes[0]}–{sizes[sizes.length - 1]}
                     </div>
 
                     <Swatches active={active} onPick={onPick} />
 
                     <div className={styles.shopOnLabel}>
-                        Buy the {active.name.toLowerCase()} pant on
+                        Buy the {active.colour.toLowerCase()} pant on
                     </div>
                     <BuyButtons links={active.links} />
 
-                    <Link to={ROUTES.sizeGuide} className={styles.sizingLink}>
-                        Need a size? Open the size guide →
-                    </Link>
+                    <div className={styles.links}>
+                        <Link
+                            to={productPath(PANT.handle, active.colourCode)}
+                            className={styles.sizingLink}
+                        >
+                            Photos, sizes &amp; details →
+                        </Link>
+                        <Link
+                            to={ROUTES.sizeGuide}
+                            className={styles.sizingLink}
+                        >
+                            Size guide →
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BRAND, ROUTES } from "../../constants";
+import { BRAND, ROUTES, collectionPath } from "../../constants";
 import styles from "./style.module.css";
 
 type NavProps = {
@@ -11,9 +11,18 @@ export function Nav({ dark = false }: NavProps) {
         <header className={`${styles.nav} ${dark ? styles.navDark : ""}`}>
             <div className={styles.inner}>
                 <nav className={styles.links}>
-                    <a className={styles.link}>Shop</a>
-                    <a className={styles.link}>Collections</a>
-                    <a className={styles.link}>Lookbook</a>
+                    <Link to={ROUTES.products} className={styles.link}>
+                        Shop all
+                    </Link>
+                    <Link to={collectionPath("pants")} className={styles.link}>
+                        Pants
+                    </Link>
+                    <Link
+                        to={collectionPath("dupattas")}
+                        className={styles.link}
+                    >
+                        Dupattas
+                    </Link>
                     <a className={`${styles.link} ${styles.linkMuted}`}>
                         Journal
                     </a>
@@ -23,8 +32,15 @@ export function Nav({ dark = false }: NavProps) {
                     {BRAND.wordmark}
                 </Link>
 
-                {/* Right-side spacer keeps the wordmark centred in the 1fr/auto/1fr grid */}
-                <div />
+                {/* Desktop links are hidden on mobile, so mobile gets a Shop link here */}
+                <div className={styles.right}>
+                    <Link
+                        to={ROUTES.products}
+                        className={`${styles.link} ${styles.mobileShop}`}
+                    >
+                        Shop
+                    </Link>
+                </div>
             </div>
 
             <div

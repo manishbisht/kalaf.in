@@ -1,12 +1,15 @@
 import { MetaCell } from "./MetaCell";
-import { PANT, formatRupees } from "./product";
+import { PANT } from "./pant";
+import { formatRupees } from "../../data/catalog";
 import styles from "./style.module.css";
 
+const v = PANT.variants[0];
+
 const META = [
-    { label: "Fabric", value: PANT.fabric },
+    { label: "Fabric", value: PANT.fabric ?? "" },
     { label: "Sizes", value: `Waist ${PANT.sizes.join(" · ")}` },
-    { label: "Price", value: `${formatRupees(PANT.price)} · Made in Jaipur` },
-    { label: "Available on", value: "Flipkart · Meesho · Amazon soon" },
+    { label: "Price", value: `${formatRupees(v.price)} · Made in Jaipur` },
+    { label: "Available on", value: "Flipkart · Meesho" },
 ];
 
 export function MetaStrip() {

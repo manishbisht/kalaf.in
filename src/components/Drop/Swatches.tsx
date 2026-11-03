@@ -1,41 +1,31 @@
-import { COLOURWAYS, type Colourway } from "./product";
+import type { Variant } from "../../data/catalog";
+import { Swatch } from "../Swatch";
+import { PANT } from "./pant";
 import styles from "./style.module.css";
 
 export function Swatches({
     active,
     onPick,
 }: {
-    active: Colourway;
-    onPick: (id: string) => void;
+    active: Variant;
+    onPick: (sku: string) => void;
 }) {
     return (
         <div className={styles.swatches}>
-            {COLOURWAYS.map((cw) => (
+            {PANT.variants.map((v) => (
                 <button
-                    key={cw.id}
-                    onClick={() => onPick(cw.id)}
-                    title={cw.name}
-                    style={{
-                        width: 26,
-                        height: 26,
-                        padding: 0,
-                        borderRadius: "50%",
-                        background: cw.swatch,
-                        border:
-                            cw.id === active.id
-                                ? "2px solid var(--ink)"
-                                : "1px solid var(--line)",
-                        outline:
-                            cw.id === active.id
-                                ? "2px solid var(--off-white)"
-                                : "none",
-                        outlineOffset: -4,
-                        cursor: "pointer",
-                        transition: "transform 200ms var(--ease)",
-                    }}
-                />
+                    key={v.sku}
+                    type="button"
+                    onClick={() => onPick(v.sku)}
+                    title={v.colour}
+                    aria-label={v.colour}
+                    aria-pressed={v.sku === active.sku}
+                    className={`${styles.swatchBtn} ${v.sku === active.sku ? styles.swatchActive : ""}`}
+                >
+                    <Swatch code={v.colourCode} size={26} />
+                </button>
             ))}
-            <span className={styles.swatchCode}>{active.name}</span>
+            <span className={styles.swatchCode}>{active.colour}</span>
         </div>
     );
 }

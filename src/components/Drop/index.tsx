@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { COLOURWAYS, DEFAULT_COLOURWAY } from "./product";
+import { PANT } from "./pant";
 import { Showcase } from "./Showcase";
 import { MetaStrip } from "./MetaStrip";
 import styles from "./style.module.css";
 
 export function Drop() {
-    const [activeId, setActiveId] = useState(DEFAULT_COLOURWAY.id);
-    const active =
-        COLOURWAYS.find((c) => c.id === activeId) ?? DEFAULT_COLOURWAY;
+    const [sku, setSku] = useState(PANT.variants[0].sku);
+    const active = PANT.variants.find((v) => v.sku === sku) ?? PANT.variants[0];
 
     return (
         <section className={styles.section} id="drop">
@@ -35,7 +34,7 @@ export function Drop() {
                     </div>
                 </div>
 
-                <Showcase active={active} onPick={setActiveId} />
+                <Showcase active={active} onPick={setSku} />
 
                 <MetaStrip />
             </div>

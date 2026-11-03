@@ -16,6 +16,8 @@ const SizeGuide = lazy(() => import("./pages/SizeGuide"));
 const CareGuide = lazy(() => import("./pages/CareGuide"));
 const TrackOrder = lazy(() => import("./pages/TrackOrder"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Shop = lazy(() => import("./pages/Shop"));
+const ProductPage = lazy(() => import("./pages/Product"));
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -27,9 +29,13 @@ function ScrollToTop() {
 
 function Shell() {
     const { pathname } = useLocation();
-    // Home uses a light Nav over its own imagery; every other route opens with
-    // the dark hero, so the Nav needs to switch to dark mode to blend in.
-    const dark = pathname !== ROUTES.home;
+    // Home and the shop pages use the light Nav; policy/guide pages open with
+    // a dark hero, so the Nav switches to dark mode to blend in.
+    const light =
+        pathname === ROUTES.home ||
+        pathname.startsWith("/products") ||
+        pathname.startsWith("/collections");
+    const dark = !light;
 
     return (
         <>
@@ -53,6 +59,9 @@ function Shell() {
                     <Route path={ROUTES.careGuide} element={<CareGuide />} />
                     <Route path={ROUTES.trackOrder} element={<TrackOrder />} />
                     <Route path={ROUTES.contact} element={<Contact />} />
+                    <Route path={ROUTES.products} element={<Shop />} />
+                    <Route path={ROUTES.collection} element={<Shop />} />
+                    <Route path={ROUTES.product} element={<ProductPage />} />
                 </Routes>
             </Suspense>
             <Footer />

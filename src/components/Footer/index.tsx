@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BRAND, ROUTES } from "../../constants";
+import { BRAND, ROUTES, collectionPath } from "../../constants";
 import { LinkColumn } from "./LinkColumn";
 import { SocialRow } from "./SocialRow";
 import { BuildStamp } from "./BuildStamp";
@@ -31,12 +31,12 @@ export function Footer() {
                     <LinkColumn
                         title="Shop"
                         items={[
-                            "Oversized tees",
-                            "Shirts",
-                            "Co-ords",
-                            "Essentials",
-                            "New drops",
-                            "Gift cards",
+                            { label: "All products", to: ROUTES.products },
+                            { label: "Pants", to: collectionPath("pants") },
+                            {
+                                label: "Dupattas",
+                                to: collectionPath("dupattas"),
+                            },
                         ]}
                     />
                     <LinkColumn

@@ -1,0 +1,884 @@
+{
+  "products": [
+    {
+      "code": "PNT",
+      "handle": "cotton-linen-relaxed-trousers",
+      "collection": "pants",
+      "title": "Cotton Linen Relaxed Trousers",
+      "description": "Kalaf Cotton Linen Relaxed Trousers. Breathable cotton-linen blend that feels light and cool in warm weather. Elastic waistband all the way round for easy comfort, with a front button and zip fly for a neat, tailored look. Relaxed wide straight leg that drapes cleanly, for work, travel and weekends.",
+      "features": [
+        "Breathable cotton-linen blend that feels light and cool in warm weather.",
+        "Elastic waistband all the way round for easy comfort, with a front button and zip fly for a neat, tailored look.",
+        "Relaxed wide straight leg that drapes cleanly, for work, travel and weekends."
+      ],
+      "details": [
+        "Fit: relaxed, wide straight leg",
+        "Waist: elastic all round, front button and zip fly, belt loops",
+        "Pockets: 2 slant side pockets, 2 back welt pockets",
+        "Length: full length, about 40 in",
+        "Sizes: 28, 30, 32, 34, 36 (waist in inches)",
+        "Colours: White, Black, Beige"
+      ],
+      "care": [
+        "Fabric: cotton-linen blend",
+        "Machine wash cold on a gentle cycle; wash dark colours separately",
+        "Do not bleach; dry in shade; warm iron",
+        "Linen blends crease naturally, which is part of their relaxed look"
+      ],
+      "fabric": "Cotton-linen blend",
+      "pattern": null,
+      "border": null,
+      "fit": "Relaxed, wide straight leg",
+      "size": null,
+      "sizes": [
+        "28",
+        "30",
+        "32",
+        "34",
+        "36"
+      ],
+      "variants": [
+        {
+          "sku": "PNT_BE",
+          "colourCode": "BE",
+          "colour": "Beige",
+          "family": "Beige",
+          "price": 2999,
+          "mrp": 5000,
+          "images": [
+            {
+              "src": "/catalog/PNT/PNT_BE_1-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BE_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BE_2-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BE_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BE_3-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BE_3-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BE_4-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BE_4-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BE_5-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BE_5-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BE_6-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BE_6-1200.jpg"
+            }
+          ],
+          "video": {
+            "src": "/catalog/PNT/PNT_BE_video.mp4",
+            "poster": "/catalog/PNT/PNT_BE_video-poster.jpg"
+          },
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j0jjaa",
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2VER6CRJP"
+          },
+          "sizeLinks": {
+            "28": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2SGWZ8RRC",
+            "30": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2MBMSVKWA",
+            "32": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2VER6CRJP",
+            "34": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2UF7H8XZR",
+            "36": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2J6BGHZ2B"
+          }
+        },
+        {
+          "sku": "PNT_BK",
+          "colourCode": "BK",
+          "colour": "Black",
+          "family": "Black",
+          "price": 2999,
+          "mrp": 5000,
+          "images": [
+            {
+              "src": "/catalog/PNT/PNT_BK_1-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BK_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BK_2-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BK_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BK_3-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BK_3-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BK_4-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BK_4-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BK_5-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BK_5-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_BK_6-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_BK_6-1200.jpg"
+            }
+          ],
+          "video": {
+            "src": "/catalog/PNT/PNT_BK_video.mp4",
+            "poster": "/catalog/PNT/PNT_BK_video-poster.jpg"
+          },
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j0jjac",
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2SMV4QBTF"
+          },
+          "sizeLinks": {
+            "28": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2UQE4XVQX",
+            "30": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2TVNS58RP",
+            "32": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2SMV4QBTF",
+            "34": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2H2FNZMFF",
+            "36": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2W8V9SDSM"
+          }
+        },
+        {
+          "sku": "PNT_WH",
+          "colourCode": "WH",
+          "colour": "White",
+          "family": "White",
+          "price": 2999,
+          "mrp": 5000,
+          "images": [
+            {
+              "src": "/catalog/PNT/PNT_WH_1-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_WH_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_WH_2-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_WH_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_WH_3-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_WH_3-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_WH_4-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_WH_4-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_WH_5-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_WH_5-1200.jpg"
+            },
+            {
+              "src": "/catalog/PNT/PNT_WH_6-600.jpg",
+              "srcLarge": "/catalog/PNT/PNT_WH_6-1200.jpg"
+            }
+          ],
+          "video": {
+            "src": "/catalog/PNT/PNT_WH_video.mp4",
+            "poster": "/catalog/PNT/PNT_WH_video-poster.jpg"
+          },
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j0jjab",
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2WR8FANUF"
+          },
+          "sizeLinks": {
+            "28": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2ZPWRJFQG",
+            "30": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2VNA8AVWJ",
+            "32": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2WR8FANUF",
+            "34": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2WBCZDYUJ",
+            "36": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2NYG4FVTT"
+          }
+        }
+      ]
+    },
+    {
+      "code": "DUAG",
+      "handle": "bandhani-dupatta-gota-border",
+      "collection": "dupattas",
+      "title": "Bandhani Dupatta with Gota Border",
+      "description": "Classic Rajasthani bandhani dots on artificial silk (taffeta), finished with a shimmering gota border along the edges. A full-length dupatta for festive days, weddings and pujas.",
+      "features": [
+        "Bandhani tie-dye print",
+        "Gota border along the edges",
+        "Artificial silk (taffeta) with a soft sheen"
+      ],
+      "details": [],
+      "care": [],
+      "fabric": "Artificial silk (taffeta)",
+      "pattern": "Bandhani",
+      "border": "Gota",
+      "fit": null,
+      "size": "2.25 m × 1 m",
+      "sizes": [],
+      "variants": [
+        {
+          "sku": "DUAG_MU",
+          "colourCode": "MU",
+          "colour": "Multicolour Green Yellow Red",
+          "family": "Multicolour",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_MU_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSG6FPHKZZFSU",
+            "meesho": "https://www.meesho.com/s/p/itwm7x"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_BK",
+          "colourCode": "BK",
+          "colour": "Black",
+          "family": "Black",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_BK_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_BK_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_BK_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_BK_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_BK_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_BK_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04eag"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_GR",
+          "colourCode": "GR",
+          "colour": "Green",
+          "family": "Green",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_GR_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_GR_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_GR_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_GR_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_GR_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_GR_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04eae"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_MA",
+          "colourCode": "MA",
+          "colour": "Maroon",
+          "family": "Maroon",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_MA_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MA_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MA_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MA_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MA_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MA_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04ead"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_MU1",
+          "colourCode": "MU1",
+          "colour": "Multicolour Orange Maroon Beige",
+          "family": "Multicolour",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_MU1_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU1_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU1_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU1_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU1_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU1_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j0d020"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_MU4",
+          "colourCode": "MU4",
+          "colour": "Multicolour Pink Red",
+          "family": "Multicolour",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_MU4_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU4_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU4_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU4_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU4_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU4_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04eaf"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_MU3",
+          "colourCode": "MU3",
+          "colour": "Multicolour Pink Yellow Blue",
+          "family": "Multicolour",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_MU3_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU3_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU3_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU3_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU3_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU3_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j0d022"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_MU2",
+          "colourCode": "MU2",
+          "colour": "Multicolour Yellow Red Black",
+          "family": "Multicolour",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_MU2_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU2_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU2_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU2_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_MU2_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_MU2_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04eaa"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_PI",
+          "colourCode": "PI",
+          "colour": "Pink",
+          "family": "Pink",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_PI_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_PI_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_PI_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_PI_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_PI_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_PI_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j0d021"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_RA",
+          "colourCode": "RA",
+          "colour": "Rani Pink",
+          "family": "Pink",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_RA_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RA_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_RA_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RA_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_RA_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RA_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04eab"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_RED",
+          "colourCode": "RED",
+          "colour": "Red",
+          "family": "Red",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_RED_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RED_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_RED_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RED_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_RED_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RED_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04eac"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_RB",
+          "colourCode": "RB",
+          "colour": "Royal Blue",
+          "family": "Blue",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_RB_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RB_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_RB_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RB_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_RB_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_RB_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j0d01z"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUAG_YEL",
+          "colourCode": "YEL",
+          "colour": "Yellow",
+          "family": "Yellow",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUAG/DUAG_YEL_1-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_YEL_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_YEL_2-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_YEL_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUAG/DUAG_YEL_3-600.jpg",
+              "srcLarge": "/catalog/DUAG/DUAG_YEL_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04eah"
+          },
+          "sizeLinks": null
+        }
+      ]
+    },
+    {
+      "code": "DUA",
+      "handle": "bandhani-dupatta",
+      "collection": "dupattas",
+      "title": "Bandhani Dupatta",
+      "description": "Classic Rajasthani bandhani dots on artificial silk (taffeta). A clean, borderless full-length dupatta that pairs with everyday kurtas as easily as festive wear.",
+      "features": [
+        "Bandhani tie-dye print",
+        "No border, for a clean finish",
+        "Artificial silk (taffeta) with a soft sheen"
+      ],
+      "details": [],
+      "care": [],
+      "fabric": "Artificial silk (taffeta)",
+      "pattern": "Bandhani",
+      "border": null,
+      "fit": null,
+      "size": "2.25 m × 1 m",
+      "sizes": [],
+      "variants": [
+        {
+          "sku": "DUA_BK",
+          "colourCode": "BK",
+          "colour": "Black",
+          "family": "Black",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUA/DUA_BK_1-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_BK_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_BK_2-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_BK_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_BK_3-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_BK_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQJCWDF3FX",
+            "meesho": "https://www.meesho.com/s/p/itzfl1"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUA_GR",
+          "colourCode": "GR",
+          "colour": "Green",
+          "family": "Green",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUA/DUA_GR_1-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_GR_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_GR_2-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_GR_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_GR_3-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_GR_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQGAFNJS7T",
+            "meesho": "https://www.meesho.com/s/p/itzfl4"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUA_PI",
+          "colourCode": "PI",
+          "colour": "Pink",
+          "family": "Pink",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUA/DUA_PI_1-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_PI_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_PI_2-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_PI_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_PI_3-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_PI_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQKQZSNXQV",
+            "meesho": "https://www.meesho.com/s/p/itzfl2"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUA_RED",
+          "colourCode": "RED",
+          "colour": "Red",
+          "family": "Red",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUA/DUA_RED_1-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_RED_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_RED_2-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_RED_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_RED_3-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_RED_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQRMQPEDWU",
+            "meesho": "https://www.meesho.com/s/p/itzfl0"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUA_RB",
+          "colourCode": "RB",
+          "colour": "Royal Blue",
+          "family": "Blue",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUA/DUA_RB_1-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_RB_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_RB_2-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_RB_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUA/DUA_RB_3-600.jpg",
+              "srcLarge": "/catalog/DUA/DUA_RB_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQGZB7TNXF",
+            "meesho": "https://www.meesho.com/s/p/itzfl3"
+          },
+          "sizeLinks": null
+        }
+      ]
+    },
+    {
+      "code": "DUCHI",
+      "handle": "chiffon-leheriya-dupatta",
+      "collection": "dupattas",
+      "title": "Chiffon Leheriya Dupatta with Gota Border",
+      "description": "Light, flowing chiffon in rippling leheriya stripes, edged with a gota border. An airy full-length dupatta that drapes softly for festive and summer wear.",
+      "features": [
+        "Leheriya wave-stripe print",
+        "Gota border along the edges",
+        "Light, sheer chiffon that drapes softly"
+      ],
+      "details": [],
+      "care": [],
+      "fabric": "Chiffon",
+      "pattern": "Leheriya",
+      "border": "Gota",
+      "fit": null,
+      "size": "2.25 m × 1 m",
+      "sizes": [],
+      "variants": [
+        {
+          "sku": "DUCHI_BK",
+          "colourCode": "BK",
+          "colour": "Black",
+          "family": "Black",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUCHI/DUCHI_BK_1-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_BK_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_BK_2-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_BK_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_BK_3-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_BK_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04wvf"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUCHI_PI",
+          "colourCode": "PI",
+          "colour": "Pink",
+          "family": "Pink",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUCHI/DUCHI_PI_1-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_PI_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_PI_2-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_PI_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_PI_3-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_PI_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04wve"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUCHI_RED",
+          "colourCode": "RED",
+          "colour": "Red",
+          "family": "Red",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUCHI/DUCHI_RED_1-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_RED_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_RED_2-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_RED_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_RED_3-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_RED_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04wvg"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUCHI_RB",
+          "colourCode": "RB",
+          "colour": "Royal Blue",
+          "family": "Blue",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUCHI/DUCHI_RB_1-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_RB_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_RB_2-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_RB_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_RB_3-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_RB_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04wvc"
+          },
+          "sizeLinks": null
+        },
+        {
+          "sku": "DUCHI_YEL",
+          "colourCode": "YEL",
+          "colour": "Yellow",
+          "family": "Yellow",
+          "price": 1000,
+          "mrp": 1500,
+          "images": [
+            {
+              "src": "/catalog/DUCHI/DUCHI_YEL_1-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_1-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_YEL_2-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_2-1200.jpg"
+            },
+            {
+              "src": "/catalog/DUCHI/DUCHI_YEL_3-600.jpg",
+              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_3-1200.jpg"
+            }
+          ],
+          "video": null,
+          "links": {
+            "meesho": "https://www.meesho.com/s/p/j04wvd"
+          },
+          "sizeLinks": null
+        }
+      ]
+    }
+  ]
+}
