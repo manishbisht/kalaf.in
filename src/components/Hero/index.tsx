@@ -1,18 +1,32 @@
 import { Icon } from "../Icons";
 import { Link } from "react-router-dom";
 import { MARKETPLACES, ROUTES } from "../../constants";
+import { PRODUCTS } from "../../data/catalog";
 import styles from "./style.module.css";
+
+// The three colourways of the pant, worn — photo 1 of each colour.
+const PANT = PRODUCTS.find((p) => p.code === "PNT")!;
+const ORDER = ["WH", "BE", "BK"];
+const SHOTS = ORDER.map((c) => PANT.variants.find((v) => v.colourCode === c))
+    .filter((v) => v !== undefined)
+    .map((v) => ({ colour: v.colour, image: v.images[0] }));
 
 export function Hero() {
     return (
         <section className={styles.hero}>
-            <img
-                src="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=2000&q=85"
-                alt=""
-                className={styles.bg}
-                decoding="async"
-                fetchPriority="high"
-            />
+            <div className={styles.bg}>
+                {SHOTS.map((shot, i) => (
+                    <img
+                        key={shot.colour}
+                        src={shot.image.srcLarge}
+                        srcSet={`${shot.image.src} 600w, ${shot.image.srcLarge} 1200w`}
+                        sizes="(max-width: 768px) 100vw, 34vw"
+                        alt={`${PANT.title} in ${shot.colour}, worn`}
+                        decoding="async"
+                        fetchPriority={i === 1 ? "high" : "auto"}
+                    />
+                ))}
+            </div>
 
             <div className={styles.metaTopRight}>
                 <div>Drop 01 — Cotton Linen Trousers</div>
