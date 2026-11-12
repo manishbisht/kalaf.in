@@ -80,7 +80,7 @@ export function Showcase({
                         </div>
                     </div>
                     <div className={styles.variant}>
-                        Cotton-linen · Relaxed straight leg · {active.colour} ·
+                        {PANT.fabric} · Relaxed straight leg · {active.colour} ·
                         Waist {sizes[0]}–{sizes[sizes.length - 1]}
                     </div>
 
@@ -89,7 +89,7 @@ export function Showcase({
                     <div className={styles.shopOnLabel}>
                         Buy the {active.colour.toLowerCase()} pant on
                     </div>
-                    <BuyButtons links={active.links} />
+                    <BuyButtons links={active.links} prices={active.prices} />
 
                     <div className={styles.links}>
                         <Link

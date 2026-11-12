@@ -16,6 +16,8 @@ export type Variant = {
     images: ProductImage[];
     video: { src: string; poster: string } | null;
     links: MarketplaceLinks;
+    // Each live store's own price (they can differ); `price` is the lowest.
+    prices: Partial<Record<keyof MarketplaceLinks, number>>;
     // Sized products: Flipkart has one page per size.
     sizeLinks: Record<string, string> | null;
 };
@@ -50,7 +52,7 @@ export const COLLECTIONS: Record<
         title: "Pants",
         eyebrow: "Collection — pants",
         devanagari: "पतलून",
-        intro: "Cotton-linen trousers cut for Indian summers. Elastic waist, relaxed straight leg, made in Jaipur.",
+        intro: "100% cotton trousers cut for Indian summers. Elastic waist, relaxed straight leg, made in Jaipur.",
     },
     dupattas: {
         title: "Dupattas",
@@ -67,8 +69,14 @@ export const LISTING: ListingItem[] = PRODUCTS.flatMap((product) =>
     product.variants.map((variant) => ({ product, variant }))
 );
 
+// Handles that changed, so old shared links keep working.
+const OLD_HANDLES: Record<string, string> = {
+    "cotton-linen-relaxed-trousers": "cotton-relaxed-trousers",
+};
+
 export function findProduct(handle: string | undefined) {
-    return PRODUCTS.find((p) => p.handle === handle);
+    const h = handle && (OLD_HANDLES[handle] ?? handle);
+    return PRODUCTS.find((p) => p.handle === h);
 }
 
 export function formatRupees(n: number) {

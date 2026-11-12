@@ -1,6 +1,6 @@
 import { Icon } from "../Icons";
 import { Link } from "react-router-dom";
-import { MARKETPLACES, ROUTES } from "../../constants";
+import { ROUTES } from "../../constants";
 import { PRODUCTS } from "../../data/catalog";
 import styles from "./style.module.css";
 
@@ -10,6 +10,9 @@ const ORDER = ["WH", "BE", "BK"];
 const SHOTS = ORDER.map((c) => PANT.variants.find((v) => v.colourCode === c))
     .filter((v) => v !== undefined)
     .map((v) => ({ colour: v.colour, image: v.images[0] }));
+
+// Hero "Buy" button: the first colour's main Flipkart page.
+const BUY_LINK = PANT.variants.find((v) => v.links.flipkart)?.links.flipkart;
 
 export function Hero() {
     return (
@@ -29,7 +32,7 @@ export function Hero() {
             </div>
 
             <div className={styles.metaTopRight}>
-                <div>Drop 01 — Cotton Linen Trousers</div>
+                <div>Drop 01 — Cotton Trousers</div>
                 <div className={styles.metaSub}>
                     One pant. Three colours. Jaipur.
                 </div>
@@ -55,12 +58,12 @@ export function Hero() {
                 <h1 className={styles.headline}>
                     The Cotton
                     <br />
-                    Linen Pant.
+                    Pant.
                 </h1>
 
                 <div className={styles.ctas}>
                     <a
-                        href={MARKETPLACES.flipkart}
+                        href={BUY_LINK}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.btnPrimary}

@@ -155,7 +155,7 @@ export default function ProductPage() {
 
                         <div className={styles.buy}>
                             <div className={styles.label}>Buy it on</div>
-                            <BuyButtons links={links} />
+                            <BuyButtons links={links} prices={variant.prices} />
                             <p className={styles.buyNote}>
                                 You&apos;ll check out on the marketplace — they
                                 handle payment, delivery and returns.

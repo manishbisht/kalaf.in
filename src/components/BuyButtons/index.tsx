@@ -1,4 +1,5 @@
 import { Icon } from "../Icons";
+import { formatRupees } from "../../data/catalog";
 import styles from "./style.module.css";
 
 export type Marketplace = "amazon" | "flipkart" | "meesho";
@@ -14,11 +15,16 @@ const STORES: { id: Marketplace; name: string }[] = [
 // primary button); a store with no link shows after them as "coming soon".
 export function BuyButtons({
     links,
+    prices,
     compact = false,
 }: {
     links: MarketplaceLinks;
+    // Shown on each button when the stores charge different prices.
+    prices?: Partial<Record<Marketplace, number>>;
     compact?: boolean;
 }) {
+    const amounts = new Set(Object.values(prices ?? {}));
+    const showPrices = amounts.size > 1;
     const stores = [
         ...STORES.filter((s) => links[s.id]),
         ...STORES.filter((s) => !links[s.id]),
@@ -49,7 +55,11 @@ export function BuyButtons({
                         rel="noopener noreferrer"
                         className={`btn ${s.id === primary ? "btn-primary" : "btn-secondary"}`}
                     >
-                        Buy on {s.name} <Icon name="arrowUpRight" size={16} />
+                        Buy on {s.name}
+                        {showPrices && prices?.[s.id] && (
+                            <> · {formatRupees(prices[s.id]!)}</>
+                        )}{" "}
+                        <Icon name="arrowUpRight" size={16} />
                     </a>
                 );
             })}

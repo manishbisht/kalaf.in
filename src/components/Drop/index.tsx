@@ -26,7 +26,7 @@ export function Drop() {
                         </h2>
                     </div>
                     <div className="right">
-                        Breathable cotton-linen that stays cool in the heat.
+                        Breathable 100% cotton that stays cool in the heat.
                         Elastic waistband all the way round, with a front button
                         and zip fly for a clean, tailored look. A relaxed wide
                         straight leg for work, travel and weekends. Made in
