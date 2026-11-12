@@ -78,15 +78,9 @@
             "poster": "/catalog/PNT/PNT_BE_video-poster.jpg"
           },
           "links": {
-            "flipkart": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2VER6CRJP"
+            "flipkart": "https://pants.kalaf.in/kalaf.in"
           },
-          "sizeLinks": {
-            "28": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2SGWZ8RRC",
-            "30": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2MBMSVKWA",
-            "32": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2VER6CRJP",
-            "34": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2UF7H8XZR",
-            "36": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2J6BGHZ2B"
-          }
+          "sizeLinks": null
         },
         {
           "sku": "PNT_BK",
@@ -129,15 +123,9 @@
             "poster": "/catalog/PNT/PNT_BK_video-poster.jpg"
           },
           "links": {
-            "flipkart": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2SMV4QBTF"
+            "flipkart": "https://pants.kalaf.in/kalaf.in"
           },
-          "sizeLinks": {
-            "28": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2UQE4XVQX",
-            "30": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2TVNS58RP",
-            "32": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2SMV4QBTF",
-            "34": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2H2FNZMFF",
-            "36": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2W8V9SDSM"
-          }
+          "sizeLinks": null
         },
         {
           "sku": "PNT_WH",
@@ -180,15 +168,9 @@
             "poster": "/catalog/PNT/PNT_WH_video-poster.jpg"
           },
           "links": {
-            "flipkart": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2WR8FANUF"
+            "flipkart": "https://pants.kalaf.in/kalaf.in"
           },
-          "sizeLinks": {
-            "28": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2ZPWRJFQG",
-            "30": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2VNA8AVWJ",
-            "32": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2WR8FANUF",
-            "34": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2WBCZDYUJ",
-            "36": "https://www.flipkart.com/product/p/itme?pid=TROHSRF2NYG4FVTT"
-          }
+          "sizeLinks": null
         }
       ]
     },

@@ -123,8 +123,10 @@ export default function ProductPage() {
                         {product.sizes.length > 0 && (
                             <>
                                 <div className={styles.label}>
-                                    Waist size (inches)
-                                    {size && (
+                                    {variant.sizeLinks
+                                        ? "Waist size (inches)"
+                                        : "Waist sizes (inches) — pick yours on the marketplace"}
+                                    {size && variant.sizeLinks && (
                                         <>
                                             {" "}
                                             — <strong>{size}</strong>
@@ -132,17 +134,30 @@ export default function ProductPage() {
                                     )}
                                 </div>
                                 <div className={styles.sizes}>
-                                    {product.sizes.map((s) => (
-                                        <button
-                                            key={s}
-                                            type="button"
-                                            aria-pressed={s === size}
-                                            className={`${styles.sizeBtn} ${s === size ? styles.sizeActive : ""}`}
-                                            onClick={() => setSize(s)}
-                                        >
-                                            {s}
-                                        </button>
-                                    ))}
+                                    {/* Sizes only pick a link when the store
+                                        has one page per size; otherwise
+                                        they're just information. */}
+                                    {!variant.sizeLinks &&
+                                        product.sizes.map((s) => (
+                                            <span
+                                                key={s}
+                                                className={styles.sizeInfo}
+                                            >
+                                                {s}
+                                            </span>
+                                        ))}
+                                    {variant.sizeLinks &&
+                                        product.sizes.map((s) => (
+                                            <button
+                                                key={s}
+                                                type="button"
+                                                aria-pressed={s === size}
+                                                className={`${styles.sizeBtn} ${s === size ? styles.sizeActive : ""}`}
+                                                onClick={() => setSize(s)}
+                                            >
+                                                {s}
+                                            </button>
+                                        ))}
                                 </div>
                                 <Link
                                     to={ROUTES.sizeGuide}
@@ -160,7 +175,9 @@ export default function ProductPage() {
                                 You&apos;ll check out on the marketplace — they
                                 handle payment, delivery and returns.
                                 {product.sizes.length > 0 &&
-                                    " Pick your size there if you haven't chosen one here."}
+                                    (variant.sizeLinks
+                                        ? " Pick your size there if you haven't chosen one here."
+                                        : " Pick your size there.")}
                             </p>
                         </div>
 

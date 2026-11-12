@@ -194,6 +194,18 @@
     border-color: var(--ink);
     color: var(--off-white);
 }
+.sizeInfo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    font-family: var(--font-head);
+    font-size: 14px;
+    color: var(--charcoal);
+}
 .sizeGuide {
     display: inline-block;
     margin-top: 12px;

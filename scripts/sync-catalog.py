@@ -43,6 +43,10 @@ PRODUCTS = {
         # 100% cotton; src/data/catalog.ts redirects the old handle.
         "handle": "cotton-relaxed-trousers",
         "collection": "pants",
+        # Owner's own link for every "Buy on Flipkart" pants button (12 Nov
+        # 2026). Replaces the per-colour/per-size Flipkart pages; only used
+        # while the products repo shows the Flipkart listing as live.
+        "links": {"flipkart": "https://pants.kalaf.in/kalaf.in"},
     },
     "DUAG": {
         "handle": "bandhani-dupatta-gota-border",
@@ -161,6 +165,14 @@ def build(src_root: Path, force: bool):
             if size_links and "flipkart" not in links:
                 mid = list(size_links)[len(size_links) // 2]
                 links["flipkart"] = size_links[mid]
+
+            # Website-side link overrides (see PRODUCTS). A store overridden
+            # here has one link for all sizes, so drop its per-size pages.
+            for m, url in extra.get("links", {}).items():
+                if m in live and (m in links or m in plat.get(m, {})):
+                    links[m] = url
+                    if m == "flipkart":
+                        size_links = {}
 
             dest = OUT_MEDIA / code
             images = []
