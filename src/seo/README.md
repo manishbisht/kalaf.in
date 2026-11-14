@@ -29,10 +29,10 @@ Everything that goes in a page's `<head>` plus the site-wide text files for craw
 
 It also writes:
 
-- `sitemap.xml`: every prerendered URL, `lastmod` = build date.
+- `sitemap.xml`: every prerendered URL except `NOT_IN_SITEMAP` (`sitemapPaths()`), `lastmod` = build date.
 - `robots.txt`: allow all, plus the sitemap URL.
 - `llms.txt` ([llmstxt.org](https://llmstxt.org) format): a plain-text summary of the brand, each product (sizes, colours, price, where to buy), help and policy links and contact details, built **only** from `catalog.json` and `business.json`. The Ask AI links point assistants at it. Keep it factual.
 
 ## Adding a page
 
-Add its path to `STATIC_PAGES` with a `title` (no suffix) and a `description` (~150 chars, factual). That gives it head tags, prerenders it and puts it in the sitemap. For JSON-LD of its own, add a builder to `STATIC_JSON_LD` (the FAQ does). A page with a different shape (like a collection) needs its own branch in `seoFor` and an entry in `prerenderPaths()`. Also follow the page checklist in [pages/README.md](../pages/README.md#adding-a-page).
+Add its path to `STATIC_PAGES` with a `title` (no suffix) and a `description` (~150 chars, factual). That gives it head tags, prerenders it and puts it in the sitemap. For JSON-LD of its own, add a builder to `STATIC_JSON_LD` (the FAQ does). `brandTitle: true` drops the ` · Kalaf` suffix when the title already names the brand (`/links`: "Kalaf — links"). A utility page that should be prerendered and indexable but not listed in the sitemap goes in `NOT_IN_SITEMAP` (`/links`); `sitemapPaths()` is `prerenderPaths()` minus those. A page with a different shape (like a collection) needs its own branch in `seoFor` and an entry in `prerenderPaths()`. Also follow the page checklist in [pages/README.md](../pages/README.md#adding-a-page).

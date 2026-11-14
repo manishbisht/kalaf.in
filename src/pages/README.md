@@ -22,6 +22,7 @@ URLs are real paths (`BrowserRouter`); every route below is prerendered to stati
 | `trackOrder`      | `/track-order`         | `TrackOrder`      | dark  |
 | `contact`         | `/contact`             | `Contact`         | dark  |
 | `faq`             | `/faq`                 | `Faq`             | dark  |
+| `links`           | `/links`               | `Links`           | light |
 | (none)            | `*`                    | `NotFound`        | light |
 
 Link with `ROUTES.*`, `productPath(handle, colour?)` and `collectionPath(handle)` from `src/constants.ts`.
@@ -46,6 +47,10 @@ One page for both. The handle is `pants` or `dupattas`; an unknown handle shows 
 - **Sizes and size chart**: size buttons plus a collapsible waist/hip table from `product.sizeChart`. If `variant.sizeLinks` has a link for the chosen size, the Flipkart button uses it. The pants have no size links today (one owner link for all sizes), so sizes are information only.
 - **Availability**: "In stock · dispatched from Jaipur in N working days", or "Sold out in {colour}" (plus "try another colour" if any are in stock). Stock `null` means unknown: only the dispatch time is shown.
 - **`BuyButtons`** with per-store prices and the SKU for click tracking, then a one-line note that prices are as listed by each store and the price at the marketplace's checkout applies (prices come from the products repo, so they can lag a store's change or offer); **`Share.tsx`** (system share sheet where available, else copy link, plus WhatsApp); details, features and care lists; `AskAI`; up to four related in-stock colours from the same collection.
+
+## Links (`/links`)
+
+The link-in-bio page for the Instagram and Facebook bios: wordmark, one line about Kalaf, then full-width square buttons (pants on Flipkart from the pant's catalog link, dupattas, all products, WhatsApp, Instagram) and the email. A button whose target is missing (no Flipkart link, no WhatsApp number) is left out. Each click fires Clarity's `links_click` tagged with its `target`. It's indexable but kept out of `sitemap.xml` (`NOT_IN_SITEMAP` in `src/seo`).
 
 ## NotFound
 

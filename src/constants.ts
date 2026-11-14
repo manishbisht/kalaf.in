@@ -54,6 +54,7 @@ export const ROUTES = {
     trackOrder: "/track-order",
     contact: "/contact",
     faq: "/faq",
+    links: "/links",
     products: "/products",
     product: "/products/:handle",
     collection: "/collections/:handle",

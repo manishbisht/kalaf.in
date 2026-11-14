@@ -29,6 +29,7 @@ const Shop = lazy(() => import("./pages/Shop"));
 const ProductPage = lazy(() => import("./pages/Product"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Faq = lazy(() => import("./pages/Faq"));
+const Links = lazy(() => import("./pages/Links"));
 
 // Policy and guide pages open with a dark hero, so the Nav goes dark there.
 const DARK_NAV: string[] = [
@@ -114,6 +115,7 @@ export function Shell({ seo = true }: { seo?: boolean }) {
                     <Route path={ROUTES.collection} element={<Shop />} />
                     <Route path={ROUTES.product} element={<ProductPage />} />
                     <Route path={ROUTES.faq} element={<Faq />} />
+                    <Route path={ROUTES.links} element={<Links />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </PageBoundary>

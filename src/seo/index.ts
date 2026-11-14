@@ -56,7 +56,11 @@ const SUFFIX = ` · ${BRAND.name}`;
 
 // Policy and guide pages: their copy lives in the page files, so the head
 // text is kept here to avoid coupling SEO to page internals.
-const STATIC_PAGES: Record<string, { title: string; description: string }> = {
+// `brandTitle`: the title already names the brand, so no " · Kalaf" suffix.
+const STATIC_PAGES: Record<
+    string,
+    { title: string; description: string; brandTitle?: boolean }
+> = {
     [ROUTES.shippingReturns]: {
         title: "Shipping & Returns",
         description:
@@ -106,7 +110,18 @@ const STATIC_PAGES: Record<string, { title: string; description: string }> = {
         description:
             "Where to buy Kalaf, why there's no checkout on kalaf.in, sizes, fabric, care, dispatch, delivery, returns, prices and how to reach us.",
     },
+    // The link-in-bio page for Instagram and Facebook. Indexable, but left
+    // out of the sitemap (see NOT_IN_SITEMAP).
+    [ROUTES.links]: {
+        title: `${BRAND.name} — links`,
+        brandTitle: true,
+        description:
+            "Kalaf's links in one place: shop the cotton trousers and bandhani dupattas, chat on WhatsApp, or follow us on Instagram.",
+    },
 };
+
+// Prerendered and indexable, but utility pages, not content for the sitemap.
+const NOT_IN_SITEMAP: string[] = [ROUTES.links];
 
 // Static pages with JSON-LD of their own.
 const STATIC_JSON_LD: Record<string, () => JsonLd[]> = {
@@ -352,7 +367,8 @@ export function seoFor(pathname: string, search = ""): SeoData {
 
     const page = STATIC_PAGES[path];
     if (page) {
-        return base(path, page.title + SUFFIX, page.description, {
+        const title = page.brandTitle ? page.title : page.title + SUFFIX;
+        return base(path, title, page.description, {
             jsonLd: STATIC_JSON_LD[path]?.() ?? [],
         });
     }
@@ -534,8 +550,13 @@ export function llmsTxt(): string {
     ].join("\n");
 }
 
+/** The prerendered URLs that go in sitemap.xml. */
+export function sitemapPaths(): string[] {
+    return prerenderPaths().filter((p) => !NOT_IN_SITEMAP.includes(p));
+}
+
 export function sitemapXml(lastmod: string): string {
-    const urls = prerenderPaths()
+    const urls = sitemapPaths()
         .map(
             (p) =>
                 `  <url><loc>${absolute(p)}</loc><lastmod>${lastmod}</lastmod></url>`

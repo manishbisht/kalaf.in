@@ -15,6 +15,7 @@ import {
     llmsTxt,
     prerenderPaths,
     seoFor,
+    sitemapPaths,
     sitemapXml,
 } from ".";
 
@@ -215,10 +216,20 @@ describe("prerenderPaths", () => {
         }
     });
 
-    it("sitemap.xml lists every path once", () => {
+    it("sitemap.xml lists every path once, except utility pages", () => {
         const xml = sitemapXml("2026-01-01");
         const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-        expect(locs).toEqual(paths.map((p) => `${SITE_URL}${p}`));
+        expect(locs).toEqual(sitemapPaths().map((p) => `${SITE_URL}${p}`));
+        expect(sitemapPaths()).toEqual(paths.filter((p) => p !== ROUTES.links));
+    });
+
+    it("/links is prerendered and indexable, but not in the sitemap", () => {
+        expect(paths).toContain(ROUTES.links);
+        expect(sitemapPaths()).not.toContain(ROUTES.links);
+        const seo = seoFor(ROUTES.links);
+        expectCommon(seo, ROUTES.links);
+        expect(seo.title).toBe("Kalaf — links");
+        expect(seo.noindex).toBe(false);
     });
 });
 
