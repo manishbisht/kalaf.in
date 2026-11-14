@@ -36,6 +36,39 @@
         "34",
         "36"
       ],
+      "sizeChart": {
+        "units": "inches",
+        "lengthIn": 40,
+        "inseamIn": 30,
+        "rows": [
+          {
+            "size": "28",
+            "waist": 28,
+            "hip": 38
+          },
+          {
+            "size": "30",
+            "waist": 30,
+            "hip": 40
+          },
+          {
+            "size": "32",
+            "waist": 32,
+            "hip": 42
+          },
+          {
+            "size": "34",
+            "waist": 34,
+            "hip": 44
+          },
+          {
+            "size": "36",
+            "waist": 36,
+            "hip": 46
+          }
+        ]
+      },
+      "dispatchDays": 2,
       "variants": [
         {
           "sku": "PNT_BE",
@@ -80,7 +113,8 @@
           "links": {
             "flipkart": "https://pants.kalaf.in/kalaf.in"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 50
         },
         {
           "sku": "PNT_BK",
@@ -125,7 +159,8 @@
           "links": {
             "flipkart": "https://pants.kalaf.in/kalaf.in"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 50
         },
         {
           "sku": "PNT_WH",
@@ -170,7 +205,8 @@
           "links": {
             "flipkart": "https://pants.kalaf.in/kalaf.in"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 50
         }
       ]
     },
@@ -194,6 +230,8 @@
       "fit": null,
       "size": "2.25 m × 1 m",
       "sizes": [],
+      "sizeChart": null,
+      "dispatchDays": 3,
       "variants": [
         {
           "sku": "DUAG_BK",
@@ -228,7 +266,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPGYHYDT6G5DJFF",
             "meesho": "https://www.meesho.com/s/p/j04eag"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_GR",
@@ -263,7 +302,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPGYHYDYRATNF69",
             "meesho": "https://www.meesho.com/s/p/j04eae"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_MA",
@@ -298,7 +338,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQ7642YNATVG",
             "meesho": "https://www.meesho.com/s/p/j04ead"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_MU",
@@ -333,7 +374,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSG6FPHKZZFSU",
             "meesho": "https://www.meesho.com/s/p/itwm7x"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_MU1",
@@ -368,7 +410,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQ76JKFQWJEF",
             "meesho": "https://www.meesho.com/s/p/j0d020"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_MU4",
@@ -403,7 +446,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQ76UGRHNZYY",
             "meesho": "https://www.meesho.com/s/p/j04eaf"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_MU3",
@@ -438,7 +482,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQ765ZZWECQQ",
             "meesho": "https://www.meesho.com/s/p/j0d022"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_MU2",
@@ -473,7 +518,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQ76GJHKG8BF",
             "meesho": "https://www.meesho.com/s/p/j04eaa"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_PI",
@@ -508,7 +554,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQ76SYDKXXJV",
             "meesho": "https://www.meesho.com/s/p/j0d021"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_RA",
@@ -543,7 +590,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPGYJUDWW4WGBAW",
             "meesho": "https://www.meesho.com/s/p/j04eab"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_RED",
@@ -578,7 +626,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQ76XVTZQD7E",
             "meesho": "https://www.meesho.com/s/p/j04eac"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_RB",
@@ -613,7 +662,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQ767UQF8SNY",
             "meesho": "https://www.meesho.com/s/p/j0d01z"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUAG_YEL",
@@ -648,7 +698,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPGYHYDRDW5EWBG",
             "meesho": "https://www.meesho.com/s/p/j04eah"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         }
       ]
     },
@@ -672,6 +723,8 @@
       "fit": null,
       "size": "2.25 m × 1 m",
       "sizes": [],
+      "sizeChart": null,
+      "dispatchDays": 3,
       "variants": [
         {
           "sku": "DUA_BK",
@@ -706,7 +759,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQJCWDF3FX",
             "meesho": "https://www.meesho.com/s/p/itzfl1"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUA_GR",
@@ -741,7 +795,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQGAFNJS7T",
             "meesho": "https://www.meesho.com/s/p/itzfl4"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUA_PI",
@@ -776,7 +831,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQKQZSNXQV",
             "meesho": "https://www.meesho.com/s/p/itzfl2"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUA_RED",
@@ -811,7 +867,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQRMQPEDWU",
             "meesho": "https://www.meesho.com/s/p/itzfl0"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUA_RB",
@@ -846,7 +903,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQBQGZB7TNXF",
             "meesho": "https://www.meesho.com/s/p/itzfl3"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         }
       ]
     },
@@ -870,6 +928,8 @@
       "fit": null,
       "size": "2.25 m × 1 m",
       "sizes": [],
+      "sizeChart": null,
+      "dispatchDays": 3,
       "variants": [
         {
           "sku": "DUCHI_BK",
@@ -904,7 +964,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPGYHXMH4EABJF8",
             "meesho": "https://www.meesho.com/s/p/j04wvf"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUCHI_PI",
@@ -939,7 +1000,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQCYMBVEVFHP",
             "meesho": "https://www.meesho.com/s/p/j04wve"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUCHI_RED",
@@ -974,7 +1036,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPHSQCYTNSVYBWY",
             "meesho": "https://www.meesho.com/s/p/j04wvg"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUCHI_RB",
@@ -1009,7 +1072,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPGYHXMYTCNHQGY",
             "meesho": "https://www.meesho.com/s/p/j04wvc"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         },
         {
           "sku": "DUCHI_YEL",
@@ -1044,7 +1108,8 @@
             "flipkart": "https://www.flipkart.com/product/p/itme?pid=DUPGYHXM6WW7RAMC",
             "meesho": "https://www.meesho.com/s/p/j04wvd"
           },
-          "sizeLinks": null
+          "sizeLinks": null,
+          "stock": 10
         }
       ]
     }

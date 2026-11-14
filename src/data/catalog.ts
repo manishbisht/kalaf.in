@@ -20,6 +20,15 @@ export type Variant = {
     prices: Partial<Record<keyof MarketplaceLinks, number>>;
     // Sized products: Flipkart has one page per size.
     sizeLinks: Record<string, string> | null;
+    // Units in stock (summed over sizes); null when the products repo has no count.
+    stock: number | null;
+};
+
+export type SizeChart = {
+    units: string;
+    lengthIn: number | null;
+    inseamIn: number | null;
+    rows: { size: string; waist: number; hip: number }[];
 };
 
 export type CollectionHandle = "pants" | "dupattas";
@@ -39,6 +48,9 @@ export type Product = {
     fit: string | null;
     size: string | null;
     sizes: string[];
+    sizeChart: SizeChart | null;
+    // Working days from order to dispatch.
+    dispatchDays: number | null;
     variants: Variant[];
 };
 

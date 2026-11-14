@@ -6,6 +6,7 @@
 Reads catalog/<PRODUCT>/product.json and catalog/<PRODUCT>/<SKU>/variant.json,
 then writes:
   - src/data/catalog.json              product + variant data the site imports
+  - src/data/business.json             public business details (from business.json)
   - public/catalog/<PRODUCT>/...       web-sized images (600w + 1200w) and videos
 
 Re-run it whenever the products repo changes. Media whose source file hasn't
@@ -29,6 +30,7 @@ from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_JSON = ROOT / "src" / "data" / "catalog.json"
+OUT_BUSINESS = ROOT / "src" / "data" / "business.json"
 OUT_MEDIA = ROOT / "public" / "catalog"
 MANIFEST = OUT_MEDIA / ".sources.json"
 WIDTHS = (600, 1200)
@@ -135,6 +137,39 @@ def size_label(attrs: dict):
     return None
 
 
+# Public fields copied from the products repo's business.json. Everything else
+# in that file (and documents/) stays private.
+BUSINESS_FIELDS = ("legal_name", "trade_name", "constitution", "gstin",
+                   "address", "email", "phone")
+
+
+def write_business(src_root: Path):
+    b = json.loads((src_root / "business.json").read_text())
+    out = {k: b.get(k) for k in BUSINESS_FIELDS}
+    OUT_BUSINESS.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
+    print(f"Wrote business details -> {OUT_BUSINESS.relative_to(ROOT)}")
+
+
+def stock_of(v: dict):
+    """Units in stock: the variant's own count, or the sum over its sizes."""
+    if v.get("sizes"):
+        counts = [s.get("stock") for s in v["sizes"].values()]
+        return None if any(c is None for c in counts) else sum(counts)
+    return v.get("stock")
+
+
+def size_chart(attrs: dict):
+    chart = attrs.get("size_chart")
+    if not chart:
+        return None
+    return {
+        "units": chart.get("units"),
+        "lengthIn": chart.get("length_in"),
+        "inseamIn": chart.get("inseam_in"),
+        "rows": [{"size": k, **r} for k, r in chart.get("rows", {}).items()],
+    }
+
+
 def build(src_root: Path, force: bool):
     catalog = src_root / "catalog"
     colours = json.loads((src_root / "colors.json").read_text())
@@ -204,6 +239,7 @@ def build(src_root: Path, force: bool):
                 "video": video,
                 "links": links,
                 "sizeLinks": size_links or None,
+                "stock": stock_of(v),
             })
 
         # Show colours with a Flipkart link first, then by name.
@@ -227,9 +263,12 @@ def build(src_root: Path, force: bool):
             "fit": attrs.get("fit"),
             "size": size_label(attrs),
             "sizes": sizes,
+            "sizeChart": size_chart(attrs),
+            "dispatchDays": p.get("dispatch_days"),
             "variants": variants,
         })
 
+    write_business(src_root)
     MANIFEST.write_text(json.dumps(manifest, indent=1, sort_keys=True) + "\n")
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps({"products": products}, indent=2, ensure_ascii=False) + "\n")
