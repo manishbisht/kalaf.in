@@ -10,7 +10,7 @@ Shared components, one folder each (`index.tsx` + optional `style.module.css` + 
 | `Footer`         | Footer on every page: shop, contact, help and policy links, socials, Ask AI, legal line, build stamp.      |
 | `WhatsAppButton` | Floating "Chat with us" badge, bottom-right on every page.                                                 |
 | `AskAI`          | "Ask AI about this page" links to Claude, ChatGPT and Perplexity. In the footer and on product pages.      |
-| `BuyButtons`     | One button per live marketplace, plus "coming soon" placeholders. `track.ts` logs clicks to Clarity.       |
+| `BuyButtons`     | One button per live marketplace, plus "coming soon" placeholders. Clicks are logged to Clarity.            |
 | `ProductCard`    | Shop-grid tile for one colour of a product; second photo on hover; "Sold out" or "% off" badge.            |
 | `Swatch`         | Round colour dot; multicolour codes render as segments (colours from `swatchColours`).                     |
 | `PolicyLayout`   | The shell every policy and guide page renders (below).                                                     |
@@ -38,7 +38,7 @@ Both use `usePageProduct()` (`src/hooks/`) to pre-fill a message. On a product p
 
 ## BuyButtons: the store rule
 
-`<BuyButtons links prices sku compact />` shows a store **only when `links` has a URL for it**. The first live store is `btn-primary`, the rest `btn-secondary`; links open in a new tab. When the stores charge different prices, each button shows its own price. A store with no link for this piece shows as "{Store} — coming soon" **only if** Kalaf sells something else there (`SOLD_ON` in `src/data/catalog.ts`; today: the pant on Meesho). A store nothing is live on is never shown, which is how Amazon stays hidden. Clicks fire Clarity's `buy_click` event via `trackBuyClick` (no-op without a Clarity ID, never blocks the link). Links come from the catalog only; never hand-type a marketplace URL.
+`<BuyButtons links prices sku compact />` shows a store **only when `links` has a URL for it**. The first live store is `btn-primary`, the rest `btn-secondary`; links open in a new tab. When the stores charge different prices, each button shows its own price. A store with no link for this piece shows as "{Store} — coming soon" **only if** Kalaf sells something else there (`SOLD_ON` in `src/data/catalog.ts`; today: the pant on Meesho). A store nothing is live on is never shown, which is how Amazon stays hidden. Clicks fire Clarity's `buy_click` event via `trackBuyClick` from `src/analytics.ts` (no-op without a Clarity ID, never blocks the link). Links come from the catalog only; never hand-type a marketplace URL.
 
 ## PolicyLayout
 

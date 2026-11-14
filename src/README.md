@@ -63,7 +63,16 @@ Global utilities in `index.css`: `.container`, `.section`, `.section-tight`, `.s
 
 ## Analytics (Microsoft Clarity)
 
-`main.tsx` calls `Clarity.init` only when `ENV.clarityProjectId` is set (CI passes it from the `CLARITY_PROJECT_ID` repo secret; blank locally, so dev sends nothing). The SDK injects its own script at runtime. Custom signals today: `page_view` events from `ScrollToTop`, and `buy_click` events tagged with `store`, `sku` and `product` from `components/BuyButtons/track.ts`. Any new tracking must check `ENV.clarityProjectId` and must never block or break a link.
+`main.tsx` calls `Clarity.init` only when `ENV.clarityProjectId` is set (CI passes it from the `CLARITY_PROJECT_ID` repo secret; blank locally, so dev sends nothing). The SDK injects its own script at runtime. Custom signals today: `page_view` events from `ScrollToTop`, plus click events from [`analytics.ts`](analytics.ts):
+
+| Event            | Tags                                                 | Fired by         |
+| ---------------- | ---------------------------------------------------- | ---------------- |
+| `buy_click`      | `store`, `sku`, `product` (SKU/product may be blank) | `BuyButtons`     |
+| `whatsapp_click` | `page`: the product SKU, else the pathname           | `WhatsAppButton` |
+| `ask_ai_click`   | `assistant`: Claude, ChatGPT or Perplexity           | `AskAI`          |
+| `links_click`    | `target`: which button on `/links`                   | `pages/Links`    |
+
+Add new events there with `trackEvent(name, tags)`, and wire them with `{...trackClicks(() => …)}`, which counts left and middle clicks but not right-clicks. `trackEvent` is a no-op without `ENV.clarityProjectId`, swallows Clarity errors and never prevents the default, so tracking can't block or break a link.
 
 ## hooks/
 

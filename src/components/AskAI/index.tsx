@@ -1,5 +1,6 @@
 import { Icon } from "../Icons";
 import { usePageProduct, SITE_URL } from "../../hooks/usePageProduct";
+import { trackAskAIClick, trackClicks } from "../../analytics";
 import styles from "./style.module.css";
 
 // "Ask AI": opens an AI assistant with a ready-made question about the page
@@ -36,6 +37,7 @@ export function AskAI({ dark = false }: { dark?: boolean }) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.link}
+                        {...trackClicks(() => trackAskAIClick(a.name))}
                     >
                         {a.name} <Icon name="arrowUpRight" size={12} />
                     </a>

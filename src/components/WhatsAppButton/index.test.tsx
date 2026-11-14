@@ -1,12 +1,21 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { BRAND, productPath } from "../../constants";
 import { PRODUCTS } from "../../data/catalog";
+import { trackWhatsAppClick } from "../../analytics";
 import { WhatsAppButton } from ".";
 
-afterEach(cleanup);
+vi.mock("../../analytics", async (importOriginal) => ({
+    ...(await importOriginal<typeof import("../../analytics")>()),
+    trackWhatsAppClick: vi.fn(),
+}));
+
+afterEach(() => {
+    cleanup();
+    vi.mocked(trackWhatsAppClick).mockReset();
+});
 
 function hrefAt(path: string) {
     render(
@@ -55,5 +64,19 @@ describe("WhatsAppButton", () => {
             "/products/cotton-linen-relaxed-trousers"
         ).searchParams.get("text")!;
         expect(text).toContain("Cotton Relaxed Trousers");
+    });
+
+    it("tracks the click with the SKU, or the pathname off product pages", () => {
+        const link = () =>
+            screen.getByRole("link", { name: "Chat with Kalaf on WhatsApp" });
+        hrefAt("/size-guide");
+        expect(fireEvent.click(link())).toBe(true);
+        expect(trackWhatsAppClick).toHaveBeenLastCalledWith("/size-guide");
+        cleanup();
+
+        const v = multi.variants[1];
+        hrefAt(productPath(multi.handle, v.colourCode));
+        fireEvent.click(link());
+        expect(trackWhatsAppClick).toHaveBeenLastCalledWith(v.sku);
     });
 });

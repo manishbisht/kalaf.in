@@ -3,9 +3,12 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { PRODUCTS, SOLD_ON } from "../../data/catalog";
 import { BuyButtons } from ".";
-import { trackBuyClick } from "./track";
+import { trackBuyClick } from "../../analytics";
 
-vi.mock("./track", () => ({ trackBuyClick: vi.fn() }));
+vi.mock("../../analytics", async (importOriginal) => ({
+    ...(await importOriginal<typeof import("../../analytics")>()),
+    trackBuyClick: vi.fn(),
+}));
 
 afterEach(() => {
     cleanup();
