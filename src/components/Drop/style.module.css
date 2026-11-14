@@ -79,6 +79,19 @@
     gap: 8px;
 }
 
+/* Pause/Play for the looping video, bottom-left of the frame. */
+.playBtn {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    height: 32px;
+    border: 0;
+    cursor: pointer;
+}
+.playBtn:hover {
+    background: var(--paper);
+}
+
 .rightCol {
     display: flex;
     flex-direction: column;
@@ -163,11 +176,14 @@
 .links {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 24px;
-    margin-top: 22px;
+    gap: 0 24px;
+    margin-top: 18px;
 }
+/* 4px padding (the gap and margin above shrink to match) makes 24px tap
+   targets without moving the text. */
 .sizingLink {
     display: inline-block;
+    padding: 4px 0;
     font-family: var(--font-head);
     font-size: 12px;
     letter-spacing: 0.04em;
@@ -258,12 +274,19 @@
 }
 
 .swatchBtn {
+    position: relative;
     display: inline-flex;
     padding: 3px;
     border: 1px solid transparent;
     border-radius: 50%;
     background: none;
     cursor: pointer;
+}
+/* Grows the 34px button's tap target to 44px without changing the look. */
+.swatchBtn::after {
+    content: "";
+    position: absolute;
+    inset: -5px;
 }
 .swatchActive {
     border-color: var(--ink);
