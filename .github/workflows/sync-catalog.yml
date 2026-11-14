@@ -1,0 +1,84 @@
+# Keeps the website in step with the private products.kalaf.in repo.
+#
+# Runs scripts/sync-catalog.py against the products repo every morning (and on
+# demand from the Actions tab). If prices, links, photos or business details
+# changed, it opens (or updates) a pull request; merging it deploys the site.
+#
+# Inert until the owner adds a repository secret PRODUCTS_REPO_TOKEN: a
+# fine-grained personal access token with read-only "Contents" access to
+# manishbisht/products.kalaf.in. Without it, the job logs a notice and stops.
+
+name: Sync catalog from products repo
+
+on:
+    schedule:
+        - cron: "30 2 * * *" # 08:00 IST
+    workflow_dispatch:
+
+permissions:
+    contents: write
+    pull-requests: write
+
+concurrency:
+    group: sync-catalog
+    cancel-in-progress: false
+
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+        env:
+            HAS_TOKEN: ${{ secrets.PRODUCTS_REPO_TOKEN != '' }}
+        steps:
+            - name: Skip without a products repo token
+              if: env.HAS_TOKEN != 'true'
+              run: echo "::notice::PRODUCTS_REPO_TOKEN is not set, so the catalog sync is skipped."
+
+            - uses: actions/checkout@v6
+              if: env.HAS_TOKEN == 'true'
+
+            - name: Check out the products repo
+              if: env.HAS_TOKEN == 'true'
+              uses: actions/checkout@v6
+              with:
+                  repository: manishbisht/products.kalaf.in
+                  token: ${{ secrets.PRODUCTS_REPO_TOKEN }}
+                  path: products.kalaf.in
+                  # Only the files the sync reads; the documents/ folder stays out.
+                  sparse-checkout: |
+                      catalog
+                      colors.json
+                      business.json
+                  sparse-checkout-cone-mode: false
+
+            - uses: actions/setup-python@v6
+              if: env.HAS_TOKEN == 'true'
+              with:
+                  python-version: "3.13"
+
+            - name: Install Pillow (with AVIF) and ffmpeg
+              if: env.HAS_TOKEN == 'true'
+              run: |
+                  pip install "Pillow>=11.3"
+                  python -c "from PIL import features; assert features.check('avif'), 'Pillow has no AVIF support'"
+                  sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+            - name: Sync
+              if: env.HAS_TOKEN == 'true'
+              run: python scripts/sync-catalog.py products.kalaf.in
+
+            - name: Open or update the pull request
+              if: env.HAS_TOKEN == 'true'
+              uses: peter-evans/create-pull-request@v7
+              with:
+                  branch: catalog-sync
+                  delete-branch: true
+                  add-paths: |
+                      src/data/catalog.json
+                      src/data/business.json
+                      public/catalog
+                  commit-message: Sync the catalog from the products repo
+                  title: Sync the catalog from the products repo
+                  body: |
+                      Automatic sync of prices, links, photos and business details from products.kalaf.in (`scripts/sync-catalog.py`).
+
+                      Check the diff of `src/data/catalog.json`, then merge to deploy. CI runs the data checks (no Amazon links, valid prices and GSTIN, every image present) on merge.

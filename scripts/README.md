@@ -52,3 +52,7 @@ Push to `main` (or run it manually) → `yarn install --frozen-lockfile` → `ya
 - **CalVer**: the build computes `YYYY.MM.DD.HHMM` (UTC). The release tag is `vYYYY.MM.DD.HHMM`, made with `gh release create … --generate-notes`, so commit titles since the last tag become the release notes. Write them like a changelog.
 - **Injected at build time**: `VITE_BUILD_VERSION` (the CalVer), `VITE_COMMIT_SHA` (full SHA) and `VITE_CLARITY_PROJECT_ID` from the `CLARITY_PROJECT_ID` repo secret. They reach the app through `ENV` in `src/env.ts`; the footer's build stamp shows the first two.
 - `dist/` is gitignored. Never commit it.
+
+## Automatic catalog sync (`.github/workflows/sync-catalog.yml`)
+
+Runs `sync-catalog.py` against the products repo daily at 08:00 IST (and on demand from the Actions tab). When anything changed it opens or updates a `catalog-sync` pull request touching only `src/data/*.json` and `public/catalog/`; merging it deploys. It does nothing until the repo has a `PRODUCTS_REPO_TOKEN` secret: a fine-grained token with read-only Contents access to `manishbisht/products.kalaf.in`. It sparse-checks out only `catalog/`, `colors.json` and `business.json`, so `documents/` never reaches CI.
