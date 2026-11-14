@@ -654,11 +654,16 @@ export function sitemapPaths(): string[] {
     return prerenderPaths().filter((p) => !NOT_IN_SITEMAP.includes(p));
 }
 
-export function sitemapXml(lastmod: string): string {
+/** `lastmod`: one date for every page, or a function giving each page its own
+ *  (scripts/lastmod.mjs: the last commit that touched the page's sources). */
+export function sitemapXml(
+    lastmod: string | ((path: string) => string)
+): string {
+    const dateFor = typeof lastmod === "string" ? () => lastmod : lastmod;
     const urls = sitemapPaths()
         .map(
             (p) =>
-                `  <url><loc>${absolute(p)}</loc><lastmod>${lastmod}</lastmod></url>`
+                `  <url><loc>${absolute(p)}</loc><lastmod>${dateFor(p)}</lastmod></url>`
         )
         .join("\n");
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;

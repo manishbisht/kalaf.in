@@ -14,6 +14,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { makeLastmod } from "./lastmod.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
@@ -88,7 +89,10 @@ await write(
 );
 
 const today = new Date().toISOString().slice(0, 10);
-await write(join(dist, "sitemap.xml"), ssr.sitemapXml(today));
+await write(
+    join(dist, "sitemap.xml"),
+    ssr.sitemapXml(makeLastmod({ cwd: root, today }))
+);
 await write(join(dist, "robots.txt"), ssr.robotsTxt());
 await write(join(dist, "llms.txt"), ssr.llmsTxt());
 
