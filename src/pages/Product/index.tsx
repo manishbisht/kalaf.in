@@ -190,6 +190,15 @@ export default function ProductPage() {
                                         prices={variant.prices}
                                         sku={variant.sku}
                                     />
+                                    {/* Prices come from the products repo,
+                                        so a store may have changed its
+                                        price since the last sync. */}
+                                    <p className={styles.priceNote}>
+                                        Prices are as listed by each store,
+                                        which runs its own offers; the
+                                        marketplace&apos;s price at checkout
+                                        applies.
+                                    </p>
                                     <p className={styles.buyNote}>
                                         You&apos;ll check out on the marketplace
                                         — they handle payment, delivery and

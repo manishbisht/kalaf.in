@@ -53,6 +53,8 @@ export const ROUTES = {
     careGuide: "/care-guide",
     trackOrder: "/track-order",
     contact: "/contact",
+    faq: "/faq",
+    links: "/links",
     products: "/products",
     product: "/products/:handle",
     collection: "/collections/:handle",

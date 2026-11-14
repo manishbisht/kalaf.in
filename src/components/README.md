@@ -4,24 +4,25 @@ Shared components, one folder each (`index.tsx` + optional `style.module.css` + 
 
 ## The set
 
-| Component        | What it does                                                                                               |
-| ---------------- | ---------------------------------------------------------------------------------------------------------- |
-| `Nav`            | Top bar on every page (rendered by the App shell). `dark` for pages with a dark hero.                      |
-| `Footer`         | Footer on every page: shop, contact, help and policy links, socials, Ask AI, legal line, build stamp.      |
-| `WhatsAppButton` | Floating "Chat with us" badge, bottom-right on every page.                                                 |
-| `AskAI`          | "Ask AI about this page" links to Claude, ChatGPT and Perplexity, in the footer (page-aware).              |
-| `CatalogImage`   | Every catalog photo: `<picture>` with AVIF + JPEG fallback. `sizes` for 600w/1200w; lazy below the fold.   |
-| `BuyButtons`     | One button per live marketplace, plus "coming soon" placeholders. `track.ts` logs clicks to Clarity.       |
-| `ProductCard`    | Shop-grid tile for one colour; second photo on hover; "Sold out"/"% off" badge; `eager` for the first row. |
-| `Swatch`         | Round colour dot; multicolour codes render as segments (colours from `swatchColours`).                     |
-| `PolicyLayout`   | The shell every policy and guide page renders (below).                                                     |
-| `Icons`          | Inline SVG set: `<Icon name="arrowUpRight" size={16} />`; `IconName` is a string union, so typos fail tsc. |
-| `Hero`           | Home: the pant's three colourways, worn; "Buy" goes to the first colour with a Flipkart link.              |
-| `Drop`           | Home: the pant (catalog code `PNT`) with video, colour swatches, facts and `BuyButtons`.                   |
-| `Process`        | Home: how pieces are made, illustrated with catalog photos and the dispatch time from the catalog.         |
-| `WhyKalaf`       | Home: feature cards (fabric, fit, craft, made in Jaipur, small batches, where to buy).                     |
-| `Lookbook`       | Home: catalog photos, each linking to that product in that colour.                                         |
-| `Newsletter`     | Home: there's no mailing list (no backend), so it points people to the social accounts.                    |
+| Component        | What it does                                                                                                         |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `Nav`            | Top bar on every page (rendered by the App shell). `dark` for pages with a dark hero.                                |
+| `Footer`         | Footer on every page: shop, contact, help and policy links, socials, Ask AI, legal line, build stamp.                |
+| `WhatsAppButton` | Floating "Chat with us" badge, bottom-right on every page.                                                           |
+| `AskAI`          | "Ask AI about this page" links to Claude, ChatGPT and Perplexity, in the footer (page-aware).                        |
+| `CatalogImage`   | Every catalog photo: `<picture>` with AVIF + JPEG fallback. `sizes` for 600w/1200w; lazy below the fold.             |
+| `BuyButtons`     | One button per live marketplace, plus "coming soon" placeholders. Clicks are logged to Clarity (`src/analytics.ts`). |
+| `ProductCard`    | Shop-grid tile for one colour; second photo on hover; "Sold out"/"% off" badge; `eager` for the first row.           |
+| `Swatch`         | Round colour dot; multicolour codes render as segments (colours from `swatchColours`).                               |
+| `PolicyLayout`   | The shell every policy and guide page renders (below).                                                               |
+| `ErrorBoundary`  | Catches a page that throws (or won't load) and shows "Something went wrong" with Reload and Home buttons.            |
+| `Icons`          | Inline SVG set: `<Icon name="arrowUpRight" size={16} />`; `IconName` is a string union, so typos fail tsc.           |
+| `Hero`           | Home: the pant's three colourways, worn; "Buy" goes to the first colour with a Flipkart link.                        |
+| `Drop`           | Home: the pant (catalog code `PNT`) with video, colour swatches, facts and `BuyButtons`.                             |
+| `Process`        | Home: how pieces are made, illustrated with catalog photos and the dispatch time from the catalog.                   |
+| `WhyKalaf`       | Home: feature cards (fabric, fit, craft, made in Jaipur, small batches, where to buy).                               |
+| `Lookbook`       | Home: catalog photos, each linking to that product in that colour.                                                   |
+| `Newsletter`     | Home: there's no mailing list (no backend), so it points people to the social accounts.                              |
 
 Home-page components read the catalog directly, so they update when the catalog is re-synced. Keep their copy factual: no invented reviews, numbers or claims.
 
@@ -39,7 +40,7 @@ Both use `usePageProduct()` (`src/hooks/`) to pre-fill a message. On a product p
 
 ## BuyButtons: the store rule
 
-`<BuyButtons links prices sku compact />` shows a store **only when `links` has a URL for it**. The first live store is `btn-primary`, the rest `btn-secondary`; links open in a new tab. When the stores charge different prices, each button shows its own price. A store with no link for this piece shows as "{Store} — coming soon" **only if** Kalaf sells something else there (`SOLD_ON` in `src/data/catalog.ts`; today: the pant on Meesho). A store nothing is live on is never shown, which is how Amazon stays hidden. Clicks fire Clarity's `buy_click` event via `trackBuyClick` (no-op without a Clarity ID, never blocks the link). Links come from the catalog only; never hand-type a marketplace URL.
+`<BuyButtons links prices sku compact />` shows a store **only when `links` has a URL for it**. The first live store is `btn-primary`, the rest `btn-secondary`; links open in a new tab. When the stores charge different prices, each button shows its own price. A store with no link for this piece shows as "{Store} — coming soon" **only if** Kalaf sells something else there (`SOLD_ON` in `src/data/catalog.ts`; today: the pant on Meesho). A store nothing is live on is never shown, which is how Amazon stays hidden. Clicks fire Clarity's `buy_click` event via `trackBuyClick` from `src/analytics.ts` (no-op without a Clarity ID, never blocks the link). Links come from the catalog only; never hand-type a marketplace URL.
 
 ## PolicyLayout
 
@@ -91,7 +92,7 @@ export const data: PolicyData = {
 ```
 
 - **Annotate `const data: PolicyData`.** Without it TypeScript widens `kind: "p"` to `string` and the `PolicyBodyBlock` union stops matching.
-- **Body blocks**: `p`, `list`, `links` (external `http…` hrefs open in a new tab) and `table` (first column is the row header; used for the size chart).
-- **Cross-link sets** (`links.ts`): `POLICY_CROSS_LINKS` (privacy, returns, terms, refund, cookies) and `HELP_CROSS_LINKS` (size-guide, care-guide, track-order, contact). `currentSlug` must match a `slug` there.
+- **Body blocks**: `p`, `list`, `links` (internal `/…` hrefs route with `<Link>`; external `http…` hrefs open in a new tab), `qa` (an FAQ entry: question heading, plain-text answer, optional links) and `table` (first column is the row header; used for the size chart).
+- **Cross-link sets** (`links.ts`): `POLICY_CROSS_LINKS` (privacy, returns, terms, refund, cookies) and `HELP_CROSS_LINKS` (size-guide, care-guide, track-order, contact, faq). `currentSlug` must match a `slug` there.
 - **Adding a page**: see [src/pages/README.md](../pages/README.md#adding-a-page).
 - On policy pages the `--ink` cross-link strip runs into the `--charcoal` footer as one dark block. That's intentional.

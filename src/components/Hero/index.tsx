@@ -2,7 +2,7 @@ import { Icon } from "../Icons";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants";
 import { PRODUCTS } from "../../data/catalog";
-import { trackBuyClick } from "../BuyButtons/track";
+import { trackBuyClick, trackClicks } from "../../analytics";
 import { CatalogImage } from "../CatalogImage";
 import styles from "./style.module.css";
 
@@ -70,9 +70,9 @@ export function Hero() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.btnPrimary}
-                        onClick={() =>
+                        {...trackClicks(() =>
                             trackBuyClick("flipkart", BUY_VARIANT?.sku)
-                        }
+                        )}
                     >
                         Buy on Flipkart <Icon name="arrowUpRight" size={16} />
                     </a>

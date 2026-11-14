@@ -11,6 +11,7 @@ The app. Back to the index: [AGENTS.md](../AGENTS.md).
 | `index.css`        | Reset and global utility classes.                                            |
 | `constants.ts`     | `BRAND`, `SOCIAL`, `ROUTES` and link helpers.                                |
 | `env.ts`           | The only place that reads `import.meta.env`.                                 |
+| `analytics.ts`     | Clarity click events (`trackEvent`, `trackClicks`, one helper per event).    |
 | `vite-env.d.ts`    | Vite client types + the `ImportMetaEnv` shape.                               |
 | `hooks/`           | `usePageProduct`: the product/colour on the current page and its public URL. |
 | `components/`      | Shared components → [components/README.md](components/README.md).            |
@@ -21,7 +22,7 @@ The app. Back to the index: [AGENTS.md](../AGENTS.md).
 ## Entry points
 
 - **`main.tsx`** imports `tokens.css` then `index.css`, rewrites old HashRouter links (`/#/products/x?colour=BK`) to real paths with `history.replaceState`, starts Clarity when `ENV.clarityProjectId` is set, and removes the static `[data-seo]` head tags the prerender wrote (`<Seo />` renders the live ones). It calls `hydrateRoot` only when `#root[data-path]` equals the current path, there's no query string and `#root` has content. Otherwise (`?colour=`, shop filters, `404.html`, old hash links) it uses `createRoot`, because the prerendered HTML is for the plain URL.
-- **`App.tsx`** lazy-loads every page (one chunk per route) and exports `Shell`: `<Seo />`, `ScrollToTop`, `<Nav dark={…}>`, the `<Routes>`, `<Footer />` and `<WhatsAppButton />`. `DARK_NAV` lists the paths whose page opens with a dark hero (the policy and guide pages). `ScrollToTop` scrolls to the top on every pathname change and fires `Clarity.event("page_view")`.
+- **`App.tsx`** lazy-loads every page (one chunk per route) and exports `Shell`: `<Seo />`, `ScrollToTop`, `<Nav dark={…}>`, the `<Routes>` inside `PageBoundary` (an `ErrorBoundary` plus the `Suspense` fallback), `<Footer />` and `<WhatsAppButton />`. Its `lazy` is `lazyWithReload`: each deploy renames the chunks, so a tab left open on the old build gets "Failed to fetch dynamically imported module" on its next page. The helper reloads once (a `sessionStorage` flag, cleared when a chunk loads, stops loops; no reload if storage is blocked or during SSR); if the chunk still won't load, the error boundary shows "Something went wrong" with a Reload button. The boundary renders nothing of its own until something throws, so prerender and hydration are unaffected, and it clears on the next navigation. `DARK_NAV` lists the paths whose page opens with a dark hero (the policy and guide pages). `ScrollToTop` scrolls to the top on every pathname change and fires `Clarity.event("page_view")`.
 - **`entry-server.tsx`** renders `<StaticRouter><Shell seo={false} /></StaticRouter>` with `react-dom/static`'s `prerender` (which waits for lazy pages) and re-exports the SEO helpers the prerender script needs. `seo={false}` because the script writes head tags itself.
 
 Because pages are prerendered and then hydrated, **render must be pure**: anything browser-only goes in an effect.
@@ -63,7 +64,16 @@ Global utilities in `index.css`: `.container`, `.section`, `.section-tight`, `.s
 
 ## Analytics (Microsoft Clarity)
 
-`main.tsx` calls `Clarity.init` only when `ENV.clarityProjectId` is set (CI passes it from the `CLARITY_PROJECT_ID` repo secret; blank locally, so dev sends nothing). The SDK injects its own script at runtime. Custom signals today: `page_view` events from `ScrollToTop`, and `buy_click` events tagged with `store`, `sku` and `product` from `components/BuyButtons/track.ts`. Any new tracking must check `ENV.clarityProjectId` and must never block or break a link.
+`main.tsx` calls `Clarity.init` only when `ENV.clarityProjectId` is set (CI passes it from the `CLARITY_PROJECT_ID` repo secret; blank locally, so dev sends nothing). The SDK injects its own script at runtime. Custom signals today: `page_view` events from `ScrollToTop`, plus click events from [`analytics.ts`](analytics.ts):
+
+| Event            | Tags                                                 | Fired by         |
+| ---------------- | ---------------------------------------------------- | ---------------- |
+| `buy_click`      | `store`, `sku`, `product` (SKU/product may be blank) | `BuyButtons`     |
+| `whatsapp_click` | `page`: the product SKU, else the pathname           | `WhatsAppButton` |
+| `ask_ai_click`   | `assistant`: Claude, ChatGPT or Perplexity           | `AskAI`          |
+| `links_click`    | `target`: which button on `/links`                   | `pages/Links`    |
+
+Add new events there with `trackEvent(name, tags)`, and wire them with `{...trackClicks(() => …)}`, which counts left and middle clicks but not right-clicks. `trackEvent` is a no-op without `ENV.clarityProjectId`, swallows Clarity errors and never prevents the default, so tracking can't block or break a link.
 
 ## hooks/
 

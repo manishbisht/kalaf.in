@@ -23,6 +23,8 @@ URLs are real paths (`BrowserRouter`); every route below is prerendered to stati
 | `careGuide`       | `/care-guide`          | `CareGuide`       | dark  |
 | `trackOrder`      | `/track-order`         | `TrackOrder`      | dark  |
 | `contact`         | `/contact`             | `Contact`         | dark  |
+| `faq`             | `/faq`                 | `Faq`             | dark  |
+| `links`           | `/links`               | `Links`           | light |
 | (none)            | `*`                    | `NotFound`        | light |
 
 Link with `ROUTES.*`, `productPath(handle, colour?)`, `collectionPath(handle)` and `journalPath(slug)` from `src/constants.ts`.
@@ -46,7 +48,11 @@ One page for both. The handle is `pants` or `dupattas`; an unknown handle shows 
 - **`Gallery.tsx`**: horizontal scroll-snap strip (swipe on phones; thumbnails, arrows and ←/→ on desktop). The video, if any, sits second and plays only while visible. Clicking a photo opens **`Lightbox.tsx`**, a native `<dialog>` that loads only the 1200w photo on screen.
 - **Sizes and size chart**: size buttons plus a collapsible waist/hip table from `product.sizeChart`. If `variant.sizeLinks` has a link for the chosen size, the Flipkart button uses it. The pants have no size links today (one owner link for all sizes), so sizes are information only.
 - **Availability**: "In stock · dispatched from Jaipur in N working days", or "Sold out in {colour}" (plus "try another colour" if any are in stock). Stock `null` means unknown: only the dispatch time is shown.
-- **`BuyButtons`** with per-store prices and the SKU for click tracking; **`Share.tsx`** (system share sheet where available, else copy link, plus WhatsApp); details, features and care lists; `AskAI`; up to four related in-stock colours from the same collection.
+- **`BuyButtons`** with per-store prices and the SKU for click tracking, then a one-line note that prices are as listed by each store and the price at the marketplace's checkout applies (prices come from the products repo, so they can lag a store's change or offer); **`Share.tsx`** (system share sheet where available, else copy link, plus WhatsApp); details, features and care lists; `AskAI`; up to four related in-stock colours from the same collection.
+
+## Links (`/links`)
+
+The link-in-bio page for the Instagram and Facebook bios: wordmark, one line about Kalaf, then full-width square buttons (pants on Flipkart from the pant's catalog link, dupattas, all products, WhatsApp, Instagram) and the email. A button whose target is missing (no Flipkart link, no WhatsApp number) is left out. Each click fires Clarity's `links_click` tagged with its `target`. It's indexable but kept out of `sitemap.xml` (`NOT_IN_SITEMAP` in `src/seo`).
 
 ## Journal (`/journal`, `/journal/:slug`)
 
@@ -65,7 +71,7 @@ Catch-all for unknown paths: a 404 message with links to the shop and both colle
 
 ## Policy and guide pages
 
-`Privacy`, `ShippingReturns`, `Terms`, `RefundPolicy`, `CookiePolicy` (`POLICY_CROSS_LINKS`) and `SizeGuide`, `CareGuide`, `TrackOrder`, `Contact` (`HELP_CROSS_LINKS`) are data wrappers: `data.ts` exports a typed `PolicyData` object and `index.tsx` renders `<PolicyLayout data={data} currentSlug="…" crossLinks={…} />`. The size and care guides build their numbers from the catalog (size chart, dupatta size, care lists); Contact and Track Order use `BRAND` and `MARKETPLACE_ORDERS`. Copy must describe how Kalaf really sells: on Flipkart and Meesho, under each marketplace's own shipping, return and refund policy. Bump `updated` when you change a policy. See [components/README.md](../components/README.md#policylayout) for the data shape.
+`Privacy`, `ShippingReturns`, `Terms`, `RefundPolicy`, `CookiePolicy` (`POLICY_CROSS_LINKS`) and `SizeGuide`, `CareGuide`, `TrackOrder`, `Contact`, `Faq` (`HELP_CROSS_LINKS`) are data wrappers: `data.ts` exports a typed `PolicyData` object and `index.tsx` renders `<PolicyLayout data={data} currentSlug="…" crossLinks={…} />`. The size and care guides build their numbers from the catalog (size chart, dupatta size, care lists); Contact and Track Order use `BRAND` and `MARKETPLACE_ORDERS`. The FAQ is `qa` blocks whose answers are built from `PRODUCTS` and `BRAND` (stores per collection from live links, sizes, fabrics, dispatch days, contact details); `FAQ_ENTRIES` feeds the same plain-text answers to the FAQPage JSON-LD, so keep answers factual and free of markup. Copy must describe how Kalaf really sells: on Flipkart and Meesho, under each marketplace's own shipping, return and refund policy. Bump `updated` when you change a policy. See [components/README.md](../components/README.md#policylayout) for the data shape.
 
 ## Adding a page
 

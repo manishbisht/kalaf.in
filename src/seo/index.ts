@@ -29,6 +29,7 @@ import {
     heroImage,
     type Article,
 } from "../pages/Journal/articles";
+import { FAQ_ENTRIES } from "../pages/Faq/data";
 
 export const SITE_URL = "https://kalaf.in";
 export const DEFAULT_IMAGE = "/og-image.jpg";
@@ -63,7 +64,11 @@ const SUFFIX = ` · ${BRAND.name}`;
 
 // Policy and guide pages: their copy lives in the page files, so the head
 // text is kept here to avoid coupling SEO to page internals.
-const STATIC_PAGES: Record<string, { title: string; description: string }> = {
+// `brandTitle`: the title already names the brand, so no " · Kalaf" suffix.
+const STATIC_PAGES: Record<
+    string,
+    { title: string; description: string; brandTitle?: boolean }
+> = {
     [ROUTES.shippingReturns]: {
         title: "Shipping & Returns",
         description:
@@ -108,6 +113,27 @@ const STATIC_PAGES: Record<string, { title: string; description: string }> = {
         title: "Contact Us",
         description: `Write to the Kalaf team in Jaipur at ${BUSINESS.email}. We reply to every message within one working day.`,
     },
+    [ROUTES.faq]: {
+        title: "FAQ",
+        description:
+            "Where to buy Kalaf, why there's no checkout on kalaf.in, sizes, fabric, care, dispatch, delivery, returns, prices and how to reach us.",
+    },
+    // The link-in-bio page for Instagram and Facebook. Indexable, but left
+    // out of the sitemap (see NOT_IN_SITEMAP).
+    [ROUTES.links]: {
+        title: `${BRAND.name} — links`,
+        brandTitle: true,
+        description:
+            "Kalaf's links in one place: shop the cotton trousers and bandhani dupattas, chat on WhatsApp, or follow us on Instagram.",
+    },
+};
+
+// Prerendered and indexable, but utility pages, not content for the sitemap.
+const NOT_IN_SITEMAP: string[] = [ROUTES.links];
+
+// Static pages with JSON-LD of their own.
+const STATIC_JSON_LD: Record<string, () => JsonLd[]> = {
+    [ROUTES.faq]: () => [faqPage()],
 };
 
 const COLLECTION_HEAD: Record<
@@ -211,6 +237,19 @@ function organization(): JsonLd {
             addressCountry: "IN",
         },
         sameAs: Object.values(SOCIAL),
+    };
+}
+
+// FAQPage from the FAQ page's own questions and plain-text answers.
+function faqPage(): JsonLd {
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: FAQ_ENTRIES.map(({ q, a }) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+        })),
     };
 }
 
@@ -399,7 +438,12 @@ export function seoFor(pathname: string, search = ""): SeoData {
     }
 
     const page = STATIC_PAGES[path];
-    if (page) return base(path, page.title + SUFFIX, page.description);
+    if (page) {
+        const title = page.brandTitle ? page.title : page.title + SUFFIX;
+        return base(path, title, page.description, {
+            jsonLd: STATIC_JSON_LD[path]?.() ?? [],
+        });
+    }
 
     const collectionMatch = path.match(/^\/collections\/([^/]+)$/);
     if (collectionMatch && collectionMatch[1] in COLLECTIONS) {
@@ -558,6 +602,7 @@ export function llmsTxt(): string {
         ["Care guide", ROUTES.careGuide],
         ["Refund policy", ROUTES.refundPolicy],
         ["Contact", ROUTES.contact],
+        ["FAQ", ROUTES.faq],
     ];
     const a = b.address;
 
@@ -591,8 +636,13 @@ export function llmsTxt(): string {
     ].join("\n");
 }
 
+/** The prerendered URLs that go in sitemap.xml. */
+export function sitemapPaths(): string[] {
+    return prerenderPaths().filter((p) => !NOT_IN_SITEMAP.includes(p));
+}
+
 export function sitemapXml(lastmod: string): string {
-    const urls = prerenderPaths()
+    const urls = sitemapPaths()
         .map(
             (p) =>
                 `  <url><loc>${absolute(p)}</loc><lastmod>${lastmod}</lastmod></url>`

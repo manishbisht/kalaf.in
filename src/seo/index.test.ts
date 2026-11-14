@@ -8,6 +8,7 @@ import {
 import { BUSINESS } from "../data/business";
 import { ROUTES, collectionPath, journalPath, productPath } from "../constants";
 import { ARTICLES, heroImage } from "../pages/Journal/articles";
+import { FAQ_ENTRIES } from "../pages/Faq/data";
 import {
     SITE_URL,
     headHtml,
@@ -15,6 +16,7 @@ import {
     llmsTxt,
     prerenderPaths,
     seoFor,
+    sitemapPaths,
     sitemapXml,
 } from ".";
 
@@ -58,6 +60,29 @@ describe("seoFor", () => {
         expectCommon(seo, ROUTES.privacy);
         expect(seo.title).toBe("Privacy Policy · Kalaf");
         expect(seo.noindex).toBe(false);
+    });
+
+    it("the FAQ page gets FAQPage JSON-LD with every question", () => {
+        const seo = seoFor(ROUTES.faq);
+        expectCommon(seo, ROUTES.faq);
+        expect(seo.title).toBe("FAQ · Kalaf");
+        const faq = ofType(seo.jsonLd, "FAQPage")!;
+        expect(faq["@context"]).toBe("https://schema.org");
+        const questions = faq.mainEntity as Json[];
+        expect(questions.map((q) => q.name)).toEqual(
+            FAQ_ENTRIES.map((e) => e.q)
+        );
+        for (const q of questions) {
+            expect(q["@type"]).toBe("Question");
+            const answer = q.acceptedAnswer as Json;
+            expect(answer["@type"]).toBe("Answer");
+            expect(typeof answer.text).toBe("string");
+            expect(answer.text).not.toMatch(/<|undefined|null|NaN/);
+        }
+    });
+
+    it("other static pages have no JSON-LD", () => {
+        expect(seoFor(ROUTES.contact).jsonLd).toEqual([]);
     });
 
     it("strips a trailing slash", () => {
@@ -192,10 +217,20 @@ describe("prerenderPaths", () => {
         }
     });
 
-    it("sitemap.xml lists every path once", () => {
+    it("sitemap.xml lists every path once, except utility pages", () => {
         const xml = sitemapXml("2026-01-01");
         const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-        expect(locs).toEqual(paths.map((p) => `${SITE_URL}${p}`));
+        expect(locs).toEqual(sitemapPaths().map((p) => `${SITE_URL}${p}`));
+        expect(sitemapPaths()).toEqual(paths.filter((p) => p !== ROUTES.links));
+    });
+
+    it("/links is prerendered and indexable, but not in the sitemap", () => {
+        expect(paths).toContain(ROUTES.links);
+        expect(sitemapPaths()).not.toContain(ROUTES.links);
+        const seo = seoFor(ROUTES.links);
+        expectCommon(seo, ROUTES.links);
+        expect(seo.title).toBe("Kalaf — links");
+        expect(seo.noindex).toBe(false);
     });
 });
 

@@ -1,18 +1,28 @@
+import { useLocation } from "react-router-dom";
 import { BRAND, whatsappHref } from "../../constants";
 import { usePageProduct } from "../../hooks/usePageProduct";
+import { trackClicks, trackWhatsAppClick } from "../../analytics";
 import styles from "./style.module.css";
 
 // The opening line we pre-fill in WhatsApp. On a product page it names the
 // piece and colour, so we know what they're asking about without a back-and-forth.
+// Also returns what the click is tagged with in analytics: the SKU on a
+// product page, else the pathname.
 function useGreeting() {
+    const { pathname } = useLocation();
     const { product, variant, url } = usePageProduct();
-    if (!product || !variant) return "Hi Kalaf! I have a question.";
-    return `Hi Kalaf! I have a question about the ${product.title} (${variant.colour}): ${url}`;
+    if (!product || !variant) {
+        return { greeting: "Hi Kalaf! I have a question.", page: pathname };
+    }
+    return {
+        greeting: `Hi Kalaf! I have a question about the ${product.title} (${variant.colour}): ${url}`,
+        page: variant.sku,
+    };
 }
 
 // Floating "chat with us" button, bottom-right on every page.
 export function WhatsAppButton() {
-    const greeting = useGreeting();
+    const { greeting, page } = useGreeting();
     if (!BRAND.whatsapp) return null;
 
     return (
@@ -22,6 +32,7 @@ export function WhatsAppButton() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat with Kalaf on WhatsApp"
+            {...trackClicks(() => trackWhatsAppClick(page))}
         >
             <span className={styles.label} aria-hidden="true">
                 Chat with us

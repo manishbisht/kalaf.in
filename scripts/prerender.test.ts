@@ -122,6 +122,35 @@ describe.skipIf(!built && !required)("prerendered dist/", () => {
         }
     });
 
+    it("faq.html has FAQPage JSON-LD and the questions in its body", () => {
+        const html = read("faq.html");
+        const faq = jsonLd(html)?.find((x) => x["@type"] === "FAQPage");
+        const questions = (faq?.mainEntity ?? []) as {
+            name: string;
+            acceptedAnswer: { text: string };
+        }[];
+        expect(questions.length).toBeGreaterThan(0);
+        for (const q of questions) {
+            expect(q.acceptedAnswer.text.length).toBeGreaterThan(0);
+            expect(html).toContain(htmlEscape(q.name).replace(/'/g, "&#x27;"));
+        }
+    });
+
+    it("/links is prerendered and indexable but left out of the sitemap", () => {
+        expect(paths).not.toContain("/links");
+        for (const file of filesFor("/links")) {
+            const html = read(file);
+            expect(html, file).toContain('data-path="/links"');
+            expect(html, file).toContain(
+                "<title data-seo>Kalaf — links</title>"
+            );
+            expect(html, file).toContain(
+                '<link data-seo rel="canonical" href="https://kalaf.in/links" />'
+            );
+            expect(html, file).not.toContain('content="noindex"');
+        }
+    });
+
     it("404.html is noindex with no canonical", () => {
         const html = read("404.html");
         expect(html).toContain(

@@ -8,6 +8,14 @@ export type PolicyBodyBlock =
           items: { label: string; href: string; sub?: string }[];
       }
     | {
+          // One FAQ entry: the question as a heading, a plain-text answer
+          // (also used verbatim in the FAQPage JSON-LD), and optional links.
+          kind: "qa";
+          q: string;
+          a: string;
+          links?: { label: string; href: string }[];
+      }
+    | {
           // A simple data table, e.g. a size chart. First column is the row header.
           kind: "table";
           caption?: string;
