@@ -27,7 +27,7 @@ export const data: PolicyData = {
     eyebrow: "Support",
     title: "Contact us",
     ornament: "संपर्क",
-    summary: `We're a small team in Jaipur. Email us${QUICK ? `, or ${QUICK} us during working hours` : ""}. A real person reads and answers every message.`,
+    summary: `We're a small team in Jaipur. Email us any time${QUICK ? `; ${QUICK} us during working hours` : ""}. A real person reads and answers every message.`,
     updated: "14 Nov 2026",
     readTime: "2 min read",
     crossLinksHeader: "More guides",

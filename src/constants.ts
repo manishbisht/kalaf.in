@@ -2,14 +2,9 @@
 
 import { BUSINESS, BUSINESS_ADDRESS } from "./data/business";
 
-// business.json may carry a WhatsApp number; older copies don't have the key.
-const CONTACT = BUSINESS as typeof BUSINESS & {
-    phone: string | null;
-    whatsapp?: string | null;
-};
-
 // Legal and contact details come from src/data/business.json (synced from the
-// products repo). Kalaf Apparels is a partnership firm, so it has no CIN.
+// products repo). Kalaf Apparels is a partnership firm, not a company, so there's no company
+// registration number to show.
 export const BRAND = {
     name: BUSINESS.trade_name,
     wordmark: "kalaf.in",
@@ -20,8 +15,8 @@ export const BRAND = {
     address: BUSINESS_ADDRESS,
     location: `${BUSINESS.address.city}, ${BUSINESS.address.state}, ${BUSINESS.address.country}`,
     email: BUSINESS.email,
-    phone: CONTACT.phone,
-    whatsapp: CONTACT.whatsapp ?? null,
+    phone: BUSINESS.phone,
+    whatsapp: BUSINESS.whatsapp,
     workingHours: "Mon–Sat, 10am–7pm IST",
     copyrightYear: new Date().getFullYear(),
 } as const;
