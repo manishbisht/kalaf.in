@@ -4,6 +4,11 @@
     gap: 12px;
 }
 
+.row a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+}
+
 .soon {
     opacity: 0.45;
     cursor: default;

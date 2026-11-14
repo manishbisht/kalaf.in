@@ -1,68 +1,72 @@
 import { Icon } from "../Icons";
-import { formatRupees } from "../../data/catalog";
+import {
+    MARKETPLACES,
+    SOLD_ON,
+    formatRupees,
+    type Marketplace,
+    type MarketplaceLinks,
+} from "../../data/catalog";
+import { trackBuyClick } from "./track";
 import styles from "./style.module.css";
 
-export type Marketplace = "amazon" | "flipkart" | "meesho";
-export type MarketplaceLinks = Partial<Record<Marketplace, string>>;
+export type { Marketplace, MarketplaceLinks };
 
-const STORES: { id: Marketplace; name: string }[] = [
-    { id: "flipkart", name: "Flipkart" },
-    { id: "meesho", name: "Meesho" },
-    { id: "amazon", name: "Amazon" },
-];
-
-// One button per marketplace. Live stores come first (the first one is the
-// primary button); a store with no link shows after them as "coming soon".
+// One button per marketplace with a link; the first is the primary button.
+// A store Kalaf sells on elsewhere in the catalog but not for this piece shows
+// after them as "coming soon" (see SOLD_ON). Stores nothing is live on are
+// left out entirely.
 export function BuyButtons({
     links,
     prices,
+    sku,
     compact = false,
 }: {
     links: MarketplaceLinks;
     // Shown on each button when the stores charge different prices.
     prices?: Partial<Record<Marketplace, number>>;
+    // Tagged on the buy_click analytics event.
+    sku?: string;
     compact?: boolean;
 }) {
     const amounts = new Set(Object.values(prices ?? {}));
     const showPrices = amounts.size > 1;
-    const stores = [
-        ...STORES.filter((s) => links[s.id]),
-        ...STORES.filter((s) => !links[s.id]),
-    ];
-    const primary = stores.find((s) => links[s.id])?.id;
+    const live = MARKETPLACES.filter((s) => links[s.id]);
+    const soon = MARKETPLACES.filter(
+        (s) => !links[s.id] && SOLD_ON.includes(s.id)
+    );
     const sizeClass = compact ? styles.compact : "";
 
     return (
         <div className={`${styles.row} ${sizeClass}`}>
-            {stores.map((s) => {
-                const href = links[s.id];
-                if (!href) {
-                    return (
-                        <span
-                            key={s.id}
-                            className={`btn btn-secondary ${styles.soon}`}
-                            aria-disabled="true"
-                        >
-                            {s.name} — coming soon
-                        </span>
-                    );
-                }
+            {live.map((s, i) => {
+                const price = prices?.[s.id];
                 return (
                     <a
                         key={s.id}
-                        href={href}
+                        href={links[s.id]}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`btn ${s.id === primary ? "btn-primary" : "btn-secondary"}`}
+                        className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`}
+                        onClick={() => trackBuyClick(s.id, sku)}
+                        onAuxClick={() => trackBuyClick(s.id, sku)}
                     >
                         Buy on {s.name}
-                        {showPrices && prices?.[s.id] && (
-                            <> · {formatRupees(prices[s.id]!)}</>
+                        {showPrices && price && (
+                            <> · {formatRupees(price)}</>
                         )}{" "}
                         <Icon name="arrowUpRight" size={16} />
                     </a>
                 );
             })}
+            {soon.map((s) => (
+                <span
+                    key={s.id}
+                    className={`btn btn-secondary ${styles.soon}`}
+                    aria-disabled="true"
+                >
+                    {s.name} — coming soon
+                </span>
+            ))}
         </div>
     );
 }
