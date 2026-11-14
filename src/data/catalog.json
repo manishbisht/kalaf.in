@@ -83,27 +83,51 @@
           "images": [
             {
               "src": "/catalog/PNT/PNT_BE_1-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BE_1-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BE_1-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BE_1-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BE_1-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BE_2-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BE_2-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BE_2-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BE_2-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BE_2-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BE_3-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BE_3-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BE_3-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BE_3-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BE_3-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BE_4-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BE_4-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BE_4-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BE_4-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BE_4-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BE_5-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BE_5-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BE_5-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BE_5-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BE_5-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BE_6-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BE_6-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BE_6-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BE_6-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BE_6-1200.avif",
+              "width": 1200,
+              "height": 1607
             }
           ],
           "video": {
@@ -129,27 +153,51 @@
           "images": [
             {
               "src": "/catalog/PNT/PNT_BK_1-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BK_1-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BK_1-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BK_1-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BK_1-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BK_2-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BK_2-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BK_2-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BK_2-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BK_2-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BK_3-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BK_3-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BK_3-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BK_3-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BK_3-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BK_4-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BK_4-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BK_4-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BK_4-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BK_4-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BK_5-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BK_5-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BK_5-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BK_5-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BK_5-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_BK_6-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_BK_6-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_BK_6-1200.jpg",
+              "avif": "/catalog/PNT/PNT_BK_6-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_BK_6-1200.avif",
+              "width": 1200,
+              "height": 1607
             }
           ],
           "video": {
@@ -175,27 +223,51 @@
           "images": [
             {
               "src": "/catalog/PNT/PNT_WH_1-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_WH_1-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_WH_1-1200.jpg",
+              "avif": "/catalog/PNT/PNT_WH_1-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_WH_1-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_WH_2-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_WH_2-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_WH_2-1200.jpg",
+              "avif": "/catalog/PNT/PNT_WH_2-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_WH_2-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_WH_3-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_WH_3-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_WH_3-1200.jpg",
+              "avif": "/catalog/PNT/PNT_WH_3-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_WH_3-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_WH_4-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_WH_4-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_WH_4-1200.jpg",
+              "avif": "/catalog/PNT/PNT_WH_4-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_WH_4-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_WH_5-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_WH_5-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_WH_5-1200.jpg",
+              "avif": "/catalog/PNT/PNT_WH_5-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_WH_5-1200.avif",
+              "width": 1200,
+              "height": 1607
             },
             {
               "src": "/catalog/PNT/PNT_WH_6-600.jpg",
-              "srcLarge": "/catalog/PNT/PNT_WH_6-1200.jpg"
+              "srcLarge": "/catalog/PNT/PNT_WH_6-1200.jpg",
+              "avif": "/catalog/PNT/PNT_WH_6-600.avif",
+              "avifLarge": "/catalog/PNT/PNT_WH_6-1200.avif",
+              "width": 1200,
+              "height": 1607
             }
           ],
           "video": {
@@ -247,15 +319,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_BK_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_BK_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_BK_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_BK_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_BK_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_BK_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_BK_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_BK_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_BK_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_BK_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_BK_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_BK_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_BK_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_BK_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_BK_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -283,15 +367,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_GR_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_GR_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_GR_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_GR_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_GR_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_GR_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_GR_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_GR_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_GR_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_GR_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_GR_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_GR_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_GR_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_GR_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_GR_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -319,15 +415,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_MA_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MA_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MA_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MA_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MA_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MA_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MA_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MA_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MA_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MA_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MA_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MA_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MA_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MA_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MA_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -355,15 +463,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_MU_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -391,15 +511,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_MU1_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU1_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU1_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU1_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU1_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU1_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU1_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU1_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU1_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU1_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU1_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU1_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU1_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU1_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU1_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -427,15 +559,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_MU4_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU4_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU4_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU4_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU4_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU4_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU4_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU4_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU4_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU4_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU4_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU4_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU4_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU4_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU4_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -463,15 +607,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_MU3_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU3_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU3_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU3_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU3_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU3_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU3_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU3_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU3_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU3_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU3_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU3_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU3_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU3_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU3_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -499,15 +655,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_MU2_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU2_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU2_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU2_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU2_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU2_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU2_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU2_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU2_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU2_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_MU2_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_MU2_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_MU2_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_MU2_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_MU2_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -535,15 +703,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_PI_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_PI_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_PI_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_PI_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_PI_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_PI_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_PI_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_PI_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_PI_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_PI_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_PI_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_PI_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_PI_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_PI_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_PI_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -571,15 +751,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_RA_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RA_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RA_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RA_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RA_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_RA_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RA_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RA_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RA_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RA_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_RA_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RA_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RA_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RA_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RA_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -607,15 +799,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_RED_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RED_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RED_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RED_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RED_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_RED_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RED_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RED_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RED_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RED_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_RED_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RED_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RED_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RED_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RED_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -643,15 +847,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_RB_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RB_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RB_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RB_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RB_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_RB_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RB_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RB_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RB_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RB_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_RB_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_RB_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_RB_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_RB_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_RB_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -679,15 +895,27 @@
           "images": [
             {
               "src": "/catalog/DUAG/DUAG_YEL_1-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_YEL_1-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_YEL_1-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_YEL_1-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_YEL_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_YEL_2-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_YEL_2-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_YEL_2-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_YEL_2-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_YEL_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUAG/DUAG_YEL_3-600.jpg",
-              "srcLarge": "/catalog/DUAG/DUAG_YEL_3-1200.jpg"
+              "srcLarge": "/catalog/DUAG/DUAG_YEL_3-1200.jpg",
+              "avif": "/catalog/DUAG/DUAG_YEL_3-600.avif",
+              "avifLarge": "/catalog/DUAG/DUAG_YEL_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -740,15 +968,27 @@
           "images": [
             {
               "src": "/catalog/DUA/DUA_BK_1-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_BK_1-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_BK_1-1200.jpg",
+              "avif": "/catalog/DUA/DUA_BK_1-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_BK_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_BK_2-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_BK_2-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_BK_2-1200.jpg",
+              "avif": "/catalog/DUA/DUA_BK_2-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_BK_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_BK_3-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_BK_3-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_BK_3-1200.jpg",
+              "avif": "/catalog/DUA/DUA_BK_3-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_BK_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -776,15 +1016,27 @@
           "images": [
             {
               "src": "/catalog/DUA/DUA_GR_1-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_GR_1-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_GR_1-1200.jpg",
+              "avif": "/catalog/DUA/DUA_GR_1-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_GR_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_GR_2-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_GR_2-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_GR_2-1200.jpg",
+              "avif": "/catalog/DUA/DUA_GR_2-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_GR_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_GR_3-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_GR_3-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_GR_3-1200.jpg",
+              "avif": "/catalog/DUA/DUA_GR_3-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_GR_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -812,15 +1064,27 @@
           "images": [
             {
               "src": "/catalog/DUA/DUA_PI_1-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_PI_1-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_PI_1-1200.jpg",
+              "avif": "/catalog/DUA/DUA_PI_1-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_PI_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_PI_2-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_PI_2-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_PI_2-1200.jpg",
+              "avif": "/catalog/DUA/DUA_PI_2-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_PI_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_PI_3-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_PI_3-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_PI_3-1200.jpg",
+              "avif": "/catalog/DUA/DUA_PI_3-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_PI_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -848,15 +1112,27 @@
           "images": [
             {
               "src": "/catalog/DUA/DUA_RED_1-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_RED_1-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_RED_1-1200.jpg",
+              "avif": "/catalog/DUA/DUA_RED_1-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_RED_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_RED_2-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_RED_2-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_RED_2-1200.jpg",
+              "avif": "/catalog/DUA/DUA_RED_2-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_RED_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_RED_3-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_RED_3-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_RED_3-1200.jpg",
+              "avif": "/catalog/DUA/DUA_RED_3-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_RED_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -884,15 +1160,27 @@
           "images": [
             {
               "src": "/catalog/DUA/DUA_RB_1-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_RB_1-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_RB_1-1200.jpg",
+              "avif": "/catalog/DUA/DUA_RB_1-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_RB_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_RB_2-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_RB_2-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_RB_2-1200.jpg",
+              "avif": "/catalog/DUA/DUA_RB_2-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_RB_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUA/DUA_RB_3-600.jpg",
-              "srcLarge": "/catalog/DUA/DUA_RB_3-1200.jpg"
+              "srcLarge": "/catalog/DUA/DUA_RB_3-1200.jpg",
+              "avif": "/catalog/DUA/DUA_RB_3-600.avif",
+              "avifLarge": "/catalog/DUA/DUA_RB_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -945,15 +1233,27 @@
           "images": [
             {
               "src": "/catalog/DUCHI/DUCHI_BK_1-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_BK_1-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_BK_1-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_BK_1-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_BK_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_BK_2-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_BK_2-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_BK_2-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_BK_2-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_BK_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_BK_3-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_BK_3-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_BK_3-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_BK_3-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_BK_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -981,15 +1281,27 @@
           "images": [
             {
               "src": "/catalog/DUCHI/DUCHI_PI_1-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_PI_1-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_PI_1-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_PI_1-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_PI_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_PI_2-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_PI_2-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_PI_2-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_PI_2-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_PI_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_PI_3-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_PI_3-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_PI_3-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_PI_3-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_PI_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -1017,15 +1329,27 @@
           "images": [
             {
               "src": "/catalog/DUCHI/DUCHI_RED_1-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_RED_1-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_RED_1-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_RED_1-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_RED_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_RED_2-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_RED_2-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_RED_2-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_RED_2-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_RED_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_RED_3-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_RED_3-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_RED_3-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_RED_3-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_RED_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -1053,15 +1377,27 @@
           "images": [
             {
               "src": "/catalog/DUCHI/DUCHI_RB_1-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_RB_1-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_RB_1-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_RB_1-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_RB_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_RB_2-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_RB_2-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_RB_2-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_RB_2-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_RB_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_RB_3-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_RB_3-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_RB_3-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_RB_3-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_RB_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
@@ -1089,15 +1425,27 @@
           "images": [
             {
               "src": "/catalog/DUCHI/DUCHI_YEL_1-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_1-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_1-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_YEL_1-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_YEL_1-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_YEL_2-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_2-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_2-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_YEL_2-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_YEL_2-1200.avif",
+              "width": 1200,
+              "height": 1800
             },
             {
               "src": "/catalog/DUCHI/DUCHI_YEL_3-600.jpg",
-              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_3-1200.jpg"
+              "srcLarge": "/catalog/DUCHI/DUCHI_YEL_3-1200.jpg",
+              "avif": "/catalog/DUCHI/DUCHI_YEL_3-600.avif",
+              "avifLarge": "/catalog/DUCHI/DUCHI_YEL_3-1200.avif",
+              "width": 1200,
+              "height": 1800
             }
           ],
           "video": {
