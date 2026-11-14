@@ -1,11 +1,15 @@
 import { useEffect, lazy, Suspense } from "react";
-import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Clarity from "@microsoft/clarity";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
+import { Seo } from "./seo/Seo";
 import { ROUTES } from "./constants";
+import { ENV } from "./env";
 
 // Route-level code splitting — each page ships in its own chunk so the home
-// bundle doesn't have to download every policy page upfront.
+// bundle doesn't have to download every policy page upfront. The build
+// prerenders these with react-dom/static, which waits for lazy pages.
 const Home = lazy(() => import("./pages/Home"));
 const ShippingReturns = lazy(() => import("./pages/ShippingReturns"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -18,27 +22,42 @@ const TrackOrder = lazy(() => import("./pages/TrackOrder"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Shop = lazy(() => import("./pages/Shop"));
 const ProductPage = lazy(() => import("./pages/Product"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+// Policy and guide pages open with a dark hero, so the Nav goes dark there.
+const DARK_NAV: string[] = [
+    ROUTES.shippingReturns,
+    ROUTES.privacy,
+    ROUTES.terms,
+    ROUTES.refundPolicy,
+    ROUTES.cookies,
+    ROUTES.sizeGuide,
+    ROUTES.careGuide,
+    ROUTES.trackOrder,
+    ROUTES.contact,
+];
 
 function ScrollToTop() {
     const { pathname } = useLocation();
     useEffect(() => {
         window.scrollTo(0, 0);
+        // Clarity's auto-tracker can miss client-side navigations.
+        if (ENV.clarityProjectId) Clarity.event("page_view");
     }, [pathname]);
     return null;
 }
 
-function Shell() {
+// Everything inside the router. The server entry (entry-server.tsx) wraps
+// this in a StaticRouter to prerender each page at build time, with
+// seo={false}: the prerender writes head tags itself, and React would
+// otherwise emit a second copy inside #root.
+export function Shell({ seo = true }: { seo?: boolean }) {
     const { pathname } = useLocation();
-    // Home and the shop pages use the light Nav; policy/guide pages open with
-    // a dark hero, so the Nav switches to dark mode to blend in.
-    const light =
-        pathname === ROUTES.home ||
-        pathname.startsWith("/products") ||
-        pathname.startsWith("/collections");
-    const dark = !light;
+    const dark = DARK_NAV.includes(pathname.replace(/(.)\/+$/, "$1"));
 
     return (
         <>
+            {seo && <Seo />}
             <ScrollToTop />
             <Nav dark={dark} />
             <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
@@ -62,6 +81,7 @@ function Shell() {
                     <Route path={ROUTES.products} element={<Shop />} />
                     <Route path={ROUTES.collection} element={<Shop />} />
                     <Route path={ROUTES.product} element={<ProductPage />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Suspense>
             <Footer />
@@ -71,8 +91,8 @@ function Shell() {
 
 export default function App() {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Shell />
-        </HashRouter>
+        </BrowserRouter>
     );
 }
