@@ -44,15 +44,13 @@ export function Hero() {
             </div>
 
             <div className={styles.countdown}>
-                <span className={styles.countdownLabel}>
-                    Now on Flipkart · Meesho · Amazon soon
-                </span>
+                <span className={styles.countdownLabel}>Now on Flipkart</span>
             </div>
 
             <div className={styles.content}>
                 <div className={styles.eyebrow}>
                     <span className={styles.eyebrowLine} />
-                    One pant. Three colours. Cut once, in Jaipur.
+                    One pant. Three colours. Made in Jaipur.
                 </div>
 
                 <h1 className={styles.headline}>

@@ -1,17 +1,35 @@
 // Centralised brand/site constants. Change once, propagates everywhere.
 
+import { BUSINESS, BUSINESS_ADDRESS } from "./data/business";
+
+// business.json may carry a WhatsApp number; older copies don't have the key.
+const CONTACT = BUSINESS as typeof BUSINESS & {
+    phone: string | null;
+    whatsapp?: string | null;
+};
+
+// Legal and contact details come from src/data/business.json (synced from the
+// products repo). Kalaf Apparels is a partnership firm, so it has no CIN.
 export const BRAND = {
-    name: "Kalaf",
+    name: BUSINESS.trade_name,
     wordmark: "kalaf.in",
     devanagari: "कलफ",
-    legalName: "Kalaf Apparels",
-    cin: "U17299RJ2024PTC0000",
-    location: "Jaipur, Rajasthan, India",
-    email: "hello@kalaf.in",
-    phone: "+91 141 400 0000",
-    workingHours: "Mon–Sat, 10am–7pm IST.",
+    legalName: BUSINESS.legal_name,
+    constitution: BUSINESS.constitution,
+    gstin: BUSINESS.gstin,
+    address: BUSINESS_ADDRESS,
+    location: `${BUSINESS.address.city}, ${BUSINESS.address.state}, ${BUSINESS.address.country}`,
+    email: BUSINESS.email,
+    phone: CONTACT.phone,
+    whatsapp: CONTACT.whatsapp ?? null,
+    workingHours: "Mon–Sat, 10am–7pm IST",
     copyrightYear: new Date().getFullYear(),
 } as const;
+
+// "+91 79768 47772" → "tel:+917976847772" and "https://wa.me/917976847772".
+export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
+export const whatsappHref = (phone: string) =>
+    `https://wa.me/${phone.replace(/\D/g, "")}`;
 
 export const SOCIAL = {
     facebook: "https://facebook.com/kalaf.india",
@@ -22,7 +40,6 @@ export const SOCIAL = {
 
 // Where to send people who bought on a marketplace and want to track an order.
 export const MARKETPLACE_ORDERS = {
-    amazon: "https://www.amazon.in/your-orders/orders",
     flipkart: "https://www.flipkart.com/account/orders",
     meesho: "https://www.meesho.com/",
 } as const;

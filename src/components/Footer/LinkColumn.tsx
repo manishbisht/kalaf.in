@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./style.module.css";
 
-// Items can be plain strings (placeholder, no destination) or {label, to}
-// objects (real internal route).
-export type LinkColumnItem = string | { label: string; to: string };
+// `to` is an internal route (<Link>); `href` is a mailto:, tel: or external
+// URL. External http(s) links open in a new tab.
+export type LinkColumnItem =
+    | { label: string; to: string }
+    | { label: string; href: string };
 
 export function LinkColumn({
     title,
@@ -16,21 +18,28 @@ export function LinkColumn({
         <div>
             <div className={styles.colTitle}>{title}</div>
             <ul className={styles.colList}>
-                {items.map((item) => {
-                    const label = typeof item === "string" ? item : item.label;
-                    const to = typeof item === "string" ? null : item.to;
-                    return (
-                        <li key={label}>
-                            {to ? (
-                                <Link to={to} className={styles.colLink}>
-                                    {label}
-                                </Link>
-                            ) : (
-                                <a className={styles.colLink}>{label}</a>
-                            )}
-                        </li>
-                    );
-                })}
+                {items.map((item) => (
+                    <li key={item.label}>
+                        {"to" in item ? (
+                            <Link to={item.to} className={styles.colLink}>
+                                {item.label}
+                            </Link>
+                        ) : item.href.startsWith("http") ? (
+                            <a
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.colLink}
+                            >
+                                {item.label}
+                            </a>
+                        ) : (
+                            <a href={item.href} className={styles.colLink}>
+                                {item.label}
+                            </a>
+                        )}
+                    </li>
+                ))}
             </ul>
         </div>
     );

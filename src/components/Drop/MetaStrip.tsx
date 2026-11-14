@@ -7,7 +7,6 @@ const v = PANT.variants[0];
 const STORE_NAMES = {
     flipkart: "Flipkart",
     meesho: "Meesho",
-    amazon: "Amazon",
 };
 const stores = (Object.keys(STORE_NAMES) as (keyof typeof STORE_NAMES)[])
     .filter((s) => PANT.variants.some((x) => x.links[s]))
