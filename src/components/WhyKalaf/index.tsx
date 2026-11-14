@@ -4,33 +4,33 @@ import styles from "./style.module.css";
 const FEATURES: Feature[] = [
     {
         num: "01",
-        title: "Premium fabric",
-        body: "280–320 GSM combed cotton, ring-spun, garment-washed for the right weight on the shoulder.",
+        title: "100% cotton",
+        body: "The pant is pure cotton: breathable, soft, and cool enough for a Jaipur summer.",
     },
     {
         num: "02",
-        title: "Tailored fit",
-        body: "Pattern-blocked for a clean line. No accidental volume, no excess length. The cut is the design.",
+        title: "An easy fit",
+        body: "Elastic all the way round the waist, with a front button and zip fly. A relaxed, wide straight leg that drapes cleanly.",
     },
     {
         num: "03",
-        title: "Minimal design",
-        body: "No logos on the chest, no slogans. The cloth, the cut, the colour. Nothing else asks for attention.",
+        title: "Rajasthani craft",
+        body: "Bandhani and leheriya are the tie-dye traditions of Rajasthan. Our dupattas carry them, some finished with a gota border.",
     },
     {
         num: "04",
-        title: "Everyday comfort",
-        body: "Tested to be worn twice a week for a year. Soft from the first wash. Holds shape through the hundredth.",
+        title: "Made in Jaipur",
+        body: "Every piece is made and packed by us in Jaipur, and dispatched from here.",
     },
     {
         num: "05",
         title: "Small batches",
-        body: "We work in small runs from the Jaipur workshop. When a batch sells out on Amazon, Flipkart, or Meesho, we make the next one — never warehouses of unsold stock.",
+        body: "We make in small runs, so colours come and go. When one sells out, it may come back in the next batch.",
     },
     {
         num: "06",
-        title: "Sustainable mindset",
-        body: "Workshops within a 200 km radius. No air freight. Offcuts re-spun into the next season's linings.",
+        title: "Buy where you shop",
+        body: "No new account to make. Buy on Flipkart, or on Meesho for dupattas, with that marketplace's delivery and returns.",
     },
 ];
 
@@ -50,16 +50,16 @@ export function WhyKalaf() {
                             Why Kalaf
                         </div>
                         <h2 style={{ color: "var(--off-white)" }}>
-                            Six promises.
+                            Simple things,
                             <br />
                             <span style={{ color: "var(--smoke)" }}>
-                                No exceptions.
+                                done properly.
                             </span>
                         </h2>
                     </div>
                     <div className="right" style={{ color: "var(--smoke)" }}>
-                        Every garment that leaves the workshop passes a
-                        six-point review against the standards below.
+                        A small label from Jaipur. Here&apos;s what you can
+                        count on.
                     </div>
                 </div>
 

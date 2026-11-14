@@ -46,87 +46,51 @@
     }
 }
 
-.form {
+.links {
     margin: 40px auto 0;
-    max-width: 480px;
     display: flex;
-    gap: 8px;
-    align-items: center;
-    border: 1px solid var(--line-dark);
-    border-radius: 999px;
-    padding: 4px;
-    background: rgba(255, 255, 255, 0.03);
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 @media (max-width: 560px) {
-    .form {
+    .links {
         flex-direction: column;
         align-items: stretch;
-        gap: 12px;
-        border: 0;
-        border-radius: 0;
-        padding: 0;
-        background: transparent;
+        max-width: 320px;
     }
 }
 
-.input {
-    flex: 1;
-    border: 0;
-    background: transparent;
-    padding: 0 24px;
+.link {
     height: 52px;
-    font-family: var(--font-body);
-    font-size: 15px;
-    color: var(--off-white);
-    outline: none;
-}
-.input::placeholder {
-    color: var(--smoke);
-}
-@media (max-width: 560px) {
-    .input {
-        border: 1px solid var(--line-dark);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.03);
-        padding: 0 20px;
-    }
-}
-
-.submit {
-    height: 52px;
-    padding: 0 24px;
-    background: var(--off-white);
-    color: var(--ink);
-    border: 0;
+    padding: 0 28px;
+    border: 1px solid var(--line-dark);
     border-radius: 999px;
-    cursor: pointer;
+    color: var(--off-white);
+    text-decoration: none;
     font-family: var(--font-head);
     font-weight: 500;
     font-size: 13px;
     letter-spacing: 0.04em;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    transition: background var(--dur-fast) var(--ease);
+    justify-content: center;
+    gap: 10px;
     white-space: nowrap;
+    transition:
+        background var(--dur-fast) var(--ease),
+        color var(--dur-fast) var(--ease);
 }
-@media (max-width: 560px) {
-    .submit {
-        justify-content: center;
-    }
+.link:first-child {
+    background: var(--off-white);
+    color: var(--ink);
+    border-color: var(--off-white);
 }
-.submit:hover {
+.link:hover {
     background: var(--bone);
+    color: var(--ink);
+    border-color: var(--bone);
 }
-.submit:active {
+.link:active {
     opacity: 0.7;
-}
-
-.fine {
-    font-family: var(--font-head);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--smoke);
-    margin-top: 22px;
 }
