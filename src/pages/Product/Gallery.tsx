@@ -55,13 +55,19 @@ export function Gallery({
         focusAfterClose.current = null;
     }, [lightbox]);
 
-    const goTo = (i: number) => {
+    // While the strip scrolls itself to a slide, the slides it passes on the
+    // way mustn't become "current" (they'd flip aria-hidden on the slide that
+    // has focus). A swipe or drag by the user cancels the guard.
+    const scrollTarget = useRef<number | null>(null);
+
+    const goTo = (i: number, instant = false) => {
         const track = trackRef.current;
         const next = Math.max(0, Math.min(total - 1, i));
+        scrollTarget.current = next;
         setIndex(next);
         track?.scrollTo({
             left: next * track.clientWidth,
-            behavior: reducedMotion() ? "auto" : "smooth",
+            behavior: instant || reducedMotion() ? "auto" : "smooth",
         });
     };
 
@@ -71,8 +77,16 @@ export function Gallery({
         frame.current = requestAnimationFrame(() => {
             const track = trackRef.current;
             if (!track || !track.clientWidth) return;
-            setIndex(Math.round(track.scrollLeft / track.clientWidth));
+            const at = Math.round(track.scrollLeft / track.clientWidth);
+            if (scrollTarget.current !== null) {
+                if (at !== scrollTarget.current) return;
+                scrollTarget.current = null;
+            }
+            setIndex(at);
         });
+    };
+    const userScrolls = () => {
+        scrollTarget.current = null;
     };
     useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
@@ -111,6 +125,9 @@ export function Gallery({
                     ref={trackRef}
                     className={styles.track}
                     onScroll={onScroll}
+                    onPointerDown={userScrolls}
+                    onTouchStart={userScrolls}
+                    onWheel={userScrolls}
                     aria-live="polite"
                 >
                     {media.map((m, i) => (
@@ -233,7 +250,9 @@ export function Gallery({
                         );
                         focusAfterClose.current = slide;
                         setLightbox(null);
-                        goTo(slide);
+                        // Jump, don't glide: the user was looking at this
+                        // photo full screen a moment ago.
+                        goTo(slide, true);
                     }}
                 />
             )}

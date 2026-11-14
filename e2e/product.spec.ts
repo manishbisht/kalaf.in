@@ -45,13 +45,9 @@ test("the lightbox opens on a photo, pages with the arrow keys and closes on Esc
     await expect(photo).toBeFocused();
 });
 
-// BUG: closing the lightbox on a different photo than the one opened scrolls
-// the gallery to that photo (Gallery.tsx onClose → goTo), but Lightbox.tsx
-// hands focus back to the button that opened it, which is now in a slide with
-// aria-hidden="true" and tabindex="-1". Keyboard and screen-reader users are
-// left focused on hidden content. Fix: focus the zoom button of the photo now
-// shown (e.g. Gallery focuses it after goTo) instead of the original opener.
-test.fixme("after paging in the lightbox, Esc returns focus to the photo now shown", async ({
+// Closing the lightbox on a different photo scrolls the gallery to it, and
+// focus must follow to that visible photo (not the hidden opener).
+test("after paging in the lightbox, Esc returns focus to the photo now shown", async ({
     page,
 }) => {
     await page.goto(DUPATTA);
