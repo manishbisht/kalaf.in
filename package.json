@@ -13,6 +13,7 @@
         "lint:fix": "eslint . --fix",
         "test": "vitest run",
         "test:dist": "REQUIRE_DIST=1 vitest run scripts/prerender.test.ts",
+        "test:e2e": "playwright test",
         "test:watch": "vitest",
         "format": "prettier --write ."
     },
@@ -29,6 +30,7 @@
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
+        "@playwright/test": "^1.65.1",
         "@testing-library/dom": "^10.4.2",
         "@testing-library/react": "^16.3.3",
         "@types/node": "^25.9.1",

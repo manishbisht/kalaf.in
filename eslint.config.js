@@ -7,7 +7,15 @@ import tseslint from "typescript-eslint";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
 
 export default tseslint.config(
-    { ignores: ["dist", "node_modules", ".claude"] },
+    {
+        ignores: [
+            "dist",
+            "node_modules",
+            ".claude",
+            "playwright-report",
+            "test-results",
+        ],
+    },
 
     // Base JS rules
     js.configs.recommended,
@@ -50,6 +58,17 @@ export default tseslint.config(
                 "warn",
                 { varsIgnorePattern: "^_", argsIgnorePattern: "^_" },
             ],
+        },
+    },
+
+    // Playwright tests and their static server run in Node, not the browser,
+    // and aren't React code (Playwright's fixture `use` isn't a hook).
+    {
+        files: ["e2e/**/*.{ts,mjs}", "playwright.config.ts"],
+        languageOptions: { globals: globals.node },
+        rules: {
+            "react-hooks/rules-of-hooks": "off",
+            "react-refresh/only-export-components": "off",
         },
     },
 
