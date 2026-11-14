@@ -1,302 +1,69 @@
 # Kalaf.in — Agent Notes
 
-A Vite + React 19 single-page app for **Kalaf**, a premium Indian fashion brand from Jaipur. Frontend-only — no backend yet. Deployed to GitHub Pages via CI. This file is the orientation doc for any agent picking up work in this repo.
-
-## Tech stack
-
-- **Vite 8** + **React 19** (no Next.js, no SSR — built as a static SPA)
-- **TypeScript 6** (strict mode, project references)
-- **React Router DOM v7**, **BrowserRouter** (real paths like `/privacy`). GitHub Pages has no server rewrites, so the build prerenders every route to its own static HTML file (see Routes)
-- **CSS Modules** (`*.module.css`) + global tokens/utilities
-- **ESLint v10** flat config + **typescript-eslint** + **eslint-plugin-prettier** (Prettier runs as an ESLint rule)
-- **Yarn Classic 1.x** enforced via `preinstall` script
-- **@microsoft/clarity** for behavioural analytics (env-gated)
+kalaf.in is the website of **Kalaf**, a fashion label from Jaipur (Kalaf Apparels, a partnership firm) that makes cotton trousers and bandhani and leheriya dupattas. The site is a **catalogue only**: no accounts, cart or checkout. Every "Buy" button goes to the piece's listing on Flipkart or Meesho. Product data, photos, videos and business details come from the private **manishbisht/products.kalaf.in** repo through `scripts/sync-catalog.py`. Stack: Vite 8 + React 19 + TypeScript 6 (strict), React Router 7 with `BrowserRouter`, CSS Modules, ESLint 10 + Prettier, Yarn Classic. Every route is prerendered to static HTML at build time and hosted on GitHub Pages at https://kalaf.in. This file is the index: read it first, then the README of the folder you're working in.
 
 ## Run / build
 
-`package.json` declares `engines.node: 26.x` but local Node is older — every yarn command needs `--ignore-engines`, and `yarn <script>` often fails the engine guard. The reliable pattern:
+`package.json` wants Node 26.x and local Node is older, so `yarn <script>` fails the engine guard. Install with `--ignore-engines` and call the binaries directly:
 
 ```bash
 yarn install --ignore-engines
 node_modules/.bin/vite                    # dev server
-node_modules/.bin/tsc -b                  # typecheck only
-node_modules/.bin/vite build              # bundle (skips typecheck)
-node_modules/.bin/eslint .                # lint + prettier check
-node_modules/.bin/eslint . --fix          # autofix formatting
+node_modules/.bin/tsc -b                  # typecheck
+node_modules/.bin/eslint .                # lint + Prettier check (--fix to autofix)
 node_modules/.bin/prettier --write .      # format only
+
+# Full build = the 4 steps of `yarn build`:
+node_modules/.bin/tsc -b
+node_modules/.bin/vite build
+node_modules/.bin/vite build --ssr src/entry-server.tsx --outDir node_modules/.tmp/ssr
+node scripts/prerender.mjs                # per-route HTML, 404.html, sitemap.xml, robots.txt, llms.txt
 ```
 
-The `build` npm script runs the whole chain: `tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir node_modules/.tmp/ssr && node scripts/prerender.mjs`. Run those four steps by hand locally (from `node_modules/.bin/`); the last two prerender the pages and write `sitemap.xml`, `robots.txt` and `llms.txt` (see Routes).
+## Hard rules
 
-Don't run `yarn <script>` directly in this environment — call binaries from `node_modules/.bin/` instead.
-
-## Folder structure
-
-```
-.github/workflows/deploy.yml   ← GitHub Pages deploy (CalVer-tagged release)
-.env                           ← VITE_CLARITY_PROJECT_ID (blank locally)
-tsconfig.json                  ← root, references the two below
-tsconfig.app.json              ← src/ — strict TS, verbatimModuleSyntax, noUnused*
-tsconfig.node.json             ← vite.config.ts
-eslint.config.js               ← flat config: ts-eslint + react + hooks + prettier
-.prettierrc                    ← 4-space, double quotes, semicolons, trailingComma:"es5"
-
-src/
-  tokens.css                   ← design tokens (colors, type, spacing, motion)
-  index.css                    ← global utilities (.container, .section, .btn*, .t-eyebrow, .img-zoom, .chip, .fade-up)
-  vite-env.d.ts                ← /// <reference types="vite/client" /> + ImportMetaEnv augmentation
-  env.ts                       ← single read-point for every VITE_* var (export const ENV)
-  constants.ts                 ← BRAND, SOCIAL, ROUTES (single source of truth)
-  main.tsx                     ← entry — imports tokens.css then index.css; gates Clarity.init on ENV
-  App.tsx                      ← BrowserRouter + Shell (Seo, ScrollToTop, Nav, Routes, Footer)
-  entry-server.tsx             ← build-only SSR entry: StaticRouter + Shell → HTML (scripts/prerender.mjs)
-  seo/                         ← seoFor(path, search) → title/meta/OG/JSON-LD; <Seo /> renders it; sitemap/robots/llms.txt
-  components/
-    Nav/        index.tsx + style.module.css
-    Hero/       …
-    Drop/       …  (home page pant feature, from the catalog)
-    BuyButtons/ …  (shared Flipkart / Meesho / Amazon buttons)
-    ProductCard/ … (shop-grid tile, one colour of a product)
-    Swatch/     …  (colour dot; multicolour = segments)
-    Process/    …
-    WhyKalaf/   …
-    Lookbook/   …
-    Newsletter/ …
-    Footer/     …
-    Cart/       …
-    Icons/      index.tsx (inline SVG set; no css module; IconName string-union for type-safe lookups)
-    PolicyLayout/  ← shared layout for all policy/guide pages
-  pages/
-    Home/                 ← composes the marketing components
-    ShippingReturns/      ← data-only wrapper around PolicyLayout
-    Privacy/              ← ”
-    Terms/                ← ”
-    RefundPolicy/         ← ”
-    CookiePolicy/         ← ”
-    SizeGuide/            ← ”
-    CareGuide/            ← ”
-    TrackOrder/           ← ”
-    Contact/              ← ”
-    Shop/                 ← /products + /collections/:handle (filters, sort)
-    Product/              ← /products/:handle (product detail)
-  data/
-    catalog.json          ← GENERATED by scripts/sync-catalog.py
-    catalog.ts            ← types + helpers over catalog.json
-scripts/sync-catalog.py    ← products.kalaf.in repo → catalog.json + public/catalog/
-public/catalog/            ← GENERATED product images + videos
-```
-
-## Conventions
-
-**Folder-per-unit**: every component and page is a directory containing `index.tsx` and (where styles exist) `style.module.css`. No flat `Foo.tsx` files.
-
-**Export style**:
-- Components: named exports — `export function Nav(...)`. Import as `import { Nav } from "../../components/Nav"`.
-- Pages: default exports — `export default function Privacy()`. Import as `import Privacy from "./pages/Privacy"`.
-- `PolicyLayout` is a default export (layout, semantically page-shell). Its data types and cross-link sets are named exports: `import PolicyLayout, { POLICY_CROSS_LINKS, HELP_CROSS_LINKS, type PolicyData } from "..."`.
-
-**Styling**:
-- Component-scoped → `style.module.css`, referenced as `styles.foo`.
-- Global utilities → live in `src/index.css`, applied as plain class strings (`"container"`, `"t-eyebrow"`, `"btn btn-primary"`).
-- Conditional/dynamic → inline `style={{}}`.
-- The brand has **no border-radius on cards**, **no shadows**, **no gradients**. Don't introduce them.
-
-**Formatting**: 4-space indent, double quotes, semicolons (`.prettierrc`). Auto-applied on `eslint --fix`. Don't fight the formatter.
-
-**Internal navigation must use `<Link to={ROUTES.foo}>`** from `react-router-dom`. Plain `<a href="/x">` causes a full reload and breaks SPA state. Plain `<a>` doesn't navigate.
-
-**Repeated values go in `src/constants.ts`**. Currently centralised: email/phone/legal name/CIN/location/wordmark/devanagari/working hours/copyright year (`BRAND`); the four social URLs (`SOCIAL`); all route paths (`ROUTES`, plus `productPath` / `collectionPath` helpers). Don't duplicate any of these — import the constant.
-
-## Routes (`src/App.tsx`)
-
-| Path constant | URL | Page |
-|---|---|---|
-| `ROUTES.home` | `/` | Home (marketing) |
-| `ROUTES.shippingReturns` | `/shipping-returns` | Policy 02 |
-| `ROUTES.privacy` | `/privacy` | Policy 01 |
-| `ROUTES.terms` | `/terms` | Policy 03 |
-| `ROUTES.refundPolicy` | `/refund-policy` | Policy 04 |
-| `ROUTES.cookies` | `/cookies` | Policy 05 |
-| `ROUTES.sizeGuide` | `/size-guide` | Guide 01 |
-| `ROUTES.careGuide` | `/care-guide` | Guide 02 |
-| `ROUTES.trackOrder` | `/track-order` | Orders |
-| `ROUTES.contact` | `/contact` | Support |
-| `ROUTES.products` | `/products` | Shop — all products |
-| `ROUTES.collection` | `/collections/:handle` | Shop — one collection |
-| `ROUTES.product` | `/products/:handle` | Product detail |
-
-Plus a catch-all `*` → `pages/NotFound` (light Nav, `noindex`).
-
-URLs are real paths (`BrowserRouter`). Old `/#/…` links from the HashRouter days still work: `main.tsx` rewrites `location.hash` to the path form with `history.replaceState` before rendering (query string kept).
-
-**Prerendering (GitHub Pages has no rewrites).** After the client build, `vite build --ssr src/entry-server.tsx` bundles a build-only server entry, and `scripts/prerender.mjs` renders every path from `prerenderPaths()` in `src/seo` (home, the `ROUTES` pages, each collection, each product handle) with `react-dom/static`'s `prerender` (it waits for the `lazy()` pages). Each route is written to both `dist/<path>.html` and `dist/<path>/index.html` (GitHub Pages serves `/privacy` from either), with that route's head tags in the `<!--seo-->` block of `index.html` and `data-path` on `#root`. `dist/404.html` is the app shell with `noindex`: GitHub Pages serves it for unknown paths and the client router renders the right page (old product handles) or NotFound.
-
-`main.tsx` calls `hydrateRoot` only when `#root[data-path]` equals the current path and there's no query string; otherwise (`?colour=`, shop filters, 404.html, old hash links) it uses `createRoot`, because the prerendered HTML is for the plain URL. Anything that renders differently on server and client (dates, `window`, random values) breaks hydration — keep render pure and put browser-only work in effects. `build.cssCodeSplit` is off so prerendered pages are styled before their JS chunk loads.
-
-**SEO.** `src/seo/index.ts` maps a pathname + search to title, description, canonical (`https://kalaf.in<path>`, no query), Open Graph/Twitter tags and JSON-LD (Organization + WebSite on home, ItemList on shop/collections, Product + BreadcrumbList on products — the `?colour=` variant when present). `<Seo />` (in the App shell) renders it with React 19's `<title>`/`<meta>`/`<link>` hoisting plus one managed `<script id="seo-jsonld">`; the prerender writes the same data as static tags marked `data-seo`, which `main.tsx` removes on load. The SSR render passes `seo={false}` to `Shell` so React doesn't emit a second copy inside `#root`. Unknown paths get `noindex`. New page → add its title/description to `STATIC_PAGES` in `src/seo/index.ts` (and to `DARK_NAV` in `App.tsx` if it has a dark hero). The prerender also writes `sitemap.xml` (every prerendered URL), `robots.txt` and `llms.txt` (llmstxt.org summary built only from `catalog.json` and `business.json`).
-
-A `ScrollToTop` helper in `App.tsx` resets `window.scrollTo(0, 0)` on every `pathname` change. Without it, routing from a page footer lands the user at the bottom of the next page.
-
-## PolicyLayout — the shared shell
-
-All 9 non-home pages are thin data-only wrappers around `components/PolicyLayout`. Each page file is:
-
-```tsx
-import PolicyLayout, {
-    POLICY_CROSS_LINKS,
-    type PolicyData,
-} from "../../components/PolicyLayout";
-import { BRAND } from "../../constants";
-
-const data: PolicyData = {
-    eyebrow: "Policy 0X",
-    title: "Page title",
-    ornament: "देव",                          // Devanagari background flourish in the hero
-    summary: "…",
-    updated: "23 May 2026",
-    readTime: "N min read",
-    crossLinksHeader: "The other policies",    // optional — defaults to "The other policies"
-    promises: [{ kicker, label, body }, …],    // optional 3-card band on bone bg
-    sections: [
-        {
-            id: "slug",
-            title: "Section",
-            body: [
-                { kind: "p", text: "…" },
-                { kind: "list", items: ["…", "…"] },
-            ],
-            steps: ["…", "…"],                  // optional bone-box numbered steps
-            callout: { label, value },           // optional left-ruled callout
-        },
-    ],
-};
-
-export default function Page() {
-    return <PolicyLayout data={data} currentSlug="slug" crossLinks={POLICY_CROSS_LINKS} />;
-}
-```
-
-`PolicyLayout` owns: dark hero w/ breadcrumb, optional promises strip, sticky-TOC body with scroll-spy, signature block, cross-link strip (current page dimmed + "You are here"), Nav (dark mode), Footer, Cart drawer.
-
-**Why explicit `const data: PolicyData = …`?** Without the annotation, TS widens literals (`kind: "p"` → `string`), breaking the `PolicyBodyBlock` discriminated union match.
-
-Two cross-link sets are exported by `PolicyLayout/index.tsx`:
-- `POLICY_CROSS_LINKS` (5 items) — legal pages
-- `HELP_CROSS_LINKS` (4 items) — guides
-
-To add a new policy/guide page: create `src/pages/Foo/index.tsx` with a typed `data` object → render `<PolicyLayout>` → add a `ROUTES` entry → add a `<Route>` in `App.tsx` → add the entry to the relevant cross-link set.
-
-## Constants (`src/constants.ts`)
-
-Three exports, all `as const`:
-
-- `BRAND` — `name`, `wordmark`, `devanagari`, `legalName`, `cin`, `location`, `email`, `phone`, `workingHours`, `copyrightYear`. Used by Footer/Nav/PolicyLayout and all policy page data. Body text with embedded brand values uses template literals (e.g. `` `Email ${BRAND.email} with a photo…` ``).
-- `SOCIAL` — `facebook`, `instagram`, `linkedin`, `x` URLs. Used only by Footer's social row.
-- `ROUTES` — all 10 page paths. Used by `App.tsx` routes, `PolicyLayout` cross-links, `Footer` Help/Policies columns.
-
-A grep for hardcoded `hello@kalaf.in`, `Kalaf Atelier`, route literals etc. should return zero matches in `src/`.
-
-## Design tokens (`src/tokens.css`)
-
-- **Colors** — `--ink #000`, `--charcoal #1a1a1a`, `--off-white #f5f5f5`, `--bone #ede8df`, `--paper`, `--sand #c9b79c`, `--olive`, `--smoke #9a9a98`. Borders: `--line` (light bg), `--line-dark` (dark bg).
-- **Fonts** — `--font-display` (Clash Display), `--font-head` (Space Grotesk), `--font-body` (Inter), `--font-devan` (Tiro Devanagari Hindi).
-- **Motion** — `--ease` cubic-bezier(0.22, 1, 0.36, 1); durations `--dur-fast` 200ms, `--dur-base` 400ms, `--dur-slow` 800ms.
-- **Layout** — `--container-max 1440px`, `--page-pad 80px` (md 40, sm 20).
-
-Use these via `var(--token)` rather than hardcoding hex/px values.
-
-## Product catalog (`src/data/`)
-
-All product data and media come from the **manishbisht/products.kalaf.in** repo (master catalog: `catalog/<PRODUCT>/product.json`, `<SKU>/variant.json`, `images/`, `videos/`). Sync it with:
-
-```bash
-python3 scripts/sync-catalog.py ../products.kalaf.in   # needs Pillow + ffmpeg
-```
-
-That writes `src/data/catalog.json` (never hand-edit) and web-sized media into `public/catalog/<PRODUCT>/` (`<SKU>_<n>-600.jpg`, `-1200.jpg`, `<SKU>_video.mp4` + `-poster.jpg`). Media is only reprocessed when its source file changed (SHA-1s in `public/catalog/.sources.json`); `--force` redoes everything. A full rebuild takes ~3 min. Website-only fields (URL handle, collection, dupatta description) live in the `PRODUCTS` dict at the top of the script — add new products there. Titles come from the products repo's `short_name`, features from `features` or `flipkart_key_features`.
-
-**Buy links**: a marketplace button appears only when the products repo has a `url` for it **and** its `status` doesn't say blocked/removed/delisted/inactive/suspended (`NOT_LIVE` in the script) — e.g. the pants' Meesho catalog was blocked in Nov 2026, so pants show "Meesho — coming soon". Each variant carries `prices` per live store (they differ: some dupattas are ₹949 on Flipkart, ₹1,000 on Meesho); `price` is the lowest, and `BuyButtons` prints each store's price on its button when they differ. All buy links come from the catalog — there's no hand-typed marketplace URL in `constants.ts` any more (the Hero's Flipkart button reads the pant's first colour). **Pants' Flipkart button goes to the owner's link `https://pants.kalaf.in/kalaf.in`** (set 12 Nov 2026 via `"links"` on `PNT` in the script's `PRODUCTS` dict; overrides beat products-repo URLs but still respect `NOT_LIVE`). Because that one link covers every size, the pant's `sizeLinks` is empty and the product page shows sizes as information only. Remove the override to go back to per-size Flipkart pages (`sizes.*.flipkart_url`), where choosing a size switches the Flipkart link. Don't hand-add an Amazon link: the owner asked (2 Nov 2026) for nothing to be live on Amazon for now.
-
-`src/data/catalog.ts` types the JSON and exports `findProduct` (also maps old handles, e.g. `cotton-linen-relaxed-trousers` → `cotton-relaxed-trousers` after the pant became 100% cotton), `PRODUCTS`, `LISTING` (one item per colour), `COLLECTIONS`, `formatRupees`, `percentOff`, `swatchColours` (colour code → hex; add new codes there).
-
-**Pages**: `/products` and `/collections/:handle` (`pants`, `dupattas`) are one page, `pages/Shop`. Filters (category, style, colour, fabric, size, available on) and sort live in the URL query (`?colour=Red,Pink&store=Flipkart&sort=price-asc`). `/products/:handle?colour=CODE` is `pages/Product` (gallery with video, colour/size pickers, buy buttons, details). The home page features only the pant (`components/Drop`, reading product code `PNT`). Link with `productPath()` / `collectionPath()` from `constants.ts`.
-
-## Footer, Nav, Cart
-
-- **Footer**: rendered identically on every page. Help and Policies columns route via `<Link to={ROUTES.…}>`; Shop column links to the shop pages; Brand column is still static placeholders. Social row: Instagram → Facebook → LinkedIn → X, all with `href` from `SOCIAL`, `target="_blank"`, `rel="noopener noreferrer"`.
-- **Nav**: wordmark links to `ROUTES.home`; Shop all / Pants / Dupattas route to the shop (Journal is still inert). On mobile those links hide and one "Shop" link shows on the right. `App.tsx` passes `dark` on policy pages only; home and shop pages use the light Nav.
-- **Cart**: `SAMPLE_CART` is hardcoded in the component. Open state is owned by the parent page (`cartOpen` / `setCartOpen` + `<Nav onBagClick={…}>`). Checkout button has no destination yet.
-
-## Env vars (`src/env.ts`)
-
-All `import.meta.env.VITE_*` reads go through `src/env.ts`. App code imports `ENV` from there; nothing else should touch `import.meta.env` directly. When adding a new env var:
-
-1. Add it to `.env` with a comment (the file is committed; only public values).
-2. Add the key to `ImportMetaEnv` in `src/vite-env.d.ts` so TS knows about it.
-3. Add it to `ENV` in `src/env.ts`.
-4. Import `ENV` in the consumer; never read `import.meta.env` directly.
-
-Current keys:
-- `ENV.clarityProjectId` — Clarity project ID; blank → analytics off.
-- `ENV.buildVersion` — CalVer stamp set by CI (`YYYY.MM.DD.HHMM` UTC).
-- `ENV.commitSha` — full SHA set by CI.
-
-`buildVersion` and `commitSha` are wired through but not yet rendered anywhere — they're there for a future build-stamp / debug overlay.
-
-## Analytics — Microsoft Clarity
-
-`src/main.tsx` reads `ENV.clarityProjectId`; if set, calls `Clarity.init(id)` before render. If blank (typical local dev), it's a no-op. The Clarity SDK injects a script tag at runtime, so the bundle stays slim regardless.
-
-In CI (`.github/workflows/deploy.yml`), the ID is passed in from the `CLARITY_PROJECT_ID` repo secret at build time.
-
-For custom tracking later:
-```ts
-import Clarity from "@microsoft/clarity";
-Clarity.event("checkout_started");
-Clarity.identify("user-123");
-Clarity.setTag("plan", "pro");
-```
-
-**Page views**: `ScrollToTop` in `App.tsx` fires `Clarity.event("page_view")` on every pathname change (only when `ENV.clarityProjectId` is set), since client-side navigations may not register with Clarity's auto-tracker.
-
-## CI / deploy (`.github/workflows/deploy.yml`)
-
-Push to `main` → `yarn build` (typecheck, client build, SSR build, prerender + sitemap/robots/llms.txt) → upload `dist/` → deploy to GitHub Pages → tag a CalVer release. `dist/` is gitignored and untracked; never commit it.
-
-Three env vars are injected at build time:
-- `VITE_CLARITY_PROJECT_ID` — from `secrets.CLARITY_PROJECT_ID`
-- `VITE_BUILD_VERSION` — `YYYY.MM.DD.HHMM` UTC, also used as the release tag `vYYYY.MM.DD.HHMM`
-- `VITE_COMMIT_SHA` — full SHA
-
-`VITE_BUILD_VERSION` and `VITE_COMMIT_SHA` flow into `ENV.buildVersion` / `ENV.commitSha` but no UI consumes them yet — they're staged for a future build-stamp or debug overlay.
-
-Release tagging uses `gh release create … --generate-notes`, so commit titles since the previous tag matter — write them like a changelog.
+- **No border-radius, shadows or gradients** on cards, buttons or panels. The one exception is the round green WhatsApp badge (WhatsApp's own mark). Small round colour swatches and dots are fine.
+- **Internal navigation uses `<Link to={…}>`** from `react-router-dom`, never `<a href="/…">`.
+- **Shared values live in [`src/constants.ts`](src/constants.ts)**: brand and business details (`BRAND`), social URLs, routes (`ROUTES`, `productPath`, `collectionPath`). Don't hard-code an email, phone, route or URL that's already there.
+- **Env vars only through [`src/env.ts`](src/env.ts)**. Nothing else reads `import.meta.env`.
+- **Render must stay pure.** Prerendered pages hydrate, so anything that differs between build and browser (dates, `window`, `navigator`, random values) goes in an effect, not in render.
+- **Never hand-edit generated files**: `src/data/catalog.json`, `src/data/business.json` and `public/catalog/`. Change the products repo or `scripts/sync-catalog.py` and re-sync.
+- **Never commit `dist/`** (gitignored; CI builds it).
+- **No Amazon.** The owner asked (2 Nov 2026) for nothing about Amazon on the site. Don't add an Amazon link, button, filter or mention.
+- **No fabricated claims.** No made-up reviews, ratings, press, awards, customer counts or certifications. Copy must match the products repo and how Kalaf actually sells.
+- **Commit titles read like a changelog**: CI turns them into release notes.
 
 ## Gotchas
 
-- **Hash-quoted strings vs ASCII apostrophes**. Don't write `'We don't ship Sundays'` — the `'` terminates the JS string. Use double quotes (`"We don't…"`) or backtick templates. Policy data files are full of contractions; this bites repeatedly.
-- **`verbatimModuleSyntax: true`** in tsconfig means type-only imports must use `import type` (or inline `import { foo, type Bar }`). Don't strip the keyword in a "cleanup" pass.
-- **`noUnusedLocals` / `noUnusedParameters` are on**. Prefix intentionally-unused identifiers with `_` to silence (e.g. `(_e) => …`).
-- **JSX entities**: ESLint flags raw `'` inside JSX text. Use `&apos;` (already done in `Drop` and `Lookbook`).
-- **Build tool is rolldown-vite**, which emits unusually verbose syntax-error output (each char tinted). The relevant line is `╭─[ path:line:col ]─` near the bottom of the error block.
-- **`--charcoal` footer + `--ink` cross-link strip** read as one large dark block on policy pages. That's intentional; don't split them.
-- **`.env` is committed; `.env.*.local` are not** (see `.gitignore`). Clarity project IDs are public anyway (they ship in the script tag), so committing them is fine — but never put a secret in plain `.env`.
-- **Don't `yarn <script>`** in tooling/automation. The engine guard fails on Node < 26. Call `node_modules/.bin/<tool>` directly.
+- **Contractions in strings.** `'We don't ship'` ends the string at the apostrophe. Use double quotes or backticks; policy data files are full of contractions.
+- **`verbatimModuleSyntax`** is on: type-only imports need `import type` or `import { x, type Y }`. Don't strip the keyword.
+- **`noUnusedLocals` / `noUnusedParameters`** are on: prefix intentionally unused names with `_`.
+- **JSX entities**: ESLint flags a raw `'` in JSX text. Write `&apos;`.
+- **rolldown-vite errors** are very verbose (each character tinted). The useful line is `╭─[ path:line:col ]─` near the bottom.
+- **`.env` is committed** and holds only public values; `.env.*.local` files are ignored. Never put a secret in `.env`.
+
+## Where things are
+
+| Folder                            | README                                               | What's there / when to read it                                                                                             |
+| --------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `src/`                            | [src/README.md](src/README.md)                       | Entry points (hydrate vs createRoot), App shell, design tokens, global CSS utilities, constants, env vars, Clarity, hooks. |
+| `src/components/`                 | [src/components/README.md](src/components/README.md) | Every shared component; PolicyLayout in depth; BuyButtons' store rule; Nav, Footer, WhatsApp, Ask AI, Icons.               |
+| `src/pages/`                      | [src/pages/README.md](src/pages/README.md)           | Routes table, Shop (filters/sort in the URL), Product page, NotFound, policy pages as data wrappers, adding a page.        |
+| `src/data/`                       | [src/data/README.md](src/data/README.md)             | Generated catalog and business JSON, their types and helpers, swatch colours, old-handle redirects.                        |
+| `src/seo/`                        | [src/seo/README.md](src/seo/README.md)               | Titles, meta, canonical, Open Graph, JSON-LD, sitemap/robots/llms.txt; what to add for a new page.                         |
+| `scripts/`, `public/`, `.github/` | [scripts/README.md](scripts/README.md)               | Catalog sync, prerender, the static files in `public/`, and the GitHub Pages deploy with CalVer releases.                  |
+
+`public/` and `.github/` have no README on purpose: Vite copies everything in `public/` to the live site, and GitHub would show `.github/README.md` as the repo's front page.
+
+Root config: `vite.config.ts` (CSS in one file, no `public/` copy for the SSR build), `index.html` (fonts, icons, the `<!--seo-->` block the prerender fills), `tsconfig.json` → `tsconfig.app.json` (src, strict) + `tsconfig.node.json` (vite config), `eslint.config.js` (ts-eslint, react, hooks, Prettier as a rule), `.prettierrc`, `.env`.
 
 ## Recent session log
 
-- Bootstrapped Vite/React, refactored into CSS Modules folder pattern, added ESLint+Prettier, bumped deps to latest.
-- Built `ShippingReturns` from a design handoff (`PolicyV2.jsx`).
-- Extracted that page's shell into `components/PolicyLayout` and created 8 more pages (Privacy, Terms, RefundPolicy, CookiePolicy, SizeGuide, CareGuide, TrackOrder, Contact) as thin data wrappers.
-- Wired all 10 routes in `App.tsx` with a `ScrollToTop` helper.
-- Converted Footer and Nav internal anchors to `<Link>` so navigation actually works.
-- Wired Prettier into ESLint via `eslint-plugin-prettier/recommended`.
-- **TypeScript migration**: every `.jsx` → `.tsx`, strict mode + project references, `PolicyData` discriminated union exported from `PolicyLayout`. Removed Hero's dead countdown code along the way.
-- Switched `BrowserRouter` → `HashRouter` for GitHub Pages hosting.
-- Extracted brand/social/route literals into `src/constants.ts`.
-- Replaced Pinterest/TikTok/YouTube icons with Facebook/LinkedIn/X; wired real social URLs.
-- Added `@microsoft/clarity` with env-gated init.
-- Added GitHub Pages deploy workflow with CalVer release tagging and three injected build env vars.
-- Funnelled all `import.meta.env.VITE_*` reads through `src/env.ts` (single `ENV` export).
-- Added the real product catalog: `scripts/sync-catalog.py` pulls photos, videos and data from products.kalaf.in; new `/products`, `/collections/:handle` (filters + sort) and `/products/:handle` pages; home page features the pant with its video.
-- Synced catalog changes (12 Nov 2026): pant is now 100% cotton at ₹998 on Flipkart (Meesho blocked → hidden), all 23 dupattas live on Flipkart with videos, per-store prices on buy buttons, sync script only reprocesses changed media.
+- Bootstrapped Vite + React with CSS Modules, ESLint + Prettier, then migrated everything to strict TypeScript.
+- Built the policy and guide pages as data wrappers around `PolicyLayout`; moved brand, social and route literals into `src/constants.ts` and env reads into `src/env.ts`.
+- Added Microsoft Clarity (env-gated) and the GitHub Pages deploy with CalVer release tags.
+- Added the real catalog from products.kalaf.in: shop, collection and product pages with photos, videos and per-store buy links (12 Nov 2026: pant 100% cotton, pants' Flipkart link → pants.kalaf.in, Meesho blocked for pants).
+- 14 Nov 2026: real business details (legal name, GSTIN, address, WhatsApp) synced from the products repo; real URLs with `BrowserRouter`, prerendered pages, per-page SEO, JSON-LD, sitemap and llms.txt.
+- 14 Nov 2026: honest copy and real product photos on the home page, policies matched to how Kalaf sells, size and care guides rewritten for the pant and dupattas.
+- 14 Nov 2026: shop/product UX (size chart, availability and dispatch time, swipe gallery with lightbox, share, sold-out last), buy-click tracking in Clarity, Amazon hidden.
+- 14 Nov 2026: floating WhatsApp chat button and Ask AI links (Claude, ChatGPT, Perplexity) on product pages and in the footer.
