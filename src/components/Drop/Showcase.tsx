@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { BuyButtons } from "../BuyButtons";
 import { CatalogImage } from "../CatalogImage";
@@ -20,15 +21,31 @@ export function Showcase({
     const side = flat ?? model;
     const sizes = PANT.sizes;
 
+    // The video sits below the fold: it loads nothing but its poster
+    // (preload="none") and only plays while it's on screen.
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const videoSrc = active.video?.src;
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) video.play().catch(() => {});
+            else video.pause();
+        });
+        observer.observe(video);
+        return () => observer.disconnect();
+    }, [videoSrc]);
+
     return (
         <div className={styles.showcase}>
             <div className={styles.heroImage}>
                 {active.video ? (
                     <video
                         key={active.video.src}
+                        ref={videoRef}
                         src={active.video.src}
                         poster={active.video.poster}
-                        autoPlay
+                        preload="none"
                         muted
                         loop
                         playsInline
