@@ -9,14 +9,16 @@ Everything that goes in a page's `<head>` plus the site-wide text files for craw
 
 ## What each page gets
 
-| Path                   | Title / description from                              | JSON-LD                                                        |
-| ---------------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
-| `/`                    | `HOME`                                                | Organization (legal name, GSTIN, address, socials) + WebSite   |
-| `/products`            | `SHOP_ALL`                                            | ItemList + BreadcrumbList                                      |
-| `/collections/:handle` | `COLLECTION_HEAD`; image = first photo                | ItemList + BreadcrumbList                                      |
-| `/products/:handle`    | built from the catalog (title, colour, price, stores) | Product (offers per live store, availability) + BreadcrumbList |
-| policy / guide pages   | `STATIC_PAGES`                                        | none                                                           |
-| anything else          | `notFoundSeo` (`noindex`)                             | none                                                           |
+| Path                   | Title / description from                               | JSON-LD                                                        |
+| ---------------------- | ------------------------------------------------------ | -------------------------------------------------------------- |
+| `/`                    | `HOME`                                                 | Organization (legal name, GSTIN, address, socials) + WebSite   |
+| `/products`            | `SHOP_ALL`                                             | ItemList + BreadcrumbList                                      |
+| `/collections/:handle` | `COLLECTION_HEAD`; image = first photo                 | ItemList + BreadcrumbList                                      |
+| `/products/:handle`    | built from the catalog (title, colour, price, stores)  | Product (offers per live store, availability) + BreadcrumbList |
+| policy / guide pages   | `STATIC_PAGES`                                         | none                                                           |
+| `/journal`             | `JOURNAL` (description = `JOURNAL_INTRO`)              | ItemList of articles + BreadcrumbList                          |
+| `/journal/:slug`       | the article's title and description; image = its photo | Article (author/publisher Organization Kalaf) + BreadcrumbList |
+| anything else          | `notFoundSeo` (`noindex`)                              | none                                                           |
 
 - Titles end with ` · Kalaf` (except home). Canonical is `https://kalaf.in<path>` with no query string; `url` keeps `?colour=` so a shared colour link previews that colour.
 - `og:image` defaults to `/og-image.jpg`; product pages use the variant's photo. The Organization logo is `/icon-512.png`.
@@ -24,13 +26,13 @@ Everything that goes in a page's `<head>` plus the site-wide text files for craw
 
 ## Prerender and crawler files
 
-`scripts/prerender.mjs` (see [scripts/README.md](../../scripts/README.md)) calls `seoFor(path)` and `headHtml()` for each path from `prerenderPaths()` (home, `/products`, each collection, each product, every `STATIC_PAGES` path) and writes the tags into the `<!--seo-->…<!--/seo-->` block of `index.html`, each marked `data-seo`. `main.tsx` removes those on load so `<Seo />` doesn't duplicate them, and the SSR render passes `seo={false}` to `Shell` for the same reason.
+`scripts/prerender.mjs` (see [scripts/README.md](../../scripts/README.md)) calls `seoFor(path)` and `headHtml()` for each path from `prerenderPaths()` (home, `/products`, each collection, each product, every `STATIC_PAGES` path, `/journal` and each article) and writes the tags into the `<!--seo-->…<!--/seo-->` block of `index.html`, each marked `data-seo`. `main.tsx` removes those on load so `<Seo />` doesn't duplicate them, and the SSR render passes `seo={false}` to `Shell` for the same reason.
 
 It also writes:
 
 - `sitemap.xml`: every prerendered URL, `lastmod` = build date.
 - `robots.txt`: allow all, plus the sitemap URL.
-- `llms.txt` ([llmstxt.org](https://llmstxt.org) format): a plain-text summary of the brand, each product (sizes, colours, price, where to buy), help and policy links and contact details, built **only** from `catalog.json` and `business.json`. The Ask AI links point assistants at it. Keep it factual.
+- `llms.txt` ([llmstxt.org](https://llmstxt.org) format): a plain-text summary of the brand, each product (sizes, colours, price, where to buy), journal articles, help and policy links and contact details, built **only** from `catalog.json`, `business.json` and the journal data. The Ask AI links point assistants at it. Keep it factual.
 
 ## Adding a page
 

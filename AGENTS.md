@@ -67,3 +67,4 @@ Root config: `vite.config.ts` (CSS in one file, no `public/` copy for the SSR bu
 - 14 Nov 2026: honest copy and real product photos on the home page, policies matched to how Kalaf sells, size and care guides rewritten for the pant and dupattas.
 - 14 Nov 2026: shop/product UX (size chart, availability and dispatch time, swipe gallery with lightbox, share, sold-out last), buy-click tracking in Clarity, Amazon hidden.
 - 14 Nov 2026: floating WhatsApp chat button and Ask AI links (Claude, ChatGPT, Perplexity) on product pages and in the footer.
+- 14 Nov 2026: Journal (`/journal`, `/journal/:slug`): craft, draping and care articles from `pages/Journal/articles.ts`, with Article JSON-LD, sitemap and llms.txt entries, linked from the Nav and Footer.
