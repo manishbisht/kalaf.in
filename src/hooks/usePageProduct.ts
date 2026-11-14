@@ -1,6 +1,6 @@
 import { matchPath, useLocation, useSearchParams } from "react-router-dom";
 import { findProduct, type Product, type Variant } from "../data/catalog";
-import { ROUTES } from "../constants";
+import { ROUTES, productPath } from "../constants";
 
 export const SITE_URL = "https://kalaf.in";
 
@@ -21,5 +21,12 @@ export function usePageProduct(): {
     const variant =
         product.variants.find((v) => v.colourCode === params.get("colour")) ??
         product.variants[0];
-    return { product, variant, url };
+    // Link the product's current handle (old handles still resolve here),
+    // and the colour only when the page asked for one.
+    const colour = params.get("colour") ? variant.colourCode : undefined;
+    return {
+        product,
+        variant,
+        url: `${SITE_URL}${productPath(product.handle, colour)}`,
+    };
 }
