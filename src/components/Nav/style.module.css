@@ -31,6 +31,12 @@
     display: flex;
     gap: 32px;
 }
+/* Tighter on tablets so four links don't push the wordmark off centre. */
+@media (max-width: 1024px) {
+    .links {
+        gap: 20px;
+    }
+}
 /* Hide the links on mobile but keep the (empty) column so the wordmark
    stays centred. */
 @media (max-width: 768px) {
