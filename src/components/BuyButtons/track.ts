@@ -9,7 +9,12 @@ export function trackBuyClick(store: Marketplace, sku?: string) {
     if (!ENV.clarityProjectId) return;
     try {
         Clarity.setTag("store", store);
-        if (sku) {
+        // Always set (or clear) these, so a click without a SKU isn't
+        // credited to a product from an earlier click in the same session.
+        if (!sku) {
+            Clarity.setTag("sku", "");
+            Clarity.setTag("product", "");
+        } else {
             Clarity.setTag("sku", sku);
             const product = PRODUCTS.find((p) =>
                 p.variants.some((v) => v.sku === sku)

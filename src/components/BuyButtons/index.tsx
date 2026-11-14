@@ -48,7 +48,11 @@ export function BuyButtons({
                         rel="noopener noreferrer"
                         className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`}
                         onClick={() => trackBuyClick(s.id, sku)}
-                        onAuxClick={() => trackBuyClick(s.id, sku)}
+                        // Middle-click opens the store too; right-click
+                        // (button 2) only opens the context menu.
+                        onAuxClick={(e) =>
+                            e.button === 1 && trackBuyClick(s.id, sku)
+                        }
                     >
                         Buy on {s.name}
                         {showPrices && price && (
