@@ -4,25 +4,25 @@ Shared components, one folder each (`index.tsx` + optional `style.module.css` + 
 
 ## The set
 
-| Component        | What it does                                                                                                         |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `Nav`            | Top bar on every page (rendered by the App shell). `dark` for pages with a dark hero.                                |
-| `Footer`         | Footer on every page: shop, contact, help and policy links, socials, Ask AI, legal line, build stamp.                |
-| `WhatsAppButton` | Floating "Chat with us" badge, bottom-right on every page.                                                           |
-| `AskAI`          | "Ask AI about this page" links to Claude, ChatGPT and Perplexity, in the footer (page-aware).                        |
-| `CatalogImage`   | Every catalog photo: `<picture>` with AVIF + JPEG fallback. `sizes` for 600w/1200w; lazy below the fold.             |
-| `BuyButtons`     | One button per live marketplace, plus "coming soon" placeholders. Clicks are logged to Clarity (`src/analytics.ts`). |
-| `ProductCard`    | Shop-grid tile for one colour; second photo on hover; "Sold out"/"% off" badge; `eager` for the first row.           |
-| `Swatch`         | Round colour dot; multicolour codes render as segments (colours from `swatchColours`).                               |
-| `PolicyLayout`   | The shell every policy and guide page renders (below).                                                               |
-| `ErrorBoundary`  | Catches a page that throws (or won't load) and shows "Something went wrong" with Reload and Home buttons.            |
-| `Icons`          | Inline SVG set: `<Icon name="arrowUpRight" size={16} />`; `IconName` is a string union, so typos fail tsc.           |
-| `Hero`           | Home: the pant's three colourways, worn; "Buy" goes to the first colour with a Flipkart link.                        |
-| `Drop`           | Home: the pant (catalog code `PNT`) with video, colour swatches, facts and `BuyButtons`.                             |
-| `Process`        | Home: how pieces are made, illustrated with catalog photos and the dispatch time from the catalog.                   |
-| `WhyKalaf`       | Home: feature cards (fabric, fit, craft, made in Jaipur, small batches, where to buy).                               |
-| `Lookbook`       | Home: catalog photos, each linking to that product in that colour.                                                   |
-| `Newsletter`     | Home: there's no mailing list (no backend), so it points people to the social accounts.                              |
+| Component        | What it does                                                                                                                       |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `Nav`            | Top bar on every page (rendered by the App shell). `dark` for pages with a dark hero.                                              |
+| `Footer`         | Footer on every page: shop, contact, help and policy links, socials, Ask AI, legal line, build stamp.                              |
+| `WhatsAppButton` | Floating "Chat with us" badge, bottom-right on every page except `/links` (it has its own WhatsApp button).                        |
+| `AskAI`          | "Ask AI about this page" links to Claude, ChatGPT and Perplexity, in the footer (page-aware).                                      |
+| `CatalogImage`   | Catalog photos (shop, product, home, journal): `<picture>` with AVIF + JPEG fallback. `sizes` for 600w/1200w; lazy below the fold. |
+| `BuyButtons`     | One button per live marketplace, plus "coming soon" placeholders. Clicks are logged to Clarity (`src/analytics.ts`).               |
+| `ProductCard`    | Shop-grid tile for one colour; second photo on hover; "Sold out"/"% off" badge; `eager` for the first row.                         |
+| `Swatch`         | Round colour dot; multicolour codes render as segments (colours from `swatchColours`).                                             |
+| `PolicyLayout`   | The shell every policy and guide page renders (below).                                                                             |
+| `ErrorBoundary`  | Catches a page that throws (or won't load) and shows "Something went wrong" with Reload and Home buttons.                          |
+| `Icons`          | Inline SVG set: `<Icon name="arrowUpRight" size={16} />`; `IconName` is a string union, so typos fail tsc.                         |
+| `Hero`           | Home: the pant's three colourways, worn; "Buy" goes to the first colour with a Flipkart link.                                      |
+| `Drop`           | Home: the pant (catalog code `PNT`) with video, colour swatches, facts and `BuyButtons`.                                           |
+| `Process`        | Home: how pieces are made, illustrated with catalog photos and the dispatch time from the catalog.                                 |
+| `WhyKalaf`       | Home: feature cards (fabric, fit, craft, made in Jaipur, small batches, where to buy).                                             |
+| `Lookbook`       | Home: catalog photos, each linking to that product in that colour.                                                                 |
+| `Newsletter`     | Home: there's no mailing list (no backend), so it points people to the social accounts.                                            |
 
 Home-page components read the catalog directly, so they update when the catalog is re-synced. Keep their copy factual: no invented reviews, numbers or claims.
 

@@ -7,6 +7,7 @@ import {
     readingTime,
     type Article,
 } from "./articles";
+import { CatalogImage } from "../../components/CatalogImage";
 import styles from "./style.module.css";
 
 function Card({ article, featured }: { article: Article; featured?: boolean }) {
@@ -18,19 +19,16 @@ function Card({ article, featured }: { article: Article; featured?: boolean }) {
         >
             <div className={styles.media}>
                 {image && (
-                    <img
-                        src={featured ? image.srcLarge : image.src}
-                        srcSet={`${image.src} 600w, ${image.srcLarge} 1200w`}
+                    <CatalogImage
+                        image={image}
                         sizes={
                             featured
                                 ? "(max-width: 768px) 100vw, 50vw"
                                 : "(max-width: 768px) 100vw, 25vw"
                         }
-                        width={1200}
-                        height={1800}
                         alt=""
                         loading={featured ? undefined : "lazy"}
-                        decoding="async"
+                        fetchPriority={featured ? "high" : undefined}
                     />
                 )}
             </div>

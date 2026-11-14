@@ -92,7 +92,7 @@ const STATIC_PAGES: Record<
     [ROUTES.cookies]: {
         title: "Cookie Policy",
         description:
-            "The few first-party cookies kalaf.in uses to understand how people find us, and how to switch them off.",
+            "kalaf.in needs no cookies to work. The only ones come from Microsoft Clarity analytics, when it's on, and here's how to switch them off.",
     },
     [ROUTES.sizeGuide]: {
         title: "Size Guide",
@@ -111,7 +111,7 @@ const STATIC_PAGES: Record<
     },
     [ROUTES.contact]: {
         title: "Contact Us",
-        description: `Write to the Kalaf team in Jaipur at ${BUSINESS.email}. We reply to every message within one working day.`,
+        description: `Write to the Kalaf team in Jaipur at ${BUSINESS.email}. A real person reads and answers every message.`,
     },
     [ROUTES.faq]: {
         title: "FAQ",
@@ -270,8 +270,22 @@ function productSeo(product: Product, colour: string | null): SeoData {
     const variant = chosen ?? product.variants[0];
     const path = productPath(product.handle);
     const url = absolute(productPath(product.handle, chosen?.colourCode));
-    const stores = liveStores(variant);
-    const storeNames = stores.map(([id]) => storeName(id));
+    // Prices and stores across the colour shown, or every colour on the
+    // plain page: stores charge different prices (₹949 vs ₹1,000), so quote
+    // the lowest as "from" when they differ.
+    const shown = chosen ? [chosen] : product.variants;
+    const amounts = shown.flatMap((v) =>
+        liveStores(v).map(
+            ([id]) => v.prices[id as keyof Variant["prices"]] ?? v.price
+        )
+    );
+    const low = amounts.length ? Math.min(...amounts) : variant.price;
+    const high = amounts.length ? Math.max(...amounts) : variant.price;
+    const price =
+        low === high ? formatRupees(low) : `from ${formatRupees(low)}`;
+    const storeNames = [
+        ...new Set(shown.flatMap((v) => liveStores(v).map(([id]) => id))),
+    ].map(storeName);
     const collection = COLLECTIONS[product.collection];
 
     const title = chosen
@@ -283,7 +297,7 @@ function productSeo(product: Product, colour: string | null): SeoData {
         : product.variants.length > 1
           ? `${product.variants.length} colours`
           : product.variants[0].colour;
-    const description = `${product.title} in ${which}, ${formatRupees(variant.price)}${where}. ${product.description}`;
+    const description = `${product.title} in ${which}, ${price}${where}. ${product.description}`;
 
     // One ProductGroup for the piece, with every colour as its own Product
     // variant and offers, so search engines see all colours, not just one.
@@ -594,8 +608,7 @@ export function llmsTxt(): string {
         return `- [${p.title}](${absolute(productPath(p.handle))}): ${parts.join("; ")}`;
     });
 
-    const extra = b as unknown as Record<string, unknown>;
-    const whatsapp = typeof extra.whatsapp === "string" ? extra.whatsapp : null;
+    const whatsapp = b.whatsapp;
     const help: [string, string][] = [
         ["Shipping & returns", ROUTES.shippingReturns],
         ["Size guide", ROUTES.sizeGuide],

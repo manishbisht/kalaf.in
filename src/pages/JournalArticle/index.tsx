@@ -22,6 +22,7 @@ import {
     type ArticleBlock,
 } from "../Journal/articles";
 import { RichText } from "./RichText";
+import { CatalogImage } from "../../components/CatalogImage";
 import styles from "./style.module.css";
 
 const SHOP_LIMIT = 4;
@@ -147,12 +148,9 @@ export default function JournalArticle() {
                         </div>
                         {image && (
                             <figure className={styles.figure}>
-                                <img
-                                    src={image.srcLarge}
-                                    srcSet={`${image.src} 600w, ${image.srcLarge} 1200w`}
+                                <CatalogImage
+                                    image={image}
                                     sizes="(max-width: 900px) 100vw, 40vw"
-                                    width={1200}
-                                    height={1800}
                                     alt={image.alt}
                                     fetchPriority="high"
                                 />

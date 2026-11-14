@@ -1,4 +1,5 @@
 .hero {
+    --fg-muted: var(--smoke); /* dark background */
     position: relative;
     min-height: calc(100vh - 110px);
     background: var(--ink);
@@ -14,6 +15,7 @@
 /* Three model shots side by side (white, beige, black); mobile shows the
    middle one only. Dimmed so the white type on top stays readable. */
 .bg {
+    --fg-muted: var(--smoke); /* dark background */
     position: absolute;
     inset: 0;
     display: grid;
@@ -119,11 +121,6 @@
     letter-spacing: 0.18em;
     font-size: 11px;
     text-transform: uppercase;
-}
-.countdownValue {
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 15px;
 }
 
 .content {

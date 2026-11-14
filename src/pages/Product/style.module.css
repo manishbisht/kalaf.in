@@ -10,7 +10,7 @@
     gap: 8px;
     font-family: var(--font-head);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin-bottom: 28px;
 }
 .breadcrumb a {
@@ -295,7 +295,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .title {
     font-family: var(--font-head);
@@ -319,7 +319,7 @@
 .mrp {
     font-family: var(--font-body);
     font-size: 14px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .off {
     font-family: var(--font-head);
@@ -333,7 +333,7 @@
     margin-bottom: 12px;
     font-family: var(--font-head);
     font-size: 13px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .label strong {
     color: var(--ink);
@@ -379,6 +379,7 @@
     border-color: var(--ink);
 }
 .sizeActive {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     border-color: var(--ink);
     color: var(--off-white);
@@ -393,7 +394,7 @@
 .sizeInfo + .sizeInfo::before {
     content: "·";
     margin-right: 8px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .sizeChart {
     margin-top: 16px;
@@ -417,7 +418,7 @@
     text-align: left;
     padding-bottom: 8px;
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .sizeChart th,
 .sizeChart td {
@@ -430,7 +431,7 @@
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .sizeChart tbody th {
     font-weight: 600;
@@ -439,7 +440,7 @@
     margin: 10px 0 0;
     font-family: var(--font-body);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 
 .sizeGuide {
@@ -447,7 +448,7 @@
     margin-top: 12px;
     font-family: var(--font-head);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
     text-decoration: none;
 }
 .sizeGuide:hover {
@@ -510,7 +511,7 @@
     font-family: var(--font-body);
     font-size: 12px;
     line-height: 1.5;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 
 /* Under the buy buttons, above .buyNote: the listed price vs checkout. */
@@ -547,7 +548,7 @@
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .facts dd {
     margin: 6px 0 0;
@@ -614,5 +615,3 @@
         gap: 28px 16px;
     }
 }
-
-

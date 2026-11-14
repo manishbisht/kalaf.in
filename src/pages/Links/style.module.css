@@ -22,7 +22,7 @@
     font-family: var(--font-devan);
     font-size: 28px;
     line-height: 1;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 
 .wordmark {

@@ -7,7 +7,7 @@
 
 .inner {
     position: relative;
-    padding: var(--s-32) 0 var(--s-24);
+    padding-block: var(--s-32) var(--s-24);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -55,6 +55,6 @@
 
 @media (max-width: 768px) {
     .inner {
-        padding: var(--s-20) 0 var(--s-16);
+        padding-block: var(--s-20) var(--s-16);
     }
 }

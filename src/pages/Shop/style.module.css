@@ -14,7 +14,7 @@
     gap: 8px;
     font-family: var(--font-head);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .breadcrumb a {
     color: inherit;
@@ -49,7 +49,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin-bottom: 14px;
 }
 .devanagari {
@@ -74,7 +74,7 @@
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.6;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 
 .tabs {
@@ -87,7 +87,7 @@
     font-family: var(--font-head);
     font-weight: 500;
     font-size: 13px;
-    color: var(--smoke);
+    color: var(--fg-muted);
     text-decoration: none;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
@@ -175,6 +175,7 @@
     }
 }
 .closeBtn {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     color: var(--off-white);
     border: 0;
@@ -206,7 +207,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .option {
     display: flex;
@@ -230,7 +231,7 @@
 }
 .optionCount {
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
     font-feature-settings: "tnum" 1;
 }
 .optionEmpty {
@@ -262,6 +263,7 @@
     }
 }
 .filterCount {
+    --fg-muted: var(--smoke); /* dark background */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -287,7 +289,7 @@
     font-family: var(--font-head);
     font-size: 12px;
     letter-spacing: 0.06em;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .sort {
     display: flex;
@@ -295,7 +297,7 @@
     gap: 10px;
     font-family: var(--font-head);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .sort select {
     height: 40px;
@@ -362,7 +364,7 @@
     padding: 80px 0;
     text-align: center;
     font-family: var(--font-body);
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .noResults p {
     margin: 0;

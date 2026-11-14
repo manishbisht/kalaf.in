@@ -1,4 +1,5 @@
 .section {
+    --fg-muted: var(--smoke); /* dark background */
     padding: var(--s-24) 0;
     background: var(--ink);
     color: var(--off-white);

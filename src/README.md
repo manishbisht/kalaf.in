@@ -7,7 +7,7 @@ The app. Back to the index: [AGENTS.md](../AGENTS.md).
 | `main.tsx`         | Browser entry: old hash links, Clarity, hydrate or render.                   |
 | `App.tsx`          | `BrowserRouter` + `Shell` (the layout and every `<Route>`).                  |
 | `entry-server.tsx` | Build-only SSR entry used by `scripts/prerender.mjs`. Never shipped.         |
-| `tokens.css`       | Design tokens (CSS custom properties) and the web-font imports.              |
+| `tokens.css`       | Design tokens (CSS custom properties). Web fonts load from `index.html`.     |
 | `index.css`        | Reset and global utility classes.                                            |
 | `constants.ts`     | `BRAND`, `SOCIAL`, `ROUTES` and link helpers.                                |
 | `env.ts`           | The only place that reads `import.meta.env`.                                 |

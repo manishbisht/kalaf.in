@@ -162,6 +162,7 @@ html {
     text-transform: uppercase;
 }
 .chip-dark {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     color: var(--off-white);
 }
@@ -193,10 +194,12 @@ html {
 }
 
 .btn-primary {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     color: var(--off-white);
 }
 .btn-primary:hover {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--charcoal);
 }
 

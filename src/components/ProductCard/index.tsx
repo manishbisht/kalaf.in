@@ -16,12 +16,15 @@ import styles from "./style.module.css";
 // photo, like most storefronts.
 // `eager`: the tile is in the first row of a grid, above the fold, so its
 // main photo is likely the page's largest paint and shouldn't wait.
+// `priority`: the very first tile, the likely LCP image, fetched first.
 export function ProductCard({
     item,
     eager = false,
+    priority = false,
 }: {
     item: ListingItem;
     eager?: boolean;
+    priority?: boolean;
 }) {
     const { product, variant } = item;
     const [first, second] = variant.images;
@@ -42,6 +45,7 @@ export function ProductCard({
                         image={first}
                         alt={`${product.title} in ${variant.colour}`}
                         loading={eager ? "eager" : "lazy"}
+                        fetchPriority={priority ? "high" : undefined}
                         className={styles.primary}
                     />
                 )}

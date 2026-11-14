@@ -21,7 +21,10 @@
     --line-dark: #262626;
 
     --fg: var(--ink);
-    --fg-muted: var(--smoke);
+    /* Muted text on light backgrounds. Darker than --smoke so small text
+       passes WCAG AA (5.6:1 on off-white, 4.9:1 on bone); dark sections
+       (.surface-dark) switch back to --smoke. */
+    --fg-muted: #626260;
     --fg-inverse: var(--off-white);
     --bg: var(--off-white);
     --bg-alt: var(--bone);

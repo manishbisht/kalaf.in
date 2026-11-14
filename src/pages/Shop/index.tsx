@@ -295,6 +295,7 @@ export default function Shop() {
                                     item={item}
                                     // First row (up to 3 across on desktop).
                                     eager={i < 3}
+                                    priority={i === 0}
                                 />
                             ))}
                         </div>

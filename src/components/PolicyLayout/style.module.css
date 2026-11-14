@@ -5,6 +5,7 @@
 
 /* ── Hero ──────────────────────────────────────────────── */
 .hero {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     color: var(--off-white);
     position: relative;
@@ -240,7 +241,7 @@
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.65;
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin: 0;
     max-width: 280px;
 }
@@ -300,7 +301,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin-bottom: 22px;
 }
 
@@ -342,7 +343,7 @@
     font-weight: 600;
     font-size: 11px;
     letter-spacing: 0.18em;
-    color: var(--smoke);
+    color: var(--fg-muted);
     font-feature-settings: "tnum" 1;
     transition: color var(--dur-fast) var(--ease);
 }
@@ -355,7 +356,7 @@
     font-weight: 500;
     font-size: 14px;
     letter-spacing: -0.005em;
-    color: var(--smoke);
+    color: var(--fg-muted);
     transition: color var(--dur-fast) var(--ease);
     position: relative;
 }
@@ -365,6 +366,7 @@
 }
 
 .tocDot {
+    --fg-muted: var(--smoke); /* dark background */
     position: absolute;
     left: -16px;
     top: 50%;
@@ -387,7 +389,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin-bottom: 12px;
 }
 .contactCardTitle {
@@ -446,7 +448,7 @@
 .sigMeta {
     font-family: var(--font-body);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
     line-height: 1.7;
     text-align: right;
 }
@@ -537,6 +539,7 @@
     border-bottom: 1px solid var(--line);
 }
 .listDash {
+    --fg-muted: var(--smoke); /* dark background */
     flex-shrink: 0;
     margin-top: 10px;
     width: 6px;
@@ -584,7 +587,7 @@
 .linkCardSub {
     font-family: var(--font-body);
     font-size: 13px;
-    color: var(--smoke);
+    color: var(--fg-muted);
     line-height: 1.5;
 }
 .linkCardArrow {
@@ -593,7 +596,7 @@
     right: 18px;
     font-family: var(--font-head);
     font-size: 14px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 
 /* FAQ entry: question, answer, small links. Ruled between entries. */
@@ -661,7 +664,7 @@
     padding-top: 12px;
     font-size: 13px;
     line-height: 1.5;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .table th,
 .table td {
@@ -680,7 +683,7 @@
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
     border-bottom-color: var(--ink);
 }
 .table tbody th {
@@ -725,7 +728,7 @@
     font-weight: 600;
     font-size: 11px;
     letter-spacing: 0.18em;
-    color: var(--smoke);
+    color: var(--fg-muted);
     font-feature-settings: "tnum" 1;
 }
 .stepText {
@@ -752,7 +755,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin-bottom: 8px;
 }
 .calloutValue {
@@ -765,6 +768,7 @@
 
 /* ── Cross-link strip ──────────────────────────────────── */
 .crossLinks {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     color: var(--off-white);
     padding: 96px 0;
@@ -822,7 +826,7 @@
     opacity: 0.65;
 }
 .crossLinkCurrent {
-    color: var(--smoke);
+    color: var(--fg-muted);
     cursor: default;
     opacity: 0.5;
     border-top-color: var(--off-white);
@@ -836,7 +840,7 @@
     font-weight: 500;
     font-size: 11px;
     letter-spacing: 0.18em;
-    color: var(--smoke);
+    color: var(--fg-muted);
     font-feature-settings: "tnum" 1;
 }
 .crossLinkTitle {
@@ -863,5 +867,5 @@
     gap: 6px;
     font-family: var(--font-body);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }

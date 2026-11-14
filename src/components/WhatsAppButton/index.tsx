@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import { BRAND, ROUTES, whatsappHref } from "../../constants";
 import { usePageProduct } from "../../hooks/usePageProduct";
 import { trackClicks, trackWhatsAppClick } from "../../analytics";
@@ -9,10 +8,9 @@ import styles from "./style.module.css";
 // Also returns what the click is tagged with in analytics: the SKU on a
 // product page, else the pathname.
 function useGreeting() {
-    const { pathname } = useLocation();
-    const { product, variant, url } = usePageProduct();
+    const { product, variant, url, path } = usePageProduct();
     if (!product || !variant) {
-        return { greeting: "Hi Kalaf! I have a question.", page: pathname };
+        return { greeting: "Hi Kalaf! I have a question.", page: path };
     }
     return {
         greeting: `Hi Kalaf! I have a question about the ${product.title} (${variant.colour}): ${url}`,
@@ -24,8 +22,7 @@ function useGreeting() {
 // which has its own full-width WhatsApp button (the badge would cover it).
 export function WhatsAppButton() {
     const { greeting, page } = useGreeting();
-    const { pathname } = useLocation();
-    if (!BRAND.whatsapp || pathname === ROUTES.links) return null;
+    if (!BRAND.whatsapp || page === ROUTES.links) return null;
 
     return (
         <a
@@ -33,7 +30,7 @@ export function WhatsAppButton() {
             href={`${whatsappHref(BRAND.whatsapp)}?text=${encodeURIComponent(greeting)}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Chat with Kalaf on WhatsApp"
+            aria-label="Chat with us on WhatsApp"
             {...trackClicks(() => trackWhatsAppClick(page))}
         >
             <span className={styles.label} aria-hidden="true">

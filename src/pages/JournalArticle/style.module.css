@@ -50,7 +50,7 @@
     gap: 8px;
     font-family: var(--font-head);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin-bottom: auto;
     padding-bottom: var(--s-16);
 }
@@ -68,7 +68,7 @@
 }
 
 .eyebrow {
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin-bottom: var(--s-5);
 }
 
@@ -125,7 +125,7 @@
     gap: 10px;
 }
 .meta dt {
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .meta dd {
     margin: 0;
@@ -145,7 +145,7 @@
     margin-top: var(--s-3);
     font-family: var(--font-body);
     font-size: 12px;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 .caption a {
     color: inherit;
@@ -192,7 +192,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
     margin-bottom: var(--s-5);
 }
 .toc ol {
@@ -210,7 +210,7 @@
     font-family: var(--font-head);
     font-weight: 500;
     font-size: 14px;
-    color: var(--smoke);
+    color: var(--fg-muted);
     text-decoration: none;
     transition: color var(--dur-fast) var(--ease);
 }
@@ -268,6 +268,7 @@
     border-bottom: 0;
 }
 .listDash {
+    --fg-muted: var(--smoke); /* dark background */
     flex-shrink: 0;
     margin-top: 12px;
     width: 6px;
@@ -307,7 +308,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
     font-feature-settings: "tnum" 1;
 }
 
@@ -358,6 +359,7 @@
 
 /* ── More from the journal ─────────────────────────────── */
 .more {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     color: var(--off-white);
     padding: var(--s-20) 0;

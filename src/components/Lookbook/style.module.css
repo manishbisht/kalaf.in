@@ -98,6 +98,7 @@
 }
 /* Product photos are shot on white, so the label sits on a solid ink chip. */
 .frameLabel > * {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     padding: 8px 10px;
     line-height: 1.4;

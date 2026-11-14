@@ -24,7 +24,7 @@ function hrefAt(path: string) {
         </MemoryRouter>
     );
     const link = screen.getByRole("link", {
-        name: "Chat with Kalaf on WhatsApp",
+        name: "Chat with us on WhatsApp",
     });
     return new URL(link.getAttribute("href")!);
 }
@@ -68,7 +68,7 @@ describe("WhatsAppButton", () => {
 
     it("tracks the click with the SKU, or the pathname off product pages", () => {
         const link = () =>
-            screen.getByRole("link", { name: "Chat with Kalaf on WhatsApp" });
+            screen.getByRole("link", { name: "Chat with us on WhatsApp" });
         hrefAt("/size-guide");
         expect(fireEvent.click(link())).toBe(true);
         expect(trackWhatsAppClick).toHaveBeenLastCalledWith("/size-guide");

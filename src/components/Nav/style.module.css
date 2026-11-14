@@ -8,6 +8,7 @@
 }
 
 .navDark {
+    --fg-muted: var(--smoke); /* dark background */
     background: var(--ink);
     color: var(--off-white);
     border-bottom-color: var(--line-dark);
@@ -72,7 +73,6 @@
     }
 }
 
-
 .wordmark {
     font-family: var(--font-display);
     font-weight: 600;
@@ -82,34 +82,6 @@
     text-decoration: none;
     cursor: pointer;
     justify-self: center;
-}
-
-.iconGroup {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    justify-content: flex-end;
-}
-
-.iconBtn {
-    display: inline-flex;
-    align-items: center;
-    background: transparent;
-    border: 0;
-    color: inherit;
-    cursor: pointer;
-    padding: 0;
-    transition: opacity var(--dur-fast) var(--ease);
-}
-.iconBtn:hover {
-    opacity: 0.6;
-}
-
-.bagCount {
-    font-family: var(--font-body);
-    font-size: 13px;
-    margin-left: 6px;
-    font-feature-settings: "tnum" 1;
 }
 
 .announcement {

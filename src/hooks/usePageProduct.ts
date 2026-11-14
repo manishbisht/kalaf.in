@@ -12,13 +12,17 @@ export function usePageProduct(): {
     product: Product | null;
     variant: Variant | null;
     url: string;
+    // The pathname without a trailing slash (/links/ → /links), matching how
+    // main.tsx and the prerender name pages.
+    path: string;
 } {
     const { pathname } = useLocation();
     const [params] = useSearchParams();
-    const url = `${SITE_URL}${pathname === "/" ? "" : pathname}`;
-    const match = matchPath(ROUTES.product, pathname);
+    const path = pathname.replace(/(.)\/+$/, "$1");
+    const url = `${SITE_URL}${path === "/" ? "" : path}`;
+    const match = matchPath(ROUTES.product, path);
     const product = (match && findProduct(match.params.handle)) || null;
-    if (!product) return { product: null, variant: null, url };
+    if (!product) return { product: null, variant: null, url, path };
     const variant =
         product.variants.find((v) => v.colourCode === params.get("colour")) ??
         product.variants[0];
@@ -28,6 +32,7 @@ export function usePageProduct(): {
     return {
         product,
         variant,
+        path,
         url: `${SITE_URL}${productPath(product.handle, colour)}`,
     };
 }
