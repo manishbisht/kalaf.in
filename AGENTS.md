@@ -6,7 +6,7 @@ A Vite + React 19 single-page app for **Kalaf**, a premium Indian fashion brand 
 
 - **Vite 8** + **React 19** (no Next.js, no SSR — built as a static SPA)
 - **TypeScript 6** (strict mode, project references)
-- **React Router DOM v7**, **HashRouter** (paths look like `/#/privacy`) — chosen so GitHub Pages serves it as a single static `index.html` without server rewrites
+- **React Router DOM v7**, **BrowserRouter** (real paths like `/privacy`). GitHub Pages has no server rewrites, so the build prerenders every route to its own static HTML file (see Routes)
 - **CSS Modules** (`*.module.css`) + global tokens/utilities
 - **ESLint v10** flat config + **typescript-eslint** + **eslint-plugin-prettier** (Prettier runs as an ESLint rule)
 - **Yarn Classic 1.x** enforced via `preinstall` script
@@ -26,7 +26,7 @@ node_modules/.bin/eslint . --fix          # autofix formatting
 node_modules/.bin/prettier --write .      # format only
 ```
 
-The `build` npm script chains both: `tsc -b && vite build`.
+The `build` npm script runs the whole chain: `tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir node_modules/.tmp/ssr && node scripts/prerender.mjs`. Run those four steps by hand locally (from `node_modules/.bin/`); the last two prerender the pages and write `sitemap.xml`, `robots.txt` and `llms.txt` (see Routes).
 
 Don't run `yarn <script>` directly in this environment — call binaries from `node_modules/.bin/` instead.
 
@@ -48,7 +48,9 @@ src/
   env.ts                       ← single read-point for every VITE_* var (export const ENV)
   constants.ts                 ← BRAND, SOCIAL, ROUTES (single source of truth)
   main.tsx                     ← entry — imports tokens.css then index.css; gates Clarity.init on ENV
-  App.tsx                      ← HashRouter + Routes + ScrollToTop
+  App.tsx                      ← BrowserRouter + Shell (Seo, ScrollToTop, Nav, Routes, Footer)
+  entry-server.tsx             ← build-only SSR entry: StaticRouter + Shell → HTML (scripts/prerender.mjs)
+  seo/                         ← seoFor(path, search) → title/meta/OG/JSON-LD; <Seo /> renders it; sitemap/robots/llms.txt
   components/
     Nav/        index.tsx + style.module.css
     Hero/       …
@@ -123,7 +125,15 @@ public/catalog/            ← GENERATED product images + videos
 | `ROUTES.collection` | `/collections/:handle` | Shop — one collection |
 | `ROUTES.product` | `/products/:handle` | Product detail |
 
-URLs are hash-based (`/#/privacy` etc.) because of `HashRouter`. Internal `<Link>` calls work transparently.
+Plus a catch-all `*` → `pages/NotFound` (light Nav, `noindex`).
+
+URLs are real paths (`BrowserRouter`). Old `/#/…` links from the HashRouter days still work: `main.tsx` rewrites `location.hash` to the path form with `history.replaceState` before rendering (query string kept).
+
+**Prerendering (GitHub Pages has no rewrites).** After the client build, `vite build --ssr src/entry-server.tsx` bundles a build-only server entry, and `scripts/prerender.mjs` renders every path from `prerenderPaths()` in `src/seo` (home, the `ROUTES` pages, each collection, each product handle) with `react-dom/static`'s `prerender` (it waits for the `lazy()` pages). Each route is written to both `dist/<path>.html` and `dist/<path>/index.html` (GitHub Pages serves `/privacy` from either), with that route's head tags in the `<!--seo-->` block of `index.html` and `data-path` on `#root`. `dist/404.html` is the app shell with `noindex`: GitHub Pages serves it for unknown paths and the client router renders the right page (old product handles) or NotFound.
+
+`main.tsx` calls `hydrateRoot` only when `#root[data-path]` equals the current path and there's no query string; otherwise (`?colour=`, shop filters, 404.html, old hash links) it uses `createRoot`, because the prerendered HTML is for the plain URL. Anything that renders differently on server and client (dates, `window`, random values) breaks hydration — keep render pure and put browser-only work in effects. `build.cssCodeSplit` is off so prerendered pages are styled before their JS chunk loads.
+
+**SEO.** `src/seo/index.ts` maps a pathname + search to title, description, canonical (`https://kalaf.in<path>`, no query), Open Graph/Twitter tags and JSON-LD (Organization + WebSite on home, ItemList on shop/collections, Product + BreadcrumbList on products — the `?colour=` variant when present). `<Seo />` (in the App shell) renders it with React 19's `<title>`/`<meta>`/`<link>` hoisting plus one managed `<script id="seo-jsonld">`; the prerender writes the same data as static tags marked `data-seo`, which `main.tsx` removes on load. The SSR render passes `seo={false}` to `Shell` so React doesn't emit a second copy inside `#root`. Unknown paths get `noindex`. New page → add its title/description to `STATIC_PAGES` in `src/seo/index.ts` (and to `DARK_NAV` in `App.tsx` if it has a dark hero). The prerender also writes `sitemap.xml` (every prerendered URL), `robots.txt` and `llms.txt` (llmstxt.org summary built only from `catalog.json` and `business.json`).
 
 A `ScrollToTop` helper in `App.tsx` resets `window.scrollTo(0, 0)` on every `pathname` change. Without it, routing from a page footer lands the user at the bottom of the next page.
 
@@ -247,11 +257,11 @@ Clarity.identify("user-123");
 Clarity.setTag("plan", "pro");
 ```
 
-**HashRouter caveat**: hash-only URL changes may not register as page views in Clarity's auto-tracker. If page-view counts look low, fire `Clarity.event("page_view")` from the existing `ScrollToTop` effect in `App.tsx`.
+**Page views**: `ScrollToTop` in `App.tsx` fires `Clarity.event("page_view")` on every pathname change (only when `ENV.clarityProjectId` is set), since client-side navigations may not register with Clarity's auto-tracker.
 
 ## CI / deploy (`.github/workflows/deploy.yml`)
 
-Push to `main` → build → deploy to GitHub Pages → tag a CalVer release.
+Push to `main` → `yarn build` (typecheck, client build, SSR build, prerender + sitemap/robots/llms.txt) → upload `dist/` → deploy to GitHub Pages → tag a CalVer release. `dist/` is gitignored and untracked; never commit it.
 
 Three env vars are injected at build time:
 - `VITE_CLARITY_PROJECT_ID` — from `secrets.CLARITY_PROJECT_ID`

@@ -4,17 +4,25 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <!-- Open earlier connections to font + image origins so the first
+        <!-- Open earlier connections to the font origins so the first
              render isn't blocked on DNS / TLS round-trips. -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="preconnect" href="https://api.fontshare.com" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#000000" />
-        <title>Kalaf.in — FW25 — Volume 03</title>
+
+        <!-- Per-route title, description, canonical, Open Graph and JSON-LD.
+             scripts/prerender.mjs replaces this block in every built page;
+             at runtime <Seo /> (src/seo) takes over. -->
+        <!--seo-->
+        <title data-seo>
+            Kalaf — Cotton Trousers &amp; Bandhani Dupattas from Jaipur
+        </title>
+        <!--/seo-->
     </head>
     <body>
         <div id="root"></div>
