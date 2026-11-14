@@ -596,6 +596,51 @@
     color: var(--smoke);
 }
 
+/* FAQ entry: question, answer, small links. Ruled between entries. */
+.qa {
+    max-width: 600px;
+    padding: 0 0 24px;
+}
+.qaBordered {
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+}
+.qaQuestion {
+    margin: 0 0 10px;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+}
+.qaAnswer {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink);
+}
+.qaLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin-top: 12px;
+}
+.qaLink {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--sand);
+    transition: text-decoration-color var(--dur-fast) var(--ease);
+}
+.qaLink:hover {
+    text-decoration-color: var(--ink);
+}
+
 /* Data table (size chart). Ruled rows, no boxes. */
 .tableWrap {
     margin-top: 24px;

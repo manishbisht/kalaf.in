@@ -72,6 +72,7 @@ export function Footer() {
                             { label: "Care guide", to: ROUTES.careGuide },
                             { label: "Track order", to: ROUTES.trackOrder },
                             { label: "Contact us", to: ROUTES.contact },
+                            { label: "FAQ", to: ROUTES.faq },
                         ]}
                     />
                     <LinkColumn

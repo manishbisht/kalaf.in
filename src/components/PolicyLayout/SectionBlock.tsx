@@ -1,5 +1,39 @@
+import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import type { PolicySection } from "./types";
 import styles from "./style.module.css";
+
+// Internal paths ("/size-guide") route with <Link>; http(s) links open in a
+// new tab; mailto:/tel: are plain links.
+function SmartLink({
+    href,
+    className,
+    children,
+}: {
+    href: string;
+    className: string;
+    children: ReactNode;
+}) {
+    if (href.startsWith("/")) {
+        return (
+            <Link to={href} className={className}>
+                {children}
+            </Link>
+        );
+    }
+    return (
+        <a
+            href={href}
+            {...(href.startsWith("http") && {
+                target: "_blank",
+                rel: "noopener noreferrer",
+            })}
+            className={className}
+        >
+            {children}
+        </a>
+    );
+}
 
 export function SectionBlock({
     section,
@@ -54,13 +88,9 @@ export function SectionBlock({
                         return (
                             <div key={i} className={styles.linkGrid}>
                                 {b.items.map((item, j) => (
-                                    <a
+                                    <SmartLink
                                         key={j}
                                         href={item.href}
-                                        {...(item.href.startsWith("http") && {
-                                            target: "_blank",
-                                            rel: "noopener noreferrer",
-                                        })}
                                         className={styles.linkCard}
                                     >
                                         <span className={styles.linkCardLabel}>
@@ -79,8 +109,32 @@ export function SectionBlock({
                                         >
                                             ↗
                                         </span>
-                                    </a>
+                                    </SmartLink>
                                 ))}
+                            </div>
+                        );
+                    }
+                    if (b.kind === "qa") {
+                        return (
+                            <div
+                                key={i}
+                                className={`${styles.qa} ${i > 0 ? styles.qaBordered : ""}`}
+                            >
+                                <h3 className={styles.qaQuestion}>{b.q}</h3>
+                                <p className={styles.qaAnswer}>{b.a}</p>
+                                {b.links && b.links.length > 0 && (
+                                    <div className={styles.qaLinks}>
+                                        {b.links.map((l) => (
+                                            <SmartLink
+                                                key={l.href}
+                                                href={l.href}
+                                                className={styles.qaLink}
+                                            >
+                                                {l.label} →
+                                            </SmartLink>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         );
                     }

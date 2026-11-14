@@ -21,6 +21,7 @@ URLs are real paths (`BrowserRouter`); every route below is prerendered to stati
 | `careGuide`       | `/care-guide`          | `CareGuide`       | dark  |
 | `trackOrder`      | `/track-order`         | `TrackOrder`      | dark  |
 | `contact`         | `/contact`             | `Contact`         | dark  |
+| `faq`             | `/faq`                 | `Faq`             | dark  |
 | (none)            | `*`                    | `NotFound`        | light |
 
 Link with `ROUTES.*`, `productPath(handle, colour?)` and `collectionPath(handle)` from `src/constants.ts`.
@@ -52,7 +53,7 @@ Catch-all for unknown paths: a 404 message with links to the shop and both colle
 
 ## Policy and guide pages
 
-`Privacy`, `ShippingReturns`, `Terms`, `RefundPolicy`, `CookiePolicy` (`POLICY_CROSS_LINKS`) and `SizeGuide`, `CareGuide`, `TrackOrder`, `Contact` (`HELP_CROSS_LINKS`) are data wrappers: `data.ts` exports a typed `PolicyData` object and `index.tsx` renders `<PolicyLayout data={data} currentSlug="…" crossLinks={…} />`. The size and care guides build their numbers from the catalog (size chart, dupatta size, care lists); Contact and Track Order use `BRAND` and `MARKETPLACE_ORDERS`. Copy must describe how Kalaf really sells: on Flipkart and Meesho, under each marketplace's own shipping, return and refund policy. Bump `updated` when you change a policy. See [components/README.md](../components/README.md#policylayout) for the data shape.
+`Privacy`, `ShippingReturns`, `Terms`, `RefundPolicy`, `CookiePolicy` (`POLICY_CROSS_LINKS`) and `SizeGuide`, `CareGuide`, `TrackOrder`, `Contact`, `Faq` (`HELP_CROSS_LINKS`) are data wrappers: `data.ts` exports a typed `PolicyData` object and `index.tsx` renders `<PolicyLayout data={data} currentSlug="…" crossLinks={…} />`. The size and care guides build their numbers from the catalog (size chart, dupatta size, care lists); Contact and Track Order use `BRAND` and `MARKETPLACE_ORDERS`. The FAQ is `qa` blocks whose answers are built from `PRODUCTS` and `BRAND` (stores per collection from live links, sizes, fabrics, dispatch days, contact details); `FAQ_ENTRIES` feeds the same plain-text answers to the FAQPage JSON-LD, so keep answers factual and free of markup. Copy must describe how Kalaf really sells: on Flipkart and Meesho, under each marketplace's own shipping, return and refund policy. Bump `updated` when you change a policy. See [components/README.md](../components/README.md#policylayout) for the data shape.
 
 ## Adding a page
 

@@ -28,6 +28,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Shop = lazy(() => import("./pages/Shop"));
 const ProductPage = lazy(() => import("./pages/Product"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Faq = lazy(() => import("./pages/Faq"));
 
 // Policy and guide pages open with a dark hero, so the Nav goes dark there.
 const DARK_NAV: string[] = [
@@ -40,6 +41,7 @@ const DARK_NAV: string[] = [
     ROUTES.careGuide,
     ROUTES.trackOrder,
     ROUTES.contact,
+    ROUTES.faq,
 ];
 
 function ScrollToTop() {
@@ -111,6 +113,7 @@ export function Shell({ seo = true }: { seo?: boolean }) {
                     <Route path={ROUTES.products} element={<Shop />} />
                     <Route path={ROUTES.collection} element={<Shop />} />
                     <Route path={ROUTES.product} element={<ProductPage />} />
+                    <Route path={ROUTES.faq} element={<Faq />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </PageBoundary>

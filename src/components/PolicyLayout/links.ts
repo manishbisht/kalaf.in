@@ -44,4 +44,5 @@ export const HELP_CROSS_LINKS: CrossLink[] = [
         to: ROUTES.trackOrder,
     },
     { slug: "contact", num: "04", label: "Contact us", to: ROUTES.contact },
+    { slug: "faq", num: "05", label: "FAQ", to: ROUTES.faq },
 ];

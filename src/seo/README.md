@@ -15,6 +15,7 @@ Everything that goes in a page's `<head>` plus the site-wide text files for craw
 | `/products`            | `SHOP_ALL`                                            | ItemList + BreadcrumbList                                      |
 | `/collections/:handle` | `COLLECTION_HEAD`; image = first photo                | ItemList + BreadcrumbList                                      |
 | `/products/:handle`    | built from the catalog (title, colour, price, stores) | Product (offers per live store, availability) + BreadcrumbList |
+| `/faq`                 | `STATIC_PAGES`                                        | FAQPage (questions and answers from `pages/Faq/data.ts`)       |
 | policy / guide pages   | `STATIC_PAGES`                                        | none                                                           |
 | anything else          | `notFoundSeo` (`noindex`)                             | none                                                           |
 
@@ -34,4 +35,4 @@ It also writes:
 
 ## Adding a page
 
-Add its path to `STATIC_PAGES` with a `title` (no suffix) and a `description` (~150 chars, factual). That gives it head tags, prerenders it and puts it in the sitemap. A page with a different shape (like a collection) needs its own branch in `seoFor` and an entry in `prerenderPaths()`. Also follow the page checklist in [pages/README.md](../pages/README.md#adding-a-page).
+Add its path to `STATIC_PAGES` with a `title` (no suffix) and a `description` (~150 chars, factual). That gives it head tags, prerenders it and puts it in the sitemap. For JSON-LD of its own, add a builder to `STATIC_JSON_LD` (the FAQ does). A page with a different shape (like a collection) needs its own branch in `seoFor` and an entry in `prerenderPaths()`. Also follow the page checklist in [pages/README.md](../pages/README.md#adding-a-page).

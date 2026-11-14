@@ -91,7 +91,7 @@ export const data: PolicyData = {
 ```
 
 - **Annotate `const data: PolicyData`.** Without it TypeScript widens `kind: "p"` to `string` and the `PolicyBodyBlock` union stops matching.
-- **Body blocks**: `p`, `list`, `links` (external `http…` hrefs open in a new tab) and `table` (first column is the row header; used for the size chart).
-- **Cross-link sets** (`links.ts`): `POLICY_CROSS_LINKS` (privacy, returns, terms, refund, cookies) and `HELP_CROSS_LINKS` (size-guide, care-guide, track-order, contact). `currentSlug` must match a `slug` there.
+- **Body blocks**: `p`, `list`, `links` (internal `/…` hrefs route with `<Link>`; external `http…` hrefs open in a new tab), `qa` (an FAQ entry: question heading, plain-text answer, optional links) and `table` (first column is the row header; used for the size chart).
+- **Cross-link sets** (`links.ts`): `POLICY_CROSS_LINKS` (privacy, returns, terms, refund, cookies) and `HELP_CROSS_LINKS` (size-guide, care-guide, track-order, contact, faq). `currentSlug` must match a `slug` there.
 - **Adding a page**: see [src/pages/README.md](../pages/README.md#adding-a-page).
 - On policy pages the `--ink` cross-link strip runs into the `--charcoal` footer as one dark block. That's intentional.

@@ -1,5 +1,5 @@
 import type { PolicyData } from "../../components/PolicyLayout";
-import { BRAND, telHref, whatsappHref } from "../../constants";
+import { BRAND, ROUTES, telHref, whatsappHref } from "../../constants";
 
 const PHONE = BRAND.phone;
 const WHATSAPP = BRAND.whatsapp ?? BRAND.phone;
@@ -62,6 +62,26 @@ export const data: PolicyData = {
                 { kind: "links", items: CHANNELS },
             ],
             callout: { label: "Working hours", value: BRAND.workingHours },
+        },
+        {
+            id: "faq",
+            title: "Quick answers",
+            body: [
+                {
+                    kind: "p",
+                    text: "Where to buy, sizes, fabric, delivery, returns and prices: the FAQ may already have your answer.",
+                },
+                {
+                    kind: "links",
+                    items: [
+                        {
+                            label: "FAQ",
+                            href: ROUTES.faq,
+                            sub: "Questions & answers",
+                        },
+                    ],
+                },
+            ],
         },
         {
             id: "include",

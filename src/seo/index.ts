@@ -21,6 +21,7 @@ import {
     type Variant,
 } from "../data/catalog";
 import { BUSINESS } from "../data/business";
+import { FAQ_ENTRIES } from "../pages/Faq/data";
 
 export const SITE_URL = "https://kalaf.in";
 export const DEFAULT_IMAGE = "/og-image.jpg";
@@ -100,6 +101,16 @@ const STATIC_PAGES: Record<string, { title: string; description: string }> = {
         title: "Contact Us",
         description: `Write to the Kalaf team in Jaipur at ${BUSINESS.email}. We reply to every message within one working day.`,
     },
+    [ROUTES.faq]: {
+        title: "FAQ",
+        description:
+            "Where to buy Kalaf, why there's no checkout on kalaf.in, sizes, fabric, care, dispatch, delivery, returns, prices and how to reach us.",
+    },
+};
+
+// Static pages with JSON-LD of their own.
+const STATIC_JSON_LD: Record<string, () => JsonLd[]> = {
+    [ROUTES.faq]: () => [faqPage()],
 };
 
 const COLLECTION_HEAD: Record<
@@ -203,6 +214,19 @@ function organization(): JsonLd {
             addressCountry: "IN",
         },
         sameAs: Object.values(SOCIAL),
+    };
+}
+
+// FAQPage from the FAQ page's own questions and plain-text answers.
+function faqPage(): JsonLd {
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: FAQ_ENTRIES.map(({ q, a }) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+        })),
     };
 }
 
@@ -327,7 +351,11 @@ export function seoFor(pathname: string, search = ""): SeoData {
     }
 
     const page = STATIC_PAGES[path];
-    if (page) return base(path, page.title + SUFFIX, page.description);
+    if (page) {
+        return base(path, page.title + SUFFIX, page.description, {
+            jsonLd: STATIC_JSON_LD[path]?.() ?? [],
+        });
+    }
 
     const collectionMatch = path.match(/^\/collections\/([^/]+)$/);
     if (collectionMatch && collectionMatch[1] in COLLECTIONS) {
@@ -479,6 +507,7 @@ export function llmsTxt(): string {
         ["Care guide", ROUTES.careGuide],
         ["Refund policy", ROUTES.refundPolicy],
         ["Contact", ROUTES.contact],
+        ["FAQ", ROUTES.faq],
     ];
     const a = b.address;
 

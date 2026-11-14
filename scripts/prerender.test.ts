@@ -99,6 +99,20 @@ describe.skipIf(!built && !required)("prerendered dist/", () => {
         }
     });
 
+    it("faq.html has FAQPage JSON-LD and the questions in its body", () => {
+        const html = read("faq.html");
+        const faq = jsonLd(html)?.find((x) => x["@type"] === "FAQPage");
+        const questions = (faq?.mainEntity ?? []) as {
+            name: string;
+            acceptedAnswer: { text: string };
+        }[];
+        expect(questions.length).toBeGreaterThan(0);
+        for (const q of questions) {
+            expect(q.acceptedAnswer.text.length).toBeGreaterThan(0);
+            expect(html).toContain(htmlEscape(q.name).replace(/'/g, "&#x27;"));
+        }
+    });
+
     it("404.html is noindex with no canonical", () => {
         const html = read("404.html");
         expect(html).toContain(

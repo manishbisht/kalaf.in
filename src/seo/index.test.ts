@@ -7,6 +7,7 @@ import {
 } from "../data/catalog";
 import { BUSINESS } from "../data/business";
 import { ROUTES, collectionPath, productPath } from "../constants";
+import { FAQ_ENTRIES } from "../pages/Faq/data";
 import {
     SITE_URL,
     headHtml,
@@ -57,6 +58,29 @@ describe("seoFor", () => {
         expectCommon(seo, ROUTES.privacy);
         expect(seo.title).toBe("Privacy Policy · Kalaf");
         expect(seo.noindex).toBe(false);
+    });
+
+    it("the FAQ page gets FAQPage JSON-LD with every question", () => {
+        const seo = seoFor(ROUTES.faq);
+        expectCommon(seo, ROUTES.faq);
+        expect(seo.title).toBe("FAQ · Kalaf");
+        const faq = ofType(seo.jsonLd, "FAQPage")!;
+        expect(faq["@context"]).toBe("https://schema.org");
+        const questions = faq.mainEntity as Json[];
+        expect(questions.map((q) => q.name)).toEqual(
+            FAQ_ENTRIES.map((e) => e.q)
+        );
+        for (const q of questions) {
+            expect(q["@type"]).toBe("Question");
+            const answer = q.acceptedAnswer as Json;
+            expect(answer["@type"]).toBe("Answer");
+            expect(typeof answer.text).toBe("string");
+            expect(answer.text).not.toMatch(/<|undefined|null|NaN/);
+        }
+    });
+
+    it("other static pages have no JSON-LD", () => {
+        expect(seoFor(ROUTES.contact).jsonLd).toEqual([]);
     });
 
     it("strips a trailing slash", () => {
