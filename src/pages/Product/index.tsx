@@ -16,6 +16,7 @@ import { ProductCard } from "../../components/ProductCard";
 import { Swatch } from "../../components/Swatch";
 import { Gallery } from "./Gallery";
 import { Share } from "./Share";
+import { AskAI } from "../../components/AskAI";
 import styles from "./style.module.css";
 
 export default function ProductPage() {
@@ -263,6 +264,10 @@ export default function ProductPage() {
                                 </ul>
                             </details>
                         )}
+
+                        <div className={styles.askAi}>
+                            <AskAI />
+                        </div>
                     </div>
                 </div>
 

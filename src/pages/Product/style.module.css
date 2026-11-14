@@ -606,3 +606,10 @@
     align-items: flex-start;
     gap: 32px;
 }
+
+/* "Ask AI about this page" row at the end of the info column. */
+.askAi {
+    margin-top: var(--s-8);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--border);
+}
