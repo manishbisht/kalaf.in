@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BuyButtons } from "../BuyButtons";
+import { CatalogImage } from "../CatalogImage";
 import { Swatches } from "./Swatches";
 import { PANT } from "./pant";
 import { formatRupees, percentOff, type Variant } from "../../data/catalog";
@@ -34,7 +35,12 @@ export function Showcase({
                         aria-label={`${PANT.title} in ${active.colour}, worn`}
                     />
                 ) : (
-                    <img src={model.srcLarge} alt="" decoding="async" />
+                    <CatalogImage
+                        image={model}
+                        sizes="(max-width: 768px) 100vw, 60vw"
+                        alt=""
+                        loading="lazy"
+                    />
                 )}
                 <div className={styles.chipWrap}>
                     <span className="chip">DROP 01 — THE PANT</span>
@@ -46,21 +52,18 @@ export function Showcase({
                     to={productPath(PANT.handle, active.colourCode)}
                     className={styles.variantImage}
                 >
-                    <img
+                    <CatalogImage
                         key={side.src}
-                        src={side.srcLarge}
-                        srcSet={`${side.src} 600w, ${side.srcLarge} 1200w`}
+                        image={side}
                         sizes="(max-width: 768px) 100vw, 40vw"
                         alt={`${PANT.title} — ${active.colour}`}
                         loading="lazy"
-                        decoding="async"
                     />
                     {back && (
-                        <img
-                            src={back.src}
+                        <CatalogImage
+                            image={back}
                             alt=""
                             loading="lazy"
-                            decoding="async"
                             className={styles.variantAlt}
                         />
                     )}

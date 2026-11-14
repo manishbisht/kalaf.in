@@ -29,6 +29,13 @@
 .secondary {
     opacity: 0;
 }
+/* Touch screens can't hover, so they never show (or, as it's lazy and
+   display: none, download) the second photo. */
+@media (hover: none) {
+    .secondary {
+        display: none;
+    }
+}
 @media (hover: hover) {
     .card:hover .secondary {
         opacity: 1;

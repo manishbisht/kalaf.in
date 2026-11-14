@@ -252,6 +252,12 @@
         opacity: 1;
     }
 }
+/* No hover on touch screens: don't show or (being lazy) download it. */
+@media (hover: none) {
+    .variantAlt {
+        display: none;
+    }
+}
 
 .swatchBtn {
     display: inline-flex;

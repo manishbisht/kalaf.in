@@ -1,0 +1,9 @@
+/* The <img> lays out as if the <picture> weren't there. */
+.picture {
+    display: contents;
+}
+/* Without this, the (empty) <source> would also become a grid or flex item
+   of the parent. Hiding it doesn't change which file the browser picks. */
+.picture > source {
+    display: none;
+}

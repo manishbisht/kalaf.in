@@ -8,6 +8,7 @@ import {
     shortColour,
     type ListingItem,
 } from "../../data/catalog";
+import { CatalogImage } from "../CatalogImage";
 import { Swatch } from "../Swatch";
 import styles from "./style.module.css";
 
@@ -27,21 +28,20 @@ export function ProductCard({ item }: { item: ListingItem }) {
             className={`${styles.card} ${soldOut ? styles.soldOut : ""}`}
         >
             <div className={styles.media}>
+                {/* Tiles are at most ~350px wide, so the 600w file is enough. */}
                 {first && (
-                    <img
-                        src={first.src}
+                    <CatalogImage
+                        image={first}
                         alt={`${product.title} in ${variant.colour}`}
                         loading="lazy"
-                        decoding="async"
                         className={styles.primary}
                     />
                 )}
                 {second && (
-                    <img
-                        src={second.src}
+                    <CatalogImage
+                        image={second}
                         alt=""
                         loading="lazy"
-                        decoding="async"
                         className={styles.secondary}
                     />
                 )}

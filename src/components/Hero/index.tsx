@@ -2,6 +2,7 @@ import { Icon } from "../Icons";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants";
 import { PRODUCTS } from "../../data/catalog";
+import { CatalogImage } from "../CatalogImage";
 import styles from "./style.module.css";
 
 // The three colourways of the pant, worn — photo 1 of each colour.
@@ -18,14 +19,16 @@ export function Hero() {
     return (
         <section className={styles.hero}>
             <div className={styles.bg}>
+                {/* The middle shot is the LCP image and the only one phones
+                    show. The side ones are lazy, so phones (where they're
+                    display: none) never download them. */}
                 {SHOTS.map((shot, i) => (
-                    <img
+                    <CatalogImage
                         key={shot.colour}
-                        src={shot.image.srcLarge}
-                        srcSet={`${shot.image.src} 600w, ${shot.image.srcLarge} 1200w`}
+                        image={shot.image}
                         sizes="(max-width: 768px) 100vw, 34vw"
                         alt={`${PANT.title} in ${shot.colour}, worn`}
-                        decoding="async"
+                        loading={i === 1 ? "eager" : "lazy"}
                         fetchPriority={i === 1 ? "high" : "auto"}
                     />
                 ))}
