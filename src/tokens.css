@@ -2,8 +2,9 @@
    Kalaf.in — Design Tokens
    ========================================================================= */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap");
-@import url("https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap");
+/* The web fonts are loaded from index.html, not @import-ed here: an @import
+   in the bundled stylesheet is only discovered after that stylesheet has
+   downloaded, and blocks the first render until it loads. */
 
 :root {
     --ink: #000000;

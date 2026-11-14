@@ -4,11 +4,38 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <!-- Open earlier connections to the font origins so the first
-             render isn't blocked on DNS / TLS round-trips. -->
+        <!-- Web fonts: Inter, Space Grotesk and Tiro Devanagari Hindi from
+             Google Fonts, Clash Display (600 is the only weight used) from
+             Fontshare. The stylesheets load without blocking the first
+             render (media="print", switched to "all" once loaded); the faces
+             use font-display: swap anyway, so text shows in the fallback
+             font until they arrive. Preconnects open the connections early. -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap"
+            media="print"
+            onload="this.media='all'"
+        />
+        <link
+            rel="stylesheet"
+            href="https://api.fontshare.com/v2/css?f[]=clash-display@600&display=swap"
+            media="print"
+            onload="this.media='all'"
+        />
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&display=swap"
+            />
+            <link
+                rel="stylesheet"
+                href="https://api.fontshare.com/v2/css?f[]=clash-display@600&display=swap"
+            />
+        </noscript>
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
