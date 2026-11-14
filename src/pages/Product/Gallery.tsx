@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
-import type { Product, Variant } from "../../data/catalog";
+import type { Product, ProductImage, Variant } from "../../data/catalog";
+import { CatalogImage } from "../../components/CatalogImage";
 import { Icon } from "../../components/Icons";
 import { Lightbox } from "./Lightbox";
 import styles from "./style.module.css";
 
 type Media =
-    | { kind: "image"; src: string; srcLarge: string; photo: number }
+    | ({ kind: "image"; photo: number } & ProductImage)
     | { kind: "video"; src: string; poster: string };
 
 const reducedMotion = () =>
@@ -132,13 +133,15 @@ export function Gallery({
                                     aria-haspopup="dialog"
                                     aria-label={`${name}, photo ${m.photo + 1} of ${photos.length}. Open full screen`}
                                 >
-                                    <img
-                                        src={m.src}
-                                        srcSet={`${m.src} 600w, ${m.srcLarge} 1200w`}
+                                    {/* The first photo is the LCP image. */}
+                                    <CatalogImage
+                                        image={m}
                                         sizes="(max-width: 900px) 100vw, 55vw"
                                         alt=""
                                         loading={i === 0 ? "eager" : "lazy"}
-                                        decoding="async"
+                                        fetchPriority={
+                                            i === 0 ? "high" : "auto"
+                                        }
                                         draggable={false}
                                     />
                                 </button>
@@ -184,11 +187,11 @@ export function Gallery({
                                     : `Show photo ${m.photo + 1} of ${photos.length}`
                             }
                         >
-                            <img
-                                src={m.kind === "video" ? m.poster : m.src}
-                                alt=""
-                                loading="lazy"
-                            />
+                            {m.kind === "video" ? (
+                                <img src={m.poster} alt="" loading="lazy" />
+                            ) : (
+                                <CatalogImage image={m} alt="" loading="lazy" />
+                            )}
                             {m.kind === "video" && (
                                 <span
                                     className={styles.play}

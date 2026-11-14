@@ -219,6 +219,9 @@
     padding: 64px 72px;
 }
 .lightboxStage img {
+    /* Ignore the width/height attributes: fit the photo, keeping its ratio. */
+    width: auto;
+    height: auto;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;

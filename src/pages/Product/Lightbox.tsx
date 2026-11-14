@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import type { ProductImage } from "../../data/catalog";
+import { CatalogImage } from "../../components/CatalogImage";
 import { Icon } from "../../components/Icons";
 import styles from "./style.module.css";
 
@@ -81,11 +82,11 @@ export function Lightbox({
             }}
         >
             <div className={styles.lightboxStage} data-backdrop="true">
-                <img
+                <CatalogImage
                     key={image.srcLarge}
-                    src={image.srcLarge}
+                    image={image}
+                    large
                     alt={`${label}, photo ${i + 1} of ${total}`}
-                    decoding="async"
                 />
             </div>
             <div className={styles.lightboxBar}>

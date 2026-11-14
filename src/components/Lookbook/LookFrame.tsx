@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CatalogImage } from "../CatalogImage";
 import { Icon } from "../Icons";
 import type { ProductImage } from "../../data/catalog";
 import styles from "./style.module.css";
@@ -14,13 +15,11 @@ export type Look = {
 export function LookFrame({ item, sizes }: { item: Look; sizes: string }) {
     return (
         <Link to={item.to} className={styles.frame}>
-            <img
-                src={item.image.src}
-                srcSet={`${item.image.src} 600w, ${item.image.srcLarge} 1200w`}
+            <CatalogImage
+                image={item.image}
                 sizes={sizes}
                 alt={item.label}
                 loading="lazy"
-                decoding="async"
                 style={
                     item.position
                         ? { objectPosition: item.position }

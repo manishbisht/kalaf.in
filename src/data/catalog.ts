@@ -19,7 +19,17 @@ export function storeName(id: string) {
     return MARKETPLACES.find((m) => m.id === id)?.name ?? id;
 }
 
-export type ProductImage = { src: string; srcLarge: string };
+// One photo at 600w and 1200w, as JPEG (src/srcLarge — also what SEO tags
+// and marketplaces use) and AVIF. width/height are the 1200w file's pixels.
+// Render it with components/CatalogImage.
+export type ProductImage = {
+    src: string;
+    srcLarge: string;
+    avif: string;
+    avifLarge: string;
+    width: number;
+    height: number;
+};
 
 export type Variant = {
     sku: string;

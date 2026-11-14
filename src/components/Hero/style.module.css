@@ -33,7 +33,8 @@
     .bg {
         grid-template-columns: 1fr;
     }
-    .bg img:not(:nth-child(2)) {
+    /* Each shot is a <picture> (display: contents) around its <img>. */
+    .bg > :not(:nth-child(2)) {
         display: none;
     }
 }

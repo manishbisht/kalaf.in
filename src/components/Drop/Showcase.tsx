@@ -1,5 +1,7 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { BuyButtons } from "../BuyButtons";
+import { CatalogImage } from "../CatalogImage";
 import { Swatches } from "./Swatches";
 import { PANT } from "./pant";
 import { formatRupees, percentOff, type Variant } from "../../data/catalog";
@@ -19,22 +21,43 @@ export function Showcase({
     const side = flat ?? model;
     const sizes = PANT.sizes;
 
+    // The video sits below the fold: it loads nothing but its poster
+    // (preload="none") and only plays while it's on screen.
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const videoSrc = active.video?.src;
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) video.play().catch(() => {});
+            else video.pause();
+        });
+        observer.observe(video);
+        return () => observer.disconnect();
+    }, [videoSrc]);
+
     return (
         <div className={styles.showcase}>
             <div className={styles.heroImage}>
                 {active.video ? (
                     <video
                         key={active.video.src}
+                        ref={videoRef}
                         src={active.video.src}
                         poster={active.video.poster}
-                        autoPlay
+                        preload="none"
                         muted
                         loop
                         playsInline
                         aria-label={`${PANT.title} in ${active.colour}, worn`}
                     />
                 ) : (
-                    <img src={model.srcLarge} alt="" decoding="async" />
+                    <CatalogImage
+                        image={model}
+                        sizes="(max-width: 768px) 100vw, 60vw"
+                        alt=""
+                        loading="lazy"
+                    />
                 )}
                 <div className={styles.chipWrap}>
                     <span className="chip">DROP 01 — THE PANT</span>
@@ -46,21 +69,18 @@ export function Showcase({
                     to={productPath(PANT.handle, active.colourCode)}
                     className={styles.variantImage}
                 >
-                    <img
+                    <CatalogImage
                         key={side.src}
-                        src={side.srcLarge}
-                        srcSet={`${side.src} 600w, ${side.srcLarge} 1200w`}
+                        image={side}
                         sizes="(max-width: 768px) 100vw, 40vw"
                         alt={`${PANT.title} — ${active.colour}`}
                         loading="lazy"
-                        decoding="async"
                     />
                     {back && (
-                        <img
-                            src={back.src}
+                        <CatalogImage
+                            image={back}
                             alt=""
                             loading="lazy"
-                            decoding="async"
                             className={styles.variantAlt}
                         />
                     )}
