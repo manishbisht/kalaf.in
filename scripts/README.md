@@ -49,7 +49,7 @@ Copied as-is to the site root by Vite, so **don't put a README or anything priva
 
 ## Deploy (`.github/workflows/deploy.yml`)
 
-Push to `main` (or run it manually) → `yarn install --frozen-lockfile` → `yarn build` (typecheck, client build, SSR build, prerender) on Node 26 → upload `dist/` → deploy to GitHub Pages → create a GitHub release.
+Push to `main` (or run it manually) → `yarn install --frozen-lockfile` → lint and `yarn test` → `yarn build` (typecheck, client build, SSR build, prerender) on Node 26 → `yarn test:dist` and `yarn test:e2e` (see [Tests](#tests)) → upload `dist/` → deploy to GitHub Pages → create a GitHub release.
 
 - **CalVer**: the build computes `YYYY.MM.DD.HHMM` (UTC). The release tag is `vYYYY.MM.DD.HHMM`, made with `gh release create … --generate-notes`, so commit titles since the last tag become the release notes. Write them like a changelog.
 - **Injected at build time**: `VITE_BUILD_VERSION` (the CalVer), `VITE_COMMIT_SHA` (full SHA) and `VITE_CLARITY_PROJECT_ID` from the `CLARITY_PROJECT_ID` repo secret. They reach the app through `ENV` in `src/env.ts`; the footer's build stamp shows the first two.
@@ -59,4 +59,30 @@ Push to `main` (or run it manually) → `yarn install --frozen-lockfile` → `ya
 
 Runs `sync-catalog.py` against the products repo daily at 08:00 IST (and on demand from the Actions tab). When anything changed it opens or updates a `catalog-sync` pull request touching only `src/data/*.json` and `public/catalog/`; merging it deploys. It does nothing until the repo has a `PRODUCTS_REPO_TOKEN` secret: a fine-grained token with read-only Contents access to `manishbisht/products.kalaf.in`. It sparse-checks out only `catalog/`, `colors.json` and `business.json`, so `documents/` never reaches CI.
 
-Pull requests (yours, and the sync PR once re-run from the Actions tab, since PRs opened by the workflow token don't trigger other workflows) run `.github/workflows/ci.yml`: lint, tests, build and the prerendered-site test.
+Pull requests (yours, and the sync PR once re-run from the Actions tab, since PRs opened by the workflow token don't trigger other workflows) run `.github/workflows/ci.yml`: lint, tests, build, the prerendered-site test and the browser tests.
+
+## Tests
+
+Three layers, all run by CI (`ci.yml` on pull requests, `deploy.yml` before deploying). Locally, call the binaries directly (the Node 26 engine guard blocks `yarn <script>` on older Node):
+
+| What                                                                                                                                                                                       | Script           | Run locally                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------------------- |
+| **Unit, data and component tests** (Vitest; `src/**/*.test.ts(x)`, `scripts/*.test.ts`). Node by default, jsdom where a file asks for it.                                                  | `yarn test`      | `node_modules/.bin/vitest run`                                                              |
+| **The built files** (`scripts/prerender.test.ts`): every route's HTML, head tags, redirects, 404.html, sitemap. Skips itself without `dist/`; `REQUIRE_DIST=1` makes a missing build fail. | `yarn test:dist` | `REQUIRE_DIST=1 node_modules/.bin/vitest run scripts/prerender.test.ts`                     |
+| **Browser tests** (Playwright, `e2e/*.spec.ts`) against the built site in Chromium, desktop and a Pixel 7.                                                                                 | `yarn test:e2e`  | `node_modules/.bin/playwright test` (`--ui` to watch, `--project desktop`, `-g "lightbox"`) |
+
+`test:dist` and `test:e2e` need a full build first (the four steps in [AGENTS.md](../AGENTS.md#run--build)); `playwright.config.ts` refuses to start without `dist/404.html`. Install the browser once with `node_modules/.bin/playwright install chromium`.
+
+**How the browser tests run.** `playwright.config.ts` starts `e2e/serve.mjs`, a dependency-free static server that answers like GitHub Pages: the exact file, then `<path>.html`, then `<path>/index.html`, else `404.html` with status 404 (port 4317, `E2E_PORT` to change). `e2e/fixtures.ts` stubs every request that leaves that server (fonts, Clarity) with an empty response and collects console errors. The `desktop` project runs every spec except `*.mobile.spec.ts`; the `mobile` project (Pixel 7 emulated in Chromium) runs `*.mobile.spec.ts` and `hydration.spec.ts`. The suite takes about 10 seconds.
+
+| Spec                          | Checks                                                                                                                                          |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hydration.spec.ts`           | Home, shop, a product, FAQ, a journal article, `/links` and `/links/` hydrate with no console errors (React's #418/#423/#425 included).         |
+| `old-urls.spec.ts`            | Old `/#/…` hash links and the old cotton-linen trousers handle land on the current URL with the colour kept.                                    |
+| `shop-filters.mobile.spec.ts` | The phone filter drawer: fills the screen, scrolls, keeps Tab inside, filters the grid and the URL, Esc closes and refocuses the toggle.        |
+| `product.spec.ts`             | Colour picker updates URL and title; the lightbox (arrows, Esc, focus); buy links go to Flipkart/Meesho/pants.kalaf.in in a new tab; no Amazon. |
+| `whatsapp.spec.ts`            | The WhatsApp badge's message names the product and colour; the badge is hidden on `/links`.                                                     |
+| `navigation.spec.ts`          | Home → shop → product → footer FAQ without a reload, landing at the top, with the title and canonical updated.                                  |
+| `not-found.spec.ts`           | Unknown URLs return 404 and show the NotFound page with `noindex`.                                                                              |
+
+A test for a known bug is marked `test.fixme` with a comment saying what's wrong; remove the `.fixme` once it's fixed. On a CI failure the Playwright report and traces are attached to the run as the `playwright-report` artifact (`node_modules/.bin/playwright show-report` / `show-trace` to open them locally).
