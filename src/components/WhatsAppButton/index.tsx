@@ -1,9 +1,6 @@
-import { BUSINESS } from "../../data/business";
+import { BRAND, whatsappHref } from "../../constants";
 import { usePageProduct } from "../../hooks/usePageProduct";
 import styles from "./style.module.css";
-
-// wa.me wants the number as digits only, with the country code.
-const NUMBER = (BUSINESS.whatsapp ?? "").replace(/\D/g, "");
 
 // The opening line we pre-fill in WhatsApp. On a product page it names the
 // piece and colour, so we know what they're asking about without a back-and-forth.
@@ -16,12 +13,12 @@ function useGreeting() {
 // Floating "chat with us" button, bottom-right on every page.
 export function WhatsAppButton() {
     const greeting = useGreeting();
-    if (!NUMBER) return null;
+    if (!BRAND.whatsapp) return null;
 
     return (
         <a
             className={styles.button}
-            href={`https://wa.me/${NUMBER}?text=${encodeURIComponent(greeting)}`}
+            href={`${whatsappHref(BRAND.whatsapp)}?text=${encodeURIComponent(greeting)}`}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat with Kalaf on WhatsApp"

@@ -9,6 +9,7 @@ import {
 import { LinkColumn, type LinkColumnItem } from "./LinkColumn";
 import { SocialRow } from "./SocialRow";
 import { BuildStamp } from "./BuildStamp";
+import { AskAI } from "../AskAI";
 import styles from "./style.module.css";
 
 const CONTACT_ITEMS: LinkColumnItem[] = [
@@ -43,6 +44,9 @@ export function Footer() {
                             Meesho.
                         </p>
                         <SocialRow />
+                        <div className={styles.askAi}>
+                            <AskAI dark />
+                        </div>
                     </div>
 
                     <LinkColumn

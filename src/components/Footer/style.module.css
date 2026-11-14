@@ -190,3 +190,8 @@
     opacity: 0.5;
     font-feature-settings: "tnum" 1;
 }
+
+/* "Ask AI about this page" under the social icons. */
+.askAi {
+    margin-top: var(--s-6);
+}
