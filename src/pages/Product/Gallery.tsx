@@ -43,6 +43,17 @@ export function Gallery({
     const trackRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const frame = useRef(0);
+    // Each slide's zoom button, and the slide whose button should take focus
+    // once the lightbox has closed (the photo last seen full screen).
+    const zoomRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    const focusAfterClose = useRef<number | null>(null);
+    useEffect(() => {
+        if (lightbox !== null || focusAfterClose.current === null) return;
+        zoomRefs.current[focusAfterClose.current]?.focus({
+            preventScroll: true,
+        });
+        focusAfterClose.current = null;
+    }, [lightbox]);
 
     const goTo = (i: number) => {
         const track = trackRef.current;
@@ -126,6 +137,9 @@ export function Gallery({
                                 />
                             ) : (
                                 <button
+                                    ref={(el) => {
+                                        zoomRefs.current[i] = el;
+                                    }}
                                     type="button"
                                     className={styles.zoom}
                                     onClick={() => setLightbox(m.photo)}
@@ -209,14 +223,17 @@ export function Gallery({
                     images={photos}
                     start={lightbox}
                     label={name}
+                    restoreFocus={false}
                     onClose={(photo) => {
-                        setLightbox(null);
-                        // Land the strip on the photo last seen full screen.
-                        goTo(
-                            media.findIndex(
-                                (m) => m.kind === "image" && m.photo === photo
-                            )
+                        // Land the strip on the photo last seen full screen,
+                        // and focus its button (the one that opened the
+                        // lightbox may now be in a hidden slide).
+                        const slide = media.findIndex(
+                            (m) => m.kind === "image" && m.photo === photo
                         );
+                        focusAfterClose.current = slide;
+                        setLightbox(null);
+                        goTo(slide);
                     }}
                 />
             )}
