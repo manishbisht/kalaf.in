@@ -1,4 +1,9 @@
-import type { ListingItem } from "../../data/catalog";
+import {
+    LISTING,
+    isSoldOut,
+    storeName,
+    type ListingItem,
+} from "../../data/catalog";
 
 // Each filter group reads one value off an item. Selected values live in the
 // URL (?colour=Red,Pink&store=flipkart) so filtered views can be shared.
@@ -6,12 +11,6 @@ export type FilterGroup = {
     key: string;
     label: string;
     values: (item: ListingItem) => string[];
-};
-
-const STORE_LABEL: Record<string, string> = {
-    flipkart: "Flipkart",
-    meesho: "Meesho",
-    amazon: "Amazon",
 };
 
 export const FILTER_GROUPS: FilterGroup[] = [
@@ -45,18 +44,31 @@ export const FILTER_GROUPS: FilterGroup[] = [
     {
         key: "store",
         label: "Available on",
+        // Only stores with a live link, so a store nothing is sold on never
+        // appears as an option.
         values: ({ variant }) =>
-            Object.keys(variant.links).map((s) => STORE_LABEL[s] ?? s),
+            Object.entries(variant.links)
+                .filter(([, url]) => url)
+                .map(([s]) => storeName(s)),
     },
 ];
 
 export type Selection = Record<string, string[]>;
 
+// Values any piece in the catalog has, per group. Values in an old link that
+// no longer exist (e.g. ?store=Amazon) are ignored rather than shown as a
+// filter that matches nothing.
+const KNOWN = new Map(
+    FILTER_GROUPS.map((g) => [g.key, new Set(LISTING.flatMap(g.values))])
+);
+
 export function readSelection(params: URLSearchParams): Selection {
     const sel: Selection = {};
     for (const g of FILTER_GROUPS) {
         const raw = params.get(g.key);
-        if (raw) sel[g.key] = raw.split(",").filter(Boolean);
+        const known = KNOWN.get(g.key);
+        const values = (raw ?? "").split(",").filter((v) => v && known?.has(v));
+        if (values.length) sel[g.key] = values;
     }
     return sel;
 }
@@ -96,6 +108,8 @@ export const SORTS = [
     { key: "name", label: "Name: A to Z" },
 ] as const;
 
+// Applies the chosen sort, then moves sold-out pieces to the end (the sort is
+// stable, so they keep their order among themselves).
 export function sortItems(items: ListingItem[], sort: string) {
     const out = [...items];
     if (sort === "price-asc")
@@ -108,5 +122,8 @@ export function sortItems(items: ListingItem[], sort: string) {
                 `${b.product.title} ${b.variant.colour}`
             )
         );
+    out.sort(
+        (a, b) => Number(isSoldOut(a.variant)) - Number(isSoldOut(b.variant))
+    );
     return out;
 }

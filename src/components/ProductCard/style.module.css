@@ -5,6 +5,10 @@
     text-decoration: none;
     min-width: 0;
 }
+.card:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+}
 
 .media {
     position: relative;
@@ -34,6 +38,15 @@
     }
 }
 
+.soldOut .primary {
+    opacity: 0.55;
+}
+@media (hover: hover) {
+    .soldOut:hover .secondary {
+        opacity: 0.55;
+    }
+}
+
 .off {
     position: absolute;
     top: 12px;
@@ -51,10 +64,19 @@
     letter-spacing: -0.005em;
 }
 .colour {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
     font-family: var(--font-body);
     font-size: 13px;
     color: var(--smoke);
     margin-top: 4px;
+}
+.colourName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .priceRow {
     display: flex;
