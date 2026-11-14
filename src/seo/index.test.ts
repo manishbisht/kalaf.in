@@ -6,7 +6,8 @@ import {
     type Variant,
 } from "../data/catalog";
 import { BUSINESS } from "../data/business";
-import { ROUTES, collectionPath, productPath } from "../constants";
+import { ROUTES, collectionPath, journalPath, productPath } from "../constants";
+import { ARTICLES, heroImage } from "../pages/Journal/articles";
 import {
     SITE_URL,
     headHtml,
@@ -224,5 +225,65 @@ describe("llmsTxt", () => {
         expect(txt).toContain(BUSINESS.gstin);
         expect(txt).toContain(BUSINESS.email);
         expect(txt).not.toMatch(/Amazon/);
+    });
+});
+
+describe("journal", () => {
+    it("the index lists every article, with breadcrumbs", () => {
+        const seo = seoFor(ROUTES.journal);
+        expectCommon(seo, ROUTES.journal);
+        expect(seo.noindex).toBe(false);
+        const list = ofType(seo.jsonLd, "ItemList")!;
+        const urls = (list.itemListElement as Json[]).map((i) => i.url);
+        expect(urls).toEqual(
+            ARTICLES.map((a) => `${SITE_URL}${journalPath(a.slug)}`)
+        );
+        expect(ofType(seo.jsonLd, "BreadcrumbList")).toBeDefined();
+    });
+
+    it.each(ARTICLES)("$slug: Article JSON-LD by Kalaf", (a) => {
+        const path = journalPath(a.slug);
+        const seo = seoFor(path);
+        expectCommon(seo, path);
+        expect(seo.type).toBe("article");
+        expect(seo.title).toBe(`${a.title} · Kalaf`);
+        expect(seo.image).toBe(`${SITE_URL}${heroImage(a)!.srcLarge}`);
+
+        const ld = ofType(seo.jsonLd, "Article")!;
+        expect(ld.headline).toBe(a.title);
+        expect(ld.datePublished).toBe(a.datePublished);
+        expect(ld.image).toEqual([seo.image]);
+        expect(ld.mainEntityOfPage).toBe(seo.canonical);
+        for (const who of [ld.author, ld.publisher] as Json[]) {
+            expect(who["@type"]).toBe("Organization");
+            expect(who.name).toBe("Kalaf");
+        }
+        expect((ld.publisher as Json).logo).toBeDefined();
+
+        const crumbs = ofType(seo.jsonLd, "BreadcrumbList")!;
+        const items = crumbs.itemListElement as Json[];
+        expect(items.map((i) => i.item)).toEqual([
+            `${SITE_URL}/`,
+            `${SITE_URL}${ROUTES.journal}`,
+            seo.canonical,
+        ]);
+    });
+
+    it("every article and the index are prerendered", () => {
+        const paths = prerenderPaths();
+        expect(paths).toContain(ROUTES.journal);
+        for (const a of ARTICLES) expect(paths).toContain(journalPath(a.slug));
+    });
+
+    it("an unknown article is a noindex 404", () => {
+        expect(seoFor(journalPath("no-such-article")).noindex).toBe(true);
+    });
+
+    it("llms.txt has a Journal section linking every article", () => {
+        const txt = llmsTxt();
+        expect(txt).toContain("## Journal");
+        for (const a of ARTICLES) {
+            expect(txt).toContain(`${SITE_URL}${journalPath(a.slug)}`);
+        }
     });
 });

@@ -8,6 +8,7 @@ import {
     ROUTES,
     SOCIAL,
     collectionPath,
+    journalPath,
     productPath,
 } from "../constants";
 import {
@@ -21,6 +22,13 @@ import {
     type Variant,
 } from "../data/catalog";
 import { BUSINESS } from "../data/business";
+import {
+    ARTICLES,
+    JOURNAL_INTRO,
+    findArticle,
+    heroImage,
+    type Article,
+} from "../pages/Journal/articles";
 
 export const SITE_URL = "https://kalaf.in";
 export const DEFAULT_IMAGE = "/og-image.jpg";
@@ -37,7 +45,7 @@ export type SeoData = {
     url: string;
     /** Absolute image URL for og:image / twitter:image. */
     image: string;
-    type: "website" | "product";
+    type: "website" | "product" | "article";
     noindex: boolean;
     jsonLd: JsonLd[];
 };
@@ -294,6 +302,70 @@ function variantJsonLd(product: Product, v: Variant): JsonLd {
     };
 }
 
+const JOURNAL = {
+    title: "Journal: Bandhani, Leheriya, Gota & How to Wear Them",
+    description: JOURNAL_INTRO,
+};
+
+function journalSeo(): SeoData {
+    return base(ROUTES.journal, JOURNAL.title + SUFFIX, JOURNAL.description, {
+        jsonLd: [
+            {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                itemListElement: ARTICLES.map((a, i) => ({
+                    "@type": "ListItem",
+                    position: i + 1,
+                    name: a.title,
+                    url: absolute(journalPath(a.slug)),
+                })),
+            },
+            breadcrumbs([
+                ["Home", ROUTES.home],
+                ["Journal", ROUTES.journal],
+            ]),
+        ],
+    });
+}
+
+function articleSeo(article: Article): SeoData {
+    const path = journalPath(article.slug);
+    const image = absolute(heroImage(article)?.srcLarge ?? DEFAULT_IMAGE);
+    const org = {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: BRAND.name,
+        url: SITE_URL,
+    };
+    return base(path, article.title + SUFFIX, article.description, {
+        type: "article",
+        image,
+        jsonLd: [
+            {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: article.title,
+                description: article.description,
+                image: [image],
+                datePublished: article.datePublished,
+                dateModified: article.datePublished,
+                author: org,
+                publisher: {
+                    ...org,
+                    logo: { "@type": "ImageObject", url: absolute(LOGO) },
+                },
+                mainEntityOfPage: absolute(path),
+                inLanguage: "en-IN",
+            },
+            breadcrumbs([
+                ["Home", ROUTES.home],
+                ["Journal", ROUTES.journal],
+                [article.title, path],
+            ]),
+        ],
+    });
+}
+
 export function notFoundSeo(path: string): SeoData {
     return base(
         path,
@@ -347,6 +419,11 @@ export function seoFor(pathname: string, search = ""): SeoData {
         });
     }
 
+    if (path === ROUTES.journal) return journalSeo();
+    const articleMatch = path.match(/^\/journal\/([^/]+)$/);
+    const article = articleMatch && findArticle(articleMatch[1]);
+    if (article) return articleSeo(article);
+
     const productMatch = path.match(/^\/products\/([^/]+)$/);
     const product = productMatch && findProduct(productMatch[1]);
     if (product) return productSeo(product, params.get("colour"));
@@ -362,6 +439,8 @@ export function prerenderPaths(): string[] {
         ...(Object.keys(COLLECTIONS) as CollectionHandle[]).map(collectionPath),
         ...PRODUCTS.map((p) => productPath(p.handle)),
         ...Object.keys(STATIC_PAGES),
+        ROUTES.journal,
+        ...ARTICLES.map((a) => journalPath(a.slug)),
     ];
 }
 
@@ -490,6 +569,13 @@ export function llmsTxt(): string {
         "## Products",
         "",
         ...productLines,
+        "",
+        "## Journal",
+        "",
+        ...ARTICLES.map(
+            (a) =>
+                `- [${a.title}](${absolute(journalPath(a.slug))}): ${a.description}`
+        ),
         "",
         "## Help",
         "",
