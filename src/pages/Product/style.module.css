@@ -49,17 +49,99 @@
     }
 }
 .main {
+    position: relative;
     aspect-ratio: 3 / 4;
     background: var(--paper);
-    overflow: hidden;
 }
-.main img,
-.main video {
+/* One slide per media item; swipe on phones, scrolled by the controls. */
+.track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+}
+.track::-webkit-scrollbar {
+    display: none;
+}
+.slide {
+    flex: 0 0 100%;
+    height: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+.zoom {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+}
+.zoom:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: -4px;
+}
+.slide img,
+.slide video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     background: var(--paper);
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-top: -22px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: opacity var(--dur-fast) var(--ease);
+}
+.arrow:hover {
+    border-color: var(--ink);
+}
+.arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+.arrow:focus-visible,
+.thumb:focus-visible,
+.swatchBtn:focus-visible,
+.sizeBtn:focus-visible,
+.sizeGuide:focus-visible,
+.breadcrumb a:focus-visible,
+.relatedHead a:focus-visible,
+.more summary:focus-visible,
+.sizeChart summary:focus-visible,
+.shareBtn:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+.arrowPrev {
+    left: 12px;
+}
+.arrowPrev svg {
+    transform: scaleX(-1);
+}
+.arrowNext {
+    right: 12px;
+}
+@media (max-width: 900px) {
+    .arrow {
+        display: none;
+    }
 }
 .thumbs {
     display: flex;
@@ -70,6 +152,7 @@
 .thumb {
     position: relative;
     flex: 0 0 72px;
+    overflow: hidden;
     aspect-ratio: 3 / 4;
     padding: 0;
     border: 1px solid transparent;
@@ -100,6 +183,106 @@
     color: var(--paper);
     font-size: 18px;
     background: rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 900px) {
+    .thumbs {
+        gap: 6px;
+    }
+    .thumb {
+        flex-basis: 52px;
+    }
+}
+
+/* ---- Lightbox ---- */
+.lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0.94);
+    color: var(--off-white);
+    overflow: hidden;
+}
+.lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.94);
+}
+.lightboxStage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 64px 72px;
+}
+.lightboxStage img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.lightboxBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 12px 12px 24px;
+    pointer-events: none;
+}
+.lightboxCount {
+    font-family: var(--font-head);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+}
+.lightboxClose,
+.lightboxArrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid transparent;
+    background: none;
+    color: var(--off-white);
+    cursor: pointer;
+    pointer-events: auto;
+}
+.lightboxClose:hover,
+.lightboxArrow:hover {
+    border-color: var(--line-dark);
+}
+.lightboxClose:focus-visible,
+.lightboxArrow:focus-visible {
+    outline: 2px solid var(--off-white);
+    outline-offset: 2px;
+}
+.lightboxArrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -24px;
+}
+.lightboxArrow.arrowPrev {
+    left: 12px;
+}
+.lightboxArrow.arrowNext {
+    right: 12px;
+}
+@media (max-width: 640px) {
+    .lightboxStage {
+        padding: 64px 0;
+    }
+    .lightboxArrow {
+        top: auto;
+        bottom: 12px;
+        margin-top: 0;
+    }
 }
 
 /* ---- Info ---- */
@@ -170,6 +353,9 @@
 .swatchActive {
     border-color: var(--ink);
 }
+.swatchSoldOut > span {
+    opacity: 0.35;
+}
 
 .sizes {
     display: flex;
@@ -206,6 +392,53 @@
     font-size: 14px;
     color: var(--charcoal);
 }
+.sizeChart {
+    margin-top: 16px;
+    max-width: 360px;
+}
+.sizeChart summary {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.sizeChart table {
+    width: 100%;
+    margin-top: 12px;
+    border-collapse: collapse;
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-feature-settings: "tnum" 1;
+}
+.sizeChart caption {
+    text-align: left;
+    padding-bottom: 8px;
+    font-size: 12px;
+    color: var(--smoke);
+}
+.sizeChart th,
+.sizeChart td {
+    padding: 8px 12px 8px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+.sizeChart thead th {
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--smoke);
+}
+.sizeChart tbody th {
+    font-weight: 600;
+}
+.sizeChartNote {
+    margin: 10px 0 0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--smoke);
+}
+
 .sizeGuide {
     display: inline-block;
     margin-top: 12px;
@@ -219,7 +452,55 @@
 }
 
 .buy {
-    margin-top: 8px;
+    margin-top: 28px;
+}
+.buy > .label {
+    margin-top: 16px;
+}
+.availability {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    font-family: var(--font-head);
+    font-size: 14px;
+    color: var(--charcoal);
+}
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 0.45em;
+    background: var(--olive);
+    flex-shrink: 0;
+}
+.soldOut {
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.share {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 20px;
+    margin-top: 20px;
+}
+.shareBtn {
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: var(--font-head);
+    font-size: 13px;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+.shareStatus {
+    font-family: var(--font-head);
+    font-size: 12px;
+    color: var(--olive);
 }
 .buyNote {
     margin: 14px 0 0;

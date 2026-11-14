@@ -2,7 +2,22 @@
 // products.kalaf.in repo by scripts/sync-catalog.py — don't edit it by hand.
 
 import raw from "./catalog.json";
-import type { MarketplaceLinks } from "../components/BuyButtons";
+
+// Every store the site knows how to link to, in button order. A store only
+// shows up anywhere on the site once the catalog has a link for it, so adding
+// one back (Amazon, say) is a data change in the products repo, not a code one.
+export const MARKETPLACES = [
+    { id: "flipkart", name: "Flipkart" },
+    { id: "meesho", name: "Meesho" },
+    { id: "amazon", name: "Amazon" },
+] as const;
+
+export type Marketplace = (typeof MARKETPLACES)[number]["id"];
+export type MarketplaceLinks = Partial<Record<Marketplace, string>>;
+
+export function storeName(id: string) {
+    return MARKETPLACES.find((m) => m.id === id)?.name ?? id;
+}
 
 export type ProductImage = { src: string; srcLarge: string };
 
@@ -55,6 +70,28 @@ export type Product = {
 };
 
 export const PRODUCTS = raw.products as Product[];
+
+// Stores Kalaf actually sells on: those with a live link for at least one
+// piece. A piece missing one of these shows it as "coming soon" (today: the
+// pant on Meesho). A store nothing is live on (Amazon) isn't shown at all.
+export const SOLD_ON: Marketplace[] = MARKETPLACES.map((m) => m.id).filter(
+    (id) => PRODUCTS.some((p) => p.variants.some((v) => v.links[id]))
+);
+
+// Stock is null when the products repo has no count — treat that as available.
+export function isSoldOut(variant: Variant) {
+    return variant.stock === 0;
+}
+
+// Card-sized colour name: "Multicolour Green Yellow Red" → "Green/Yellow/Red"
+// (the swatch next to it already says it's multicolour).
+export function shortColour(variant: Variant) {
+    const prefix = `${variant.family} `;
+    if (variant.family === "Multicolour" && variant.colour.startsWith(prefix)) {
+        return variant.colour.slice(prefix.length).split(/\s+/).join("/");
+    }
+    return variant.colour;
+}
 
 export const COLLECTIONS: Record<
     CollectionHandle,

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
     COLLECTIONS,
@@ -22,6 +22,29 @@ export default function Shop() {
     const { handle } = useParams();
     const [params, setParams] = useSearchParams();
     const [filtersOpen, setFiltersOpen] = useState(false);
+    const isDrawer = useIsNarrow();
+    const drawerOpen = isDrawer && filtersOpen;
+    const filterBtnRef = useRef<HTMLButtonElement>(null);
+    const doneBtnRef = useRef<HTMLButtonElement>(null);
+
+    // Mobile filter drawer: focus it on open, close on Esc, lock page scroll,
+    // and hand focus back to the Filter button when it closes.
+    useEffect(() => {
+        if (!drawerOpen) return;
+        const toggleBtn = filterBtnRef.current;
+        doneBtnRef.current?.focus();
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setFiltersOpen(false);
+        };
+        window.addEventListener("keydown", onKey);
+        return () => {
+            window.removeEventListener("keydown", onKey);
+            document.body.style.overflow = prevOverflow;
+            toggleBtn?.focus();
+        };
+    }, [drawerOpen]);
 
     const collection =
         handle && handle in COLLECTIONS
@@ -136,16 +159,36 @@ export default function Shop() {
 
             <div className={`container ${styles.layout}`}>
                 <aside
-                    className={`${styles.sidebar} ${filtersOpen ? styles.sidebarOpen : ""}`}
+                    id="shop-filters"
+                    className={`${styles.sidebar} ${drawerOpen ? styles.sidebarOpen : ""}`}
+                    aria-label="Filters"
+                    {...(isDrawer && {
+                        role: "dialog",
+                        "aria-modal": true,
+                        inert: !drawerOpen,
+                    })}
                 >
                     <div className={styles.sidebarHead}>
-                        <span>Filter</span>
+                        <span>
+                            Filter
+                            {active.length > 0 && (
+                                <button
+                                    type="button"
+                                    className={styles.clearBtn}
+                                    onClick={clearAll}
+                                >
+                                    Clear all
+                                </button>
+                            )}
+                        </span>
                         <button
+                            ref={doneBtnRef}
                             type="button"
                             className={styles.closeBtn}
                             onClick={() => setFiltersOpen(false)}
                         >
-                            Done
+                            Show {results.length}{" "}
+                            {results.length === 1 ? "product" : "products"}
                         </button>
                     </div>
                     <FilterPanel
@@ -158,19 +201,33 @@ export default function Shop() {
                 <section>
                     <div className={styles.toolbar}>
                         <button
+                            ref={filterBtnRef}
                             type="button"
                             className={styles.filterBtn}
+                            aria-expanded={drawerOpen}
+                            aria-controls="shop-filters"
                             onClick={() => setFiltersOpen(true)}
                         >
-                            Filter{active.length ? ` (${active.length})` : ""}
+                            Filter
+                            {active.length > 0 && (
+                                <span className={styles.filterCount}>
+                                    <span className={styles.srOnly}>, </span>
+                                    {active.length}
+                                    <span className={styles.srOnly}>
+                                        {" "}
+                                        active
+                                    </span>
+                                </span>
+                            )}
                         </button>
                         <span className={styles.count}>
                             {results.length}{" "}
                             {results.length === 1 ? "product" : "products"}
                         </span>
                         <label className={styles.sort}>
-                            <span>Sort</span>
+                            <span>Sort by</span>
                             <select
+                                aria-label="Sort by"
                                 value={sort}
                                 onChange={(e) =>
                                     update((p) => {
@@ -222,8 +279,12 @@ export default function Shop() {
                         </div>
                     ) : (
                         <div className={styles.noResults}>
-                            Nothing matches those filters.{" "}
-                            <button type="button" onClick={clearAll}>
+                            <p>Nothing matches those filters.</p>
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={clearAll}
+                            >
                                 Clear filters
                             </button>
                         </div>
@@ -232,4 +293,17 @@ export default function Shop() {
             </div>
         </main>
     );
+}
+
+// True below the width where the filter sidebar becomes a drawer.
+function useIsNarrow() {
+    const query = "(max-width: 900px)";
+    const [narrow, setNarrow] = useState(() => matchMedia(query).matches);
+    useEffect(() => {
+        const mq = matchMedia(query);
+        const onChange = () => setNarrow(mq.matches);
+        mq.addEventListener("change", onChange);
+        return () => mq.removeEventListener("change", onChange);
+    }, []);
+    return narrow;
 }

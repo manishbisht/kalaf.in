@@ -126,27 +126,48 @@
     .sidebar {
         position: fixed;
         inset: 0;
-        top: 0;
         z-index: var(--z-modal);
         background: var(--off-white);
-        padding: 20px;
+        padding: 0 20px 32px;
         overflow-y: auto;
+        overscroll-behavior: contain;
         transform: translateX(-100%);
-        transition: transform var(--dur-base) var(--ease);
+        visibility: hidden;
+        transition:
+            transform var(--dur-base) var(--ease),
+            visibility 0s linear var(--dur-base);
     }
     .sidebarOpen {
         transform: none;
+        visibility: visible;
+        transition: transform var(--dur-base) var(--ease);
     }
     .sidebarHead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-bottom: 16px;
-        margin-bottom: 8px;
+        gap: 12px;
+        padding: 16px 0;
+        margin-bottom: 20px;
+        background: var(--off-white);
         border-bottom: 1px solid var(--line);
         font-family: var(--font-head);
         font-weight: 600;
         font-size: 16px;
+    }
+    .sidebarHead > span {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sidebar,
+    .sidebarOpen {
+        transition: none;
     }
 }
 .closeBtn {
@@ -231,11 +252,34 @@
 }
 @media (max-width: 900px) {
     .filterBtn {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
     }
+}
+.filterCount {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: var(--ink);
+    color: var(--off-white);
+    font-size: 11px;
+    font-feature-settings: "tnum" 1;
+}
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 .count {
     flex: 1;
+    white-space: nowrap;
     font-family: var(--font-head);
     font-size: 12px;
     letter-spacing: 0.06em;
@@ -283,8 +327,7 @@
 .activeChip:hover {
     border-color: var(--ink);
 }
-.clearBtn,
-.noResults button {
+.clearBtn {
     background: none;
     border: 0;
     padding: 0 6px;
@@ -308,10 +351,33 @@
 }
 
 .noResults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
     padding: 80px 0;
     text-align: center;
     font-family: var(--font-body);
     color: var(--smoke);
+}
+.noResults p {
+    margin: 0;
+}
+
+/* Keyboard focus for the shop's own controls. */
+.tabs a:focus-visible,
+.breadcrumb a:focus-visible,
+.filterBtn:focus-visible,
+.closeBtn:focus-visible,
+.activeChip:focus-visible,
+.clearBtn:focus-visible,
+.sort select:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+.option:has(input:focus-visible) {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
 }
 
 .empty {
