@@ -18,6 +18,11 @@ node_modules/.bin/tsc -b
 node_modules/.bin/vite build
 node_modules/.bin/vite build --ssr src/entry-server.tsx --outDir node_modules/.tmp/ssr
 node scripts/prerender.mjs                # per-route HTML, 404.html, sitemap.xml, robots.txt, llms.txt
+
+# Tests (see scripts/README.md → Tests); the last two need the build above:
+node_modules/.bin/vitest run              # unit, data and component tests
+REQUIRE_DIST=1 node_modules/.bin/vitest run scripts/prerender.test.ts   # the built files
+node_modules/.bin/playwright test         # browser tests (once: playwright install chromium)
 ```
 
 ## Hard rules
@@ -44,14 +49,14 @@ node scripts/prerender.mjs                # per-route HTML, 404.html, sitemap.xm
 
 ## Where things are
 
-| Folder                            | README                                               | What's there / when to read it                                                                                             |
-| --------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `src/`                            | [src/README.md](src/README.md)                       | Entry points (hydrate vs createRoot), App shell, design tokens, global CSS utilities, constants, env vars, Clarity, hooks. |
-| `src/components/`                 | [src/components/README.md](src/components/README.md) | Every shared component; PolicyLayout in depth; BuyButtons' store rule; Nav, Footer, WhatsApp, Ask AI, Icons.               |
-| `src/pages/`                      | [src/pages/README.md](src/pages/README.md)           | Routes table, Shop (filters/sort in the URL), Product page, NotFound, policy pages as data wrappers, adding a page.        |
-| `src/data/`                       | [src/data/README.md](src/data/README.md)             | Generated catalog and business JSON, their types and helpers, swatch colours, old-handle redirects.                        |
-| `src/seo/`                        | [src/seo/README.md](src/seo/README.md)               | Titles, meta, canonical, Open Graph, JSON-LD, sitemap/robots/llms.txt; what to add for a new page.                         |
-| `scripts/`, `public/`, `.github/` | [scripts/README.md](scripts/README.md)               | Catalog sync, prerender, the static files in `public/`, and the GitHub Pages deploy with CalVer releases.                  |
+| Folder                            | README                                               | What's there / when to read it                                                                                                                      |
+| --------------------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/`                            | [src/README.md](src/README.md)                       | Entry points (hydrate vs createRoot), App shell, design tokens, global CSS utilities, constants, env vars, Clarity, hooks.                          |
+| `src/components/`                 | [src/components/README.md](src/components/README.md) | Every shared component; PolicyLayout in depth; BuyButtons' store rule; Nav, Footer, WhatsApp, Ask AI, Icons.                                        |
+| `src/pages/`                      | [src/pages/README.md](src/pages/README.md)           | Routes table, Shop (filters/sort in the URL), Product page, NotFound, policy pages as data wrappers, adding a page.                                 |
+| `src/data/`                       | [src/data/README.md](src/data/README.md)             | Generated catalog and business JSON, their types and helpers, swatch colours, old-handle redirects.                                                 |
+| `src/seo/`                        | [src/seo/README.md](src/seo/README.md)               | Titles, meta, canonical, Open Graph, JSON-LD, sitemap/robots/llms.txt; what to add for a new page.                                                  |
+| `scripts/`, `public/`, `.github/` | [scripts/README.md](scripts/README.md)               | Catalog sync, prerender, the static files in `public/`, the GitHub Pages deploy with CalVer releases, and the tests (Vitest, Playwright in `e2e/`). |
 
 `public/` and `.github/` have no README on purpose: Vite copies everything in `public/` to the live site, and GitHub would show `.github/README.md` as the repo's front page.
 
