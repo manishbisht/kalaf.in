@@ -18,6 +18,8 @@ export type Business = {
     };
     email: string;
     phone: string | null;
+    // WhatsApp chat number, with country code (e.g. "+91 79768 47772").
+    whatsapp: string | null;
 };
 
 export const BUSINESS = raw as Business;

@@ -2,6 +2,7 @@ import { useEffect, lazy, Suspense } from "react";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
+import { WhatsAppButton } from "./components/WhatsAppButton";
 import { ROUTES } from "./constants";
 
 // Route-level code splitting — each page ships in its own chunk so the home
@@ -65,6 +66,7 @@ function Shell() {
                 </Routes>
             </Suspense>
             <Footer />
+            <WhatsAppButton />
         </>
     );
 }

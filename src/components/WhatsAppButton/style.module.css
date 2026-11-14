@@ -1,0 +1,93 @@
+/* Floating WhatsApp chat button. The round green badge is WhatsApp's own
+   mark, so it's the one deliberate exception to the brand's no-radius rule.
+   It sits above page content but under modals (gallery lightbox, filters). */
+.button {
+    position: fixed;
+    right: calc(24px + env(safe-area-inset-right));
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    z-index: calc(var(--z-nav) + 10);
+    display: block;
+    text-decoration: none;
+}
+
+.badge {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25d366;
+    color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: transform var(--dur-fast) var(--ease);
+}
+
+/* "Chat with us" slides out on hover/focus (desktop only). Absolutely placed
+   so the hidden label doesn't widen the clickable area. */
+.label {
+    position: absolute;
+    right: calc(100% + var(--s-3));
+    top: 50%;
+    white-space: nowrap;
+    font-family: var(--font-head);
+    font-size: var(--t-small);
+    font-weight: var(--w-med);
+    color: var(--fg-inverse);
+    background: var(--bg-inverse);
+    padding: var(--s-2) var(--s-3);
+    opacity: 0;
+    transform: translate(8px, -50%);
+    pointer-events: none;
+    transition:
+        opacity var(--dur-fast) var(--ease),
+        transform var(--dur-fast) var(--ease);
+}
+
+.button:hover .badge,
+.button:focus-visible .badge {
+    transform: scale(1.06);
+}
+
+.button:hover .label,
+.button:focus-visible .label {
+    opacity: 1;
+    transform: translate(0, -50%);
+}
+
+.button:focus-visible {
+    outline: none;
+}
+
+.button:focus-visible .badge {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+    .button {
+        right: calc(16px + env(safe-area-inset-right));
+        bottom: calc(16px + env(safe-area-inset-bottom));
+    }
+
+    .badge {
+        width: 52px;
+        height: 52px;
+    }
+
+    .label {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .badge,
+    .label {
+        transition: none;
+    }
+}
+
+@media print {
+    .button {
+        display: none;
+    }
+}

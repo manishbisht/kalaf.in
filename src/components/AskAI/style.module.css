@@ -1,0 +1,51 @@
+/* Row of "Ask <assistant>" links. Light by default; `dark` for the footer. */
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3) var(--s-4);
+}
+
+.label {
+    font-family: var(--font-head);
+    font-size: var(--t-eyebrow);
+    letter-spacing: var(--tr-eyebrow);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-1);
+    padding: 6px var(--s-3);
+    border: 1px solid var(--border);
+    font-size: var(--t-meta);
+    font-weight: var(--w-med);
+    color: var(--fg);
+    text-decoration: none;
+    transition:
+        border-color var(--dur-fast) var(--ease),
+        background var(--dur-fast) var(--ease);
+}
+
+.link:hover,
+.link:focus-visible {
+    border-color: var(--fg);
+}
+
+.dark .link {
+    border-color: var(--line-dark);
+    color: var(--fg-inverse);
+}
+
+.dark .link:hover,
+.dark .link:focus-visible {
+    border-color: var(--fg-inverse);
+}

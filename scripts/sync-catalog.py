@@ -140,7 +140,7 @@ def size_label(attrs: dict):
 # Public fields copied from the products repo's business.json. Everything else
 # in that file (and documents/) stays private.
 BUSINESS_FIELDS = ("legal_name", "trade_name", "constitution", "gstin",
-                   "address", "email", "phone")
+                   "address", "email", "phone", "whatsapp")
 
 
 def write_business(src_root: Path):
