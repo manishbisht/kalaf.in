@@ -85,8 +85,17 @@ describe("lazyWithReload", () => {
     });
 
     it("doesn't reload when sessionStorage is blocked (no loop guard)", async () => {
-        vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+        // Replace the global itself: on Node 22+ `sessionStorage` can be
+        // Node's own Web Storage, so spying on jsdom's Storage.prototype
+        // wouldn't reach the object the code calls.
+        const blocked = () => {
             throw new Error("SecurityError");
+        };
+        vi.stubGlobal("sessionStorage", {
+            getItem: blocked,
+            setItem: blocked,
+            removeItem: blocked,
+            clear: blocked,
         });
         await renderLazy(() => Promise.reject(STALE));
         expect(reload).not.toHaveBeenCalled();
