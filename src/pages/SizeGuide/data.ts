@@ -1,79 +1,123 @@
 import type { PolicyData } from "../../components/PolicyLayout";
 import { BRAND } from "../../constants";
+import { PRODUCTS } from "../../data/catalog";
+
+const PANT = PRODUCTS.find((p) => p.code === "PNT");
+const CHART = PANT?.sizeChart;
+const DUPATTA_SIZE =
+    PRODUCTS.find((p) => p.collection === "dupattas")?.size ?? "2.25 m × 1 m";
+
+const cm = (inches: number) => `${Math.round(inches * 2.54)}`;
+
+const LENGTH = CHART?.lengthIn ?? 40;
+const INSEAM = CHART?.inseamIn ?? 30;
 
 export const data: PolicyData = {
     eyebrow: "Guide 01",
     title: "Size guide",
     ornament: "माप",
     summary:
-        "Every Kalaf piece is cut in Jaipur with relaxed, generous proportions. Find your fit below.",
-    updated: "23 May 2026",
+        "Our pant comes in waist sizes 28 to 36 with an elastic waist. Our dupattas are one size. Here are the numbers, and how to measure yourself.",
+    updated: "14 Nov 2026",
     readTime: "2 min read",
     crossLinksHeader: "More guides",
     promises: [
         {
-            kicker: "True",
-            label: "To size",
-            body: "Our pieces run as labelled. If you're between sizes, size down for a cleaner silhouette.",
+            kicker: "Waist",
+            label: "Pant sizes",
+            body: "Sizes 28, 30, 32, 34 and 36 are your waist in inches.",
         },
         {
-            kicker: "Relaxed",
-            label: "Fit",
-            body: "We cut with generous ease. The measurements below are garment measurements, not body measurements.",
+            kicker: "Elastic",
+            label: "Easy waist",
+            body: "Elastic all the way round, so choose your usual waist size.",
         },
         {
-            kicker: "Free",
-            label: "Alterations",
-            body: "If the fit isn't quite right after purchase, we'll recommend a local tailor in your city.",
+            kicker: "One size",
+            label: "Dupattas",
+            body: `Every dupatta is ${DUPATTA_SIZE}. No sizing needed.`,
         },
     ],
     sections: [
         {
-            id: "sizing",
-            title: "How we size",
+            id: "pant-chart",
+            title: "Cotton Relaxed Trousers",
             body: [
                 {
                     kind: "p",
-                    text: "Kalaf pieces run in S, M, L, XL. Our cuts are relaxed and slightly oversized — if you're between sizes, size down.",
+                    text: "These are standard size measurements, not measurements taken from the finished garment. Match them to your body, measured as shown below.",
                 },
                 {
-                    kind: "p",
-                    text: "All measurements below are garment measurements in centimetres, taken flat. Your body measurement will be smaller.",
+                    kind: "table",
+                    head: [
+                        "Size",
+                        "Waist (in)",
+                        "Hip (in)",
+                        "Waist (cm)",
+                        "Hip (cm)",
+                    ],
+                    rows: (CHART?.rows ?? []).map((r) => [
+                        r.size,
+                        `${r.waist}`,
+                        `${r.hip}`,
+                        cm(r.waist),
+                        cm(r.hip),
+                    ]),
+                    caption:
+                        "Centimetres are converted from inches and rounded.",
                 },
             ],
+            callout: {
+                label: "Every size",
+                value: `Length about ${LENGTH} in · inseam ${INSEAM} in`,
+            },
         },
         {
-            id: "chest",
-            title: "Chest & shoulder",
+            id: "measure",
+            title: "How to measure",
             body: [
                 {
                     kind: "p",
-                    text: "Measure across the widest point of your chest with the tape horizontal. Our garment measurements include 10–14 cm of ease.",
+                    text: "Use a soft tape and measure over light clothing or none. Keep the tape level and snug, but not tight.",
                 },
                 {
                     kind: "list",
                     items: [
-                        "S — chest 88–96 cm, shoulder 44 cm",
-                        "M — chest 96–104 cm, shoulder 46 cm",
-                        "L — chest 104–112 cm, shoulder 48 cm",
-                        "XL — chest 112–120 cm, shoulder 50 cm",
+                        "Waist — around your waist where you normally wear your trousers.",
+                        "Hip — around the fullest part of your hips, with your feet together.",
+                        "Inseam — from the crotch down the inside of the leg to where you want the hem, if you'd like to compare with a pair you own.",
                     ],
                 },
             ],
         },
         {
-            id: "length",
-            title: "Length",
+            id: "fit",
+            title: "How the pant fits",
             body: [
                 {
                     kind: "p",
-                    text: "We measure length from the highest point of the shoulder seam to the hem. Kurta lengths vary by style — check the individual product page for specifics.",
+                    text: "It's a relaxed, wide straight leg that falls cleanly to full length. The waistband is elastic all the way round, with a front button and zip fly, so it gives a little for comfort.",
+                },
+                {
+                    kind: "list",
+                    items: [
+                        "Choose your usual waist size.",
+                        "If your hips measure more than the chart shows for your waist size, go up one size.",
+                        `The length is about ${LENGTH} in for every size. If you're shorter, a tailor can take up the hem easily.`,
+                    ],
                 },
             ],
-            callout: {
-                label: "Average body length",
-                value: "S 70 cm · M 72 cm · L 74 cm · XL 76 cm",
-            },
+        },
+        {
+            id: "dupattas",
+            title: "Dupattas",
+            body: [
+                {
+                    kind: "p",
+                    text: `All our dupattas — bandhani, bandhani with gota border, and chiffon leheriya — are one size: ${DUPATTA_SIZE}. That's a full-length drape for suits, lehengas and festive wear.`,
+                },
+            ],
+            callout: { label: "Size", value: DUPATTA_SIZE },
         },
         {
             id: "unsure",
@@ -81,7 +125,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: `Email us at ${BRAND.email} with your chest, shoulder, and height measurements and the piece you're looking at. We'll tell you exactly which size to order.`,
+                    text: `Email ${BRAND.email} with your waist and hip measurements and we'll suggest a size.`,
                 },
             ],
             callout: { label: "Write to us", value: BRAND.email },

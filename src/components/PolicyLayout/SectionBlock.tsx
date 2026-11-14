@@ -57,8 +57,10 @@ export function SectionBlock({
                                     <a
                                         key={j}
                                         href={item.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                        {...(item.href.startsWith("http") && {
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                        })}
                                         className={styles.linkCard}
                                     >
                                         <span className={styles.linkCardLabel}>
@@ -79,6 +81,45 @@ export function SectionBlock({
                                         </span>
                                     </a>
                                 ))}
+                            </div>
+                        );
+                    }
+                    if (b.kind === "table") {
+                        return (
+                            <div key={i} className={styles.tableWrap}>
+                                <table className={styles.table}>
+                                    {b.caption && (
+                                        <caption
+                                            className={styles.tableCaption}
+                                        >
+                                            {b.caption}
+                                        </caption>
+                                    )}
+                                    <thead>
+                                        <tr>
+                                            {b.head.map((h) => (
+                                                <th key={h} scope="col">
+                                                    {h}
+                                                </th>
+                                            ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {b.rows.map((row) => (
+                                            <tr key={row[0]}>
+                                                {row.map((cell, j) =>
+                                                    j === 0 ? (
+                                                        <th key={j} scope="row">
+                                                            {cell}
+                                                        </th>
+                                                    ) : (
+                                                        <td key={j}>{cell}</td>
+                                                    )
+                                                )}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
                             </div>
                         );
                     }

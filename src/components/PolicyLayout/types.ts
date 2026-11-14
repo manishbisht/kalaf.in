@@ -6,6 +6,13 @@ export type PolicyBodyBlock =
     | {
           kind: "links";
           items: { label: string; href: string; sub?: string }[];
+      }
+    | {
+          // A simple data table, e.g. a size chart. First column is the row header.
+          kind: "table";
+          caption?: string;
+          head: string[];
+          rows: string[][];
       };
 
 export type PolicySection = {
