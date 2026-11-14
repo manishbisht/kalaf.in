@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { BRAND, whatsappHref } from "../../constants";
+import { BRAND, ROUTES, whatsappHref } from "../../constants";
 import { usePageProduct } from "../../hooks/usePageProduct";
 import { trackClicks, trackWhatsAppClick } from "../../analytics";
 import styles from "./style.module.css";
@@ -20,10 +20,12 @@ function useGreeting() {
     };
 }
 
-// Floating "chat with us" button, bottom-right on every page.
+// Floating "chat with us" button, bottom-right on every page except /links,
+// which has its own full-width WhatsApp button (the badge would cover it).
 export function WhatsAppButton() {
     const { greeting, page } = useGreeting();
-    if (!BRAND.whatsapp) return null;
+    const { pathname } = useLocation();
+    if (!BRAND.whatsapp || pathname === ROUTES.links) return null;
 
     return (
         <a

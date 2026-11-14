@@ -4,7 +4,14 @@ import { MetaRow } from "./MetaRow";
 import type { PolicyData } from "./types";
 import styles from "./style.module.css";
 
-export function PolicyHero({ data }: { data: PolicyData }) {
+export function PolicyHero({
+    data,
+    section,
+}: {
+    data: PolicyData;
+    // Breadcrumb middle step: "Help" for guides, "Policies" for legal pages.
+    section: string;
+}) {
     return (
         <section className={styles.hero}>
             <div aria-hidden className={styles.ornament}>
@@ -12,12 +19,12 @@ export function PolicyHero({ data }: { data: PolicyData }) {
             </div>
 
             <div className={`container ${styles.heroInner}`}>
-                <nav className={styles.breadcrumb}>
+                <nav className={styles.breadcrumb} aria-label="Breadcrumb">
                     <Link to={ROUTES.home} className={styles.breadcrumbLink}>
                         Home
                     </Link>
                     <span>/</span>
-                    <span>Policies</span>
+                    <span>{section}</span>
                     <span>/</span>
                     <span className={styles.breadcrumbCurrent}>
                         {data.title}

@@ -15,6 +15,7 @@ export type {
     PolicyBodyBlock,
     CrossLink,
 } from "./types";
+import { HELP_CROSS_LINKS } from "./links";
 export { POLICY_CROSS_LINKS, HELP_CROSS_LINKS } from "./links";
 
 type PolicyLayoutProps = {
@@ -30,7 +31,10 @@ export default function PolicyLayout({
 }: PolicyLayoutProps) {
     return (
         <div className={styles.wrapper}>
-            <PolicyHero data={data} />
+            <PolicyHero
+                data={data}
+                section={crossLinks === HELP_CROSS_LINKS ? "Help" : "Policies"}
+            />
 
             {data.promises && <Promises promises={data.promises} />}
 
