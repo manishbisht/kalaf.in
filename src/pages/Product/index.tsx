@@ -5,13 +5,17 @@ import {
     LISTING,
     findProduct,
     formatRupees,
+    isSoldOut,
     percentOff,
+    type Product,
+    type Variant,
 } from "../../data/catalog";
-import { ROUTES, collectionPath } from "../../constants";
+import { ROUTES, collectionPath, productPath } from "../../constants";
 import { BuyButtons } from "../../components/BuyButtons";
 import { ProductCard } from "../../components/ProductCard";
 import { Swatch } from "../../components/Swatch";
 import { Gallery } from "./Gallery";
+import { Share } from "./Share";
 import styles from "./style.module.css";
 
 export default function ProductPage() {
@@ -45,10 +49,13 @@ export default function ProductPage() {
         links.flipkart = variant.sizeLinks[size];
     }
 
+    const soldOut = isSoldOut(variant);
+
     const related = LISTING.filter(
         (i) =>
             i.product.collection === product.collection &&
-            i.variant.sku !== variant.sku
+            i.variant.sku !== variant.sku &&
+            !isSoldOut(i.variant)
     ).slice(0, 4);
 
     const facts = [
@@ -96,18 +103,22 @@ export default function ProductPage() {
                             </span>
                         </div>
 
-                        <div className={styles.label}>
+                        <div className={styles.label} id="colour-label">
                             Colour — <strong>{variant.colour}</strong>
                         </div>
-                        <div className={styles.swatches}>
+                        <div
+                            className={styles.swatches}
+                            role="group"
+                            aria-labelledby="colour-label"
+                        >
                             {product.variants.map((v) => (
                                 <button
                                     key={v.sku}
                                     type="button"
                                     title={v.colour}
-                                    aria-label={v.colour}
+                                    aria-label={`${v.colour}${isSoldOut(v) ? " (sold out)" : ""}`}
                                     aria-pressed={v.sku === variant.sku}
-                                    className={`${styles.swatchBtn} ${v.sku === variant.sku ? styles.swatchActive : ""}`}
+                                    className={`${styles.swatchBtn} ${v.sku === variant.sku ? styles.swatchActive : ""} ${isSoldOut(v) ? styles.swatchSoldOut : ""}`}
                                     onClick={() =>
                                         setParams(
                                             { colour: v.colourCode },
@@ -122,7 +133,7 @@ export default function ProductPage() {
 
                         {product.sizes.length > 0 && (
                             <>
-                                <div className={styles.label}>
+                                <div className={styles.label} id="size-label">
                                     {variant.sizeLinks
                                         ? "Waist size (inches)"
                                         : "Waist sizes (inches) — pick yours on the marketplace"}
@@ -133,7 +144,11 @@ export default function ProductPage() {
                                         </>
                                     )}
                                 </div>
-                                <div className={styles.sizes}>
+                                <div
+                                    className={styles.sizes}
+                                    role="group"
+                                    aria-labelledby="size-label"
+                                >
                                     {/* Sizes only pick a link when the store
                                         has one page per size; otherwise
                                         they're just information. */}
@@ -159,6 +174,9 @@ export default function ProductPage() {
                                             </button>
                                         ))}
                                 </div>
+                                {product.sizeChart && (
+                                    <SizeChart chart={product.sizeChart} />
+                                )}
                                 <Link
                                     to={ROUTES.sizeGuide}
                                     className={styles.sizeGuide}
@@ -169,16 +187,35 @@ export default function ProductPage() {
                         )}
 
                         <div className={styles.buy}>
-                            <div className={styles.label}>Buy it on</div>
-                            <BuyButtons links={links} prices={variant.prices} />
-                            <p className={styles.buyNote}>
-                                You&apos;ll check out on the marketplace — they
-                                handle payment, delivery and returns.
-                                {product.sizes.length > 0 &&
-                                    (variant.sizeLinks
-                                        ? " Pick your size there if you haven't chosen one here."
-                                        : " Pick your size there.")}
-                            </p>
+                            <Availability product={product} variant={variant} />
+                            {!soldOut && (
+                                <>
+                                    <div className={styles.label}>
+                                        Buy it on
+                                    </div>
+                                    <BuyButtons
+                                        links={links}
+                                        prices={variant.prices}
+                                        sku={variant.sku}
+                                    />
+                                    <p className={styles.buyNote}>
+                                        You&apos;ll check out on the marketplace
+                                        — they handle payment, delivery and
+                                        returns.
+                                        {product.sizes.length > 0 &&
+                                            (variant.sizeLinks
+                                                ? " Pick your size there if you haven't chosen one here."
+                                                : " Pick your size there.")}
+                                    </p>
+                                </>
+                            )}
+                            <Share
+                                title={`${product.title} — ${variant.colour} | Kalaf`}
+                                path={productPath(
+                                    product.handle,
+                                    variant.colourCode
+                                )}
+                            />
                         </div>
 
                         <p className={styles.description}>
@@ -249,5 +286,78 @@ export default function ProductPage() {
                 )}
             </div>
         </main>
+    );
+}
+
+// Waist/hip per size in a collapsible table, under the size buttons.
+function SizeChart({ chart }: { chart: NonNullable<Product["sizeChart"]> }) {
+    const unit = chart.units === "inches" ? "in" : chart.units;
+    const extras = [
+        chart.lengthIn && `Length ~${chart.lengthIn} in`,
+        chart.inseamIn && `Inseam ${chart.inseamIn} in`,
+    ].filter(Boolean);
+    return (
+        <details className={styles.sizeChart}>
+            <summary>Size chart</summary>
+            <table>
+                <caption>Body measurements ({unit})</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Size</th>
+                        <th scope="col">Waist</th>
+                        <th scope="col">Hip</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {chart.rows.map((r) => (
+                        <tr key={r.size}>
+                            <th scope="row">{r.size}</th>
+                            <td>{r.waist}</td>
+                            <td>{r.hip}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            {extras.length > 0 && (
+                <p className={styles.sizeChartNote}>
+                    {extras.join(" · ")}, same for every size.
+                </p>
+            )}
+        </details>
+    );
+}
+
+// "In stock · dispatched from Jaipur in N working days", or "Sold out".
+// Stock is null when the products repo has no count; then we only promise
+// the dispatch time.
+function Availability({
+    product,
+    variant,
+}: {
+    product: Product;
+    variant: Variant;
+}) {
+    if (isSoldOut(variant)) {
+        return (
+            <p className={`${styles.availability} ${styles.soldOut}`}>
+                Sold out in {variant.colour}
+                {product.variants.some((v) => !isSoldOut(v)) &&
+                    " — try another colour"}
+            </p>
+        );
+    }
+    const days = product.dispatchDays;
+    const parts = [
+        variant.stock !== null && "In stock",
+        days &&
+            `dispatched from Jaipur in ${days} working ${days === 1 ? "day" : "days"}`,
+    ].filter(Boolean) as string[];
+    if (!parts.length) return null;
+    const text = parts.join(" · ");
+    return (
+        <p className={styles.availability}>
+            <span className={styles.dot} aria-hidden="true" />
+            {text.charAt(0).toUpperCase() + text.slice(1)}
+        </p>
     );
 }
