@@ -182,6 +182,9 @@ describe.skipIf(!built && !required)("prerendered dist/", () => {
             expect(body.match(/<main\b/g), path).toHaveLength(1);
             expect(body, path).toContain('<main id="main" tabindex="-1">');
             expect(body.match(/<h1\b/g), path).toHaveLength(1);
+            // The page is inline in <main>, not a fallback swapped later.
+            expect(body, path).not.toContain("<!--$?-->");
+            expect(body, path).not.toContain("$RC(");
         }
     });
 
