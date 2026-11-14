@@ -510,6 +510,19 @@
     color: var(--smoke);
 }
 
+/* Under the buy buttons, above .buyNote: the listed price vs checkout. */
+.priceNote {
+    margin: 12px 0 0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--charcoal);
+}
+
+.priceNote + .buyNote {
+    margin-top: 6px;
+}
+
 .description {
     margin: 36px 0 0;
     padding-top: 28px;
