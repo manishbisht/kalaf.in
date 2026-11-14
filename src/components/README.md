@@ -14,6 +14,7 @@ Shared components, one folder each (`index.tsx` + optional `style.module.css` + 
 | `ProductCard`    | Shop-grid tile for one colour of a product; second photo on hover; "Sold out" or "% off" badge.            |
 | `Swatch`         | Round colour dot; multicolour codes render as segments (colours from `swatchColours`).                     |
 | `PolicyLayout`   | The shell every policy and guide page renders (below).                                                     |
+| `ErrorBoundary`  | Catches a page that throws (or won't load) and shows "Something went wrong" with Reload and Home buttons.  |
 | `Icons`          | Inline SVG set: `<Icon name="arrowUpRight" size={16} />`; `IconName` is a string union, so typos fail tsc. |
 | `Hero`           | Home: the pant's three colourways, worn; "Buy" goes to the first colour with a Flipkart link.              |
 | `Drop`           | Home: the pant (catalog code `PNT`) with video, colour swatches, facts and `BuyButtons`.                   |

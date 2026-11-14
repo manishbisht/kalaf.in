@@ -1,16 +1,20 @@
-import { useEffect, useRef, lazy, Suspense } from "react";
+import { useEffect, useRef, Suspense, type ReactNode } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Clarity from "@microsoft/clarity";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { WhatsAppButton } from "./components/WhatsAppButton";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Seo } from "./seo/Seo";
 import { ROUTES } from "./constants";
 import { ENV } from "./env";
+import { lazyWithReload as lazy } from "./lazyWithReload";
 
 // Route-level code splitting — each page ships in its own chunk so the home
 // bundle doesn't have to download every policy page upfront. The build
 // prerenders these with react-dom/static, which waits for lazy pages.
+// `lazy` here is lazyWithReload (React's lazy plus one page reload when a
+// chunk from an older deploy is gone), so every page gets it.
 const Home = lazy(() => import("./pages/Home"));
 const ShippingReturns = lazy(() => import("./pages/ShippingReturns"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -54,6 +58,25 @@ function ScrollToTop() {
     return null;
 }
 
+// The routes' error boundary and Suspense fallback. A page that throws, or
+// whose chunk won't load even after lazyWithReload's one reload, shows the
+// boundary's "Something went wrong" message; the next navigation clears it.
+function PageBoundary({
+    resetKey,
+    children,
+}: {
+    resetKey: string;
+    children: ReactNode;
+}) {
+    return (
+        <ErrorBoundary resetKey={resetKey}>
+            <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+                {children}
+            </Suspense>
+        </ErrorBoundary>
+    );
+}
+
 // Everything inside the router. The server entry (entry-server.tsx) wraps
 // this in a StaticRouter to prerender each page at build time, with
 // seo={false}: the prerender writes head tags itself, and React would
@@ -67,7 +90,7 @@ export function Shell({ seo = true }: { seo?: boolean }) {
             {seo && <Seo />}
             <ScrollToTop />
             <Nav dark={dark} />
-            <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+            <PageBoundary resetKey={pathname}>
                 <Routes>
                     <Route path={ROUTES.home} element={<Home />} />
                     <Route
@@ -90,7 +113,7 @@ export function Shell({ seo = true }: { seo?: boolean }) {
                     <Route path={ROUTES.product} element={<ProductPage />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
-            </Suspense>
+            </PageBoundary>
             <Footer />
             <WhatsAppButton />
         </>
