@@ -16,7 +16,7 @@ import { ProductCard } from "../../components/ProductCard";
 import { Swatch } from "../../components/Swatch";
 import { Gallery } from "./Gallery";
 import { Share } from "./Share";
-import { AskAI } from "../../components/AskAI";
+import NotFound from "../NotFound";
 import styles from "./style.module.css";
 
 export default function ProductPage() {
@@ -26,16 +26,7 @@ export default function ProductPage() {
     const product = findProduct(handle);
 
     if (!product) {
-        return (
-            <main className={styles.page}>
-                <div className={`container ${styles.notFound}`}>
-                    <h1>Product not found</h1>
-                    <Link to={ROUTES.products} className="btn btn-primary">
-                        Shop all products
-                    </Link>
-                </div>
-            </main>
-        );
+        return <NotFound />;
     }
 
     const variant =
@@ -264,10 +255,6 @@ export default function ProductPage() {
                                 </ul>
                             </details>
                         )}
-
-                        <div className={styles.askAi}>
-                            <AskAI />
-                        </div>
                     </div>
                 </div>
 

@@ -126,6 +126,10 @@
     .sidebar {
         position: fixed;
         inset: 0;
+        /* The desktop rule's align-self: start would size the fixed drawer
+           to its content; stretch it to the screen so it scrolls. */
+        align-self: stretch;
+        height: 100dvh;
         z-index: var(--z-modal);
         background: var(--off-white);
         padding: 0 20px 32px;
@@ -378,12 +382,4 @@
 .option:has(input:focus-visible) {
     outline: 2px solid var(--ink);
     outline-offset: 4px;
-}
-
-.empty {
-    padding: 120px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    align-items: flex-start;
 }

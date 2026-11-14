@@ -136,13 +136,21 @@ describe("seoFor", () => {
     });
 });
 
-function expectProductJsonLd(ld: Json[], v: Variant, url: string) {
-    const product = ofType(ld, "Product")!;
-    expect(product["@context"]).toBe("https://schema.org");
-    expect(product.sku).toBe(v.sku);
+function expectProductJsonLd(ld: Json[], v: Variant, _pageUrl: string) {
+    const group = ofType(ld, "ProductGroup")!;
+    expect(group["@context"]).toBe("https://schema.org");
+    expect(group.brand).toEqual({ "@type": "Brand", name: "Kalaf" });
+    expect(group.variesBy).toBe("https://schema.org/color");
+    const variants = group.hasVariant as Json[];
+    // Every colour of the piece is listed, each as its own Product.
+    expect(variants.length).toBeGreaterThan(0);
+    variants.forEach((x) => expect(x["@type"]).toBe("Product"));
+    const product = variants.find((x) => x.sku === v.sku)!;
+    expect(product, `variant ${v.sku}`).toBeDefined();
     expect(product.color).toBe(v.colour);
-    expect(product.url).toBe(url);
-    expect(product.brand).toEqual({ "@type": "Brand", name: "Kalaf" });
+    expect(product.url).toMatch(
+        new RegExp(`^https://kalaf\\.in/products/.+\\?colour=${v.colourCode}$`)
+    );
     const images = product.image as string[];
     expect(images).toHaveLength(v.images.length);
     images.forEach((src) => expect(src).toMatch(/^https:\/\/kalaf\.in\//));

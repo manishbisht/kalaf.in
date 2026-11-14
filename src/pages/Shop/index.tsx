@@ -21,7 +21,25 @@ import {
     readSelection,
     sortItems,
 } from "./filters";
+import NotFound from "../NotFound";
 import styles from "./style.module.css";
+
+// Makes everything on the page except `el` (and its ancestors) inert, so Tab
+// and screen readers stay inside the open drawer. Returns an undo function.
+function inertOutside(el: HTMLElement | null) {
+    const made: HTMLElement[] = [];
+    for (let node = el; node && node !== document.body; ) {
+        const parent: HTMLElement | null = node.parentElement;
+        for (const sib of Array.from(parent?.children ?? [])) {
+            if (sib !== node && sib instanceof HTMLElement && !sib.inert) {
+                sib.inert = true;
+                made.push(sib);
+            }
+        }
+        node = parent;
+    }
+    return () => made.forEach((m) => (m.inert = false));
+}
 
 // Serves /products (everything) and /collections/:handle (one collection).
 export default function Shop() {
@@ -39,6 +57,9 @@ export default function Shop() {
         if (!drawerOpen) return;
         const toggleBtn = filterBtnRef.current;
         doneBtnRef.current?.focus();
+        const restoreInert = inertOutside(
+            document.getElementById("shop-filters")
+        );
         const prevOverflow = document.body.style.overflow;
         document.body.style.overflow = "hidden";
         const onKey = (e: KeyboardEvent) => {
@@ -48,6 +69,7 @@ export default function Shop() {
         return () => {
             window.removeEventListener("keydown", onKey);
             document.body.style.overflow = prevOverflow;
+            restoreInert();
             toggleBtn?.focus();
         };
     }, [drawerOpen]);
@@ -75,16 +97,7 @@ export default function Shop() {
     );
 
     if (handle && !collection) {
-        return (
-            <main className={styles.page}>
-                <div className={`container ${styles.empty}`}>
-                    <h1 className={styles.title}>Collection not found</h1>
-                    <Link to={ROUTES.products} className="btn btn-primary">
-                        Shop all products
-                    </Link>
-                </div>
-            </main>
-        );
+        return <NotFound />;
     }
 
     const update = (fn: (p: URLSearchParams) => void) => {

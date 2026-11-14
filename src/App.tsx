@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Clarity from "@microsoft/clarity";
 import { Nav } from "./components/Nav";
@@ -40,9 +40,15 @@ const DARK_NAV: string[] = [
 
 function ScrollToTop() {
     const { pathname } = useLocation();
+    const firstLoad = useRef(true);
     useEffect(() => {
         window.scrollTo(0, 0);
-        // Clarity's auto-tracker can miss client-side navigations.
+        // Clarity's auto-tracker can miss client-side navigations. It does
+        // count the first load itself, so only report the ones after it.
+        if (firstLoad.current) {
+            firstLoad.current = false;
+            return;
+        }
         if (ENV.clarityProjectId) Clarity.event("page_view");
     }, [pathname]);
     return null;

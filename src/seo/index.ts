@@ -15,6 +15,7 @@ import {
     PRODUCTS,
     findProduct,
     formatRupees,
+    storeName,
     type CollectionHandle,
     type Product,
     type Variant,
@@ -39,12 +40,6 @@ export type SeoData = {
     type: "website" | "product";
     noindex: boolean;
     jsonLd: JsonLd[];
-};
-
-const STORE_NAMES: Record<string, string> = {
-    flipkart: "Flipkart",
-    meesho: "Meesho",
-    amazon: "Amazon",
 };
 
 const absolute = (path: string) =>
@@ -229,7 +224,7 @@ function productSeo(product: Product, colour: string | null): SeoData {
     const path = productPath(product.handle);
     const url = absolute(productPath(product.handle, chosen?.colourCode));
     const stores = liveStores(variant);
-    const storeNames = stores.map(([id]) => STORE_NAMES[id] ?? id);
+    const storeNames = stores.map(([id]) => storeName(id));
     const collection = COLLECTIONS[product.collection];
 
     const title = chosen
@@ -243,31 +238,20 @@ function productSeo(product: Product, colour: string | null): SeoData {
           : product.variants[0].colour;
     const description = `${product.title} in ${which}, ${formatRupees(variant.price)}${where}. ${product.description}`;
 
-    const inStock = variant.stock === null || variant.stock > 0;
-    const jsonProduct: JsonLd = {
+    // One ProductGroup for the piece, with every colour as its own Product
+    // variant and offers, so search engines see all colours, not just one.
+    const group: JsonLd = {
         "@context": "https://schema.org",
-        "@type": "Product",
-        name: `${product.title} — ${variant.colour}`,
+        "@type": "ProductGroup",
+        "@id": `${absolute(path)}#product`,
+        name: product.title,
         description: product.description,
-        sku: variant.sku,
+        productGroupID: product.code,
         brand: { "@type": "Brand", name: BRAND.name },
-        image: variant.images.map((img) => absolute(img.srcLarge)),
-        color: variant.colour,
         ...(product.fabric ? { material: product.fabric } : {}),
-        url,
-        offers: stores.map(([id, link]) => ({
-            "@type": "Offer",
-            url: link,
-            priceCurrency: "INR",
-            price: (
-                variant.prices[id as keyof Variant["prices"]] ?? variant.price
-            ).toFixed(2),
-            availability: inStock
-                ? "https://schema.org/InStock"
-                : "https://schema.org/OutOfStock",
-            itemCondition: "https://schema.org/NewCondition",
-            seller: { "@type": "Organization", name: BUSINESS.legal_name },
-        })),
+        url: absolute(path),
+        variesBy: "https://schema.org/color",
+        hasVariant: product.variants.map((v) => variantJsonLd(product, v)),
     };
 
     return base(path, title + SUFFIX, description, {
@@ -275,7 +259,7 @@ function productSeo(product: Product, colour: string | null): SeoData {
         type: "product",
         image: absolute(variant.images[0]?.srcLarge ?? DEFAULT_IMAGE),
         jsonLd: [
-            jsonProduct,
+            group,
             breadcrumbs([
                 ["Home", ROUTES.home],
                 [collection.title, collectionPath(product.collection)],
@@ -283,6 +267,31 @@ function productSeo(product: Product, colour: string | null): SeoData {
             ]),
         ],
     });
+}
+
+function variantJsonLd(product: Product, v: Variant): JsonLd {
+    const inStock = v.stock === null || v.stock > 0;
+    return {
+        "@type": "Product",
+        name: `${product.title} — ${v.colour}`,
+        sku: v.sku,
+        color: v.colour,
+        image: v.images.map((img) => absolute(img.srcLarge)),
+        url: absolute(productPath(product.handle, v.colourCode)),
+        offers: liveStores(v).map(([id, link]) => ({
+            "@type": "Offer",
+            url: link,
+            priceCurrency: "INR",
+            price: (v.prices[id as keyof Variant["prices"]] ?? v.price).toFixed(
+                2
+            ),
+            availability: inStock
+                ? "https://schema.org/InStock"
+                : "https://schema.org/OutOfStock",
+            itemCondition: "https://schema.org/NewCondition",
+            seller: { "@type": "Organization", name: BUSINESS.legal_name },
+        })),
+    };
 }
 
 export function notFoundSeo(path: string): SeoData {
@@ -422,7 +431,7 @@ export function llmsTxt(): string {
         const s = new Set<string>();
         products.forEach((p) =>
             p.variants.forEach((v) =>
-                liveStores(v).forEach(([id]) => s.add(STORE_NAMES[id] ?? id))
+                liveStores(v).forEach(([id]) => s.add(storeName(id)))
             )
         );
         return [...s];

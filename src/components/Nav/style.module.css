@@ -66,9 +66,6 @@
     }
 }
 
-.linkMuted {
-    color: var(--smoke);
-}
 
 .wordmark {
     font-family: var(--font-display);

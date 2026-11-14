@@ -12,6 +12,9 @@ const dispatch = (collection: string) =>
     );
 const PANT_DAYS = dispatch("pants");
 const DUPATTA_DAYS = dispatch("dupattas");
+const FASTEST = Math.min(PANT_DAYS, DUPATTA_DAYS);
+const SLOWEST = Math.max(PANT_DAYS, DUPATTA_DAYS);
+const DAY_RANGE = FASTEST === SLOWEST ? `${FASTEST}` : `${FASTEST}–${SLOWEST}`;
 
 export const data: PolicyData = {
     eyebrow: "Policy 02",
@@ -23,7 +26,7 @@ export const data: PolicyData = {
     readTime: "2 min read",
     promises: [
         {
-            kicker: `${PANT_DAYS}–${DUPATTA_DAYS} days`,
+            kicker: `${DAY_RANGE} days`,
             label: "Dispatch from Jaipur",
             body: `We hand your order to the courier within ${PANT_DAYS} working days for the pant and ${DUPATTA_DAYS} for dupattas.`,
         },

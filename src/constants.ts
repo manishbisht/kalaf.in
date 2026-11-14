@@ -18,7 +18,10 @@ export const BRAND = {
     phone: BUSINESS.phone,
     whatsapp: BUSINESS.whatsapp,
     workingHours: "Mon–Sat, 10am–7pm IST",
-    copyrightYear: new Date().getFullYear(),
+    copyrightYear:
+        typeof __BUILD_YEAR__ === "number"
+            ? __BUILD_YEAR__
+            : new Date().getFullYear(),
 } as const;
 
 // "+91 79768 47772" → "tel:+917976847772" and "https://wa.me/917976847772".

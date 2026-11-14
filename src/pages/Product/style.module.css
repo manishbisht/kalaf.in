@@ -380,17 +380,17 @@
     border-color: var(--ink);
     color: var(--off-white);
 }
+/* Sizes shown for information only (the store's page has the size picker):
+   plain text with dot separators, so they don't look like buttons. */
 .sizeInfo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 56px;
-    height: 44px;
-    padding: 0 12px;
-    border: 1px solid var(--line);
     font-family: var(--font-head);
-    font-size: 14px;
+    font-size: 15px;
     color: var(--charcoal);
+}
+.sizeInfo + .sizeInfo::before {
+    content: "·";
+    margin-right: 8px;
+    color: var(--smoke);
 }
 .sizeChart {
     margin-top: 16px;
@@ -599,17 +599,4 @@
     }
 }
 
-.notFound {
-    padding: 120px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-}
 
-/* "Ask AI about this page" row at the end of the info column. */
-.askAi {
-    margin-top: var(--s-8);
-    padding-top: var(--s-6);
-    border-top: 1px solid var(--border);
-}

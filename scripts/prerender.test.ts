@@ -77,7 +77,7 @@ describe.skipIf(!built && !required)("prerendered dist/", () => {
         }
     });
 
-    it("each product page has its title and Product JSON-LD", () => {
+    it("each product page has its title and a ProductGroup with every colour", () => {
         for (const p of catalog.products) {
             const html = read(`products/${p.handle}.html`);
             expect(html).toContain(
@@ -85,9 +85,17 @@ describe.skipIf(!built && !required)("prerendered dist/", () => {
             );
             const ld = jsonLd(html);
             expect(ld, p.handle).not.toBeNull();
-            const product = ld!.find((x) => x["@type"] === "Product");
-            expect(product?.sku, p.handle).toBe(p.variants[0].sku);
-            expect((product?.offers as unknown[]).length).toBeGreaterThan(0);
+            const group = ld!.find((x) => x["@type"] === "ProductGroup");
+            const variants = (group?.hasVariant ?? []) as {
+                sku: string;
+                offers: unknown[];
+            }[];
+            expect(variants.map((v) => v.sku).sort(), p.handle).toEqual(
+                p.variants.map((v) => v.sku).sort()
+            );
+            for (const v of variants) {
+                expect(v.offers.length, v.sku).toBeGreaterThan(0);
+            }
         }
     });
 
