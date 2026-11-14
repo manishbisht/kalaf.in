@@ -34,11 +34,22 @@ jobs:
 
             - run: yarn install --frozen-lockfile
 
+            - name: Lint
+              run: yarn lint
+
+            # Unit, data and component tests. The dist/ smoke test skips
+            # itself here because nothing is built yet.
+            - name: Test
+              run: yarn test
+
             - run: yarn build
               env:
                   VITE_BUILD_VERSION: ${{ steps.version.outputs.version }}
                   VITE_COMMIT_SHA: ${{ github.sha }}
                   VITE_CLARITY_PROJECT_ID: ${{ secrets.CLARITY_PROJECT_ID }}
+
+            - name: Test the prerendered site
+              run: yarn test:dist
 
             - uses: actions/configure-pages@v6
 
