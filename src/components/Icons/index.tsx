@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import { cloneElement, type ReactElement, type SVGProps } from "react";
 
 export type IconName =
     | "search"
@@ -15,7 +15,9 @@ export type IconName =
     | "linkedin"
     | "x";
 
-type IconRenderer = (p: { size?: number }) => ReactElement;
+type IconRenderer = (p: {
+    size?: number;
+}) => ReactElement<SVGProps<SVGSVGElement>>;
 
 const ic: Record<IconName, IconRenderer> = {
     search: (p) => (
@@ -219,6 +221,11 @@ const ic: Record<IconName, IconRenderer> = {
     ),
 };
 
+// Icons are always decoration beside a text label (or inside a control with
+// an aria-label), so they're hidden from screen readers.
 export function Icon({ name, size }: { name: IconName; size?: number }) {
-    return ic[name]({ size });
+    return cloneElement(ic[name]({ size }), {
+        "aria-hidden": true,
+        focusable: "false",
+    });
 }

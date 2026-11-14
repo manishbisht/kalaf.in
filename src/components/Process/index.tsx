@@ -60,7 +60,13 @@ export function Process() {
                             <span className={styles.eyebrowText}>
                                 The making
                             </span>
-                            <span className={styles.devanagari}>— कलफ</span>
+                            <span
+                                className={styles.devanagari}
+                                lang="hi"
+                                aria-hidden="true"
+                            >
+                                — कलफ
+                            </span>
                         </div>
                         <h2>
                             Made in Jaipur.

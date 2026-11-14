@@ -59,16 +59,16 @@ export default function ProductPage() {
     ].filter(Boolean) as [string, string][];
 
     return (
-        <main className={styles.page}>
+        <div className={styles.page}>
             <div className="container">
                 <nav className={styles.breadcrumb} aria-label="Breadcrumb">
                     <Link to={ROUTES.home}>Home</Link>
-                    <span>/</span>
+                    <span aria-hidden="true">/</span>
                     <Link to={collectionPath(product.collection)}>
                         {collection.title}
                     </Link>
-                    <span>/</span>
-                    <span>{product.title}</span>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">{product.title}</span>
                 </nav>
 
                 <div className={styles.layout}>
@@ -179,7 +179,14 @@ export default function ProductPage() {
                         )}
 
                         <div className={styles.buy}>
-                            <Availability product={product} variant={variant} />
+                            {/* Announced when a colour swatch changes it
+                                (e.g. to "Sold out in …"). */}
+                            <div role="status">
+                                <Availability
+                                    product={product}
+                                    variant={variant}
+                                />
+                            </div>
                             {!soldOut && (
                                 <>
                                     <div className={styles.label}>
@@ -286,7 +293,7 @@ export default function ProductPage() {
                     </section>
                 )}
             </div>
-        </main>
+        </div>
     );
 }
 

@@ -1,5 +1,6 @@
 .hero {
     --fg-muted: var(--smoke); /* dark background */
+    --focus-ring: var(--off-white);
     position: relative;
     min-height: calc(100vh - 110px);
     background: var(--ink);

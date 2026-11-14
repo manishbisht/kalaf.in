@@ -58,9 +58,12 @@
     outline: none;
 }
 
+/* The badge floats over light and dark sections alike, so the ring is ink
+   with a white gap between it and the badge: visible on either. */
 .button:focus-visible .badge {
     outline: 2px solid var(--ink);
     outline-offset: 3px;
+    box-shadow: 0 0 0 3px var(--paper);
 }
 
 @media (max-width: 768px) {

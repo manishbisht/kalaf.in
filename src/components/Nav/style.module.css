@@ -9,6 +9,7 @@
 
 .navDark {
     --fg-muted: var(--smoke); /* dark background */
+    --focus-ring: var(--off-white);
     background: var(--ink);
     color: var(--off-white);
     border-bottom-color: var(--line-dark);
@@ -46,7 +47,11 @@
     }
 }
 
+/* The padding (cancelled by the negative margin) grows the tap target to
+   ~37px tall without moving the text. */
 .link {
+    padding: 10px 0;
+    margin: -10px 0;
     font-family: var(--font-head);
     font-weight: 500;
     font-size: 13px;
@@ -69,7 +74,9 @@
 }
 @media (max-width: 768px) {
     .mobileShop {
-        display: inline;
+        display: inline-block;
+        padding: 12px 0 12px 12px;
+        margin: -12px 0;
     }
 }
 
@@ -84,6 +91,8 @@
     justify-self: center;
 }
 
+
+
 .announcement {
     border-top: 1px solid var(--line);
     text-align: center;
@@ -92,7 +101,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--fg-muted);
 }
 @media (max-width: 640px) {
     .announcement {

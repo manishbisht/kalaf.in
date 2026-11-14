@@ -106,10 +106,14 @@ export default function JournalArticle() {
     const more = ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 3);
 
     return (
-        <main className={styles.page}>
+        <div className={styles.page}>
             <article>
                 <header className={styles.header}>
-                    <div className={styles.ornament} aria-hidden="true">
+                    <div
+                        className={styles.ornament}
+                        aria-hidden="true"
+                        lang="hi"
+                    >
                         {article.ornament}
                     </div>
                     <div className={`container ${styles.headerGrid}`}>
@@ -247,6 +251,6 @@ export default function JournalArticle() {
                     </div>
                 </div>
             </section>
-        </main>
+        </div>
     );
 }

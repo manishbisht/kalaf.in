@@ -65,7 +65,7 @@ const attr = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
 for (const [from, to] of Object.entries(ssr.oldHandles)) {
     const target = `/products/${to}`;
     const html = `<!doctype html>
-<html lang="en">
+<html lang="en-IN">
 <head>
 <meta charset="utf-8" />
 <title>Moved</title>

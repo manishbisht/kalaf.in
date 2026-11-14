@@ -1,5 +1,6 @@
 .footer {
     --fg-muted: var(--smoke); /* dark background */
+    --focus-ring: var(--off-white);
     background: var(--charcoal);
     color: var(--off-white);
     padding: 80px 0 32px;
@@ -91,11 +92,18 @@
 
 .social {
     display: flex;
-    gap: 16px;
-    margin-top: 28px;
+    gap: 4px;
+    /* 20px icons in 44px tap targets; the margins keep the icons where they
+       sat with a 16px gap. */
+    margin: 16px 0 0 -12px;
     color: var(--smoke);
 }
 .social a {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    color: inherit;
     cursor: pointer;
     transition: opacity var(--dur-fast) var(--ease);
 }
@@ -104,6 +112,8 @@
 }
 
 .colTitle {
+    margin: 0 0 18px;
+    font-weight: 400;
     font-family: var(--font-head);
     font-size: 11px;
     letter-spacing: 0.18em;
@@ -118,10 +128,14 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 4px;
 }
 
+/* 4px of padding top and bottom (with the list's gap down from 12px to 4px)
+   makes each link a 24px+ tap target without moving it. */
 .colLink {
+    display: inline-block;
+    padding: 4px 0;
     font-family: var(--font-body);
     font-size: 14px;
     color: var(--off-white);
@@ -188,7 +202,6 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--smoke);
-    opacity: 0.5;
     font-feature-settings: "tnum" 1;
 }
 

@@ -14,7 +14,7 @@ export function PolicyHero({
 }) {
     return (
         <section className={styles.hero}>
-            <div aria-hidden className={styles.ornament}>
+            <div aria-hidden="true" lang="hi" className={styles.ornament}>
                 {data.ornament}
             </div>
 
@@ -23,10 +23,13 @@ export function PolicyHero({
                     <Link to={ROUTES.home} className={styles.breadcrumbLink}>
                         Home
                     </Link>
-                    <span>/</span>
+                    <span aria-hidden="true">/</span>
                     <span>{section}</span>
-                    <span>/</span>
-                    <span className={styles.breadcrumbCurrent}>
+                    <span aria-hidden="true">/</span>
+                    <span
+                        className={styles.breadcrumbCurrent}
+                        aria-current="page"
+                    >
                         {data.title}
                     </span>
                 </nav>

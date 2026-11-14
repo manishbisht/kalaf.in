@@ -121,27 +121,33 @@ export default function Shop() {
     const title = collection?.title ?? "All products";
 
     return (
-        <main className={styles.page}>
+        <div className={styles.page}>
             <header className={styles.header}>
                 <div className="container">
                     <nav className={styles.breadcrumb} aria-label="Breadcrumb">
                         <Link to={ROUTES.home}>Home</Link>
-                        <span>/</span>
+                        <span aria-hidden="true">/</span>
                         {collection ? (
                             <>
                                 <Link to={ROUTES.products}>Shop</Link>
-                                <span>/</span>
-                                <span>{collection.title}</span>
+                                <span aria-hidden="true">/</span>
+                                <span aria-current="page">
+                                    {collection.title}
+                                </span>
                             </>
                         ) : (
-                            <span>Shop</span>
+                            <span aria-current="page">Shop</span>
                         )}
                     </nav>
                     <div className={styles.headRow}>
                         <div>
                             <div className={styles.eyebrow}>
                                 {collection?.eyebrow ?? "Shop — everything"}
-                                <span className={styles.devanagari}>
+                                <span
+                                    className={styles.devanagari}
+                                    lang="hi"
+                                    aria-hidden="true"
+                                >
                                     {collection?.devanagari ?? "सब"}
                                 </span>
                             </div>
@@ -152,10 +158,11 @@ export default function Shop() {
                                 "Every Kalaf piece, made in Jaipur. Pick one and buy it on Flipkart or Meesho — the marketplace handles delivery and returns."}
                         </p>
                     </div>
-                    <div className={styles.tabs}>
+                    <nav className={styles.tabs} aria-label="Collections">
                         <Link
                             to={ROUTES.products}
                             className={!handle ? styles.tabActive : ""}
+                            aria-current={!handle ? "page" : undefined}
                         >
                             All
                         </Link>
@@ -167,17 +174,20 @@ export default function Shop() {
                                     className={
                                         handle === h ? styles.tabActive : ""
                                     }
+                                    aria-current={
+                                        handle === h ? "page" : undefined
+                                    }
                                 >
                                     {COLLECTIONS[h].title}
                                 </Link>
                             )
                         )}
-                    </div>
+                    </nav>
                 </div>
             </header>
 
             <div className={`container ${styles.layout}`}>
-                <aside
+                <section
                     id="shop-filters"
                     className={`${styles.sidebar} ${drawerOpen ? styles.sidebarOpen : ""}`}
                     aria-label="Filters"
@@ -215,7 +225,7 @@ export default function Shop() {
                         selection={selection}
                         onToggle={toggle}
                     />
-                </aside>
+                </section>
 
                 <section>
                     <div className={styles.toolbar}>
@@ -239,11 +249,14 @@ export default function Shop() {
                                 </span>
                             )}
                         </button>
-                        <span className={styles.count}>
+                        {/* A status region, so screen readers hear the new
+                            count when a filter changes the results. */}
+                        <span className={styles.count} role="status">
                             {results.length}{" "}
                             {results.length === 1 ? "product" : "products"}
                         </span>
                         <label className={styles.sort}>
+                            {/* Hidden on phones; aria-label keeps the name. */}
                             <span>Sort by</span>
                             <select
                                 aria-label="Sort by"
@@ -313,7 +326,7 @@ export default function Shop() {
                     )}
                 </section>
             </div>
-        </main>
+        </div>
     );
 }
 

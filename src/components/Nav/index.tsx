@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { BRAND, ROUTES, collectionPath } from "../../constants";
 import styles from "./style.module.css";
 
@@ -6,30 +6,36 @@ type NavProps = {
     dark?: boolean;
 };
 
+// NavLink marks the link to the current page with aria-current="page".
+// `end`: /products shouldn't count as current on /products/some-piece.
 export function Nav({ dark = false }: NavProps) {
     return (
         <header className={`${styles.nav} ${dark ? styles.navDark : ""}`}>
-            <div className={styles.inner}>
-                <nav className={styles.links}>
-                    <Link to={ROUTES.products} className={styles.link}>
+            <nav className={styles.inner} aria-label="Main">
+                <div className={styles.links}>
+                    <NavLink to={ROUTES.products} end className={styles.link}>
                         Shop all
-                    </Link>
-                    <Link to={collectionPath("pants")} className={styles.link}>
+                    </NavLink>
+                    <NavLink
+                        to={collectionPath("pants")}
+                        className={styles.link}
+                    >
                         Pants
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                         to={collectionPath("dupattas")}
                         className={styles.link}
                     >
                         Dupattas
-                    </Link>
-                    <Link to={ROUTES.journal} className={styles.link}>
+                    </NavLink>
+                    <NavLink to={ROUTES.journal} end className={styles.link}>
                         Journal
-                    </Link>
-                </nav>
+                    </NavLink>
+                </div>
 
                 <Link to={ROUTES.home} className={styles.wordmark}>
                     {BRAND.wordmark}
+                    <span className="sr-only"> home</span>
                 </Link>
 
                 {/* Desktop links are hidden on mobile, so mobile gets a Shop link here */}
@@ -41,7 +47,7 @@ export function Nav({ dark = false }: NavProps) {
                         Shop
                     </Link>
                 </div>
-            </div>
+            </nav>
 
             <div
                 className={`${styles.announcement} ${dark ? styles.announcementDark : ""}`}

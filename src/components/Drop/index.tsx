@@ -17,7 +17,13 @@ export function Drop() {
                             <span className={styles.eyebrowText}>
                                 Drop 01 — the first piece
                             </span>
-                            <span className={styles.devanagari}>— पहला</span>
+                            <span
+                                className={styles.devanagari}
+                                lang="hi"
+                                aria-hidden="true"
+                            >
+                                — पहला
+                            </span>
                         </div>
                         <h2>
                             One pant.

@@ -28,15 +28,15 @@ Home-page components read the catalog directly, so they update when the catalog 
 
 ## Nav
 
-Desktop: Shop all / Pants / Dupattas / Journal on the left, the `kalaf.in` wordmark (home link) centred. On mobile the left links hide and a single "Shop" link shows on the right. An announcement strip under it says where each collection is sold. `App.tsx` passes `dark` for paths in `DARK_NAV` (the policy and guide pages); home, shop, product and 404 use the light Nav.
+Desktop: Shop all / Pants / Dupattas / Journal on the left, the `kalaf.in` wordmark (home link) centred, all inside `<nav aria-label="Main">`; the left links are `NavLink`s, so the current one gets `aria-current="page"`. On mobile the left links hide and a single "Shop" link shows on the right. An announcement strip under it says where each collection is sold. `App.tsx` passes `dark` for paths in `DARK_NAV` (the policy and guide pages); home, shop, product and 404 use the light Nav.
 
 ## Footer
 
-Same on every page. Columns: brand blurb + `SocialRow` (Instagram, Facebook, LinkedIn, X from `SOCIAL`, opened in a new tab with `rel="noopener noreferrer"`) + `<AskAI dark />`; Shop (with the Journal); Get in touch (email, WhatsApp and phone when `BRAND` has them); Help; Policies. Internal links use `<Link>`. The bottom row shows the legal name, constitution, GSTIN and address; `BuildStamp` prints `ENV.buildVersion` and the short commit SHA.
+Same on every page. Columns (a `<nav aria-label="Footer">`, each titled with an `h2`): brand blurb + `SocialRow` (Instagram, Facebook, LinkedIn, X from `SOCIAL`, opened in a new tab with `rel="noopener noreferrer"`) + `<AskAI dark />`; Shop (with the Journal); Get in touch (email, WhatsApp and phone when `BRAND` has them); Help; Policies. Internal links use `<Link>`. The bottom row shows the legal name, constitution, GSTIN and address; `BuildStamp` prints `ENV.buildVersion` and the short commit SHA.
 
 ## WhatsAppButton and AskAI
 
-Both use `usePageProduct()` (`src/hooks/`) to pre-fill a message. On a product page it names the piece, colour and public URL; elsewhere it's a general question. `WhatsAppButton` renders nothing if `BRAND.whatsapp` is empty and links to `whatsappHref(BRAND.whatsapp)?text=…`. Its round green badge is the only element allowed a border-radius. `AskAI`'s prompt points the assistant at the page URL and `https://kalaf.in/llms.txt`.
+Both use `usePageProduct()` (`src/hooks/`) to pre-fill a message. On a product page it names the piece, colour and public URL; elsewhere it's a general question. `WhatsAppButton` renders nothing if `BRAND.whatsapp` is empty and links to `whatsappHref(BRAND.whatsapp)?text=…`, inside an `<aside aria-label="WhatsApp chat">` landmark. Its round green badge is the only element allowed a border-radius. `AskAI`'s prompt points the assistant at the page URL and `https://kalaf.in/llms.txt`.
 
 ## BuyButtons: the store rule
 

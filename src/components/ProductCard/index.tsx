@@ -79,7 +79,10 @@ export function ProductCard({
                     <span className={styles.price}>
                         {formatRupees(variant.price)}
                     </span>
-                    <s className={styles.mrp}>{formatRupees(variant.mrp)}</s>
+                    <s className={styles.mrp}>
+                        <span className="sr-only">MRP </span>
+                        {formatRupees(variant.mrp)}
+                    </s>
                 </div>
                 {!soldOut && stores.length > 0 && (
                     <div className={styles.stores}>On {stores.join(" · ")}</div>

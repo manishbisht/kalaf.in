@@ -31,6 +31,8 @@
     --bg-inverse: var(--ink);
     --border: var(--line);
     --accent: var(--sand);
+    /* Keyboard focus ring (see :focus-visible in index.css). */
+    --focus-ring: var(--ink);
 
     --font-display: "Clash Display", "Space Grotesk", system-ui, sans-serif;
     --font-head: "Space Grotesk", system-ui, sans-serif;
@@ -109,6 +111,7 @@
     --bg: var(--ink);
     --bg-alt: var(--charcoal);
     --border: var(--line-dark);
+    --focus-ring: var(--off-white);
     color: var(--fg);
     background: var(--bg);
 }

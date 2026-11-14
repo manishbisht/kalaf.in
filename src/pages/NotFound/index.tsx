@@ -4,9 +4,9 @@ import styles from "./style.module.css";
 
 export default function NotFound() {
     return (
-        <main className={styles.page}>
+        <div className={styles.page}>
             <div className={`container ${styles.inner}`}>
-                <div className={styles.ornament} aria-hidden="true">
+                <div className={styles.ornament} aria-hidden="true" lang="hi">
                     {BRAND.devanagari}
                 </div>
                 <div className="t-eyebrow">Error 404</div>
@@ -33,6 +33,6 @@ export default function NotFound() {
                     </Link>
                 </div>
             </div>
-        </main>
+        </div>
     );
 }

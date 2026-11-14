@@ -36,9 +36,13 @@ export class ErrorBoundary extends Component<Props, State> {
     render() {
         if (!this.state.error) return this.props.children;
         return (
-            <main className={styles.page} role="alert">
+            <div className={styles.page} role="alert">
                 <div className={`container ${styles.inner}`}>
-                    <div className={styles.ornament} aria-hidden="true">
+                    <div
+                        className={styles.ornament}
+                        aria-hidden="true"
+                        lang="hi"
+                    >
                         {BRAND.devanagari}
                     </div>
                     <div className="t-eyebrow">Error</div>
@@ -61,7 +65,7 @@ export class ErrorBoundary extends Component<Props, State> {
                         </Link>
                     </div>
                 </div>
-            </main>
+            </div>
         );
     }
 }
