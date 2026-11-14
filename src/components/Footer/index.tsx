@@ -30,10 +30,18 @@ export function Footer() {
                     <Link to={ROUTES.home} className={styles.wordmark}>
                         {BRAND.wordmark}
                     </Link>
-                    <div className={styles.devanagari}>{BRAND.devanagari}</div>
+                    {/* The wordmark in Devanagari: decoration beside the
+                        link, so screen readers skip it. */}
+                    <div
+                        className={styles.devanagari}
+                        lang="hi"
+                        aria-hidden="true"
+                    >
+                        {BRAND.devanagari}
+                    </div>
                 </div>
 
-                <div className={styles.columns}>
+                <nav className={styles.columns} aria-label="Footer">
                     <div>
                         <div className={styles.brandColLabel}>
                             Made in Jaipur
@@ -85,7 +93,7 @@ export function Footer() {
                             { label: "Cookie policy", to: ROUTES.cookies },
                         ]}
                     />
-                </div>
+                </nav>
 
                 <div className={styles.bottom}>
                     <div>

@@ -66,8 +66,9 @@ export default function PolicyLayout({
                             </div>
                         </article>
 
-                        {/* Right spacer column for breathing room */}
-                        <aside />
+                        {/* Right spacer column for breathing room (a plain
+                            div: an empty <aside> is an empty landmark) */}
+                        <div aria-hidden="true" />
                     </div>
                 </div>
             </section>

@@ -16,7 +16,8 @@ export function LinkColumn({
 }) {
     return (
         <div>
-            <div className={styles.colTitle}>{title}</div>
+            <h2 className={styles.colTitle}>{title}</h2>
+
             <ul className={styles.colList}>
                 {items.map((item) => (
                     <li key={item.label}>

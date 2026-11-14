@@ -171,6 +171,23 @@ describe.skipIf(!built && !required)("prerendered dist/", () => {
         expect(html).toContain('<div id="root"></div>');
     });
 
+    it("every page is en-IN with a skip link first, one <main id=main> and one h1", () => {
+        for (const path of paths) {
+            const html = read(filesFor(path)[0]);
+            expect(html, path).toContain('<html lang="en-IN">');
+            const body = html.slice(html.indexOf('<div id="root"'));
+            // The skip link is the first link or button on the page.
+            const firstControl = body.match(/<(a|button)\b[^>]*>/)?.[0];
+            expect(firstControl, path).toContain('href="#main"');
+            expect(body.match(/<main\b/g), path).toHaveLength(1);
+            expect(body, path).toContain('<main id="main" tabindex="-1">');
+            expect(body.match(/<h1\b/g), path).toHaveLength(1);
+            // The page is inline in <main>, not a fallback swapped later.
+            expect(body, path).not.toContain("<!--$?-->");
+            expect(body, path).not.toContain("$RC(");
+        }
+    });
+
     it("llms.txt mentions every product title", () => {
         const txt = read("llms.txt");
         for (const p of catalog.products) expect(txt).toContain(p.title);

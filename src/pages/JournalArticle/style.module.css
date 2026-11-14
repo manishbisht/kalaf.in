@@ -360,6 +360,7 @@
 /* ── More from the journal ─────────────────────────────── */
 .more {
     --fg-muted: var(--smoke); /* dark background */
+    --focus-ring: var(--off-white);
     background: var(--ink);
     color: var(--off-white);
     padding: var(--s-20) 0;

@@ -94,41 +94,51 @@ export function Shell({ seo = true }: { seo?: boolean }) {
         <>
             {seo && <Seo />}
             <ScrollToTop />
+            {/* First focusable element: jumps keyboard and screen-reader
+                users past the Nav. A plain fragment link, not a <Link>: it
+                moves focus within the page rather than routing. */}
+            <a className="skip-link" href="#main">
+                Skip to content
+            </a>
             <Nav dark={dark} />
-            <PageBoundary resetKey={pathname}>
-                <Routes>
-                    <Route path={ROUTES.home} element={<Home />} />
-                    <Route
-                        path={ROUTES.shippingReturns}
-                        element={<ShippingReturns />}
-                    />
-                    <Route path={ROUTES.privacy} element={<Privacy />} />
-                    <Route path={ROUTES.terms} element={<Terms />} />
-                    <Route
-                        path={ROUTES.refundPolicy}
-                        element={<RefundPolicy />}
-                    />
-                    <Route path={ROUTES.cookies} element={<CookiePolicy />} />
-                    <Route path={ROUTES.sizeGuide} element={<SizeGuide />} />
-                    <Route path={ROUTES.careGuide} element={<CareGuide />} />
-                    <Route path={ROUTES.trackOrder} element={<TrackOrder />} />
-                    <Route path={ROUTES.contact} element={<Contact />} />
-                    <Route path={ROUTES.products} element={<Shop />} />
-                    <Route path={ROUTES.collection} element={<Shop />} />
-                    <Route path={ROUTES.product} element={<ProductPage />} />
-                    <Route path={ROUTES.journal} element={<Journal />} />
-                    <Route
-                        path={ROUTES.journalArticle}
-                        element={<JournalArticle />}
-                    />
-                    <Route path={ROUTES.faq} element={<Faq />} />
-                    <Route path={ROUTES.links} element={<Links />} />
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
-            </PageBoundary>
+            {/* The page's one <main>; pages render their content inside it.
+                tabIndex -1 lets the skip link move focus here. */}
+            <main id="main" tabIndex={-1}>
+                <PageBoundary resetKey={pathname}>
+                    <PageRoutes />
+                </PageBoundary>
+            </main>
             <Footer />
             <WhatsAppButton />
         </>
+    );
+}
+
+function PageRoutes() {
+    return (
+        <Routes>
+            <Route path={ROUTES.home} element={<Home />} />
+            <Route
+                path={ROUTES.shippingReturns}
+                element={<ShippingReturns />}
+            />
+            <Route path={ROUTES.privacy} element={<Privacy />} />
+            <Route path={ROUTES.terms} element={<Terms />} />
+            <Route path={ROUTES.refundPolicy} element={<RefundPolicy />} />
+            <Route path={ROUTES.cookies} element={<CookiePolicy />} />
+            <Route path={ROUTES.sizeGuide} element={<SizeGuide />} />
+            <Route path={ROUTES.careGuide} element={<CareGuide />} />
+            <Route path={ROUTES.trackOrder} element={<TrackOrder />} />
+            <Route path={ROUTES.contact} element={<Contact />} />
+            <Route path={ROUTES.products} element={<Shop />} />
+            <Route path={ROUTES.collection} element={<Shop />} />
+            <Route path={ROUTES.product} element={<ProductPage />} />
+            <Route path={ROUTES.journal} element={<Journal />} />
+            <Route path={ROUTES.journalArticle} element={<JournalArticle />} />
+            <Route path={ROUTES.faq} element={<Faq />} />
+            <Route path={ROUTES.links} element={<Links />} />
+            <Route path="*" element={<NotFound />} />
+        </Routes>
     );
 }
 

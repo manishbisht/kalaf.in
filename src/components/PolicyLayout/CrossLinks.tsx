@@ -13,12 +13,13 @@ export function CrossLinks({
     header?: string;
 }) {
     return (
-        <section className={styles.crossLinks}>
+        <nav className={styles.crossLinks} aria-labelledby="cross-links-label">
             <div className="container">
                 <div className={styles.crossLinksHeader}>
                     <span
                         className="t-eyebrow"
                         style={{ color: "var(--smoke)" }}
+                        id="cross-links-label"
                     >
                         {header ?? "The other policies"}
                     </span>
@@ -37,6 +38,7 @@ export function CrossLinks({
                             <div
                                 key={l.slug}
                                 className={`${styles.crossLink} ${styles.crossLinkCurrent}`}
+                                aria-current="page"
                             >
                                 <span className={styles.crossLinkNum}>
                                     {l.num} · You are here
@@ -65,6 +67,6 @@ export function CrossLinks({
                     })}
                 </div>
             </div>
-        </section>
+        </nav>
     );
 }

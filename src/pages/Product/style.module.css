@@ -346,12 +346,19 @@
     gap: 10px;
 }
 .swatchBtn {
+    position: relative;
     display: inline-flex;
     padding: 3px;
     border: 1px solid transparent;
     border-radius: 50%;
     background: none;
     cursor: pointer;
+}
+/* Grows the 36px button's tap target to 44px without changing the look. */
+.swatchBtn::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
 }
 .swatchActive {
     border-color: var(--ink);
@@ -400,7 +407,10 @@
     margin-top: 16px;
     max-width: 360px;
 }
+/* Small text controls get 4px of vertical padding so each is a 24px+ tap
+   target (WCAG 2.5.8); the margins around them shrink to match. */
 .sizeChart summary {
+    padding: 4px 0;
     font-family: var(--font-head);
     font-size: 13px;
     font-weight: 500;
@@ -445,7 +455,8 @@
 
 .sizeGuide {
     display: inline-block;
-    margin-top: 12px;
+    margin-top: 8px;
+    padding: 4px 0;
     font-family: var(--font-head);
     font-size: 12px;
     color: var(--fg-muted);
@@ -487,11 +498,12 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px 20px;
-    margin-top: 20px;
+    gap: 0 20px;
+    margin-top: 16px;
 }
 .shareBtn {
-    padding: 0;
+    display: inline-block;
+    padding: 4px 0;
     border: 0;
     background: none;
     font-family: var(--font-head);
@@ -563,6 +575,7 @@
     padding-top: 18px;
 }
 .more summary {
+    padding: 4px 0;
     font-family: var(--font-head);
     font-weight: 600;
     font-size: 14px;
@@ -599,6 +612,8 @@
     margin: 0;
 }
 .relatedHead a {
+    display: inline-block;
+    padding: 4px 0;
     font-family: var(--font-head);
     font-size: 13px;
     color: var(--ink);

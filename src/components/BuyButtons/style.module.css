@@ -9,8 +9,10 @@
     outline-offset: 3px;
 }
 
+/* Muted rather than faded: the text still reads at 5.6:1. */
 .soon {
-    opacity: 0.45;
+    color: var(--fg-muted);
+    border-color: var(--border);
     cursor: default;
     pointer-events: none;
 }

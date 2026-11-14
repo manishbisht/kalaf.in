@@ -47,16 +47,16 @@ function Card({ article, featured }: { article: Article; featured?: boolean }) {
 export default function Journal() {
     const [first, ...rest] = ARTICLES;
     return (
-        <main className={styles.page}>
+        <div className={styles.page}>
             <header className={styles.header}>
-                <div className={styles.ornament} aria-hidden="true">
+                <div className={styles.ornament} aria-hidden="true" lang="hi">
                     पत्रिका
                 </div>
                 <div className={`container ${styles.headerInner}`}>
                     <nav className={styles.breadcrumb} aria-label="Breadcrumb">
                         <Link to={ROUTES.home}>Home</Link>
                         <span aria-hidden>/</span>
-                        <span>Journal</span>
+                        <span aria-current="page">Journal</span>
                     </nav>
                     <div className={`t-eyebrow ${styles.eyebrow}`}>
                         Craft, care &amp; how to wear
@@ -74,6 +74,6 @@ export default function Journal() {
                     ))}
                 </div>
             </div>
-        </main>
+        </div>
     );
 }

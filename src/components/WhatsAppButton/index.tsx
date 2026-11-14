@@ -24,22 +24,26 @@ export function WhatsAppButton() {
     const { greeting, page } = useGreeting();
     if (!BRAND.whatsapp || page === ROUTES.links) return null;
 
+    // In its own labelled landmark: it sits outside <main> and the footer, and
+    // screen-reader users can jump to it from the landmarks list.
     return (
-        <a
-            className={styles.button}
-            href={`${whatsappHref(BRAND.whatsapp)}?text=${encodeURIComponent(greeting)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat with us on WhatsApp"
-            {...trackClicks(() => trackWhatsAppClick(page))}
-        >
-            <span className={styles.label} aria-hidden="true">
-                Chat with us
-            </span>
-            <span className={styles.badge}>
-                <WhatsAppLogo />
-            </span>
-        </a>
+        <aside aria-label="WhatsApp chat">
+            <a
+                className={styles.button}
+                href={`${whatsappHref(BRAND.whatsapp)}?text=${encodeURIComponent(greeting)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat with us on WhatsApp"
+                {...trackClicks(() => trackWhatsAppClick(page))}
+            >
+                <span className={styles.label} aria-hidden="true">
+                    Chat with us
+                </span>
+                <span className={styles.badge}>
+                    <WhatsAppLogo />
+                </span>
+            </a>
+        </aside>
     );
 }
 

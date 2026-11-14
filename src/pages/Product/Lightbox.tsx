@@ -13,18 +13,24 @@ export function Lightbox({
     start,
     label,
     onClose,
+    restoreFocus = true,
 }: {
     images: ProductImage[];
     start: number;
     label: string;
     // Called with the photo that was on screen, so the gallery can follow.
     onClose: (photo: number) => void;
+    // false: the caller moves focus itself once the lightbox has closed.
+    restoreFocus?: boolean;
 }) {
     const ref = useRef<HTMLDialogElement>(null);
     const [i, setI] = useState(start);
     const total = images.length;
     const image = images[i];
 
+    // Focus goes back to the opener by default. The gallery passes
+    // `restoreFocus={false}` and focuses the photo now on screen instead,
+    // because after paging the opener sits in a hidden slide.
     useEffect(() => {
         const dialog = ref.current;
         if (!dialog) return;
@@ -38,8 +44,10 @@ export function Lightbox({
         return () => {
             if (dialog.open) dialog.close();
             document.body.style.overflow = prevOverflow;
-            opener?.focus({ preventScroll: true });
+            if (restoreFocus) opener?.focus({ preventScroll: true });
         };
+        // Runs once per open; restoreFocus is fixed for its lifetime.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const step = (d: number) => setI((n) => (n + d + total) % total);

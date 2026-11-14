@@ -6,17 +6,16 @@ import { Lookbook } from "../../components/Lookbook";
 import { Newsletter } from "../../components/Newsletter";
 import styles from "./style.module.css";
 
+// The App shell wraps every page in <main id="main">.
 export default function Home() {
     return (
         <div className={styles.page}>
-            <main className={styles.main}>
-                <Hero />
-                <Drop />
-                <Process />
-                <WhyKalaf />
-                <Lookbook />
-                <Newsletter />
-            </main>
+            <Hero />
+            <Drop />
+            <Process />
+            <WhyKalaf />
+            <Lookbook />
+            <Newsletter />
         </div>
     );
 }

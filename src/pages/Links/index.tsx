@@ -69,10 +69,14 @@ const ITEMS: Item[] = [
 
 export default function Links() {
     return (
-        <main className={styles.page}>
+        <div className={styles.page}>
             <div className={styles.inner}>
                 <header className={styles.head}>
-                    <div className={styles.devanagari} aria-hidden="true">
+                    <div
+                        className={styles.devanagari}
+                        aria-hidden="true"
+                        lang="hi"
+                    >
                         {BRAND.devanagari}
                     </div>
                     <h1 className={styles.wordmark}>{BRAND.wordmark}</h1>
@@ -109,7 +113,7 @@ export default function Links() {
                     {BRAND.email}
                 </a>
             </div>
-        </main>
+        </div>
     );
 }
 

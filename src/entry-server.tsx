@@ -25,7 +25,12 @@ export async function render(url: string): Promise<string> {
             <StaticRouter location={url}>
                 <Shell seo={false} />
             </StaticRouter>
-        </StrictMode>
+        </StrictMode>,
+        // Never split a large page out of its Suspense boundary. Otherwise
+        // React writes the fallback in place and the real content in a hidden
+        // <div> that an inline script swaps in later, so crawlers, no-JS
+        // visitors and the first paint see an empty <main>.
+        { progressiveChunkSize: Infinity }
     );
     return new Response(prelude).text();
 }

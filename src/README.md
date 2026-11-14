@@ -22,7 +22,7 @@ The app. Back to the index: [AGENTS.md](../AGENTS.md).
 ## Entry points
 
 - **`main.tsx`** imports `tokens.css` then `index.css`, rewrites old HashRouter links (`/#/products/x?colour=BK`) to real paths with `history.replaceState`, starts Clarity when `ENV.clarityProjectId` is set, and removes the static `[data-seo]` head tags the prerender wrote (`<Seo />` renders the live ones). It calls `hydrateRoot` only when `#root[data-path]` equals the current path, there's no query string and `#root` has content. Otherwise (`?colour=`, shop filters, `404.html`, old hash links) it uses `createRoot`, because the prerendered HTML is for the plain URL.
-- **`App.tsx`** lazy-loads every page (one chunk per route) and exports `Shell`: `<Seo />`, `ScrollToTop`, `<Nav dark={…}>`, the `<Routes>` inside `PageBoundary` (an `ErrorBoundary` plus the `Suspense` fallback), `<Footer />` and `<WhatsAppButton />`. Its `lazy` is `lazyWithReload`: each deploy renames the chunks, so a tab left open on the old build gets "Failed to fetch dynamically imported module" on its next page. The helper reloads once (a `sessionStorage` flag, cleared when a chunk loads, stops loops; no reload if storage is blocked or during SSR); if the chunk still won't load, the error boundary shows "Something went wrong" with a Reload button. The boundary renders nothing of its own until something throws, so prerender and hydration are unaffected, and it clears on the next navigation. `DARK_NAV` lists the paths whose page opens with a dark hero (the policy and guide pages). `ScrollToTop` scrolls to the top on every pathname change and fires `Clarity.event("page_view")`.
+- **`App.tsx`** lazy-loads every page (one chunk per route) and exports `Shell`: `<Seo />`, `ScrollToTop`, the "Skip to content" link (`.skip-link`, the first focusable element), `<Nav dark={…}>`, the page's one `<main id="main" tabIndex={-1}>` holding the `<Routes>` inside `PageBoundary` (an `ErrorBoundary` plus the `Suspense` fallback), `<Footer />` and `<WhatsAppButton />`. Pages render a `<div>`, never their own `<main>`. Its `lazy` is `lazyWithReload`: each deploy renames the chunks, so a tab left open on the old build gets "Failed to fetch dynamically imported module" on its next page. The helper reloads once (a `sessionStorage` flag, cleared when a chunk loads, stops loops; no reload if storage is blocked or during SSR); if the chunk still won't load, the error boundary shows "Something went wrong" with a Reload button. The boundary renders nothing of its own until something throws, so prerender and hydration are unaffected, and it clears on the next navigation. `DARK_NAV` lists the paths whose page opens with a dark hero (the policy and guide pages). `ScrollToTop` scrolls to the top on every pathname change and fires `Clarity.event("page_view")`.
 - **`entry-server.tsx`** renders `<StaticRouter><Shell seo={false} /></StaticRouter>` with `react-dom/static`'s `prerender` (which waits for lazy pages) and re-exports the SEO helpers the prerender script needs. `seo={false}` because the script writes head tags itself.
 
 Because pages are prerendered and then hydrated, **render must be pure**: anything browser-only goes in an effect.
@@ -40,9 +40,19 @@ Because pages are prerendered and then hydrated, **render must be pure**: anythi
 - **Fonts**: `--font-display` (Clash Display), `--font-head` (Space Grotesk), `--font-body` (Inter), `--font-devan` (Tiro Devanagari Hindi). Type scale `--t-hero` … `--t-eyebrow`.
 - **Spacing / layout**: `--s-1` (4px) … `--s-40` (160px); `--container-max 1440px`; `--page-pad 80px` (`-md` 40, `-sm` 20).
 - **Motion**: `--ease` cubic-bezier(0.22, 1, 0.36, 1); `--dur-fast` 200ms, `--dur-base` 400ms, `--dur-slow` 800ms, `--dur-cinem` 1200ms.
-- **Other**: `--r-0` (radius is 0 by design), `--z-nav` / `--z-modal` / `--z-toast`.
+- **Other**: `--r-0` (radius is 0 by design), `--z-nav` / `--z-modal` / `--z-toast`, `--focus-ring` (ink; set it to `--off-white` on a dark section, next to its `--fg-muted: var(--smoke)`).
 
-Global utilities in `index.css`: `.container`, `.section`, `.section-tight`, `.section-head`, `.btn` + `.btn-primary` / `.btn-secondary` / `.btn-ghost`, `.chip` / `.chip-dark`, `.img-zoom`, `.fade-up` (+ `.d1`–`.d4` delays), `.t-eyebrow`.
+Global utilities in `index.css`: `.container`, `.section`, `.section-tight`, `.section-head`, `.btn` + `.btn-primary` / `.btn-secondary` / `.btn-ghost`, `.chip` / `.chip-dark`, `.img-zoom`, `.fade-up` (+ `.d1`–`.d4` delays), `.t-eyebrow`, `.skip-link`, `.sr-only` (visually hidden, e.g. "MRP" inside a struck-out price).
+
+## Accessibility
+
+Target is WCAG 2.2 AA (Lighthouse a11y 100 on every page type). `index.css` gives every element one `:focus-visible` ring (2px `--focus-ring`, 2px offset) and, under `prefers-reduced-motion`, turns off smooth scrolling, fade-ups and transitions. Keep to these when adding UI:
+
+- One `h1` per page and no skipped heading levels; nav landmarks have an `aria-label` ("Main", "Breadcrumb", "Footer"); breadcrumb separators are `aria-hidden` and the last crumb has `aria-current="page"`.
+- Devanagari words get `lang="hi"`, plus `aria-hidden="true"` when they're decoration (ornaments, the eyebrow flourishes).
+- Tap targets are at least 24×24px (44px for swatches, filter rows on phones and the footer icons); grow small text links with padding rather than moving them.
+- No text below 4.5:1: dim with `--fg-muted`, not `opacity`. An image inside a link that already has a text label gets `alt=""`. `<Icon>` is always `aria-hidden`.
+- Video that plays by itself needs a pause control and mustn't autoplay under reduced motion (`Drop/Showcase.tsx`).
 
 ## Constants (`constants.ts`)
 

@@ -28,35 +28,42 @@ export function TocRail({ sections }: { sections: PolicySection[] }) {
     }, [sections]);
 
     return (
-        <aside className={styles.leftRail}>
-            <div className={`t-eyebrow ${styles.tocLabel}`}>On this page</div>
-            <ol className={styles.tocList}>
-                {sections.map((s, i) => {
-                    const active = activeSection === s.id;
-                    return (
-                        <li key={s.id}>
-                            <a
-                                href={`#sec-${s.id}`}
-                                className={`${styles.tocLink} ${i === 0 ? styles.tocLinkFirst : styles.tocLinkRest}`}
-                            >
-                                <span
-                                    className={`${styles.tocNum} ${active ? styles.tocNumActive : ""}`}
+        <div className={styles.leftRail}>
+            <div className={`t-eyebrow ${styles.tocLabel}`} id="toc-label">
+                On this page
+            </div>
+            <nav aria-labelledby="toc-label">
+                <ol className={styles.tocList}>
+                    {sections.map((s, i) => {
+                        const active = activeSection === s.id;
+                        return (
+                            <li key={s.id}>
+                                <a
+                                    href={`#sec-${s.id}`}
+                                    className={`${styles.tocLink} ${i === 0 ? styles.tocLinkFirst : styles.tocLinkRest}`}
+                                    aria-current={
+                                        active ? "location" : undefined
+                                    }
                                 >
-                                    {String(i + 1).padStart(2, "0")}
-                                </span>
-                                <span
-                                    className={`${styles.tocTitle} ${active ? styles.tocTitleActive : ""}`}
-                                >
-                                    {s.title}
-                                    {active && (
-                                        <span className={styles.tocDot} />
-                                    )}
-                                </span>
-                            </a>
-                        </li>
-                    );
-                })}
-            </ol>
+                                    <span
+                                        className={`${styles.tocNum} ${active ? styles.tocNumActive : ""}`}
+                                    >
+                                        {String(i + 1).padStart(2, "0")}
+                                    </span>
+                                    <span
+                                        className={`${styles.tocTitle} ${active ? styles.tocTitleActive : ""}`}
+                                    >
+                                        {s.title}
+                                        {active && (
+                                            <span className={styles.tocDot} />
+                                        )}
+                                    </span>
+                                </a>
+                            </li>
+                        );
+                    })}
+                </ol>
+            </nav>
 
             <div className={styles.contactCard}>
                 <div className={`t-eyebrow ${styles.contactCardLabel}`}>
@@ -70,6 +77,6 @@ export function TocRail({ sections }: { sections: PolicySection[] }) {
                     {BRAND.email} <Icon name="arrowUpRight" size={12} />
                 </a>
             </div>
-        </aside>
+        </div>
     );
 }

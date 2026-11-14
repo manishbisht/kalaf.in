@@ -15,10 +15,12 @@ export type Look = {
 export function LookFrame({ item, sizes }: { item: Look; sizes: string }) {
     return (
         <Link to={item.to} className={styles.frame}>
+            {/* The visible label below names the link, so the photo is
+                decorative here: an alt repeating it would be read twice. */}
             <CatalogImage
                 image={item.image}
                 sizes={sizes}
-                alt={item.label}
+                alt=""
                 loading="lazy"
                 style={
                     item.position
