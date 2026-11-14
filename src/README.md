@@ -49,7 +49,7 @@ Global utilities in `index.css`: `.container`, `.section`, `.section-tight`, `.s
 - `telHref(phone)`, `whatsappHref(phone)`: `tel:` and `wa.me` links from a formatted number.
 - `SOCIAL`: Facebook, Instagram, LinkedIn, X URLs.
 - `MARKETPLACE_ORDERS`: where buyers track a marketplace order (Track Order page).
-- `ROUTES` (every route path) and `productPath(handle, colour?)` / `collectionPath(handle)`.
+- `ROUTES` (every route path) and `productPath(handle, colour?)` / `collectionPath(handle)` / `journalPath(slug)`.
 
 ## Env vars (`env.ts`)
 

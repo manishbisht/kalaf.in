@@ -12,6 +12,8 @@ URLs are real paths (`BrowserRouter`); every route below is prerendered to stati
 | `products`        | `/products`            | `Shop` (all)      | light |
 | `collection`      | `/collections/:handle` | `Shop` (one)      | light |
 | `product`         | `/products/:handle`    | `Product`         | light |
+| `journal`         | `/journal`             | `Journal`         | light |
+| `journalArticle`  | `/journal/:slug`       | `JournalArticle`  | light |
 | `privacy`         | `/privacy`             | `Privacy`         | dark  |
 | `shippingReturns` | `/shipping-returns`    | `ShippingReturns` | dark  |
 | `terms`           | `/terms`               | `Terms`           | dark  |
@@ -23,7 +25,7 @@ URLs are real paths (`BrowserRouter`); every route below is prerendered to stati
 | `contact`         | `/contact`             | `Contact`         | dark  |
 | (none)            | `*`                    | `NotFound`        | light |
 
-Link with `ROUTES.*`, `productPath(handle, colour?)` and `collectionPath(handle)` from `src/constants.ts`.
+Link with `ROUTES.*`, `productPath(handle, colour?)`, `collectionPath(handle)` and `journalPath(slug)` from `src/constants.ts`.
 
 ## Home
 
@@ -45,6 +47,17 @@ One page for both. The handle is `pants` or `dupattas`; an unknown handle shows 
 - **Sizes and size chart**: size buttons plus a collapsible waist/hip table from `product.sizeChart`. If `variant.sizeLinks` has a link for the chosen size, the Flipkart button uses it. The pants have no size links today (one owner link for all sizes), so sizes are information only.
 - **Availability**: "In stock · dispatched from Jaipur in N working days", or "Sold out in {colour}" (plus "try another colour" if any are in stock). Stock `null` means unknown: only the dispatch time is shown.
 - **`BuyButtons`** with per-store prices and the SKU for click tracking; **`Share.tsx`** (system share sheet where available, else copy link, plus WhatsApp); details, features and care lists; `AskAI`; up to four related in-stock colours from the same collection.
+
+## Journal (`/journal`, `/journal/:slug`)
+
+Short articles about the crafts (bandhani, leheriya, gota), draping and the pant. All content is data in **`Journal/articles.ts`** (`ARTICLES`): slug, title, description, date (`date` shown, `datePublished` ISO), category, a Devanagari ornament, a hero photo picked from the catalog (`{ handle, colour, index }`), intro, sections of blocks (`p`, `list`, `steps`) and the related product handles. Text can hold inline links as `[label](/path)`, built from `ROUTES` / `productPath` / `collectionPath` / `journalPath`; `JournalArticle/RichText.tsx` renders them as `<Link>`s. Reading time is computed from the word count.
+
+- `Journal/` is the index: the newest article featured, the rest in a grid.
+- `JournalArticle/` is one article: header with photo, a contents rail, the sections, "Shop the pieces" (`ProductCard`s, one in-stock colour per related product in turn, up to four) and "More from the journal". An unknown slug renders `NotFound`.
+- SEO (title, Article + BreadcrumbList JSON-LD, prerender, sitemap, llms.txt) comes from the same data in `src/seo`.
+- `articles.test.ts` checks every related handle, hero photo and inline link exists, and keeps each article at 400–700 words.
+
+**Content rules.** Write about the crafts in general, well-established terms and hedge where traditions vary ("often", "traditionally"). Say nothing about how or by whom Kalaf's own pieces are made beyond what the catalog states (fabric, size, fit, care); no artisan stories, dyes, timings, statistics or quotes. To add an article, append to `ARTICLES` and run the tests.
 
 ## NotFound
 

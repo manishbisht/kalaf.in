@@ -56,8 +56,11 @@ export const ROUTES = {
     products: "/products",
     product: "/products/:handle",
     collection: "/collections/:handle",
+    journal: "/journal",
+    journalArticle: "/journal/:slug",
 } as const;
 
 export const productPath = (handle: string, colour?: string) =>
     `/products/${handle}${colour ? `?colour=${colour}` : ""}`;
 export const collectionPath = (handle: string) => `/collections/${handle}`;
+export const journalPath = (slug: string) => `/journal/${slug}`;

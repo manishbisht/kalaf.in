@@ -6,6 +6,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { ARTICLES } from "../src/pages/Journal/articles";
 
 const root = join(import.meta.dirname, "..");
 const dist = join(root, "dist");
@@ -96,6 +97,28 @@ describe.skipIf(!built && !required)("prerendered dist/", () => {
             for (const v of variants) {
                 expect(v.offers.length, v.sku).toBeGreaterThan(0);
             }
+        }
+    });
+
+    it("each journal article is prerendered with Article JSON-LD and only real product links", () => {
+        const handles = new Set(catalog.products.map((p) => p.handle));
+        expect(paths).toContain("/journal");
+        for (const a of ARTICLES) {
+            const path = `/journal/${a.slug}`;
+            expect(paths, path).toContain(path);
+            const html = read(`journal/${a.slug}.html`);
+            expect(html).toContain(
+                `<title data-seo>${htmlEscape(a.title)} · Kalaf</title>`
+            );
+            const article = jsonLd(html)?.find((x) => x["@type"] === "Article");
+            expect(article?.headline, path).toBe(a.title);
+            expect(article?.datePublished, path).toBe(a.datePublished);
+
+            const linked = [
+                ...html.matchAll(/href="\/products\/([^"?/]+)[^"]*"/g),
+            ].map((m) => m[1]);
+            expect(linked.length, path).toBeGreaterThan(0);
+            for (const h of linked) expect(handles.has(h), h).toBe(true);
         }
     });
 

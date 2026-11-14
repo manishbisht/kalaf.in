@@ -58,6 +58,7 @@ export function Footer() {
                                 label: "Dupattas",
                                 to: collectionPath("dupattas"),
                             },
+                            { label: "Journal", to: ROUTES.journal },
                         ]}
                     />
                     <LinkColumn title="Get in touch" items={CONTACT_ITEMS} />

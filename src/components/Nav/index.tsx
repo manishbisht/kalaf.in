@@ -23,6 +23,9 @@ export function Nav({ dark = false }: NavProps) {
                     >
                         Dupattas
                     </Link>
+                    <Link to={ROUTES.journal} className={styles.link}>
+                        Journal
+                    </Link>
                 </nav>
 
                 <Link to={ROUTES.home} className={styles.wordmark}>

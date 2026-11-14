@@ -27,11 +27,11 @@ Home-page components read the catalog directly, so they update when the catalog 
 
 ## Nav
 
-Desktop: Shop all / Pants / Dupattas on the left, the `kalaf.in` wordmark (home link) centred. On mobile the left links hide and a single "Shop" link shows on the right. An announcement strip under it says where each collection is sold. `App.tsx` passes `dark` for paths in `DARK_NAV` (the policy and guide pages); home, shop, product and 404 use the light Nav.
+Desktop: Shop all / Pants / Dupattas / Journal on the left, the `kalaf.in` wordmark (home link) centred. On mobile the left links hide and a single "Shop" link shows on the right. An announcement strip under it says where each collection is sold. `App.tsx` passes `dark` for paths in `DARK_NAV` (the policy and guide pages); home, shop, product and 404 use the light Nav.
 
 ## Footer
 
-Same on every page. Columns: brand blurb + `SocialRow` (Instagram, Facebook, LinkedIn, X from `SOCIAL`, opened in a new tab with `rel="noopener noreferrer"`) + `<AskAI dark />`; Shop; Get in touch (email, WhatsApp and phone when `BRAND` has them); Help; Policies. Internal links use `<Link>`. The bottom row shows the legal name, constitution, GSTIN and address; `BuildStamp` prints `ENV.buildVersion` and the short commit SHA.
+Same on every page. Columns: brand blurb + `SocialRow` (Instagram, Facebook, LinkedIn, X from `SOCIAL`, opened in a new tab with `rel="noopener noreferrer"`) + `<AskAI dark />`; Shop (with the Journal); Get in touch (email, WhatsApp and phone when `BRAND` has them); Help; Policies. Internal links use `<Link>`. The bottom row shows the legal name, constitution, GSTIN and address; `BuildStamp` prints `ENV.buildVersion` and the short commit SHA.
 
 ## WhatsAppButton and AskAI
 
