@@ -56,3 +56,5 @@ Push to `main` (or run it manually) → `yarn install --frozen-lockfile` → `ya
 ## Automatic catalog sync (`.github/workflows/sync-catalog.yml`)
 
 Runs `sync-catalog.py` against the products repo daily at 08:00 IST (and on demand from the Actions tab). When anything changed it opens or updates a `catalog-sync` pull request touching only `src/data/*.json` and `public/catalog/`; merging it deploys. It does nothing until the repo has a `PRODUCTS_REPO_TOKEN` secret: a fine-grained token with read-only Contents access to `manishbisht/products.kalaf.in`. It sparse-checks out only `catalog/`, `colors.json` and `business.json`, so `documents/` never reaches CI.
+
+Pull requests (yours, and the sync PR once re-run from the Actions tab, since PRs opened by the workflow token don't trigger other workflows) run `.github/workflows/ci.yml`: lint, tests, build and the prerendered-site test.
