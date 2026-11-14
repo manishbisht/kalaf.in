@@ -39,3 +39,28 @@ jobs:
 
             - name: Test the prerendered site
               run: yarn test:dist
+
+            # Browser tests (e2e/) against dist/. The browser download is
+            # cached per Playwright version (pinned by yarn.lock); --with-deps
+            # still installs the system libraries Chromium needs.
+            - name: Cache Playwright browsers
+              uses: actions/cache@v6
+              with:
+                  path: ~/.cache/ms-playwright
+                  key: playwright-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+            - name: Install Chromium
+              run: npx playwright install --with-deps chromium
+
+            - name: Browser tests
+              run: yarn test:e2e
+
+            - name: Upload the Playwright report
+              if: failure()
+              uses: actions/upload-artifact@v7
+              with:
+                  name: playwright-report
+                  path: |
+                      playwright-report/
+                      test-results/
+                  retention-days: 14
