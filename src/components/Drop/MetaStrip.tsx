@@ -1,16 +1,12 @@
 import { MetaCell } from "./MetaCell";
 import { PANT } from "./pant";
-import { formatRupees } from "../../data/catalog";
+import { MARKETPLACES, formatRupees } from "../../data/catalog";
 import styles from "./style.module.css";
 
 const v = PANT.variants[0];
-const STORE_NAMES = {
-    flipkart: "Flipkart",
-    meesho: "Meesho",
-};
-const stores = (Object.keys(STORE_NAMES) as (keyof typeof STORE_NAMES)[])
-    .filter((s) => PANT.variants.some((x) => x.links[s]))
-    .map((s) => STORE_NAMES[s]);
+const stores = MARKETPLACES.filter((m) =>
+    PANT.variants.some((x) => x.links[m.id])
+).map((m) => m.name);
 
 const META = [
     { label: "Fabric", value: PANT.fabric ?? "" },

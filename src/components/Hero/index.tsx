@@ -2,6 +2,7 @@ import { Icon } from "../Icons";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constants";
 import { PRODUCTS } from "../../data/catalog";
+import { trackBuyClick } from "../BuyButtons/track";
 import { CatalogImage } from "../CatalogImage";
 import styles from "./style.module.css";
 
@@ -13,7 +14,8 @@ const SHOTS = ORDER.map((c) => PANT.variants.find((v) => v.colourCode === c))
     .map((v) => ({ colour: v.colour, image: v.images[0] }));
 
 // Hero "Buy" button: the first colour's main Flipkart page.
-const BUY_LINK = PANT.variants.find((v) => v.links.flipkart)?.links.flipkart;
+const BUY_VARIANT = PANT.variants.find((v) => v.links.flipkart);
+const BUY_LINK = BUY_VARIANT?.links.flipkart;
 
 export function Hero() {
     return (
@@ -68,6 +70,9 @@ export function Hero() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.btnPrimary}
+                        onClick={() =>
+                            trackBuyClick("flipkart", BUY_VARIANT?.sku)
+                        }
                     >
                         Buy on Flipkart <Icon name="arrowUpRight" size={16} />
                     </a>

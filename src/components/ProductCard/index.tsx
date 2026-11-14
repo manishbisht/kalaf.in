@@ -14,7 +14,15 @@ import styles from "./style.module.css";
 
 // Shop-grid tile for one colour of a product. Hovering swaps to the second
 // photo, like most storefronts.
-export function ProductCard({ item }: { item: ListingItem }) {
+// `eager`: the tile is in the first row of a grid, above the fold, so its
+// main photo is likely the page's largest paint and shouldn't wait.
+export function ProductCard({
+    item,
+    eager = false,
+}: {
+    item: ListingItem;
+    eager?: boolean;
+}) {
     const { product, variant } = item;
     const [first, second] = variant.images;
     const soldOut = isSoldOut(variant);
@@ -33,7 +41,7 @@ export function ProductCard({ item }: { item: ListingItem }) {
                     <CatalogImage
                         image={first}
                         alt={`${product.title} in ${variant.colour}`}
-                        loading="lazy"
+                        loading={eager ? "eager" : "lazy"}
                         className={styles.primary}
                     />
                 )}

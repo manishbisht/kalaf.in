@@ -13,7 +13,7 @@ Product and business data. Back to the index: [AGENTS.md](../../AGENTS.md).
 
 ## catalog.ts
 
-Types: `Product` (code, handle, collection, title, description, features, details, care, fabric/pattern/border/fit, `size` for one-size pieces, `sizes`, `sizeChart`, `dispatchDays`, variants), `Variant` (SKU, colour code/name/family, `price` = lowest live price, `prices` per store, `mrp`, images at 600w/1200w, optional video + poster, `links` per store, `sizeLinks`, `stock`), `SizeChart`, `ListingItem`, `Marketplace`, `MarketplaceLinks`, `CollectionHandle` (`"pants" | "dupattas"`).
+Types: `Product` (code, handle, collection, title, description, features, details, care, fabric/pattern/border/fit, `size` for one-size pieces, `sizes`, `sizeChart`, `dispatchDays`, variants), `Variant` (SKU, colour code/name/family, `price` = lowest live price, `prices` per store, `mrp`, images at 600w/1200w (JPEG + AVIF, with pixel `width`/`height`), optional video + poster, `links` per store, `sizeLinks`, `stock`), `SizeChart`, `ListingItem`, `Marketplace`, `MarketplaceLinks`, `CollectionHandle` (`"pants" | "dupattas"`).
 
 Exports:
 

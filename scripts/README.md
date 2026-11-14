@@ -15,7 +15,7 @@ Use the products repo's venv, which has Pillow; `ffmpeg` must be on `PATH` (the 
 
 - `src/data/catalog.json`: products and colours (see [src/data/README.md](../src/data/README.md)).
 - `src/data/business.json`: only the public fields of the products repo's `business.json` (`BUSINESS_FIELDS`: legal name, trade name, constitution, GSTIN, address, email, phone, WhatsApp). Everything else there stays private.
-- `public/catalog/<PRODUCT>/`: `<SKU>_<n>-600.jpg` and `-1200.jpg` for each photo, `<SKU>_video.mp4` (720w H.264, no audio) and `<SKU>_video-poster.jpg`.
+- `public/catalog/<PRODUCT>/`: `<SKU>_<n>-600.jpg` and `-1200.jpg` for each photo, plus AVIF copies (`-600.avif`, `-1200.avif`, q50, ~40% of the JPEG's bytes; the JPEGs stay for og:image and JSON-LD), `<SKU>_video.mp4` (720w H.264, no audio) and `<SKU>_video-poster.jpg`.
 
 **Media caching**: each source file's SHA-1 is stored in `public/catalog/.sources.json`; a photo or video is re-encoded only when its source changed or an output is missing.
 

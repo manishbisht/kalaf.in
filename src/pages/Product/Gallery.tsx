@@ -209,7 +209,15 @@ export function Gallery({
                     images={photos}
                     start={lightbox}
                     label={name}
-                    onClose={() => setLightbox(null)}
+                    onClose={(photo) => {
+                        setLightbox(null);
+                        // Land the strip on the photo last seen full screen.
+                        goTo(
+                            media.findIndex(
+                                (m) => m.kind === "image" && m.photo === photo
+                            )
+                        );
+                    }}
                 />
             )}
         </div>

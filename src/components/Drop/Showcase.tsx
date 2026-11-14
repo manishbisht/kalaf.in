@@ -109,7 +109,11 @@ export function Showcase({
                     <div className={styles.shopOnLabel}>
                         Buy the {active.colour.toLowerCase()} pant on
                     </div>
-                    <BuyButtons links={active.links} prices={active.prices} />
+                    <BuyButtons
+                        links={active.links}
+                        prices={active.prices}
+                        sku={active.sku}
+                    />
 
                     <div className={styles.links}>
                         <Link

@@ -17,7 +17,8 @@ export function Lightbox({
     images: ProductImage[];
     start: number;
     label: string;
-    onClose: () => void;
+    // Called with the photo that was on screen, so the gallery can follow.
+    onClose: (photo: number) => void;
 }) {
     const ref = useRef<HTMLDialogElement>(null);
     const [i, setI] = useState(start);
@@ -71,14 +72,14 @@ export function Lightbox({
             aria-label={`${label} — photo ${i + 1} of ${total}`}
             onCancel={(e) => {
                 e.preventDefault();
-                onClose();
+                onClose(i);
             }}
             onKeyDown={onKeyDown}
             onClick={(e) => {
                 // The backdrop is the dialog itself and the stage around the
                 // photo; clicks on the photo or the buttons don't close it.
                 const t = e.target as HTMLElement;
-                if (t === e.currentTarget || t.dataset.backdrop) onClose();
+                if (t === e.currentTarget || t.dataset.backdrop) onClose(i);
             }}
         >
             <div className={styles.lightboxStage} data-backdrop="true">
@@ -96,7 +97,7 @@ export function Lightbox({
                 <button
                     type="button"
                     className={styles.lightboxClose}
-                    onClick={onClose}
+                    onClick={() => onClose(i)}
                     aria-label="Close"
                     autoFocus
                 >

@@ -9,9 +9,10 @@ Shared components, one folder each (`index.tsx` + optional `style.module.css` + 
 | `Nav`            | Top bar on every page (rendered by the App shell). `dark` for pages with a dark hero.                      |
 | `Footer`         | Footer on every page: shop, contact, help and policy links, socials, Ask AI, legal line, build stamp.      |
 | `WhatsAppButton` | Floating "Chat with us" badge, bottom-right on every page.                                                 |
-| `AskAI`          | "Ask AI about this page" links to Claude, ChatGPT and Perplexity. In the footer and on product pages.      |
+| `AskAI`          | "Ask AI about this page" links to Claude, ChatGPT and Perplexity, in the footer (page-aware).              |
+| `CatalogImage`   | Every catalog photo: `<picture>` with AVIF + JPEG fallback. `sizes` for 600w/1200w; lazy below the fold.   |
 | `BuyButtons`     | One button per live marketplace, plus "coming soon" placeholders. `track.ts` logs clicks to Clarity.       |
-| `ProductCard`    | Shop-grid tile for one colour of a product; second photo on hover; "Sold out" or "% off" badge.            |
+| `ProductCard`    | Shop-grid tile for one colour; second photo on hover; "Sold out"/"% off" badge; `eager` for the first row. |
 | `Swatch`         | Round colour dot; multicolour codes render as segments (colours from `swatchColours`).                     |
 | `PolicyLayout`   | The shell every policy and guide page renders (below).                                                     |
 | `Icons`          | Inline SVG set: `<Icon name="arrowUpRight" size={16} />`; `IconName` is a string union, so typos fail tsc. |

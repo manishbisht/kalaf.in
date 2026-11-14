@@ -96,7 +96,8 @@
 
 .countdown {
     position: absolute;
-    right: 40px;
+    /* Clear of the floating WhatsApp button in the bottom-right corner. */
+    right: 112px;
     bottom: 40px;
     z-index: 2;
     color: var(--off-white);

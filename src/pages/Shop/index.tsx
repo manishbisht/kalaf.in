@@ -289,10 +289,12 @@ export default function Shop() {
 
                     {results.length ? (
                         <div className={styles.grid}>
-                            {results.map((item) => (
+                            {results.map((item, i) => (
                                 <ProductCard
                                     key={item.variant.sku}
                                     item={item}
+                                    // First row (up to 3 across on desktop).
+                                    eager={i < 3}
                                 />
                             ))}
                         </div>

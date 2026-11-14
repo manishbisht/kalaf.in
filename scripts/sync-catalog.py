@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Build the website's product catalog from the products.kalaf.in repo.
 
-    python3 scripts/sync-catalog.py ../products.kalaf.in
+    ../products.kalaf.in/.venv/bin/python scripts/sync-catalog.py ../products.kalaf.in
+
+(Any Python with Pillow works; the products repo's venv has it. ffmpeg too.)
 
 Reads catalog/<PRODUCT>/product.json and catalog/<PRODUCT>/<SKU>/variant.json,
 then writes:
