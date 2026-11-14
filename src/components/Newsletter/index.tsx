@@ -1,51 +1,47 @@
-import { useState } from "react";
 import { Icon } from "../Icons";
+import { SOCIAL } from "../../constants";
 import styles from "./style.module.css";
 
-export function Newsletter() {
-    const [email, setEmail] = useState("");
-    const [done, setDone] = useState(false);
+// There's no mailing list (no backend), so this points people to the social
+// accounts where new pieces are posted.
+const CHANNELS = [
+    { label: "Instagram", href: SOCIAL.instagram, icon: "instagram" },
+    { label: "Facebook", href: SOCIAL.facebook, icon: "facebook" },
+] as const;
 
+export function Newsletter() {
     return (
         <section className={styles.section} id="updates">
             <div className={`container ${styles.inner}`}>
                 <div className={styles.eyebrow}>
-                    The Circle · Notes from the workshop
+                    Follow along · Notes from Jaipur
                 </div>
 
                 <h2 className={styles.headline}>
-                    First to know
+                    See what&apos;s next
                     <br />
-                    when the next drop lands.
+                    from Jaipur.
                 </h2>
 
                 <p className={styles.sub}>
-                    One email when a new piece goes live on Amazon, Flipkart, or
-                    Meesho — with the direct link. Nothing else.
+                    We post new colours and pieces on Instagram and Facebook,
+                    with a link to where you can buy them.
                 </p>
 
-                <form
-                    className={styles.form}
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        if (email) setDone(true);
-                    }}
-                >
-                    <input
-                        type="email"
-                        placeholder="your@email.in"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className={styles.input}
-                    />
-                    <button type="submit" className={styles.submit}>
-                        {done ? "You're on the list" : "Stay in the loop"}
-                        {!done && <Icon name="arrowRight" size={16} />}
-                    </button>
-                </form>
-
-                <div className={styles.fine}>
-                    No spam. Unsubscribe in one click.
+                <div className={styles.links}>
+                    {CHANNELS.map((c) => (
+                        <a
+                            key={c.label}
+                            href={c.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.link}
+                        >
+                            <Icon name={c.icon} size={16} />
+                            {c.label}
+                            <Icon name="arrowUpRight" size={14} />
+                        </a>
+                    ))}
                 </div>
             </div>
         </section>

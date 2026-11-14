@@ -1,60 +1,40 @@
-import { Icon } from "../Icons";
+import { productPath } from "../../constants";
+import { PRODUCTS } from "../../data/catalog";
+import { LookFrame, type Look } from "./LookFrame";
 import styles from "./style.module.css";
 
-const LOOK = [
-    {
-        src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80",
-        label: "Look 01 — Heavyweight crew, charcoal",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
-        label: "Look 02 — Sand co-ord",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=80",
-        label: "Look 03 — Olive overshirt",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1200&q=80",
-        label: "Look 04 — Pleated trouser",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1485518882345-15568b007407?auto=format&fit=crop&w=1200&q=80",
-        label: "Look 05 — After hours",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=1000&q=80",
-        label: "Look 06 — Linen shirt",
-    },
-];
-
-const frameClass = [
-    styles.frame1,
-    styles.frame2,
-    styles.frame3,
-    styles.frame4,
-    styles.frame5,
-    styles.frame6,
-];
-
-type Look = { src: string; label: string };
-
-function LookFrame({ item }: { item: Look }) {
-    return (
-        <a className={styles.frame}>
-            <img
-                src={item.src}
-                alt={item.label}
-                loading="lazy"
-                decoding="async"
-            />
-            <div className={styles.frameLabel}>
-                <span>{item.label}</span>
-                <Icon name="arrowUpRight" size={18} />
-            </div>
-        </a>
-    );
+// A look is one catalog photo linking to that product in that colour.
+function look(code: string, colour: string, n: number, position?: string) {
+    const product = PRODUCTS.find((p) => p.code === code)!;
+    const variant =
+        product.variants.find((v) => v.colourCode === colour) ??
+        product.variants[0];
+    return {
+        to: productPath(product.handle, variant.colourCode),
+        image: variant.images[n - 1] ?? variant.images[0],
+        label: `${product.title} — ${variant.colour}`,
+        position,
+    } satisfies Look;
 }
+
+const LOOKS: Look[] = [
+    look("PNT", "WH", 1, "50% 30%"),
+    look("DUAG", "MU", 2, "50% 25%"),
+    look("PNT", "BE", 4, "50% 40%"),
+    look("DUCHI", "RB", 1, "50% 30%"),
+    look("DUA", "GR", 1, "50% 30%"),
+    look("PNT", "BK", 1, "50% 35%"),
+];
+
+// Rendered width of each frame, for srcSet (see the grid in style.module.css).
+const FRAMES = [
+    { className: styles.frame1, sizes: "(max-width: 640px) 100vw, 42vw" },
+    { className: styles.frame2, sizes: "(max-width: 640px) 100vw, 58vw" },
+    { className: styles.frame3, sizes: "(max-width: 640px) 100vw, 25vw" },
+    { className: styles.frame4, sizes: "(max-width: 640px) 100vw, 33vw" },
+    { className: styles.frame5, sizes: "(max-width: 640px) 100vw, 67vw" },
+    { className: styles.frame6, sizes: "(max-width: 640px) 100vw, 33vw" },
+];
 
 export function Lookbook() {
     return (
@@ -62,24 +42,23 @@ export function Lookbook() {
             <div className="container">
                 <div className="section-head">
                     <div>
-                        <div className="eyebrow">The lookbook</div>
+                        <div className="eyebrow">The pieces</div>
                         <h2>
-                            Sand &amp; stone.
+                            Cotton &amp; colour.
                             <br />
-                            Shot in Jaipur, January.
+                            Made in Jaipur.
                         </h2>
                     </div>
                     <div className="right">
-                        FW25&apos;s editorial — photographed in natural light
-                        across three Jaipur locations.
-                        <a>Open the full lookbook →</a>
+                        The pant in white, beige and black, and our bandhani and
+                        leheriya dupattas. Tap a photo to see the piece.
                     </div>
                 </div>
 
                 <div className={styles.grid}>
-                    {LOOK.map((item, i) => (
-                        <div key={i} className={frameClass[i]}>
-                            <LookFrame item={item} />
+                    {LOOKS.map((item, i) => (
+                        <div key={item.to} className={FRAMES[i].className}>
+                            <LookFrame item={item} sizes={FRAMES[i].sizes} />
                         </div>
                     ))}
                 </div>

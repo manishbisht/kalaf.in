@@ -1,9 +1,25 @@
 import { Link } from "react-router-dom";
-import { BRAND, ROUTES, collectionPath } from "../../constants";
-import { LinkColumn } from "./LinkColumn";
+import {
+    BRAND,
+    ROUTES,
+    collectionPath,
+    telHref,
+    whatsappHref,
+} from "../../constants";
+import { LinkColumn, type LinkColumnItem } from "./LinkColumn";
 import { SocialRow } from "./SocialRow";
 import { BuildStamp } from "./BuildStamp";
 import styles from "./style.module.css";
+
+const CONTACT_ITEMS: LinkColumnItem[] = [
+    { label: BRAND.email, href: `mailto:${BRAND.email}` },
+    ...(BRAND.whatsapp
+        ? [{ label: "WhatsApp", href: whatsappHref(BRAND.whatsapp) }]
+        : []),
+    ...(BRAND.phone
+        ? [{ label: BRAND.phone, href: telHref(BRAND.phone) }]
+        : []),
+];
 
 export function Footer() {
     return (
@@ -22,8 +38,9 @@ export function Footer() {
                             Made in Jaipur
                         </div>
                         <p className={styles.brandColBody}>
-                            Cloth sourced and finished in Jaipur. Worn
-                            everywhere.
+                            Cotton trousers and Rajasthani bandhani and leheriya
+                            dupattas, made in Jaipur. Sold on Flipkart and
+                            Meesho.
                         </p>
                         <SocialRow />
                     </div>
@@ -39,16 +56,7 @@ export function Footer() {
                             },
                         ]}
                     />
-                    <LinkColumn
-                        title="Brand"
-                        items={[
-                            "The story",
-                            "Journal",
-                            "Lookbook",
-                            "Press",
-                            "Careers",
-                        ]}
-                    />
+                    <LinkColumn title="Get in touch" items={CONTACT_ITEMS} />
                     <LinkColumn
                         title="Help"
                         items={[
@@ -75,12 +83,14 @@ export function Footer() {
 
                 <div className={styles.bottom}>
                     <div>
-                        © {BRAND.copyrightYear} {BRAND.legalName} ·{" "}
-                        {BRAND.location} · CIN {BRAND.cin}
+                        © {BRAND.copyrightYear} {BRAND.legalName} (
+                        {BRAND.constitution.toLowerCase()}) · GSTIN{" "}
+                        {BRAND.gstin}
                     </div>
-                    <div>
-                        {BRAND.email} · {BRAND.phone}
-                    </div>
+                    <address className={styles.address}>
+                        {BRAND.address} ·{" "}
+                        <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
+                    </address>
                 </div>
 
                 <BuildStamp />

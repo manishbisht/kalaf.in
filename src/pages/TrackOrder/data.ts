@@ -6,8 +6,8 @@ export const data: PolicyData = {
     title: "Track order",
     ornament: "पार्सल",
     summary:
-        "Kalaf pieces are sold and shipped by Amazon, Flipkart, and Meesho. Each one handles its own tracking — open the marketplace you bought from.",
-    updated: "23 May 2026",
+        "Kalaf orders are placed and delivered through Flipkart and Meesho. Each one has its own tracking, so open the marketplace you bought from.",
+    updated: "14 Nov 2026",
     readTime: "1 min read",
     crossLinksHeader: "More guides",
     sections: [
@@ -17,25 +17,20 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Tap the marketplace you ordered from to open its order history. You'll need to be signed in with the account you used to place the order.",
+                    text: "Tap the marketplace you ordered from to open your orders. Sign in with the account you used to place the order.",
                 },
                 {
                     kind: "links",
                     items: [
                         {
-                            label: "Amazon",
-                            href: MARKETPLACE_ORDERS.amazon,
-                            sub: "Your Orders",
-                        },
-                        {
                             label: "Flipkart",
                             href: MARKETPLACE_ORDERS.flipkart,
-                            sub: "My Orders",
+                            sub: "My Orders · pants & dupattas",
                         },
                         {
                             label: "Meesho",
                             href: MARKETPLACE_ORDERS.meesho,
-                            sub: "My Orders",
+                            sub: "My Orders · dupattas",
                         },
                     ],
                 },
@@ -48,10 +43,10 @@ export const data: PolicyData = {
                 {
                     kind: "list",
                     items: [
-                        "Order placed — the marketplace has your order and is sharing it with us for dispatch.",
-                        "Dispatched / Shipped — the courier has picked it up; the tracking number is live in the marketplace app.",
-                        "Out for delivery — it's on a vehicle in your area today.",
-                        "Delivered — the courier has marked it as delivered at your address.",
+                        "Ordered — the marketplace has your order and has passed it to us to pack.",
+                        "Shipped — we've handed it to the courier, and tracking is live on the marketplace.",
+                        "Out for delivery — it's with the courier in your area today.",
+                        "Delivered — the courier has marked it delivered at your address.",
                     ],
                 },
             ],
@@ -62,11 +57,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Standard delivery on each marketplace is typically 4–6 working days across India; Prime / Plus accounts often see 2–3 days to metros.",
-                },
-                {
-                    kind: "p",
-                    text: "Delays beyond 7 working days are rare. If your tracking hasn't updated in 48 hours, raise it inside the marketplace's order page first — they hold the courier relationship.",
+                    text: "The marketplace shows the expected delivery date on your order page. If it has passed, or tracking hasn't moved for a couple of days, raise it on the marketplace first — they manage the courier.",
                 },
             ],
         },
@@ -76,7 +67,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: `Write to us at ${BRAND.email} with the marketplace name, the order ID, and a screenshot of the tracking page. We'll chase it with the marketplace on your behalf.`,
+                    text: `Write to us at ${BRAND.email} with the marketplace, the order ID and a screenshot of the tracking page. We'll follow it up with the marketplace for you.`,
                 },
             ],
             callout: { label: "Write to us", value: BRAND.email },

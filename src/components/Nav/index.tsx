@@ -23,9 +23,6 @@ export function Nav({ dark = false }: NavProps) {
                     >
                         Dupattas
                     </Link>
-                    <a className={`${styles.link} ${styles.linkMuted}`}>
-                        Journal
-                    </a>
                 </nav>
 
                 <Link to={ROUTES.home} className={styles.wordmark}>
@@ -46,7 +43,7 @@ export function Nav({ dark = false }: NavProps) {
             <div
                 className={`${styles.announcement} ${dark ? styles.announcementDark : ""}`}
             >
-                Drop 01 — Now on Flipkart · Meesho · Amazon soon
+                Pants on Flipkart · Dupattas on Flipkart &amp; Meesho
             </div>
         </header>
     );

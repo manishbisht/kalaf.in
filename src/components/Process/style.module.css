@@ -74,7 +74,10 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     color: var(--off-white);
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+    /* Product photos are shot on white, so the number sits on an ink chip. */
+    background: var(--ink);
+    padding: 6px 8px;
+    line-height: 1;
 }
 
 .label {

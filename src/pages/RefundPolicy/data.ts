@@ -6,24 +6,24 @@ export const data: PolicyData = {
     title: "Refund policy",
     ornament: "वापसी",
     summary:
-        "Kalaf pieces are sold through Amazon, Flipkart, and Meesho. Refunds are issued by the marketplace where you bought the piece, against the original payment method.",
-    updated: "23 May 2026",
+        "Kalaf products are sold through Flipkart and Meesho. Refunds are issued by the marketplace you bought from, under its own return and refund policy.",
+    updated: "14 Nov 2026",
     readTime: "2 min read",
     promises: [
         {
             kicker: "Theirs",
             label: "Marketplace processed",
-            body: "The refund is initiated and paid by the marketplace, not by us — that's how marketplace seller-of-record works.",
+            body: "The marketplace takes your payment, so it also issues the refund.",
         },
         {
-            kicker: "Same",
-            label: "Original payment method",
-            body: "The amount returns to the card, UPI, or wallet you originally paid with.",
+            kicker: "Their rules",
+            label: "Window & eligibility",
+            body: "What can be returned, and for how long, is set by the marketplace and shown on your order page.",
         },
         {
-            kicker: "5–7 d",
-            label: "Typical timeline",
-            body: "From the day the marketplace accepts the return to the day the money lands in your account.",
+            kicker: "We help",
+            label: "If it gets stuck",
+            body: "If something goes wrong with a refund, write to us and we'll follow it up with the marketplace.",
         },
     ],
     sections: [
@@ -33,15 +33,14 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Each marketplace defines what's returnable and the window it accepts returns within. The exact rules sit on each order page — but the standards across all three are consistent:",
+                    text: "Flipkart and Meesho each decide what's returnable and for how long. Your order page shows the exact window for your item. As a rule, a return needs to be:",
                 },
                 {
                     kind: "list",
                     items: [
-                        "Unworn and in original condition.",
-                        "Original packaging and the marketplace tag intact — not the brand label sewn into the garment.",
-                        "Inside the marketplace's return window (typically 7–30 days from delivery).",
-                        "Not marked as final-sale on the product page.",
+                        "Unused, unwashed and in its original condition.",
+                        "With all tags and the original packaging.",
+                        "Requested inside the return window shown on the order page.",
                     ],
                 },
             ],
@@ -52,34 +51,29 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Open Your Orders on the marketplace you bought from and choose 'Return' or 'Refund' on the Kalaf piece. The marketplace handles the rest.",
+                    text: "Open your orders on the marketplace you bought from and choose Return on the Kalaf item. The marketplace arranges the rest.",
                 },
                 {
                     kind: "links",
                     items: [
                         {
-                            label: "Amazon",
-                            href: MARKETPLACE_ORDERS.amazon,
-                            sub: "Your Orders",
-                        },
-                        {
                             label: "Flipkart",
                             href: MARKETPLACE_ORDERS.flipkart,
-                            sub: "My Orders",
+                            sub: "My Orders · pants & dupattas",
                         },
                         {
                             label: "Meesho",
                             href: MARKETPLACE_ORDERS.meesho,
-                            sub: "My Orders",
+                            sub: "My Orders · dupattas",
                         },
                     ],
                 },
             ],
             steps: [
-                "Open the order on the marketplace and select Return / Refund.",
-                "Pick a reason and confirm the pickup address.",
-                "Hand the piece (unworn, tag intact) to the courier when they arrive.",
-                "Refund is initiated once the return is inspected and accepted.",
+                "Open the order on the marketplace and select Return.",
+                "Pick a reason and confirm the pickup details.",
+                "Hand the item, unused and with tags, to the courier.",
+                "The marketplace issues the refund once it accepts the return.",
             ],
         },
         {
@@ -88,36 +82,28 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Standard refund processing is 5–7 working days from the day the marketplace accepts the return. Bank settlement adds another 1–3 days depending on the payment method.",
-                },
-                {
-                    kind: "p",
-                    text: "The refund always goes back to the original payment method — you can't redirect it to a different card or wallet.",
-                },
-            ],
-            callout: { label: "Refund arrives in", value: "5–10 days total." },
-        },
-        {
-            id: "exceptions",
-            title: "What can't be refunded",
-            body: [
-                {
-                    kind: "list",
-                    items: [
-                        "Items marked Final Sale on the product page.",
-                        "Anything visibly worn, washed, or with the marketplace tag removed.",
-                        "Returns submitted after the marketplace's return window has closed.",
-                    ],
-                },
-                {
-                    kind: "p",
-                    text: `If a piece arrives damaged, raise it inside the marketplace within 48 hours. If you can't get it sorted there, write to ${BRAND.email} with the order ID and a photo and we'll chase it for you.`,
+                    text: "How long a refund takes, and how it's paid back, depends on the marketplace and how you paid. Your order page shows the refund status and expected date.",
                 },
             ],
             callout: {
-                label: "Damaged on arrival?",
-                value: `${BRAND.email} — within 48 hours.`,
+                label: "Refund status",
+                value: "Shown on your marketplace order page.",
             },
+        },
+        {
+            id: "damaged",
+            title: "Damaged or wrong item",
+            body: [
+                {
+                    kind: "p",
+                    text: "If an item arrives damaged, or isn't what you ordered, report it on the marketplace as soon as you can. Marketplaces often have a short window for this, so take photos when you open the parcel.",
+                },
+                {
+                    kind: "p",
+                    text: `If you can't get it sorted there, write to ${BRAND.email} with the marketplace, the order ID and a photo, and we'll follow it up for you.`,
+                },
+            ],
+            callout: { label: "Write to us", value: BRAND.email },
         },
     ],
 };

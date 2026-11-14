@@ -6,9 +6,9 @@ export const data: PolicyData = {
     title: "Cookie policy",
     ornament: "नियम",
     summary:
-        "kalaf.in is a brand site — no cart, no checkout, no payments here. We use a small number of first-party cookies to understand how people find us.",
-    updated: "23 May 2026",
-    readTime: "3 min read",
+        "kalaf.in has no cart, checkout or login, so it needs no cookies to work. The only cookies come from Microsoft Clarity, our analytics tool, when it's switched on.",
+    updated: "14 Nov 2026",
+    readTime: "2 min read",
     sections: [
         {
             id: "what",
@@ -16,11 +16,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Cookies are small text files saved in your browser when you visit a website. They let a site remember things between pages and sessions — like which page you came from or whether you've dismissed a banner.",
-                },
-                {
-                    kind: "p",
-                    text: "Cookies can't run code or carry viruses. They're just text.",
+                    text: "Cookies are small text files a website saves in your browser. They let a site recognise your browser between pages and visits.",
                 },
             ],
         },
@@ -29,15 +25,30 @@ export const data: PolicyData = {
             title: "What we use on kalaf.in",
             body: [
                 {
+                    kind: "p",
+                    text: "We don't set any cookies of our own. When analytics is switched on, Microsoft Clarity sets cookies so it can tell a returning browser from a new one and group page views into one visit:",
+                },
+                {
                     kind: "list",
                     items: [
-                        "Preference cookie — remembers small UI choices, like whether you've dismissed a banner. Lasts 90 days.",
-                        "Analytics cookies — first-party only, via Microsoft Clarity. We use them to understand how people navigate the site. No fingerprinting, no data sold.",
+                        "_clck — keeps a random Clarity user ID for the site. Lasts about a year.",
+                        "_clsk — links the pages you view in one visit into a single session. Lasts about a day.",
+                        "Clarity may also set cookies on Microsoft's own domains (such as clarity.ms) to work across sites that use it.",
                     ],
                 },
                 {
                     kind: "p",
-                    text: "There's no cart, checkout, or payment here, so no session-cart or payment-processor cookies are set on this domain.",
+                    text: "The Privacy policy explains what Clarity records. Microsoft handles the data under its own privacy statement.",
+                },
+                {
+                    kind: "links",
+                    items: [
+                        {
+                            label: "Microsoft Privacy Statement",
+                            href: "https://privacy.microsoft.com/privacystatement",
+                            sub: "Covers Microsoft Clarity",
+                        },
+                    ],
                 },
             ],
         },
@@ -47,11 +58,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "You can block or delete cookies in your browser settings at any time. The site will continue to work normally without them.",
-                },
-                {
-                    kind: "p",
-                    text: "You can opt out of analytics cookies using the toggle in our cookie banner, or by emailing us.",
+                    text: "You can block or delete cookies in your browser settings at any time. kalaf.in works normally without them; we just won't see your visit in our analytics.",
                 },
             ],
         },
@@ -61,11 +68,11 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "When you tap a marketplace button here, you leave kalaf.in and land on Amazon, Flipkart, or Meesho. Each of those sites sets its own cookies under its own policy. We have no control over what they store, and we don't receive that data.",
+                    text: "When you tap a Buy button, you leave kalaf.in for Flipkart or Meesho. Each sets its own cookies under its own policy. We don't control them and we don't receive that data.",
                 },
                 {
                     kind: "p",
-                    text: "We do not use Google Analytics, Meta Pixel, or any other third-party advertising tracker on kalaf.in.",
+                    text: "We don't use Google Analytics, Meta Pixel or any advertising tracker on kalaf.in.",
                 },
             ],
             callout: {

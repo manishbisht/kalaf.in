@@ -6,44 +6,82 @@ export const data: PolicyData = {
     title: "Privacy policy",
     ornament: "गोपनीय",
     summary:
-        "Most of your purchase data sits with the marketplace you bought from. We collect very little ourselves, and we don't sell any of it.",
-    updated: "23 May 2026",
+        "kalaf.in has no accounts, no checkout and no sign-up forms. Your purchase data sits with Flipkart or Meesho. We hold very little ourselves, and we don't sell any of it.",
+    updated: "14 Nov 2026",
     readTime: "4 min read",
     sections: [
+        {
+            id: "who",
+            title: "Who we are",
+            body: [
+                {
+                    kind: "p",
+                    text: `kalaf.in is run by ${BRAND.legalName}, a ${BRAND.constitution.toLowerCase()} based in ${BRAND.location} (GSTIN ${BRAND.gstin}). We make and sell Kalaf products through Flipkart and Meesho.`,
+                },
+            ],
+        },
         {
             id: "collect",
             title: "What we collect",
             body: [
                 {
                     kind: "p",
-                    text: "Kalaf pieces are sold and fulfilled by Amazon, Flipkart, and Meesho. When you buy on a marketplace, your purchase data — name, payment method, account details — sits with that marketplace under its own privacy policy. We never see your payment information.",
+                    text: "When you buy on a marketplace, your account, payment and order details sit with that marketplace under its own privacy policy. We never see your payment information.",
                 },
                 {
                     kind: "p",
-                    text: "When the marketplace passes us an order to fulfil, we receive the recipient's name and shipping address only — enough to print a dispatch label. That's the entirety of customer data we hold from a sale.",
+                    text: "To pack and ship an order, the marketplace gives us what's on the shipping label: the recipient's name, delivery address and the order details. We use it only to send that order.",
                 },
                 {
                     kind: "p",
-                    text: "If you subscribe to our newsletter from this website, we store your email address. If you write to us, we store the message and your reply-to email.",
+                    text: "If you email, call or WhatsApp us, we keep the conversation and your contact details so we can reply and follow up.",
                 },
                 {
                     kind: "p",
-                    text: "We record basic browsing behaviour on kalaf.in — which pages you visit, how long you spend on them — through first-party analytics.",
+                    text: "This website itself has no forms, accounts or cart, so it doesn't ask you for any personal details.",
                 },
             ],
         },
         {
-            id: "use",
-            title: "How we use it",
+            id: "analytics",
+            title: "Analytics: Microsoft Clarity",
             body: [
+                {
+                    kind: "p",
+                    text: "When analytics is switched on, kalaf.in uses Microsoft Clarity to understand how people use the site. Clarity records how you move through pages — clicks, taps, scrolling and mouse movement — so we can look at session replays and heatmaps and fix what's confusing.",
+                },
                 {
                     kind: "list",
                     items: [
-                        "To dispatch the order to the address the marketplace shared with us.",
-                        "To reply to your email if you've written to us.",
-                        "To send the Kalaf newsletter, if you've opted in.",
-                        "To improve the website based on how people actually use it.",
+                        "It also collects technical details such as your browser, device, screen size, approximate location from your IP address, and the pages you visited.",
+                        "This site has no forms, so there's no typed text for Clarity to record.",
+                        "Clarity sets cookies to recognise a returning browser and to group page views into one visit. The Cookie policy lists them.",
+                        "Microsoft processes this data under its own privacy statement and may use it to improve its services.",
                     ],
+                },
+                {
+                    kind: "links",
+                    items: [
+                        {
+                            label: "Microsoft Privacy Statement",
+                            href: "https://privacy.microsoft.com/privacystatement",
+                            sub: "How Microsoft handles Clarity data",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            id: "others",
+            title: "Other services the site uses",
+            body: [
+                {
+                    kind: "p",
+                    text: "The site loads its fonts from Google Fonts and Fontshare, which means your browser asks their servers for the font files and they see your IP address. We don't use Google Analytics, Meta Pixel or any advertising tracker.",
+                },
+                {
+                    kind: "p",
+                    text: "When you tap a Buy button or a social link, you leave kalaf.in. Flipkart, Meesho, Instagram, Facebook, LinkedIn, X and WhatsApp each handle your data under their own policies.",
                 },
             ],
         },
@@ -53,25 +91,11 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "We do not sell your data. We do not share it with third-party marketers.",
+                    text: "We do not sell your data and we don't share it with marketers.",
                 },
                 {
                     kind: "p",
-                    text: "We share the shipping address from your marketplace order with our courier partner to deliver the piece. That's the only external sharing.",
-                },
-                {
-                    kind: "p",
-                    text: "We may be required by law to share data with government authorities. We'll inform you if we can.",
-                },
-            ],
-        },
-        {
-            id: "cookies",
-            title: "Cookies",
-            body: [
-                {
-                    kind: "p",
-                    text: "See our Cookie Policy for a full breakdown. In short: kalaf.in uses only first-party analytics cookies. There's no on-site cart, checkout, or payment processor here — those run on the marketplace, under the marketplace's cookie policy.",
+                    text: "Shipping details go to the courier the marketplace assigns, to deliver your order. We may also have to share data with government authorities when the law requires it.",
                 },
             ],
         },
@@ -82,10 +106,14 @@ export const data: PolicyData = {
                 {
                     kind: "list",
                     items: [
-                        "Request a copy of all data we hold about you.",
-                        "Ask us to correct or delete it.",
-                        "Withdraw consent for marketing emails at any time — click unsubscribe or email us.",
+                        "Ask for a copy of the data we hold about you.",
+                        "Ask us to correct or delete it, where the law allows.",
+                        "Block or clear cookies in your browser at any time; the site works without them.",
                     ],
+                },
+                {
+                    kind: "p",
+                    text: "Email us and we'll acknowledge your request within 48 hours. For data held by Flipkart or Meesho, contact them directly.",
                 },
             ],
             callout: { label: "Write to", value: BRAND.email },

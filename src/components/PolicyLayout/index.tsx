@@ -53,9 +53,11 @@ export default function PolicyLayout({
                                     {BRAND.wordmark}
                                 </div>
                                 <div className={styles.sigMeta}>
-                                    {BRAND.legalName} · {BRAND.location}
+                                    {BRAND.legalName} · {BRAND.constitution} ·{" "}
+                                    {BRAND.location}
                                     <br />
-                                    CIN {BRAND.cin} · Effective {data.updated}
+                                    GSTIN {BRAND.gstin} · Effective{" "}
+                                    {data.updated}
                                 </div>
                             </div>
                         </article>

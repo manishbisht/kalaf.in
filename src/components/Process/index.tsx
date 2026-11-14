@@ -1,30 +1,52 @@
+import { PRODUCTS } from "../../data/catalog";
 import { ProcessStep, type ProcessItem } from "./ProcessStep";
 import styles from "./style.module.css";
 
+// A product photo from the catalog: product code, colour code, photo number.
+function photo(code: string, colour: string, n: number) {
+    const product = PRODUCTS.find((p) => p.code === code)!;
+    const variant =
+        product.variants.find((v) => v.colourCode === colour) ??
+        product.variants[0];
+    return {
+        image: variant.images[n - 1] ?? variant.images[0],
+        alt: `${product.title} in ${variant.colour}`,
+    };
+}
+
+// Working days from order to dispatch across the range, e.g. "2–3".
+const DAYS = PRODUCTS.map((p) => p.dispatchDays).filter(
+    (d): d is number => d !== null
+);
+const DISPATCH =
+    Math.min(...DAYS) === Math.max(...DAYS)
+        ? `${Math.max(...DAYS)}`
+        : `${Math.min(...DAYS)}–${Math.max(...DAYS)}`;
+
 const PROCESS: ProcessItem[] = [
     {
-        img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1000&q=80",
+        ...photo("PNT", "BE", 6),
         step: "01",
         label: "The cloth",
-        body: "Long-staple cotton from Gujarat. Linen from Erode. Sourced before it's spun.",
+        body: "100% cotton for the pant. Art silk (taffeta) and light chiffon for the dupattas.",
     },
     {
-        img: "https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=1000&q=80",
+        ...photo("DUA", "GR", 1),
         step: "02",
-        label: "The loom",
-        body: "Woven on power looms in Bagru, ten minutes from where we sit. We know the looms by serial number.",
+        label: "The dye",
+        body: "Bandhani and leheriya are tie-dyed, so every dupatta's pattern varies a little from the next.",
     },
     {
-        img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1000&q=80",
+        ...photo("PNT", "BK", 4),
         step: "03",
-        label: "The cut",
-        body: "Pattern-blocked in our workshop in Sanganer. Three master tailors. Two assistants. One sample run.",
+        label: "The details",
+        body: "An elastic waist with a button and zip fly on the pant. A gota border on many of the dupattas.",
     },
     {
-        img: "https://images.unsplash.com/photo-1542060748-10c28b62716f?auto=format&fit=crop&w=1000&q=80",
+        ...photo("DUCHI", "YEL", 3),
         step: "04",
-        label: "The finish",
-        body: "Single garment-wash, line-dry, hand-press. Then a six-point review before it leaves the workshop.",
+        label: "Sent from Jaipur",
+        body: `We pack every order ourselves and dispatch it within ${DISPATCH} working days.`,
     },
 ];
 
@@ -41,15 +63,14 @@ export function Process() {
                             <span className={styles.devanagari}>— कलफ</span>
                         </div>
                         <h2>
-                            From the loom
+                            Made in Jaipur.
                             <br />
-                            to the shoulder.
+                            Sent to your door.
                         </h2>
                     </div>
                     <div className="right">
-                        Every Kalaf piece is sourced, woven, cut, and finished
-                        within 25 km of our office in Jaipur. Four steps. Four
-                        people we know by name.
+                        Every Kalaf piece is made and packed in Jaipur in small
+                        batches, then delivered by Flipkart or Meesho.
                     </div>
                 </div>
 
