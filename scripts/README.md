@@ -34,6 +34,8 @@ The last step of the build, after `vite build` (client → `dist/`) and `vite bu
 - renders the page body (`render(path)` in `src/entry-server.tsx`) into `<div id="root" data-path="…">`, and that path's head tags into the `<!--seo-->` block of `dist/index.html` (it throws if the block or `#root` is missing);
 - writes it to both `dist/<path>.html` and `dist/<path>/index.html` (GitHub Pages serves `/privacy` from either), or `dist/index.html` for `/`.
 
+Old product handles (`OLD_HANDLES` in `src/data/catalog.ts`, exported to the script as `oldHandles`) get a tiny redirect page at the old path: a zero-second meta refresh plus a canonical to the current URL, keeping `?colour=`. That's the closest GitHub Pages gets to a 301; without it the old URL would come back with HTTP 404.
+
 Then it writes `dist/404.html` (empty app shell with `noindex`; GitHub Pages serves it for unknown paths and the client router takes over), `sitemap.xml`, `robots.txt` and `llms.txt`. See [src/seo/README.md](../src/seo/README.md). `vite.config.ts` sets `build.cssCodeSplit: false` so prerendered pages are styled before their JS loads, and skips the `public/` copy for the SSR build.
 
 ## public/

@@ -129,7 +129,7 @@ export const LISTING: ListingItem[] = PRODUCTS.flatMap((product) =>
 );
 
 // Handles that changed, so old shared links keep working.
-const OLD_HANDLES: Record<string, string> = {
+export const OLD_HANDLES: Record<string, string> = {
     "cotton-linen-relaxed-trousers": "cotton-relaxed-trousers",
 };
 

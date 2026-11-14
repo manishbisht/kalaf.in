@@ -151,6 +151,17 @@ describe.skipIf(!built && !required)("prerendered dist/", () => {
         }
     });
 
+    it("old product handles redirect to the current URL instead of 404ing", () => {
+        const html = read("products/cotton-linen-relaxed-trousers.html");
+        expect(html).toContain(
+            '<link rel="canonical" href="https://kalaf.in/products/cotton-relaxed-trousers" />'
+        );
+        expect(html).toContain(
+            'content="0; url=/products/cotton-relaxed-trousers"'
+        );
+        expect(html).toContain("location.search");
+    });
+
     it("404.html is noindex with no canonical", () => {
         const html = read("404.html");
         expect(html).toContain(

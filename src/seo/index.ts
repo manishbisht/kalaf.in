@@ -667,3 +667,6 @@ export function sitemapXml(lastmod: string): string {
 export function robotsTxt(): string {
     return `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
 }
+
+// Old product handles → current ones, for the prerender's redirect pages.
+export { OLD_HANDLES as oldHandles } from "../data/catalog";

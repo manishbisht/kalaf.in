@@ -8,6 +8,7 @@ import { StaticRouter } from "react-router-dom";
 import { Shell } from "./App";
 
 export {
+    oldHandles,
     headHtml,
     llmsTxt,
     notFoundSeo,

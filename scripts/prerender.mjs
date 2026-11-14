@@ -56,8 +56,32 @@ for (const path of paths) {
     }
 }
 
-// Unknown paths (and old product handles) get the app shell; the client router
-// renders the right page or the NotFound page.
+// Old product handles (e.g. after the pant became 100% cotton): a tiny page
+// that redirects to the current URL, keeping ?colour=. A zero-second meta
+// refresh plus a canonical is what GitHub Pages can offer instead of a 301,
+// and search engines treat it as a permanent redirect. Without this the old
+// URL would be served with HTTP 404 from 404.html.
+const attr = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+for (const [from, to] of Object.entries(ssr.oldHandles)) {
+    const target = `/products/${to}`;
+    const html = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Moved</title>
+<link rel="canonical" href="https://kalaf.in${attr(target)}" />
+<meta name="robots" content="noindex" />
+<meta http-equiv="refresh" content="0; url=${attr(target)}" />
+<script>location.replace(${JSON.stringify(target)} + location.search + location.hash);</script>
+</head>
+<body><a href="${attr(target)}">This page has moved.</a></body>
+</html>
+`;
+    await write(join(dist, "products", `${from}.html`), html);
+    await write(join(dist, "products", from, "index.html"), html);
+}
+
+// Unknown paths get the app shell; the client router renders the NotFound page.
 await write(
     join(dist, "404.html"),
     page(ssr.headHtml(ssr.notFoundSeo("/404")), null)
@@ -69,5 +93,5 @@ await write(join(dist, "robots.txt"), ssr.robotsTxt());
 await write(join(dist, "llms.txt"), ssr.llmsTxt());
 
 console.log(
-    `prerendered ${paths.length} routes + 404.html, sitemap.xml, robots.txt, llms.txt`
+    `prerendered ${paths.length} routes + ${Object.keys(ssr.oldHandles).length} redirects, 404.html, sitemap.xml, robots.txt, llms.txt`
 );
