@@ -1,43 +1,67 @@
 import type { PolicyData } from "../../components/PolicyLayout";
-import { BRAND } from "../../constants";
+import { BRAND, telHref, whatsappHref } from "../../constants";
+
+const PHONE = BRAND.phone;
+const WHATSAPP = BRAND.whatsapp ?? BRAND.phone;
+
+const CHANNELS = [
+    { label: "Email", href: `mailto:${BRAND.email}`, sub: BRAND.email },
+    ...(WHATSAPP
+        ? [
+              {
+                  label: "WhatsApp",
+                  href: whatsappHref(WHATSAPP),
+                  sub: WHATSAPP,
+              },
+          ]
+        : []),
+    ...(PHONE ? [{ label: "Call", href: telHref(PHONE), sub: PHONE }] : []),
+];
+
+// "WhatsApp or call", depending on which numbers exist.
+const QUICK = [WHATSAPP && "WhatsApp", PHONE && "call"]
+    .filter(Boolean)
+    .join(" or ");
 
 export const data: PolicyData = {
     eyebrow: "Support",
     title: "Contact us",
     ornament: "संपर्क",
-    summary:
-        "We're a small team in Jaipur. Email is fastest. We reply to every message within one working day.",
-    updated: "23 May 2026",
-    readTime: "1 min read",
+    summary: `We're a small team in Jaipur. Email us${QUICK ? `, or ${QUICK} us during working hours` : ""}. A real person reads and answers every message.`,
+    updated: "14 Nov 2026",
+    readTime: "2 min read",
     crossLinksHeader: "More guides",
     promises: [
         {
-            kicker: "1 d",
-            label: "Response time",
-            body: "We reply to all emails within one working day, Monday to Saturday.",
+            kicker: "1 day",
+            label: "Reply time",
+            body: "We aim to reply within one working day, Monday to Saturday.",
         },
         {
             kicker: "Human",
             label: "Support",
-            body: "Every reply comes from a real person on the team — not a bot.",
+            body: "Every reply comes from someone on the team, not a bot.",
         },
         {
             kicker: "Jaipur",
             label: "Based in",
-            body: "We're a small team in Jaipur. IST is our timezone — 10am–7pm, Mon–Sat.",
+            body: `Our working hours are ${BRAND.workingHours}.`,
         },
     ],
     sections: [
         {
             id: "write",
-            title: "Write to us",
+            title: "Reach us",
             body: [
                 {
                     kind: "p",
-                    text: "Email is the fastest way to reach the team. We don't run a phone line — email lets us give you a considered, accurate reply rather than a rushed one.",
+                    text: QUICK
+                        ? `For a quick question, ${QUICK} us during working hours. For anything that needs a photo or an order ID, email is best, so we have everything in one place.`
+                        : "Email is the best way to reach us, especially for anything that needs a photo or an order ID.",
                 },
+                { kind: "links", items: CHANNELS },
             ],
-            callout: { label: "Email", value: BRAND.email },
+            callout: { label: "Working hours", value: BRAND.workingHours },
         },
         {
             id: "include",
@@ -45,14 +69,14 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Tell us which marketplace you bought from (Amazon, Flipkart, or Meesho) and paste the order ID — that's the fastest path to a useful reply.",
+                    text: "If it's about an order, tell us where you bought it and paste the order ID. That's the fastest way to a useful reply.",
                 },
                 {
                     kind: "list",
                     items: [
-                        "The marketplace name (Amazon / Flipkart / Meesho).",
-                        "The marketplace order ID, copied from Your Orders.",
-                        "A brief description of what you need.",
+                        "The marketplace (Flipkart or Meesho).",
+                        "The order ID, copied from your orders on the marketplace.",
+                        "What you need, with a photo if something's wrong.",
                     ],
                 },
             ],
@@ -63,22 +87,32 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Returns and exchanges are handled by the marketplace where you bought the piece — start from Your Orders on Amazon, Flipkart, or Meesho. The Shipping & Returns page walks through what each marketplace covers. If you've already tried there and hit a wall, write to us and we'll chase it.",
+                    text: "Returns and exchanges are handled by the marketplace you bought from. Start from your orders on Flipkart or Meesho; the Shipping & returns page explains how. If you've tried there and hit a wall, write to us and we'll follow it up.",
                 },
             ],
         },
         {
-            id: "hours",
-            title: "Response time",
+            id: "grievances",
+            title: "Grievances",
             body: [
                 {
                     kind: "p",
-                    text: "We reply to all emails within one working day. On weekends and public holidays, we're back to you the next working day.",
+                    text: `To raise a complaint or grievance, email ${BRAND.email} with "Grievance" in the subject line. We acknowledge every grievance within 48 hours and work to resolve it within one month.`,
+                },
+                {
+                    kind: "list",
+                    items: [
+                        `Legal name — ${BRAND.legalName} (${BRAND.constitution.toLowerCase()})`,
+                        `GSTIN — ${BRAND.gstin}`,
+                        `Address — ${BRAND.address}`,
+                        `Email — ${BRAND.email}`,
+                        ...(PHONE ? [`Phone — ${PHONE}`] : []),
+                    ],
                 },
             ],
             callout: {
-                label: "Working hours",
-                value: BRAND.workingHours,
+                label: "Grievances",
+                value: `${BRAND.email} — acknowledged within 48 hours.`,
             },
         },
     ],
