@@ -1,17 +1,25 @@
-import { useEffect, useRef, useState } from "react";
-import { useHref } from "react-router-dom";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { SITE_URL } from "../../hooks/usePageProduct";
 import styles from "./style.module.css";
+
+const noSubscribe = () => () => {};
 
 // Share the current colour's page: the system share sheet where there is one
 // (phones), otherwise copy the link, with a WhatsApp link alongside.
 export function Share({ title, path }: { title: string; path: string }) {
-    const href = useHref(path);
     const [copied, setCopied] = useState(false);
+    // Known only in the browser; the prerendered page shows "Copy link" and
+    // switches to the share sheet after hydration where there is one.
+    const canShare = useSyncExternalStore(
+        noSubscribe,
+        () => typeof navigator.share === "function",
+        () => false
+    );
     const timer = useRef(0);
     useEffect(() => () => window.clearTimeout(timer.current), []);
 
-    const url = new URL(href, window.location.href).toString();
-    const canShare = typeof navigator.share === "function";
+    // Always share the public kalaf.in link, even from localhost or a preview.
+    const url = `${SITE_URL}${path}`;
 
     const share = async () => {
         if (canShare) {

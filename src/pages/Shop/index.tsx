@@ -1,4 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+    useSyncExternalStore,
+} from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
     COLLECTIONS,
@@ -295,15 +301,18 @@ export default function Shop() {
     );
 }
 
-// True below the width where the filter sidebar becomes a drawer.
+// True below the width where the filter sidebar becomes a drawer. False while
+// prerendering (no matchMedia on the server), then the real value on hydrate.
+const NARROW = "(max-width: 900px)";
+const subscribeNarrow = (onChange: () => void) => {
+    const mq = matchMedia(NARROW);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+};
 function useIsNarrow() {
-    const query = "(max-width: 900px)";
-    const [narrow, setNarrow] = useState(() => matchMedia(query).matches);
-    useEffect(() => {
-        const mq = matchMedia(query);
-        const onChange = () => setNarrow(mq.matches);
-        mq.addEventListener("change", onChange);
-        return () => mq.removeEventListener("change", onChange);
-    }, []);
-    return narrow;
+    return useSyncExternalStore(
+        subscribeNarrow,
+        () => matchMedia(NARROW).matches,
+        () => false
+    );
 }
