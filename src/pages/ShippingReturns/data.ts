@@ -1,6 +1,7 @@
 import type { PolicyData } from "../../components/PolicyLayout";
 import { BRAND, MARKETPLACE_ORDERS } from "../../constants";
 import { PRODUCTS } from "../../data/catalog";
+import { BUSINESS } from "../../data/business";
 
 // Working days from order to dispatch, from the products repo.
 const dispatch = (collection: string) =>
@@ -15,6 +16,28 @@ const DUPATTA_DAYS = dispatch("dupattas");
 const FASTEST = Math.min(PANT_DAYS, DUPATTA_DAYS);
 const SLOWEST = Math.max(PANT_DAYS, DUPATTA_DAYS);
 const DAY_RANGE = FASTEST === SLOWEST ? `${FASTEST}` : `${FASTEST}–${SLOWEST}`;
+
+// "When we last checked (15 Nov 2026), our listings showed a 10-day return on
+// Flipkart and a 7-day return on Meesho. " from the products repo; the same
+// numbers go in the product pages' structured data (src/seo).
+const MONTHS = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ");
+
+function returnWindows() {
+    const r = BUSINESS.marketplace_returns;
+    const parts = [
+        r.flipkart && `a ${r.flipkart.return_days}-day return on Flipkart`,
+        r.meesho && `a ${r.meesho.return_days}-day return on Meesho`,
+    ].filter(Boolean);
+    const checked = [r.flipkart?.checked, r.meesho?.checked]
+        .filter((d): d is string => Boolean(d))
+        .sort()[0];
+    if (!parts.length || !checked) return "";
+    // Formatted by hand, not toLocaleDateString: the prerender (Node) and the
+    // browser must produce the same text or hydration fails.
+    const [y, m, d] = checked.split("-").map(Number);
+    const when = `${d} ${MONTHS[m - 1]} ${y}`;
+    return `When we last checked (${when}), our listings showed ${parts.join(" and ")}. `;
+}
 
 export const data: PolicyData = {
     eyebrow: "Policy 02",
@@ -90,7 +113,7 @@ export const data: PolicyData = {
                 },
                 {
                     kind: "p",
-                    text: "The exact window for your item is on the order page. Check it before you send anything back.",
+                    text: `${returnWindows()}The exact window for your item is on the order page. Check it before you send anything back.`,
                 },
             ],
             steps: [

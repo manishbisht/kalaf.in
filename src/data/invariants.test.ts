@@ -178,6 +178,28 @@ function gstinCheckDigit(gstin: string) {
 }
 
 describe("business.json", () => {
+    it("has a return window for every marketplace we link to", () => {
+        const stores = new Set(
+            PRODUCTS.flatMap((p) =>
+                p.variants.flatMap((v) =>
+                    Object.entries(v.links)
+                        .filter(([, link]) => link)
+                        .map(([store]) => store)
+                )
+            )
+        );
+        for (const store of stores) {
+            const r =
+                BUSINESS.marketplace_returns[
+                    store as keyof typeof BUSINESS.marketplace_returns
+                ];
+            expect(r, `return window for ${store}`).toBeDefined();
+            expect(Number.isInteger(r!.return_days)).toBe(true);
+            expect(r!.return_days).toBeGreaterThan(0);
+            expect(r!.checked).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        }
+    });
+
     it("GSTIN has the Indian GSTIN format and a valid check digit", () => {
         expect(BUSINESS.gstin).toMatch(
             /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/

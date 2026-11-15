@@ -354,7 +354,28 @@ function variantJsonLd(product: Product, v: Variant): JsonLd {
                 : "https://schema.org/OutOfStock",
             itemCondition: "https://schema.org/NewCondition",
             seller: { "@type": "Organization", name: BUSINESS.legal_name },
+            ...returnPolicy(id),
         })),
+    };
+}
+
+// The return window the marketplace shows on our listings (from the products
+// repo's business.json). No shippingDetails: Google requires a fixed rate,
+// and the marketplaces' delivery charges vary by order and address.
+function returnPolicy(store: string): JsonLd {
+    const r =
+        BUSINESS.marketplace_returns[
+            store as keyof typeof BUSINESS.marketplace_returns
+        ];
+    if (!r) return {};
+    return {
+        hasMerchantReturnPolicy: {
+            "@type": "MerchantReturnPolicy",
+            applicableCountry: "IN",
+            returnPolicyCategory:
+                "https://schema.org/MerchantReturnFiniteReturnWindow",
+            merchantReturnDays: r.return_days,
+        },
     };
 }
 

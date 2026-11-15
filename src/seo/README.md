@@ -9,17 +9,17 @@ Everything that goes in a page's `<head>` plus the site-wide text files for craw
 
 ## What each page gets
 
-| Path                   | Title / description from                               | JSON-LD                                                        |
-| ---------------------- | ------------------------------------------------------ | -------------------------------------------------------------- |
-| `/`                    | `HOME`                                                 | Organization (legal name, GSTIN, address, socials) + WebSite   |
-| `/products`            | `SHOP_ALL`                                             | ItemList + BreadcrumbList                                      |
-| `/collections/:handle` | `COLLECTION_HEAD`; image = first photo                 | ItemList + BreadcrumbList                                      |
-| `/products/:handle`    | built from the catalog (title, colour, price, stores)  | ProductGroup (every colour, offers per store) + BreadcrumbList |
-| `/faq`                 | `STATIC_PAGES`                                         | FAQPage (questions and answers from `pages/Faq/data.ts`)       |
-| policy / guide pages   | `STATIC_PAGES`                                         | none                                                           |
-| `/journal`             | `JOURNAL` (description = `JOURNAL_INTRO`)              | ItemList of articles + BreadcrumbList                          |
-| `/journal/:slug`       | the article's title and description; image = its photo | Article (author/publisher Organization Kalaf) + BreadcrumbList |
-| anything else          | `notFoundSeo` (`noindex`)                              | none                                                           |
+| Path                   | Title / description from                               | JSON-LD                                                                                       |
+| ---------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| `/`                    | `HOME`                                                 | Organization (legal name, GSTIN, address, socials) + WebSite                                  |
+| `/products`            | `SHOP_ALL`                                             | ItemList + BreadcrumbList                                                                     |
+| `/collections/:handle` | `COLLECTION_HEAD`; image = first photo                 | ItemList + BreadcrumbList                                                                     |
+| `/products/:handle`    | built from the catalog (title, colour, price, stores)  | ProductGroup (every colour, offers per store with the store's return window) + BreadcrumbList |
+| `/faq`                 | `STATIC_PAGES`                                         | FAQPage (questions and answers from `pages/Faq/data.ts`)                                      |
+| policy / guide pages   | `STATIC_PAGES`                                         | none                                                                                          |
+| `/journal`             | `JOURNAL` (description = `JOURNAL_INTRO`)              | ItemList of articles + BreadcrumbList                                                         |
+| `/journal/:slug`       | the article's title and description; image = its photo | Article (author/publisher Organization Kalaf) + BreadcrumbList                                |
+| anything else          | `notFoundSeo` (`noindex`)                              | none                                                                                          |
 
 - Titles end with ` · Kalaf` (except home). Canonical is `https://kalaf.in<path>` with no query string; `url` keeps `?colour=` so a shared colour link previews that colour.
 - `og:image` defaults to `/og-image.jpg`; product pages use the variant's photo. The Organization logo is `/icon-512.png`.
@@ -38,3 +38,8 @@ It also writes:
 ## Adding a page
 
 Add its path to `STATIC_PAGES` with a `title` (no suffix) and a `description` (~150 chars, factual). That gives it head tags, prerenders it and puts it in the sitemap. For JSON-LD of its own, add a builder to `STATIC_JSON_LD` (the FAQ does). `brandTitle: true` drops the ` · Kalaf` suffix when the title already names the brand (`/links`: "Kalaf — links"). A utility page that should be prerendered and indexable but not listed in the sitemap goes in `NOT_IN_SITEMAP` (`/links`); `sitemapPaths()` is `prerenderPaths()` minus those. A page with a different shape (like a collection) needs its own branch in `seoFor` and an entry in `prerenderPaths()`. Also follow the page checklist in [pages/README.md](../pages/README.md#adding-a-page).
+
+## Google's structured-data warnings we leave on purpose
+
+- **`aggregateRating` / `review`** (Product snippets): there are no reviews on kalaf.in, and Google doesn't allow marking up reviews from Flipkart or Meesho as ours. Don't add them.
+- **`shippingDetails`** (Merchant listings): Google requires a fixed `shippingRate`, but the marketplaces' delivery charge varies by order and address. Add it only if a store's charge becomes fixed (e.g. always free), via the products repo.

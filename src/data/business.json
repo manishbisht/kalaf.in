@@ -13,5 +13,15 @@
   },
   "email": "hello@kalaf.in",
   "phone": "+91 79768 47772",
-  "whatsapp": "+91 79768 47772"
+  "whatsapp": "+91 79768 47772",
+  "marketplace_returns": {
+    "flipkart": {
+      "return_days": 10,
+      "checked": "2026-11-15"
+    },
+    "meesho": {
+      "return_days": 7,
+      "checked": "2026-11-15"
+    }
+  }
 }

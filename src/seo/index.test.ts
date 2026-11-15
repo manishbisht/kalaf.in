@@ -26,6 +26,7 @@ type Offer = {
     url: string;
     priceCurrency: string;
     price: string;
+    hasMerchantReturnPolicy?: Json;
 };
 
 const ofType = (ld: Json[], type: string) =>
@@ -193,6 +194,18 @@ function expectProductJsonLd(ld: Json[], v: Variant, _pageUrl: string) {
         expect(offer!.priceCurrency).toBe("INR");
         const price = v.prices[store as keyof Variant["prices"]] ?? v.price;
         expect(offer!.price).toBe(price.toFixed(2));
+        // The marketplace's return window, as shown on its listing.
+        const returns =
+            BUSINESS.marketplace_returns[
+                store as keyof typeof BUSINESS.marketplace_returns
+            ];
+        expect(offer!.hasMerchantReturnPolicy).toEqual({
+            "@type": "MerchantReturnPolicy",
+            applicableCountry: "IN",
+            returnPolicyCategory:
+                "https://schema.org/MerchantReturnFiniteReturnWindow",
+            merchantReturnDays: returns!.return_days,
+        });
     }
 
     const crumbs = ofType(ld, "BreadcrumbList")!;

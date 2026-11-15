@@ -20,6 +20,11 @@ export type Business = {
     phone: string | null;
     // WhatsApp chat number, with country code (e.g. "+91 79768 47772").
     whatsapp: string | null;
+    // Return window each marketplace shows on our listings, and when it was
+    // last checked there (the marketplace sets it, not us).
+    marketplace_returns: Partial<
+        Record<"flipkart" | "meesho", { return_days: number; checked: string }>
+    >;
 };
 
 export const BUSINESS = raw as Business;
