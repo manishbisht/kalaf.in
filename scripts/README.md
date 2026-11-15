@@ -38,6 +38,15 @@ Old product handles (`OLD_HANDLES` in `src/data/catalog.ts`, exported to the scr
 
 Then it writes `dist/404.html` (empty app shell with `noindex`; GitHub Pages serves it for unknown paths and the client router takes over), `sitemap.xml`, `robots.txt` and `llms.txt`. See [src/seo/README.md](../src/seo/README.md). `vite.config.ts` sets `build.cssCodeSplit: false` so prerendered pages are styled before their JS loads, and skips the `public/` copy for the SSR build.
 
+## CSP (Content Security Policy)
+
+`vite.config.ts` adds a `<meta http-equiv="Content-Security-Policy">` to every built page (build only: the dev server's inline React Refresh script would be blocked). It allows our own files, Google Fonts and Fontshare, and Microsoft Clarity (`www.clarity.ms`, `scripts.clarity.ms`, `*.clarity.ms`, `c.bing.com`). `e2e/csp.spec.ts` fails if a page reports a violation.
+
+- **New third-party host** (a script, font, image or API): add it to the matching directive in `CSP`, or the browser blocks it.
+- **The font `onload` handler in `index.html`** is allowed by its SHA-256 hash. If you change that text, recompute the hash and replace it in `CSP`:
+  `printf "%s" "this.media='all'" | openssl dgst -sha256 -binary | base64`
+- A `<meta>` CSP can't set `frame-ancestors` or reporting; GitHub Pages can't send headers.
+
 ## public/
 
 Copied as-is to the site root by Vite, so **don't put a README or anything private here**.

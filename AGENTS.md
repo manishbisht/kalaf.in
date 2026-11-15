@@ -40,6 +40,7 @@ node_modules/.bin/playwright test         # browser tests (once: playwright inst
 
 ## Gotchas
 
+- **Content Security Policy.** Built pages only allow scripts, styles, fonts and images from hosts listed in `CSP` in `vite.config.ts`. Adding a third-party host or changing the inline font `onload` means updating it (scripts/README.md → CSP).
 - **Contractions in strings.** `'We don't ship'` ends the string at the apostrophe. Use double quotes or backticks; policy data files are full of contractions.
 - **`verbatimModuleSyntax`** is on: type-only imports need `import type` or `import { x, type Y }`. Don't strip the keyword.
 - **`noUnusedLocals` / `noUnusedParameters`** are on: prefix intentionally unused names with `_`.
