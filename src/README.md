@@ -76,12 +76,13 @@ Target is WCAG 2.2 AA (Lighthouse a11y 100 on every page type). `index.css` give
 
 `main.tsx` calls `Clarity.init` only when `ENV.clarityProjectId` is set (CI passes it from the `CLARITY_PROJECT_ID` repo secret; blank locally, so dev sends nothing). The SDK injects its own script at runtime. Custom signals today: `page_view` events from `ScrollToTop`, plus click events from [`analytics.ts`](analytics.ts):
 
-| Event            | Tags                                                 | Fired by         |
-| ---------------- | ---------------------------------------------------- | ---------------- |
-| `buy_click`      | `store`, `sku`, `product` (SKU/product may be blank) | `BuyButtons`     |
-| `whatsapp_click` | `page`: the product SKU, else the pathname           | `WhatsAppButton` |
-| `ask_ai_click`   | `assistant`: Claude, ChatGPT or Perplexity           | `AskAI`          |
-| `links_click`    | `target`: which button on `/links`                   | `pages/Links`    |
+| Event            | Tags                                                 | Fired by              |
+| ---------------- | ---------------------------------------------------- | --------------------- |
+| `buy_click`      | `store`, `sku`, `product` (SKU/product may be blank) | `BuyButtons`          |
+| `whatsapp_click` | `page`: the product SKU, else the pathname           | `WhatsAppButton`      |
+| `restock_click`  | `sku`: the sold-out colour                           | `Product/BackInStock` |
+| `ask_ai_click`   | `assistant`: Claude, ChatGPT or Perplexity           | `AskAI`               |
+| `links_click`    | `target`: which button on `/links`                   | `pages/Links`         |
 
 Add new events there with `trackEvent(name, tags)`, and wire them with `{...trackClicks(() => …)}`, which counts left and middle clicks but not right-clicks. `trackEvent` is a no-op without `ENV.clarityProjectId`, swallows Clarity errors and never prevents the default, so tracking can't block or break a link.
 

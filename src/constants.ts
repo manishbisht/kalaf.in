@@ -28,6 +28,9 @@ export const BRAND = {
 export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 export const whatsappHref = (phone: string) =>
     `https://wa.me/${phone.replace(/\D/g, "")}`;
+// A wa.me chat with the first message already typed in.
+export const whatsappMessageHref = (phone: string, text: string) =>
+    `${whatsappHref(phone)}?text=${encodeURIComponent(text)}`;
 
 export const SOCIAL = {
     facebook: "https://facebook.com/kalaf.india",

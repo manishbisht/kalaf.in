@@ -1,4 +1,4 @@
-import { BRAND, ROUTES, whatsappHref } from "../../constants";
+import { BRAND, ROUTES, whatsappMessageHref } from "../../constants";
 import { usePageProduct } from "../../hooks/usePageProduct";
 import { trackClicks, trackWhatsAppClick } from "../../analytics";
 import styles from "./style.module.css";
@@ -30,7 +30,7 @@ export function WhatsAppButton() {
         <aside aria-label="WhatsApp chat">
             <a
                 className={styles.button}
-                href={`${whatsappHref(BRAND.whatsapp)}?text=${encodeURIComponent(greeting)}`}
+                href={whatsappMessageHref(BRAND.whatsapp, greeting)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat with us on WhatsApp"

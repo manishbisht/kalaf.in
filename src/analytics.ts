@@ -52,6 +52,11 @@ export function trackWhatsAppClick(page: string) {
     trackEvent("whatsapp_click", { page });
 }
 
+/** "Message us when it's back" on a sold-out colour: demand for a restock. */
+export function trackRestockClick(sku: string) {
+    trackEvent("restock_click", { sku });
+}
+
 /** An "Ask AI" link (Claude, ChatGPT, Perplexity). */
 export function trackAskAIClick(assistant: string) {
     trackEvent("ask_ai_click", { assistant });

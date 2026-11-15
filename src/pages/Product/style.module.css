@@ -494,6 +494,11 @@
     color: var(--ink);
 }
 
+/* Sold-out colour: the WhatsApp "tell me when it's back" button. */
+.restock {
+    margin-top: 16px;
+}
+
 .share {
     display: flex;
     flex-wrap: wrap;

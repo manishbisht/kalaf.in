@@ -16,6 +16,7 @@ import { ProductCard } from "../../components/ProductCard";
 import { Swatch } from "../../components/Swatch";
 import { Gallery } from "./Gallery";
 import { Share } from "./Share";
+import { BackInStock } from "./BackInStock";
 import NotFound from "../NotFound";
 import styles from "./style.module.css";
 
@@ -187,6 +188,12 @@ export default function ProductPage() {
                                     variant={variant}
                                 />
                             </div>
+                            {soldOut && (
+                                <BackInStock
+                                    product={product}
+                                    variant={variant}
+                                />
+                            )}
                             {!soldOut && (
                                 <>
                                     <div className={styles.label}>
