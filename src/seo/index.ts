@@ -335,6 +335,9 @@ function variantJsonLd(product: Product, v: Variant): JsonLd {
     return {
         "@type": "Product",
         name: `${product.title} — ${v.colour}`,
+        // Google's merchant listings want a description on each variant,
+        // not only on the group.
+        description: `${product.title} in ${v.colour}. ${product.description}`,
         sku: v.sku,
         color: v.colour,
         image: v.images.map((img) => absolute(img.srcLarge)),

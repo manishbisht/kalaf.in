@@ -174,6 +174,9 @@ function expectProductJsonLd(ld: Json[], v: Variant, _pageUrl: string) {
     const product = variants.find((x) => x.sku === v.sku)!;
     expect(product, `variant ${v.sku}`).toBeDefined();
     expect(product.color).toBe(v.colour);
+    // Google's merchant listings flag a variant without its own description.
+    expect(product.description).toEqual(expect.any(String));
+    expect((product.description as string).length).toBeGreaterThan(20);
     expect(product.url).toMatch(
         new RegExp(`^https://kalaf\\.in/products/.+\\?colour=${v.colourCode}$`)
     );
