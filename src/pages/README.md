@@ -57,14 +57,14 @@ The link-in-bio page for the Instagram and Facebook bios: wordmark, one line abo
 
 ## Journal (`/journal`, `/journal/:slug`)
 
-Short articles about the crafts (bandhani, leheriya, gota), draping and the pant. All content is data in **`Journal/articles.ts`** (`ARTICLES`): slug, title, description, date (`date` shown, `datePublished` ISO), category, a Devanagari ornament, a hero photo picked from the catalog (`{ handle, colour, index }`), intro, sections of blocks (`p`, `list`, `steps`) and the related product handles. Text can hold inline links as `[label](/path)`, built from `ROUTES` / `productPath` / `collectionPath` / `journalPath`; `JournalArticle/RichText.tsx` renders them as `<Link>`s. Reading time is computed from the word count.
+Short articles about the crafts (bandhani, leheriya, gota), the two dupatta fabrics, draping, pairing a dupatta with an outfit, and the pant. All content is data in **`Journal/articles.ts`** (`ARTICLES`): slug, title, description, date (`date` shown, `datePublished` ISO), category, a Devanagari ornament, a hero photo picked from the catalog (`{ handle, colour, index }`), intro, sections of blocks (`p`, `list`, `steps`) and the related product handles. Text can hold inline links as `[label](/path)`, built from `ROUTES` / `productPath` / `collectionPath` / `journalPath`; `JournalArticle/RichText.tsx` renders them as `<Link>`s. Reading time is computed from the word count.
 
 - `Journal/` is the index: the newest article featured, the rest in a grid.
 - `JournalArticle/` is one article: header with photo, a contents rail, the sections, "Shop the pieces" (`ProductCard`s, one in-stock colour per related product in turn, up to four) and "More from the journal". An unknown slug renders `NotFound`.
 - SEO (title, Article + BreadcrumbList JSON-LD, prerender, sitemap, llms.txt) comes from the same data in `src/seo`.
 - `articles.test.ts` checks every related handle, hero photo and inline link exists, and keeps each article at 400–700 words.
 
-**Content rules.** Write about the crafts in general, well-established terms and hedge where traditions vary ("often", "traditionally"). Say nothing about how or by whom Kalaf's own pieces are made beyond what the catalog states (fabric, size, fit, care); no artisan stories, dyes, timings, statistics or quotes. To add an article, append to `ARTICLES` and run the tests.
+**Content rules.** Write about the crafts in general, well-established terms and hedge where traditions vary ("often", "traditionally"). Say nothing about how or by whom Kalaf's own pieces are made beyond what the catalog states (fabric, size, fit, care); no artisan stories, dyes, timings, statistics or quotes. To add an article, put it at the top of `ARTICLES` (newest first: the index features the first one) and run the tests.
 
 ## NotFound
 

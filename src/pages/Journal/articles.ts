@@ -76,6 +76,14 @@ const list = (items: string[]) =>
     items.length < 2
         ? items.join("")
         : `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+/** Single colours of a product, lower case ("royal blue"); no multicolours. */
+const solidColours = (handle: string) =>
+    (byHandle(handle)?.variants ?? [])
+        .filter((v) => v.family !== "Multicolour")
+        .map((v) => v.colour.toLowerCase());
+const multicolours = (handle: string) =>
+    (byHandle(handle)?.variants ?? []).filter((v) => v.family === "Multicolour")
+        .length;
 
 /** The index page's intro, also its meta description. */
 export const JOURNAL_INTRO =
@@ -83,8 +91,236 @@ export const JOURNAL_INTRO =
 
 const DATE = "14 Nov 2026";
 const ISO_DATE = "2026-11-14";
+const DATE_15 = "15 Nov 2026";
+const ISO_DATE_15 = "2026-11-15";
 
+const FABRIC_SLUG = "chiffon-vs-art-silk-dupattas";
+const FABRIC_TITLE = "Chiffon or art silk? Choosing a dupatta fabric";
+const PAIRING_SLUG = "how-to-pair-a-dupatta-with-your-kurta";
+const PAIRING_TITLE = "How to pair a dupatta with your kurta";
+
+const GOTA_MULTI = multicolours(BANDHANI_GOTA);
+
+// Newest first: the index features the first article.
 export const ARTICLES: Article[] = [
+    {
+        slug: FABRIC_SLUG,
+        title: FABRIC_TITLE,
+        description:
+            "Chiffon and art silk (taffeta) wear very differently. How the two dupatta fabrics compare on drape, weight, sheen and feel, when to wear each, and care.",
+        date: DATE_15,
+        datePublished: ISO_DATE_15,
+        category: "Craft",
+        ornament: "कपड़ा",
+        hero: { handle: LEHERIYA, colour: "PI", index: 0 },
+        intro: `Our dupattas come in two fabrics: light chiffon for the leheriya, and art silk (taffeta) for the bandhani. They're all ${DUPATTA_SIZE}, but the two fabrics look, feel and wear quite differently. Here is how they compare, when each one works best, and how to look after them.`,
+        sections: [
+            {
+                id: "chiffon",
+                heading: "Chiffon: light and sheer",
+                blocks: [
+                    {
+                        kind: "p",
+                        text: "Chiffon is a fine, sheer fabric woven from tightly twisted yarns. The twist gives it a faintly grainy feel between the fingers and a soft, matte surface with little shine of its own. It can be made from silk or from man-made fibres such as polyester, and either way it's one of the lightest fabrics a dupatta can be made in.",
+                    },
+                    {
+                        kind: "p",
+                        text: "Because it's so light, chiffon falls in soft, fluid folds and moves as you move. It's sheer in a single layer, so the colour of your kurta shows through a little wherever the dupatta lies flat. That lightness is also one reason leheriya is so often done on chiffon: thin cloth rolls tightly, and the dye can reach through every layer.",
+                    },
+                ],
+            },
+            {
+                id: "art-silk",
+                heading: "Art silk (taffeta): crisp, with a sheen",
+                blocks: [
+                    {
+                        kind: "p",
+                        text: "Art silk is short for artificial silk, a broad name for man-made fibres, such as viscose and polyester, that are made to look like silk. Taffeta is the weave: a tight, plain weave that makes a smooth, crisp cloth with a gentle sheen.",
+                    },
+                    {
+                        kind: "p",
+                        text: "Compared with chiffon, art silk taffeta has more body. It's less sheer, it feels smooth rather than grainy, and it catches the light. Rather than flowing, it holds its shape, so pleats and folds stay where you put them. Against that sheen, the small undyed dots of bandhani stand out clearly.",
+                    },
+                ],
+            },
+            {
+                id: "compare",
+                heading: "Side by side",
+                blocks: [
+                    {
+                        kind: "list",
+                        items: [
+                            "Drape: chiffon flows and falls in soft folds; taffeta is crisper and holds a pleat.",
+                            "Weight: chiffon is the lighter of the two; taffeta has a little more weight and body.",
+                            "Sheen: taffeta has a soft lustre; chiffon is more matte.",
+                            "Feel: chiffon is fine and slightly grainy; taffeta is smooth and crisp, and can rustle a little as you move.",
+                            "Sheerness: chiffon is see-through in a single layer; taffeta is less sheer.",
+                        ],
+                    },
+                ],
+            },
+            {
+                id: "occasions",
+                heading: "When to wear which",
+                blocks: [
+                    {
+                        kind: "p",
+                        text: "There are no fixed rules, but a few things are worth keeping in mind:",
+                    },
+                    {
+                        kind: "list",
+                        items: [
+                            "In the heat, chiffon is the easier choice. It's light and airy, which is part of why leheriya has long been thought of as cloth for summer and the rains.",
+                            `For open, flowing drapes, such as across both shoulders or belted like a cape, chiffon's softness shows well. For a neat drape over one shoulder, taffeta's crispness helps. There are steps for each in ${link("Four ways to drape a dupatta", journalPath("four-ways-to-drape-a-dupatta"))}.`,
+                            `For festive days, both work. Taffeta's sheen looks dressy on its own, and a gota border adds shimmer to either fabric, as on our ${productLink(LEHERIYA)}.`,
+                            `For everyday wear, a borderless art silk bandhani, like our ${productLink(BANDHANI)}, goes easily with a plain kurta.`,
+                        ],
+                    },
+                ],
+            },
+            {
+                id: "care",
+                heading: "Caring for each",
+                blocks: [
+                    {
+                        kind: "p",
+                        text: "All our dupattas are tie-dyed, so the basics are the same for both fabrics: wash on its own the first few times, dry clean or hand wash gently in cold water with a mild detergent, don't wring, and dry in the shade. With a gota border, dry cleaning is the safer choice. Beyond that, a few differences:",
+                    },
+                    {
+                        kind: "list",
+                        items: [
+                            "Chiffon is fine and can snag. Keep it clear of rings, bangles and brooches with sharp edges, and handle it gently when it's wet.",
+                            "Taffeta holds creases as well as it holds pleats. Store it folded, and refold it now and then along different lines so the folds don't set.",
+                            "Man-made fibres don't like a hot iron. Iron both fabrics on low heat, on the reverse, and keep the iron off the gota.",
+                            "If you like the crinkle of bandhani, skip the iron or steam it lightly.",
+                        ],
+                    },
+                    {
+                        kind: "p",
+                        text: `The full washing and storing notes are in our ${link("care guide", ROUTES.careGuide)}.`,
+                    },
+                ],
+            },
+            {
+                id: "ours",
+                heading: "Our dupattas, by fabric",
+                blocks: [
+                    {
+                        kind: "p",
+                        text: `In chiffon: the ${productLink(LEHERIYA)}, in ${coloursOf(LEHERIYA)} colours. In art silk (taffeta): the ${productLink(BANDHANI)}, in ${coloursOf(BANDHANI)} colours, and the ${productLink(BANDHANI_GOTA)}, in ${coloursOf(BANDHANI_GOTA)} colours. For help choosing a colour, read ${link(PAIRING_TITLE, journalPath(PAIRING_SLUG))}.`,
+                    },
+                ],
+            },
+        ],
+        related: [LEHERIYA, BANDHANI, BANDHANI_GOTA],
+    },
+    {
+        slug: PAIRING_SLUG,
+        title: PAIRING_TITLE,
+        description:
+            "Choosing a dupatta for a kurta: colour pairings that work, when to pick a gota border, and bandhani dots or leheriya stripes for plain and printed outfits.",
+        date: DATE_15,
+        datePublished: ISO_DATE_15,
+        category: "How to",
+        ornament: "रंग",
+        hero: { handle: BANDHANI, colour: "GR", index: 0 },
+        intro: "The right dupatta can make a simple kurta look finished, or turn a plain suit into something festive. There's no single right answer, but a few ideas make choosing easier: start from the kurta, decide how much contrast you want, then pick the pattern and the edge.",
+        sections: [
+            {
+                id: "kurta",
+                heading: "Start with the kurta",
+                blocks: [
+                    {
+                        kind: "p",
+                        text: "Before you think about colour, look at how busy your kurta is.",
+                    },
+                    {
+                        kind: "list",
+                        items: [
+                            "A plain or lightly embroidered kurta leaves room for a strong dupatta: a bold colour, an all-over pattern, a gota border.",
+                            "A printed or heavily embroidered kurta usually looks best with a quieter dupatta, either a single colour or one that picks up a shade from the print.",
+                            "If the kurta already has metallic detailing, such as zari or gota, a gota-bordered dupatta echoes it and ties the outfit together.",
+                        ],
+                    },
+                ],
+            },
+            {
+                id: "colour",
+                heading: "Three ways to match colour",
+                blocks: [
+                    {
+                        kind: "list",
+                        items: [
+                            "Contrast. Pair strong partners: a royal blue dupatta over a yellow kurta, pink with green, red with yellow. Bright contrasts are a familiar sight in Rajasthani dress, and they suit festive days.",
+                            "Tone on tone. Choose a dupatta a shade or two deeper or lighter than the kurta: rani pink over pale pink, maroon over red. It looks calm and put together, and works well for the office or daytime events.",
+                            "Pick up a colour. With a printed kurta, take one colour from the print, often not the main one, and match the dupatta to it. A multicolour dupatta works the other way round: wear it with a plain kurta in any one of its colours.",
+                        ],
+                    },
+                ],
+            },
+            {
+                id: "neutrals",
+                heading: "White, black and beige",
+                blocks: [
+                    {
+                        kind: "p",
+                        text: "Neutral kurtas are the easiest to dress up, because almost any dupatta works with them. A white or cream kurta takes every colour, and lets a bold bandhani or leheriya be the centre of attention. A black kurta looks striking with a bright dupatta in red, yellow, pink or royal blue. Beige sits well with warm shades such as maroon, red and orange.",
+                    },
+                    {
+                        kind: "p",
+                        text: `The same idea works for the bottom half. Our ${productLink(PANT)} come in ${list(PANT_COLOURS)}, so a short kurta over them keeps the outfit simple and lets the dupatta bring the colour.`,
+                    },
+                ],
+            },
+            {
+                id: "border",
+                heading: "Plain edge or gota border",
+                blocks: [
+                    {
+                        kind: "p",
+                        text: "A borderless dupatta is the more versatile of the two. It goes with everyday kurtas and office wear, and it won't compete with an embroidered neckline. A gota border adds a line of shimmer that frames the dupatta, which makes it a natural choice for weddings, pujas and festivals.",
+                    },
+                    {
+                        kind: "p",
+                        text: `If you want one dupatta to wear often, borderless is an easy place to start. For a particular occasion, a border does a lot of the dressing up for you. There's more about the ribbon itself in ${link("Gota patti: the shimmer on the border", journalPath("gota-patti"))}.`,
+                    },
+                ],
+            },
+            {
+                id: "pattern",
+                heading: "Bandhani or leheriya",
+                blocks: [
+                    {
+                        kind: "list",
+                        items: [
+                            "Bandhani's dots read as a fine texture from a distance, so they sit comfortably with plain kurtas and with small, simple prints.",
+                            "Leheriya's diagonal stripes have more movement. They look best against a plain kurta; with a striped or checked kurta, the lines can clash.",
+                            `The fabric matters too. Our leheriya is light chiffon and our bandhani is art silk (taffeta); ${link(FABRIC_TITLE, journalPath(FABRIC_SLUG))} explains how they differ.`,
+                        ],
+                    },
+                ],
+            },
+            {
+                id: "ours",
+                heading: "Our colours",
+                blocks: [
+                    {
+                        kind: "list",
+                        items: [
+                            `${productLink(BANDHANI)}: ${list(solidColours(BANDHANI))}.`,
+                            `${productLink(BANDHANI_GOTA)}: ${list(solidColours(BANDHANI_GOTA))}${GOTA_MULTI ? `, plus ${GOTA_MULTI} multicolour combinations` : ""}.`,
+                            `${productLink(LEHERIYA)}: ${list(solidColours(LEHERIYA))}.`,
+                        ],
+                    },
+                    {
+                        kind: "p",
+                        text: `See them side by side in our ${link("dupattas collection", collectionPath("dupattas"))}, where you can filter by colour.`,
+                    },
+                ],
+            },
+        ],
+        related: [BANDHANI, BANDHANI_GOTA, LEHERIYA, PANT],
+    },
     {
         slug: "what-is-bandhani",
         title: "What is bandhani?",
