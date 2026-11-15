@@ -182,6 +182,12 @@ def write_business(src_root: Path):
     print(f"Wrote business details -> {OUT_BUSINESS.relative_to(ROOT)}")
 
 
+def shopper_price(store: dict):
+    """The price a shopper sees on a store's listing: its customer_price if
+    recorded (Meesho adds a fee on top of the price we set), else our price."""
+    return store.get("customer_price") or store.get("price")
+
+
 def stock_of(v: dict):
     """Units in stock: the variant's own count, or the sum over its sizes."""
     if v.get("sizes"):
@@ -254,9 +260,12 @@ def build(src_root: Path, force: bool):
 
             # Each store can charge a different price; show the lowest one
             # you can actually buy at, and each store's own on its button.
-            prices = {m: plat[m]["price"] for m in links if plat[m].get("price")}
+            # A store's customer_price (what the shopper sees, e.g. Meesho's
+            # price after its own fee) wins over the price we set there.
+            prices = {m: shopper_price(plat[m]) for m in links if shopper_price(plat[m])}
             if not prices:
-                prices = {m: plat[m]["price"] for m in MARKETPLACES if plat.get(m, {}).get("price")}
+                prices = {m: shopper_price(plat[m]) for m in MARKETPLACES
+                          if shopper_price(plat.get(m, {}))}
             colour = colours[v["color"]]
             variants.append({
                 "sku": v["sku"],
