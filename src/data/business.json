@@ -17,10 +17,18 @@
   "marketplace_returns": {
     "flipkart": {
       "return_days": 10,
-      "checked": "2026-11-15"
+      "checked": "2026-11-15",
+      "return_fees": "free",
+      "return_method": "pickup"
     },
     "meesho": {
       "return_days": 7,
+      "checked": "2026-11-15"
+    }
+  },
+  "marketplace_delivery": {
+    "meesho": {
+      "delivery_charge": 0,
       "checked": "2026-11-15"
     }
   }

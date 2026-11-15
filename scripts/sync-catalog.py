@@ -172,7 +172,7 @@ def size_label(attrs: dict):
 # in that file (and documents/) stays private.
 BUSINESS_FIELDS = ("legal_name", "trade_name", "constitution", "gstin",
                    "address", "email", "phone", "whatsapp",
-                   "marketplace_returns")
+                   "marketplace_returns", "marketplace_delivery")
 
 
 def write_business(src_root: Path):

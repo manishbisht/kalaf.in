@@ -42,4 +42,5 @@ Add its path to `STATIC_PAGES` with a `title` (no suffix) and a `description` (~
 ## Google's structured-data warnings we leave on purpose
 
 - **`aggregateRating` / `review`** (Product snippets): there are no reviews on kalaf.in, and Google doesn't allow marking up reviews from Flipkart or Meesho as ours. Don't add them.
-- **`shippingDetails`** (Merchant listings): Google requires a fixed `shippingRate`, but the marketplaces' delivery charge varies by order and address. Add it only if a store's charge becomes fixed (e.g. always free), via the products repo.
+- **`shippingDetails`** (Merchant listings): Google requires a fixed `shippingRate`, so an offer gets one only when the products repo's `marketplace_delivery` has that store's charge (Meesho: ₹0 as of 15 Nov 2026). Flipkart's charge isn't known, so its offers have none. Transit time is the marketplace's, so `deliveryTime` has only our handling (dispatch) time.
+- **`returnFees` / `returnMethod`**: set only where the marketplace states them (Flipkart: free, picked up). Meesho's aren't stated, so its offers leave them out.

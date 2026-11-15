@@ -22,8 +22,24 @@ export type Business = {
     whatsapp: string | null;
     // Return window each marketplace shows on our listings, and when it was
     // last checked there (the marketplace sets it, not us).
+    // return_fees / return_method only where the marketplace states them.
     marketplace_returns: Partial<
-        Record<"flipkart" | "meesho", { return_days: number; checked: string }>
+        Record<
+            "flipkart" | "meesho",
+            {
+                return_days: number;
+                checked: string;
+                return_fees?: "free";
+                return_method?: "pickup";
+            }
+        >
+    >;
+    // Delivery charge (₹) a marketplace shows on our listings, where known.
+    marketplace_delivery: Partial<
+        Record<
+            "flipkart" | "meesho",
+            { delivery_charge: number; checked: string }
+        >
     >;
 };
 

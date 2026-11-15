@@ -22,20 +22,36 @@ const DAY_RANGE = FASTEST === SLOWEST ? `${FASTEST}` : `${FASTEST}–${SLOWEST}`
 // numbers go in the product pages' structured data (src/seo).
 const MONTHS = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ");
 
+// " Meesho shows no delivery charge on our dupattas (checked 15 Nov 2026)."
+function deliveryNote() {
+    const m = BUSINESS.marketplace_delivery.meesho;
+    if (!m) return "";
+    const charge =
+        m.delivery_charge === 0
+            ? "no delivery charge"
+            : `a delivery charge of ₹${m.delivery_charge}`;
+    return ` Meesho shows ${charge} on our dupattas (checked ${formatDate(m.checked)}); any charge on Flipkart is shown at checkout.`;
+}
+
+function formatDate(iso: string) {
+    // By hand, not toLocaleDateString: the prerender (Node) and the browser
+    // must produce the same text or hydration fails.
+    const [y, m, d] = iso.split("-").map(Number);
+    return `${d} ${MONTHS[m - 1]} ${y}`;
+}
+
 function returnWindows() {
     const r = BUSINESS.marketplace_returns;
     const parts = [
-        r.flipkart && `a ${r.flipkart.return_days}-day return on Flipkart`,
+        r.flipkart &&
+            `a ${r.flipkart.return_days}-day return on Flipkart${r.flipkart.return_method === "pickup" && r.flipkart.return_fees === "free" ? " (picked up from you, with no return fee)" : ""}`,
         r.meesho && `a ${r.meesho.return_days}-day return on Meesho`,
     ].filter(Boolean);
     const checked = [r.flipkart?.checked, r.meesho?.checked]
         .filter((d): d is string => Boolean(d))
         .sort()[0];
     if (!parts.length || !checked) return "";
-    // Formatted by hand, not toLocaleDateString: the prerender (Node) and the
-    // browser must produce the same text or hydration fails.
-    const [y, m, d] = checked.split("-").map(Number);
-    const when = `${d} ${MONTHS[m - 1]} ${y}`;
+    const when = formatDate(checked);
     return `When we last checked (${when}), our listings showed ${parts.join(" and ")}. `;
 }
 
@@ -71,7 +87,7 @@ export const data: PolicyData = {
             body: [
                 {
                     kind: "p",
-                    text: "Once you order on Flipkart or Meesho, we pack it in Jaipur and hand it to the marketplace's courier. From there, the marketplace handles delivery and tracking.",
+                    text: `Once you order on Flipkart or Meesho, we pack it in Jaipur and hand it to the marketplace's courier. From there, the marketplace handles delivery and tracking.${deliveryNote()}`,
                 },
                 {
                     kind: "list",

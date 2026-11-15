@@ -27,6 +27,7 @@ type Offer = {
     priceCurrency: string;
     price: string;
     hasMerchantReturnPolicy?: Json;
+    shippingDetails?: Json;
 };
 
 const ofType = (ld: Json[], type: string) =>
@@ -194,18 +195,58 @@ function expectProductJsonLd(ld: Json[], v: Variant, _pageUrl: string) {
         expect(offer!.priceCurrency).toBe("INR");
         const price = v.prices[store as keyof Variant["prices"]] ?? v.price;
         expect(offer!.price).toBe(price.toFixed(2));
-        // The marketplace's return window, as shown on its listing.
+        // The marketplace's return terms, as shown on its listing: the
+        // window always, the fee and method only where it states them.
         const returns =
             BUSINESS.marketplace_returns[
                 store as keyof typeof BUSINESS.marketplace_returns
-            ];
+            ]!;
         expect(offer!.hasMerchantReturnPolicy).toEqual({
             "@type": "MerchantReturnPolicy",
             applicableCountry: "IN",
             returnPolicyCategory:
                 "https://schema.org/MerchantReturnFiniteReturnWindow",
-            merchantReturnDays: returns!.return_days,
+            merchantReturnDays: returns.return_days,
+            ...(returns.return_fees === "free"
+                ? { returnFees: "https://schema.org/FreeReturn" }
+                : {}),
+            ...(returns.return_method === "pickup"
+                ? { returnMethod: "https://schema.org/ReturnByMail" }
+                : {}),
         });
+        // Shipping only where the store's delivery charge is known.
+        const delivery =
+            BUSINESS.marketplace_delivery[
+                store as keyof typeof BUSINESS.marketplace_delivery
+            ];
+        if (!delivery) {
+            expect(offer!.shippingDetails).toBeUndefined();
+        } else {
+            const product = PRODUCTS.find((p) =>
+                p.variants.some((x) => x.sku === v.sku)
+            )!;
+            expect(offer!.shippingDetails).toEqual({
+                "@type": "OfferShippingDetails",
+                shippingRate: {
+                    "@type": "MonetaryAmount",
+                    value: delivery.delivery_charge,
+                    currency: "INR",
+                },
+                shippingDestination: {
+                    "@type": "DefinedRegion",
+                    addressCountry: "IN",
+                },
+                deliveryTime: {
+                    "@type": "ShippingDeliveryTime",
+                    handlingTime: {
+                        "@type": "QuantitativeValue",
+                        minValue: 0,
+                        maxValue: product.dispatchDays,
+                        unitCode: "DAY",
+                    },
+                },
+            });
+        }
     }
 
     const crumbs = ofType(ld, "BreadcrumbList")!;

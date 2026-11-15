@@ -21,7 +21,7 @@ import {
     type Product,
     type Variant,
 } from "../data/catalog";
-import { BUSINESS } from "../data/business";
+import { BUSINESS, type Business } from "../data/business";
 import {
     ARTICLES,
     JOURNAL_INTRO,
@@ -355,18 +355,18 @@ function variantJsonLd(product: Product, v: Variant): JsonLd {
             itemCondition: "https://schema.org/NewCondition",
             seller: { "@type": "Organization", name: BUSINESS.legal_name },
             ...returnPolicy(id),
+            ...shipping(id, product.dispatchDays),
         })),
     };
 }
 
-// The return window the marketplace shows on our listings (from the products
-// repo's business.json). No shippingDetails: Google requires a fixed rate,
-// and the marketplaces' delivery charges vary by order and address.
+type Store = keyof Business["marketplace_returns"];
+
+// The return terms the marketplace shows on our listings (from the products
+// repo's business.json): the window always, the fee and method only where
+// the marketplace states them. Its pickup counts as a return by mail.
 function returnPolicy(store: string): JsonLd {
-    const r =
-        BUSINESS.marketplace_returns[
-            store as keyof typeof BUSINESS.marketplace_returns
-        ];
+    const r = BUSINESS.marketplace_returns[store as Store];
     if (!r) return {};
     return {
         hasMerchantReturnPolicy: {
@@ -375,6 +375,43 @@ function returnPolicy(store: string): JsonLd {
             returnPolicyCategory:
                 "https://schema.org/MerchantReturnFiniteReturnWindow",
             merchantReturnDays: r.return_days,
+            ...(r.return_fees === "free"
+                ? { returnFees: "https://schema.org/FreeReturn" }
+                : {}),
+            ...(r.return_method === "pickup"
+                ? { returnMethod: "https://schema.org/ReturnByMail" }
+                : {}),
+        },
+    };
+}
+
+// Shipping only for a store whose delivery charge we know: Google requires a
+// fixed rate, and a guessed one would be wrong. Handling time is our dispatch
+// time; transit time is the marketplace's, so it's left out.
+function shipping(store: string, dispatchDays: number | null): JsonLd {
+    const d = BUSINESS.marketplace_delivery[store as Store];
+    if (!d || dispatchDays === null) return {};
+    return {
+        shippingDetails: {
+            "@type": "OfferShippingDetails",
+            shippingRate: {
+                "@type": "MonetaryAmount",
+                value: d.delivery_charge,
+                currency: "INR",
+            },
+            shippingDestination: {
+                "@type": "DefinedRegion",
+                addressCountry: "IN",
+            },
+            deliveryTime: {
+                "@type": "ShippingDeliveryTime",
+                handlingTime: {
+                    "@type": "QuantitativeValue",
+                    minValue: 0,
+                    maxValue: dispatchDays,
+                    unitCode: "DAY",
+                },
+            },
         },
     };
 }
